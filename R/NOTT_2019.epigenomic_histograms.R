@@ -14,10 +14,11 @@
 #'     return_assay_track = TRUE,
 #'     save_annot = FALSE
 #' )
-#' @import ggplot2
+#' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom ggbio autoplot geom_rect scale_x_sequnit plotGrandLinear
 #' @importFrom ggbio theme_genome ggsave
 #' @importFrom stats formula
+#' @importFrom GenomeInfoDb seqlevelsStyle
 NOTT_2019.epigenomic_histograms <- function(finemap_dat,
                                             locus_dir,
                                             show_plot = TRUE,
@@ -45,15 +46,20 @@ NOTT_2019.epigenomic_histograms <- function(finemap_dat,
     # library(BiocGenerics)
     # library(GenomicRanges)
     # library(ggbio)
-    # show_plot=T;save_plot=T;full_data=T;return_assay_track=F;binwidth=2500; geom="histogram"; plot_formula="Cell_type ~."; show_regulatory_rects=T;  bigwig_dir=NULL; verbose=T; nThread=1;
-    # finemap_dat=echoannot::LRRK2; plot.zoom=500000; fill_var="Assay"; density_adjust=.2; strip.text.y.angle=0;
+    # show_plot=T;save_plot=T;full_data=T;return_assay_track=F;
+    # binwidth=2500; geom="histogram"; plot_formula="Cell_type ~."; 
+    # show_regulatory_rects=T;  bigwig_dir=NULL; verbose=T; nThread=1;
+    # finemap_dat=echoannot::LRRK2; plot.zoom=500000; fill_var="Assay"; 
+    # density_adjust=.2; strip.text.y.angle=0;
 
     # Import BigWig annotation files
     bigWigFiles <- echoannot::NOTT_2019.bigwig_metadata
-    # Some bigWig files were initially loaded to UCSC GB, but then later taken down by the authors....
+    # Some bigWig files were initially loaded to UCSC GB, 
+    # but then later taken down by the authors....
     # However I saved these files on Minerva beforehand.
     bigWigFiles <- subset(bigWigFiles, UCSC_available == "T")
-    bigWigFiles <- dplyr::mutate(bigWigFiles, cell_type = gsub(" ", ".", cell_type))
+    bigWigFiles <- dplyr::mutate(bigWigFiles, 
+                                 cell_type = gsub(" ", ".", cell_type))
     # Convert finemap data to granges
     dat <- finemap_dat
     dat$seqnames <- dat$CHR

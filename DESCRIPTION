@@ -27,7 +27,7 @@ LazyData: true
 Depends: R (>= 4.1)
 SystemRequirements: Python (>= 3.7.0)
 biocViews:
-Imports:  
+Imports: 
     echodata,
     echotabix,
     dplyr,
@@ -50,7 +50,8 @@ Imports:
     S4Vectors,
     GenomeInfoDb,
     biomaRt,
-    IRanges
+    IRanges,
+    XGR
 Suggests:
     markdown,
     rmarkdown,

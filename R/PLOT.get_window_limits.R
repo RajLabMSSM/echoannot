@@ -26,7 +26,7 @@ PLOT.get_window_limits <- function(finemap_dat,
                                              .index_as_center = index_as_center,
                                              .genomic_units = genomic_units,
                                              .verbose = verbose) {
-        printer("+ Inferring genomic limits for window:", pz, v = .verbose)
+        messager("+ Inferring genomic limits for window:", pz, v = .verbose)
         # Zoom #x as  input
         if (.index_as_center) {
             middle_pos <- subset(.finemap_dat, leadSNP)$POS[1]

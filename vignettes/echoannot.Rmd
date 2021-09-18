@@ -68,12 +68,6 @@ gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = echodata::Nalls2019_merged)
 gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = echodata::Nalls2019_merged)
 ```
 
-## Credible Set counts plot
-
-```{r}
-gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = echodata::Nalls2019_merged)
-```
-
 
 ## Epigenomic data
 

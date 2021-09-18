@@ -21,5 +21,9 @@ xlims <- PLOT.get_window_limits(finemap_dat = BST1, plot.zoom = 50000)
 xlims <- PLOT.get_window_limits(finemap_dat = BST1, plot.zoom = "all")
 xlims <- PLOT.get_window_limits(finemap_dat = BST1, plot.zoom = "5x")
 }
+\seealso{
+Other plot: 
+\code{\link{GR.name_filter_convert}()}
+}
 \concept{plot}
 \keyword{internal}

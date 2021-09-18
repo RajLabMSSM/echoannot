@@ -37,7 +37,7 @@
 #' )
 #' }
 #' @keywords internal
-#' @import ggplot2
+#' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom dplyr %>% group_by top_n slice mutate desc arrange
 #' @importFrom data.table fread data.table
 coloc_nominated_eGenes <- function(coloc_results,

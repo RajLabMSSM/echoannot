@@ -17,7 +17,7 @@ granges_overlap <- function(dat1,
                             chr_format = "NCBI",
                             verbose = FALSE) {
     # dat1
-    if (class(dat1)[1] == "GRanges") {
+    if (is_granges(dat1)) {
         messager("+ dat1 already in GRanges format", v = verbose)
         gr.dat1 <- dat1
     } else {
@@ -31,7 +31,7 @@ granges_overlap <- function(dat1,
         )
     }
     # dat2
-    if (class(dat2)[1] == "GRanges") {
+    if (is_granges(dat2)) {
         messager("+ dat2 already in GRanges format", v = verbose)
         gr.dat2 <- dat2
     } else {
@@ -64,7 +64,7 @@ granges_overlap <- function(dat1,
     # gr.hits <- cbind(mcols(gr.regions[ S4Vectors::subjectHits(hits), ] ),
     #                         mcols(gr.consensus[S4Vectors::queryHits(hits),]) )
     message(
-        "", nrow(GenomicRanges::mcols(gr.hits)),
+        "", formatC(nrow(GenomicRanges::mcols(gr.hits)), big.mark = ","),
         " query SNP(s) detected with reference overlap."
     )
     # print(data.frame(mcols(gr.hits[,c("Name","SNP")])) )

@@ -6,10 +6,14 @@
 \usage{
 merge_celltype_specific_epigenomics(keep_extra_cols = FALSE)
 }
+\arguments{
+\item{keep_extra_cols}{Keep extra columns
+that are not shared across all annotations.}
+}
 \description{
 Merges multiple cell-type-specific epigenomic datasets
 (Nott 2019, Corces 2020) into a single \link[GenomicRanges]{GRanges} object.
 }
 \examples{
-gr.merged <- merge_celltype_specific_epigenomics()
+gr.merged <- echoannot::merge_celltype_specific_epigenomics()
 }

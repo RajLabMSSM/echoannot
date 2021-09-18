@@ -4,7 +4,7 @@
 #' and then identify the number of SNPs overlapping by each cell type
 #'
 #' @keywords internal
-#' @import ggplot2
+#' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom dplyr %>% top_n
 cell_type_specificity <- function(plot_dat,
                                   merged_DT,

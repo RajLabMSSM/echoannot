@@ -2,9 +2,12 @@
 #'
 #' Merges multiple cell-type-specific epigenomic datasets
 #' (Nott 2019, Corces 2020) into a single \link[GenomicRanges]{GRanges} object.
+#' @param keep_extra_cols Keep extra columns
+#' that are not shared across all annotations.
 #'
 #' @examples
-#' gr.merged <- merge_celltype_specific_epigenomics()
+#' gr.merged <- echoannot::merge_celltype_specific_epigenomics()
+#' @export
 #' @importFrom tidyr separate
 #' @importFrom dplyr %>% mutate select
 #' @importFrom data.table rbindlist data.table

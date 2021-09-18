@@ -5,7 +5,7 @@
 #' @examples
 #' gg_CS <- CS_counts_plot(merged_DT = echodata::Nalls2019_merged)
 #' @export
-#' @import ggplot2
+#' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom dplyr %>% mutate arrange
 CS_counts_plot <- function(merged_DT,
                            show_numbers = TRUE,

@@ -4,8 +4,8 @@
 #' @examples
 #' bin_plot <- CS_bin_plot(merged_DT = echodata::Nalls2019_merged)
 #' @export
-#' @import ggplot2
 #' @importFrom RColorBrewer brewer.pal
+#' @importFrom stats setNames
 CS_bin_plot <- function(merged_DT,
                         show_plot = TRUE) {
     Method <- bin <- ..count.. <- NULL
@@ -17,40 +17,40 @@ CS_bin_plot <- function(merged_DT,
     custom_colors <- RColorBrewer::brewer.pal(
         n = length(levels(bin_counts$bin)), "GnBu"
     )
-    custom_colors_dict <- setNames(
+    custom_colors_dict <- stats::setNames(
         custom_colors[seq(1, length(used_bins))],
         rev(used_bins)
     )
     custom_colors_dict[names(custom_colors_dict) == "0"] <- "lightgray"
 
-    bin_plot <- ggplot(
+    bin_plot <- ggplot2::ggplot(
         subset(bin_counts, Method != "mean"),
-        aes(x = Method, fill = bin)
+        ggplot2::aes(x = Method, fill = bin)
     ) +
-        geom_bar(
+        gggplot2::eom_bar(
             stat = "count", show.legend = TRUE,
-            position = position_stack(reverse = FALSE), color = "white"
+            position = ggplot2::position_stack(reverse = FALSE), color = "white"
         ) +
         # scale_fill_brewer(palette = "Spectral", direction = -1) +
-        scale_fill_manual(values = custom_colors_dict) +
+        ggplot2::scale_fill_manual(values = custom_colors_dict) +
         # geom_text(aes(label = paste(bin,"SNPs")),
         # position =  position_stack(vjust = .5), vjust=-1, stat = "count") +
-        geom_text(aes(label = ..count..),
-            position = position_stack(vjust = .5),
+        ggplot2::geom_text(ggplot2::aes(label = ..count..),
+            position = ggplot2::position_stack(vjust = .5),
             vjust = .5, stat = "count"
         ) +
-        theme_bw() +
-        labs(x = NULL, y = "Loci", fill = "CS size") +
-        coord_flip() +
-        theme(
-            panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank(),
-            rect = element_blank(),
-            axis.text.x = element_blank(),
-            axis.ticks = element_blank(),
+        ggplot2::theme_bw() +
+        ggplot2::labs(x = NULL, y = "Loci", fill = "CS size") +
+        ggplot2::coord_flip() +
+        ggplot2::theme(
+            panel.grid.major = ggplot2::element_blank(),
+            panel.grid.minor = ggplot2::element_blank(),
+            rect = ggplot2::element_blank(),
+            axis.text.x = ggplot2::element_blank(),
+            axis.ticks = ggplot2::element_blank(),
             legend.position = "top"
         ) +
-        guides(fill = guide_legend(nrow = 1, reverse = TRUE))
+        ggplot2::guides(fill = ggplot2::guide_legend(nrow = 1, reverse = TRUE))
     if (show_plot) print(bin_plot)
     return(list(
         plot = bin_plot,

@@ -29,7 +29,7 @@
 #'     fill_title = "UCS SNPs in epigenomic peaks"
 #' )
 #' @export
-#' @import ggplot2
+#' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom patchwork plot_layout
 #' @importFrom scales alpha
 #' @importFrom stats formula
@@ -41,7 +41,8 @@ peak_overlap_plot <- function(merged_DT,
                               include.CORCES_2020_scATACpeaks = TRUE,
                               include.CORCES_2020_Cicero_coaccess = TRUE,
                               include.CORCES_2020_bulkATACpeaks = TRUE,
-                              include.CORCES_2020_HiChIP_FitHiChIP_coaccess = TRUE,
+                              include.CORCES_2020_HiChIP_FitHiChIP_coaccess =
+                                  TRUE,
                               include.CORCES_2020_gene_annotations = TRUE,
                               plot_celltype_specificity = TRUE,
                               plot_celltype_specificity_genes = FALSE,

@@ -13,7 +13,8 @@
 #' # Zoom in
 #' trks_plus_lines <- NOTT_2019.plac_seq_plot(finemap_dat = BST1, locus_dir = file.path("~/Desktop", locus_dir), zoom_window = 500000, highlight_plac = TRUE)
 #' }
-#' @import ggplot2
+#' @rawNamespace import(ggplot2, except = geom_rect)
+#' @rawNamespace import(ggplot2, except = ggsave)
 #' @importFrom ggbio ggbio geom_arch geom_rect scale_x_sequnit ggsave
 #' @importFrom IRanges IRanges
 NOTT_2019.plac_seq_plot <- function(finemap_dat = NULL,
