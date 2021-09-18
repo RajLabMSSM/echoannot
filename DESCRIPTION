@@ -1,0 +1,68 @@
+Package: echoannot
+Type: Package
+Title: echoverse module: Annotate fine-mapping results
+Version: 0.99.1
+Authors@R: 
+    c(person(given = "Brian",
+           family = "Schilder",
+           role = c("cre"),
+           email = "brian_schilder@alumni.brown.edu",
+           comment = c(ORCID = "0000-0001-5949-2191")),
+    person(given = "Jack",
+           family = "Humphrey",
+           role = c("aut"),
+           email = "Jack.Humphrey@mssm.edu",
+           comment = c(ORCID = "0000-0002-6274-6620")),
+    person(given = "Towfique",
+           family = "Raj",
+           role = c("aut"),
+           email = "towfique.raj@mssm.edu",
+           comment = c(ORCID = "0000-0002-9355-5704"))
+           ) 
+Description: echoverse module: Annotate fine-mapping results.
+URL: https://github.com/RajLabMSSM/echoannot
+BugReports: https://github.com/RajLabMSSM/echoannot/issues
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 4.1)
+SystemRequirements: Python (>= 3.7.0)
+biocViews:
+Imports:  
+    echodata,
+    echotabix,
+    dplyr,
+    data.table,
+    utils, 
+    stats, 
+    tidyr,
+    parallel,
+    haploR,
+    ggplot2,
+    patchwork,
+    ggbio,
+    RColorBrewer,
+    scales,
+    GenomicRanges,
+    DescTools,
+    pheatmap,
+    grDevices,
+    rtracklayer,
+    S4Vectors,
+    GenomeInfoDb,
+    biomaRt
+Suggests:
+    markdown,
+    rmarkdown,
+    remotes,
+    knitr,
+    BiocStyle,
+    covr,
+    testthat (>= 3.0.0),
+    corrplot
+Remotes:
+    github::RajLabMSSM/echodata,
+    github::RajLabMSSM/echotabix
+RoxygenNote: 7.1.2
+VignetteBuilder: knitr
+License: GPL-3
+Config/testthat/edition: 3

@@ -1,0 +1,61 @@
+#' Import cell type-specific interactomes
+#'
+#' Brain cell-specific epigenomic data from Nott et al. (2019).
+#' @keywords internal
+#' @family NOTT_2019
+#' @source
+#' \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
+#' \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
+#' @importFrom dplyr %>% mutate group_by summarise
+#' @importFrom data.table data.table rbindlist
+NOTT_2019.get_interactome <- function(annot_sub,
+                                      top.consensus.pos,
+                                      marker_key,
+                                      verbose = TRUE) {
+    Coordinates <- Interaction <- chr <- Cell_type <- Element <- End <-
+        top.consensus.dist <- NULL
+
+    messager("+ NOTT_2019:: Getting interactome data.", v = verbose)
+    interact.cols <- grep("*_interactions", colnames(annot_sub), value = TRUE)
+    interact.DT <- lapply(interact.cols, function(column) {
+        coords <- strsplit(annot_sub[, column][[1]], ",")
+        coord.dt <- lapply(coords, function(coord, .column = column) {
+            data.table::data.table(
+                Interaction = .column,
+                Cell_type = marker_key[
+                    gsub("\\_.*", "", .column)
+                ],
+                Coordinates = coord
+            )
+        }) %>% data.table::rbindlist()
+        return(coord.dt)
+    }) %>% data.table::rbindlist()
+    interact.DT <- subset(
+        interact.DT,
+        !is.na(Coordinates) & Coordinates != ""
+    ) %>%
+        tidyr::separate(
+            col = Coordinates,
+            into = c("chr", "Start", "End"), sep = ":|-"
+        ) %>%
+        tidyr::separate(
+            col = Interaction, into = c("Marker", "Element", NA),
+            sep = "_", remove = FALSE
+        )
+    interact.DT <- interact.DT %>%
+        # Standardize CHR (NCBI format)
+        dplyr::mutate(
+            chr = gsub("chr", "", chr),
+            Cell_type_interaction = paste(Cell_type, "-", Element)
+        )
+    interact.DT$Cell_type <- interact.DT$Cell_type %>% as.character()
+    interact.DT$Start <- as.numeric(interact.DT$Start)
+    interact.DT$End <- as.numeric(interact.DT$End)
+    # Summarise distance from different celltype enhancer interactions
+    summarise_top.consensus.dist <- interact.DT %>%
+        dplyr::mutate(top.consensus.dist = End - top.consensus.pos) %>%
+        dplyr::group_by(Cell_type) %>%
+        dplyr::summarise(top.consensus.dist = mean(top.consensus.dist))
+    # print(summarise_top.consensus.dist)
+    return(interact.DT)
+}

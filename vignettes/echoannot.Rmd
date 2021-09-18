@@ -1,0 +1,113 @@
+---
+title: "echoannot: Getting Started" 
+author: "<h4>Author: <i>Brian M. Schilder</i></h4>" 
+date: "<h4>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document:
+    self_contained: yes
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    df_print: paged
+vignette: >
+    %\VignetteIndexEntry{echoannot} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::rmarkdown} 
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+```{r style, echo=FALSE, results='asis', message=FALSE}
+BiocStyle::markdown()
+knitr::opts_chunk$set(tidy = FALSE,
+                      message = FALSE)
+```
+
+```{r setup}
+library(echoannot)
+library(echodata)
+```
+
+# Merge and annotate 
+
+## Import results 
+
+Import pre-calculated fine-mapping results from the [**echolocatoR Fine-mapping Portal**](https://rajlab.shinyapps.io/Fine_Mapping_Shiny/).
+
+```{r}
+local_files <- echodata::portal_query(phenotypes = "parkinson",
+                                      LD_panels = "UKB", 
+                                      loci = c("BST1","LRRK2","MEX3C"),
+                                      file_types = "multi_finemap")
+```
+
+
+Merge (and annotate) SNP-wise fine-mapping results.
+
+```{r}
+dataset <- dirname(dirname(dirname(local_files)))
+merged_DT <- echoannot::merge_finemapping_results(dataset = dataset[1], 
+                                                  minimum_support = 1,
+                                                  haploreg_annotation = TRUE)
+knitr::kable(merged_DT)
+```
+
+# Summary plots
+
+## Credible Set bin plot
+
+```{r}
+gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = echodata::Nalls2019_merged)
+```
+## Credible Set counts plot
+
+```{r}
+gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = echodata::Nalls2019_merged)
+```
+
+## Credible Set counts plot
+
+```{r}
+gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = echodata::Nalls2019_merged)
+```
+
+
+## Epigenomic data
+
+```{r}
+gg_epi <- echoannot::peak_overlap_plot(merged_DT =  echodata::Nalls2019_merged, 
+                                       include.NOTT_2019_enhancers_promoters = TRUE,
+                                       include.NOTT_2019_PLACseq = TRUE,
+                                       #### Omit many annot to save time ####
+                                       include.NOTT_2019_peaks = FALSE,
+                                       include.CORCES_2020_scATACpeaks = FALSE, 
+                                       include.CORCES_2020_Cicero_coaccess = FALSE, 
+                                       include.CORCES_2020_bulkATACpeaks = FALSE, 
+                                       include.CORCES_2020_HiChIP_FitHiChIP_coaccess = FALSE,
+                                       include.CORCES_2020_gene_annotations = FALSE)
+```
+
+## Super summary plot
+
+Creates one big merged plot using the subfunctions above.
+
+```{r, eval=FALSE} 
+super_plot <- echoannot::super_summary_plot(merged_DT = echodata::Nalls2019_merged, 
+                                            plot_missense = FALSE)
+
+```
+
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
+
