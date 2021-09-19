@@ -20,7 +20,7 @@
 #' @examples
 #' \dontrun{
 #' fg_bg <- XGR.prepare_foreground_background(
-#'     subset_DT = echodata::Nalls2019_merged,
+#'     subset_DT = echodata::get_Nalls2019_merged(),
 #'     foreground_filter = "Consensus_SNP==TRUE",
 #'     background_filter = "leadSNP==TRUE"
 #' )

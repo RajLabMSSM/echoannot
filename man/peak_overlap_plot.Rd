@@ -56,13 +56,13 @@ Plot overlap between some SNP group and various epigenomic data
 \examples{
 # Consensus SNPs
 gg_peaks <- peak_overlap_plot(
-    merged_DT = echodata::Nalls2019_merged,
+    merged_DT = echodata::get_Nalls2019_merged(),
     snp_filter = "Consensus_SNP==T",
     fill_title = "Consensus SNPs in epigenomic peaks"
 )
 # UCS SNPs
 gg_peaks <- peak_overlap_plot(
-    merged_DT = echodata::Nalls2019_merged,
+    merged_DT = echodata::get_Nalls2019_merged(),
     snp_filter = "Support>0",
     fill_title = "UCS SNPs in epigenomic peaks"
 )

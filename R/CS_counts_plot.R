@@ -3,7 +3,7 @@
 #' Loci ordered by UCS size (smallest to largest).
 #' @family summarise
 #' @examples
-#' gg_CS <- CS_counts_plot(merged_DT = echodata::Nalls2019_merged)
+#' gg_CS <- CS_counts_plot(merged_DT = echodata::get_Nalls2019_merged())
 #' @export
 #' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom dplyr %>% mutate arrange

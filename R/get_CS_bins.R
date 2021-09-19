@@ -3,7 +3,7 @@
 #' @family summarise
 #' @examples
 #' \dontrun{
-#' bin_counts <- get_CS_bins(merged_DT = echodata::Nalls2019_merged)
+#' bin_counts <- get_CS_bins(merged_DT = echodata::get_Nalls2019_merged())
 #' }
 #' @keywords internal
 #' @importFrom dplyr %>% mutate group_by case_when

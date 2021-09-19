@@ -1,6 +1,6 @@
 test_that("peak_overlap_plot works", {
     gg_epi <- echoannot::peak_overlap_plot(
-        merged_DT = echodata::Nalls2019_merged,
+        merged_DT = echodata::get_Nalls2019_merged(),
         include.NOTT_2019_enhancers_promoters = TRUE,
         include.NOTT_2019_PLACseq = TRUE,
         #### Omit many annot to save time ####

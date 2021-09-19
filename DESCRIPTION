@@ -51,7 +51,8 @@ Imports:
     GenomeInfoDb,
     biomaRt,
     IRanges,
-    XGR
+    XGR,
+    piggyback
 Suggests:
     markdown,
     rmarkdown,

@@ -54,7 +54,7 @@ Perform annotation enrichment tests using iterative bootstrapping procedure.
 gr.merged <- echoannot::merge_celltype_specific_epigenomics()
 enrich_res <- XGR.enrichment_bootstrap(
     gr = gr.merged,
-    merged_dat = echodata::Nalls2019_merged
+    merged_dat = echodata::get_Nalls2019_merged()
 )
 }
 }

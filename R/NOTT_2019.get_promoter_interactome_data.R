@@ -10,8 +10,9 @@
 NOTT_2019.get_promoter_interactome_data <- function(finemap_dat) {
     Chr <- Start <- End <- chr <- NULL
     # Subset to window
+    NOTT_2019.interactome <- echoannot::get_NOTT_2019.interactome()
     annot_sub <-
-        echoannot::NOTT_2019.interactome$H3K4me3_around_TSS_annotated_pe %>%
+        NOTT_2019.interactome$H3K4me3_around_TSS_annotated_pe %>%
         dplyr::rename(chr = Chr, start = Start, end = End) %>%
         subset(chr == paste0("chr", unique(finemap_dat$CHR)) &
             start >= min(finemap_dat$POS) &

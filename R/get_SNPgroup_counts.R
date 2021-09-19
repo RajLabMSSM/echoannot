@@ -3,7 +3,7 @@
 #' @family summarise
 #' @examples
 #' data("merged_DT")
-#' snp_groups <- get_SNPgroup_counts(merged_DT = echodata::Nalls2019_merged)
+#' snp_groups <- get_SNPgroup_counts(merged_DT = echodata::get_Nalls2019_merged())
 #' @importFrom dplyr %>%
 get_SNPgroup_counts <- function(merged_DT,
                                 grouping_vars = "Locus") {

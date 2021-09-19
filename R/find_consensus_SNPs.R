@@ -14,7 +14,7 @@
 #' \strong{Consensus_SNP} status.
 #' @keywords internal
 #' @examples
-#' merged_DT <- find_consensus_SNPs(finemap_dat = echodata::Nalls2019_merged)
+#' merged_DT <- find_consensus_SNPs(finemap_dat = echodata::get_Nalls2019_merged())
 #' @importFrom dplyr %>% desc arrange
 find_consensus_SNPs <- function(finemap_dat,
                                 credset_thresh = .95,

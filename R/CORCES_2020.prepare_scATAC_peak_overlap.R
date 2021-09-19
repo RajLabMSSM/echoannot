@@ -6,7 +6,7 @@
 #' @examples
 #' \dontrun{
 #' dat_melt <- CORCES_2020.prepare_scATAC_peak_overlap(
-#'     merged_DT = echodata::Nalls2019_merged
+#'     merged_DT = echodata::get_Nalls2019_merged()
 #' )
 #' }
 #' @keywords internal
@@ -49,7 +49,7 @@ CORCES_2020.prepare_scATAC_peak_overlap <- function(merged_DT,
             v = verbose
         )
         peak_overlap <- subset(
-            echoannot::CORCES_2020.scATACseq_peaks,
+            echoannot::get_CORCES_2020.scATACseq_peaks(),
             Peak_ID %in% unique(gr.hits$Peak_ID)
         )
         prefix <- ""

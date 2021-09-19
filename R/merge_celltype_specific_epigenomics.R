@@ -29,8 +29,9 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
     gr.Nott2019.regions$Study <- "Nott2019.celltype_regions"
     gr.Nott2019.regions$Assay <- gr.Nott2019.regions$Element
     ### Interactome
-    interactome <- echoannot::NOTT_2019.interactome[
-        grep("interactome", names(echoannot::NOTT_2019.interactome))
+    NOTT_2019.interactome <- echoannot::get_NOTT_2019.interactome()
+    interactome <- NOTT_2019.interactome[
+        grep("interactome", names(NOTT_2019.interactome))
     ] %>%
         data.table::rbindlist(idcol = "id") %>%
         tidyr::separate(id,
@@ -71,7 +72,7 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
 
     ## Cicero Interactome
     #### Assign cell types to interactome
-    cicero <- echoannot::CORCES_2020.cicero_coaccessibility %>%
+    cicero <- echoannot::get_CORCES_2020.cicero_coaccessibility() %>%
         dplyr::mutate(
             Study = "Corces2020.celltype_interactome",
             Assay = "cicero"
@@ -116,7 +117,8 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
 
 
     ### Bulk ATACseq peaks
-    gr.Corces2020.bulk_peaks <- echoannot::CORCES_2020.bulkATACseq_peaks %>%
+    gr.Corces2020.bulk_peaks <- 
+        echoannot::get_CORCES_2020.bulkATACseq_peaks() %>%
         dplyr::mutate(
             Study = "Corces2020.bulk_peaks",
             Assay = "ATAC",
@@ -133,7 +135,7 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         )
 
     ### FitChip interactome
-    fitchip <- echoannot::CORCES_2020.HiChIP_FitHiChIP_loop_calls %>%
+    fitchip <- echoannot::get_CORCES_2020.HiChIP_FitHiChIP_loop_calls() %>%
         dplyr::mutate(
             Study = "Corces2020.bulk_interactome",
             Cell_type = "brain", Assay = "HiChIP_FitHiChIP"

@@ -2,7 +2,7 @@
 #'
 #' @family summarise
 #' @examples
-#' bin_plot <- CS_bin_plot(merged_DT = echodata::Nalls2019_merged)
+#' bin_plot <- CS_bin_plot(merged_DT = echodata::get_Nalls2019_merged())
 #' @export
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom stats setNames

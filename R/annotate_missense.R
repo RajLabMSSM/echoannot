@@ -4,7 +4,7 @@
 #' @examples
 #' \dontrun{
 #' annotated_DT <- annotate_missense(
-#'     merged_DT = echodata::Nalls2019_merged,
+#'     merged_DT = echodata::get_Nalls2019_merged(),
 #'     snp_filter = "Support>0"
 #' )
 #' }

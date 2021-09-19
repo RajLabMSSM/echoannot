@@ -2,7 +2,7 @@ CORCES_2020.scATAC_to_granges <- function(standardize_cellTypes = FALSE) {
     value <- NULL
 
     scATAC <- data.table::melt.data.table(
-        echoannot::CORCES_2020.scATACseq_celltype_peaks,
+        echoannot::get_CORCES_2020.scATACseq_celltype_peaks(),
         measure.vars = c(
             "ExcitatoryNeurons",
             "InhibitoryNeurons",

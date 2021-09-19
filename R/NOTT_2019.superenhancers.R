@@ -16,7 +16,7 @@ NOTT_2019.superenhancers <- function(finemap_dat) {
     chr <- CHR <- POS <- s6 <- NULL
 
     annot_sub <- subset(
-        echoannot::NOTT_2019.superenhancer_interactome,
+        echoannot::get_NOTT_2019.superenhancer_interactome(),
         chr == paste0("chr", unique(finemap_dat$CHR)) &
             start >= min(finemap_dat$POS) &
             end <= max(finemap_dat$POS)

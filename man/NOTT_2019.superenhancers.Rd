@@ -23,9 +23,9 @@ Other NOTT_2019:
 \code{\link{NOTT_2019.get_promoter_celltypes}()},
 \code{\link{NOTT_2019.get_promoter_interactome_data}()},
 \code{\link{NOTT_2019.get_regulatory_regions}()},
-\code{\link{NOTT_2019.interactome}},
 \code{\link{NOTT_2019.plac_seq_plot}()},
-\code{\link{NOTT_2019.superenhancer_interactome}}
+\code{\link{get_NOTT_2019.interactome}()},
+\code{\link{get_NOTT_2019.superenhancer_interactome}()}
 }
 \concept{NOTT_2019}
 \keyword{internal}

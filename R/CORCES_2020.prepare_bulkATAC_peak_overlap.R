@@ -5,7 +5,7 @@
 #' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
 #' @examples
 #' dat_melt <- CORCES_2020.prepare_bulkATAC_peak_overlap(
-#'     merged_DT = echodata::Nalls2019_merged
+#'     merged_DT = echodata::get_Nalls2019_merged()
 #' )
 #' @keywords internal
 #' @importFrom GenomicRanges mcols makeGRangesFromDataFrame
@@ -39,7 +39,7 @@ CORCES_2020.prepare_bulkATAC_peak_overlap <- function(merged_DT,
             v = verbose
         )
         peak_overlap <- subset(
-            echoannot::CORCES_2020.bulkATACseq_peaks,
+            echoannot::get_CORCES_2020.bulkATACseq_peaks(),
             Peak_ID %in% unique(gr.hits$Peak_ID)
         )
         prefix <- ""

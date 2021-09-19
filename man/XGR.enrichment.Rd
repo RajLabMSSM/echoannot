@@ -46,7 +46,7 @@ Run SNP-level enrichment test with \link[XGR]{xGRviaGenomicAnno}.
 gr.merged <- echoannot::merge_celltype_specific_epigenomics()
 enrich.lead <- XGR.enrichment(
     gr = gr.merged,
-    merged_dat = echodata::Nalls2019_merged,
+    merged_dat = echodata::get_Nalls2019_merged(),
     foreground_filter = "leadSNP==TRUE",
     grouping_vars = c("Study", "Cell_type", "Assay")
 )

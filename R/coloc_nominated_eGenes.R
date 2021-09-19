@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' merged_DT <- echodata::Nalls2019_merged
+#' merged_DT <- echodata::get_Nalls2019_merged()
 #' base_url <- "~/Desktop/Fine_Mapping/Data/GWAS/Nalls23andMe_2019"
 #' coloc_results_path <- file.path(
 #'     base_url, "_genome_wide/COLOC/coloc.eQTL_Catalogue_ALL.csv.gz"

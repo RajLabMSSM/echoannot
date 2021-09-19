@@ -10,7 +10,7 @@ CS_bin_plot(merged_DT, show_plot = TRUE)
 Plot CS bin counts
 }
 \examples{
-bin_plot <- CS_bin_plot(merged_DT = echodata::Nalls2019_merged)
+bin_plot <- CS_bin_plot(merged_DT = echodata::get_Nalls2019_merged())
 }
 \seealso{
 Other summarise: 

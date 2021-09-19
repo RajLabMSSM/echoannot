@@ -10,14 +10,14 @@ NOTT_2019.get_interactions <- function(finemap_dat,
                                        as.granges = FALSE) {
     Name <- NULL
 
-    NOTT_2019.interactome <- echoannot::NOTT_2019.interactome
+    NOTT_2019.interactome <- echoannot::get_NOTT_2019.interactome()
     selected_sheets <- grep("interactome$", names(NOTT_2019.interactome),
         value = TRUE
     )
     interactomes <- lapply(selected_sheets, function(s) {
         messager("Importing", s, "...")
         # Read the sheet you want
-        dat <- echoannot::NOTT_2019.interactome[[s]]
+        dat <- NOTT_2019.interactome[[s]]
         dat$Name <- s
         return(dat)
     }) %>% data.table::rbindlist()

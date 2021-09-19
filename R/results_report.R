@@ -2,7 +2,7 @@
 #' @family summarise
 #' @examples
 #' \dontrun{
-#' results_report(echodata::Nalls2019_merged)
+#' results_report(echodata::get_Nalls2019_merged())
 #' }
 #' @return Null
 #' @keywords internal

@@ -11,7 +11,7 @@ Tally tool-specific and union CS sizes
 }
 \examples{
 \dontrun{
-locus_order <- get_CS_counts(merged_DT = echodata::Nalls2019_merged)
+locus_order <- get_CS_counts(merged_DT = echodata::get_Nalls2019_merged())
 }
 }
 \seealso{

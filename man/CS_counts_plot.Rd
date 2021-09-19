@@ -18,7 +18,7 @@ CS_counts_plot(
 Loci ordered by UCS size (smallest to largest).
 }
 \examples{
-gg_CS <- CS_counts_plot(merged_DT = echodata::Nalls2019_merged)
+gg_CS <- CS_counts_plot(merged_DT = echodata::get_Nalls2019_merged())
 }
 \seealso{
 Other summarise: 

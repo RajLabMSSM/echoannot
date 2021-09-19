@@ -14,7 +14,7 @@ Give a quick summary report of the fine-mapping results
 }
 \examples{
 \dontrun{
-results_report(echodata::Nalls2019_merged)
+results_report(echodata::get_Nalls2019_merged())
 }
 }
 \seealso{

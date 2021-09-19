@@ -14,7 +14,7 @@
 #'
 CORCES_2020.get_HiChIP_FitHiChIP_overlap <- function(finemap_dat,
                                                      verbose = TRUE) {
-    loops <- echoannot::CORCES_2020.HiChIP_FitHiChIP_loop_calls
+    loops <- echoannot::get_CORCES_2020.HiChIP_FitHiChIP_loop_calls()
     # Anchor 1
     gr.anchor1 <- echotabix::liftover(
         sumstats_dt = loops,

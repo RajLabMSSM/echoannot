@@ -43,7 +43,7 @@ Description of all datasets}
 \examples{
 \dontrun{
 enrich_res <- XGR.iterate_enrichment(
-    subset_DT = echodata::Nalls2019_merged,
+    subset_DT = echodata::get_Nalls2019_merged(),
     foreground_filter = "Consensus_SNP",
     background_filter = "leadSNP",
     lib.selections = c("ENCODE_TFBS_ClusteredV3_CellTypes")

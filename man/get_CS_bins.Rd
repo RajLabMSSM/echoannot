@@ -11,7 +11,7 @@ Count bins of tool-specific and union CS sizes
 }
 \examples{
 \dontrun{
-bin_counts <- get_CS_bins(merged_DT = echodata::Nalls2019_merged)
+bin_counts <- get_CS_bins(merged_DT = echodata::get_Nalls2019_merged())
 }
 }
 \seealso{

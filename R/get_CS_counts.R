@@ -3,7 +3,7 @@
 #' @family summarise
 #' @examples
 #' \dontrun{
-#' locus_order <- get_CS_counts(merged_DT = echodata::Nalls2019_merged)
+#' locus_order <- get_CS_counts(merged_DT = echodata::get_Nalls2019_merged())
 #' }
 #' @keywords internal
 #' @importFrom dplyr %>% group_by summarise summarise_at vars funs n_distinct

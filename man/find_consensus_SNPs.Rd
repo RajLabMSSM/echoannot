@@ -31,7 +31,7 @@ in a credible set.}
 }
 }
 \examples{
-merged_DT <- find_consensus_SNPs(finemap_dat = echodata::Nalls2019_merged)
+merged_DT <- find_consensus_SNPs(finemap_dat = echodata::get_Nalls2019_merged())
 }
 \concept{finemapping functions}
 \keyword{internal}

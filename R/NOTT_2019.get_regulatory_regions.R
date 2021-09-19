@@ -13,14 +13,15 @@ NOTT_2019.get_regulatory_regions <- function(as.granges = FALSE,
                                              nThread = 1,
                                              verbose = TRUE) {
     Name <- Cell_type <- NULL
-
+    
+    NOTT_2019.interactome <- echoannot::get_NOTT_2019.interactome()
     selected_sheets <- grep("promoters$|enhancers$",
-        names(echoannot::NOTT_2019.interactome),
+        names(NOTT_2019.interactome),
         value = TRUE
     )
     regions <- parallel::mclapply(selected_sheets, function(s) {
         messager("Importing", s, "...")
-        dat <- echoannot::NOTT_2019.interactome[[s]]
+        dat <- NOTT_2019.interactome[[s]]
         dat$Name <- tolower(s)
         return(dat)
     }, mc.cores = nThread) %>% data.table::rbindlist(fill = TRUE)
@@ -33,7 +34,8 @@ NOTT_2019.get_regulatory_regions <- function(as.granges = FALSE,
         "microglia" = "microglia"
     )
     regions_sub <- regions %>%
-        tidyr::separate(Name, into = c("Cell_type", "Element"), remove = FALSE) %>%
+        tidyr::separate(Name, into = c("Cell_type", "Element"),
+                        remove = FALSE) %>%
         dplyr::mutate(
             middle = as.integer(end - abs(end - start) / 2),
             Cell_type = cell_dict[Cell_type]

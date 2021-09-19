@@ -17,14 +17,14 @@ CORCES_2020.get_ATAC_peak_overlap <- function(finemap_dat,
             "cell-type-specific scATAC-seq peaks",
             v = verbose
         )
-        dat <- echoannot::CORCES_2020.scATACseq_celltype_peaks
+        dat <- echoannot::get_CORCES_2020.scATACseq_celltype_peaks()
         Assay <- "scATAC"
     } else {
         messager("CORCES_2020:: Extracting overlapping",
             "bulkATAC-seq peaks from brain tissue",
             v = verbose
         )
-        dat <- echoannot::CORCES_2020.bulkATACseq_peaks
+        dat <- echoannot::get_CORCES_2020.bulkATACseq_peaks()
         Assay <- "bulkATAC"
     }
     gr.peaks_lifted <- echotabix::liftover(
@@ -61,7 +61,7 @@ CORCES_2020.get_ATAC_peak_overlap <- function(finemap_dat,
             # only in the scATACseq gr.hits object is ok
             # bc you can only test for coaccessibility if there's a
             # peak to begin with.
-            cicero <- echoannot::CORCES_2020.cicero_coaccessibility
+            cicero <- echoannot::get_CORCES_2020.cicero_coaccessibility()
             cicero_dict <- c(
                 stats::setNames(
                     cicero$Coaccessibility,

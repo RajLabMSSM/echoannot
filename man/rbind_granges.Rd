@@ -12,7 +12,7 @@ Bind GRanges with different mcols
 \concept{utils
 #' @examples
 \dontrun{
-merged_DT <- echodata::Nalls2019_merged
+merged_DT <- echodata::get_Nalls2019_merged()
 gr.hits <- CORCES_2020.get_ATAC_peak_overlap(finemap_dat = merged_DT)
 gr.hits$extra_col <- "Extra"
 gr.anchor_hits <- CORCES_2020.get_HiChIP_FitHiChIP_overlap(

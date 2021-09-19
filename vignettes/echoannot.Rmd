@@ -60,19 +60,19 @@ knitr::kable(merged_DT)
 ## Credible Set bin plot
 
 ```{r}
-gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = echodata::Nalls2019_merged)
+gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = echodata::get_Nalls2019_merged())
 ```
 ## Credible Set counts plot
 
 ```{r}
-gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = echodata::Nalls2019_merged)
+gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = echodata::get_Nalls2019_merged())
 ```
 
 
 ## Epigenomic data
 
 ```{r}
-gg_epi <- echoannot::peak_overlap_plot(merged_DT =  echodata::Nalls2019_merged, 
+gg_epi <- echoannot::peak_overlap_plot(merged_DT =  echodata::get_Nalls2019_merged(), 
                                        include.NOTT_2019_enhancers_promoters = TRUE,
                                        include.NOTT_2019_PLACseq = TRUE,
                                        #### Omit many annot to save time ####
@@ -89,7 +89,7 @@ gg_epi <- echoannot::peak_overlap_plot(merged_DT =  echodata::Nalls2019_merged,
 Creates one big merged plot using the subfunctions above.
 
 ```{r, eval=FALSE} 
-super_plot <- echoannot::super_summary_plot(merged_DT = echodata::Nalls2019_merged, 
+super_plot <- echoannot::super_summary_plot(merged_DT = echodata::get_Nalls2019_merged(), 
                                             plot_missense = FALSE)
 
 ```
