@@ -15,7 +15,7 @@ plot_missense(
 )
 }
 \description{
-Plot any missense variants
+Plot any missense variants in fine-mapped data.
 }
 \examples{
 \dontrun{

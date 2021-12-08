@@ -12,7 +12,7 @@ XGR_plot_enrichment(
 )
 }
 \description{
-Plot XGR enrichment
+Plot XGR enrichment.
 }
 \examples{
 \dontrun{

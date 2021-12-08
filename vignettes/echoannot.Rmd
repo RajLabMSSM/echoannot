@@ -40,16 +40,24 @@ dataset <- dirname(dirname(dirname(local_files)))
 merged_DT <- echoannot::merge_finemapping_results(dataset = dataset[1], 
                                                   minimum_support = 1,
                                                   haploreg_annotation = TRUE)
-echodata::createDT(head(merged_DT))
+knitr::kable(head(merged_DT))
+```
+
+### Genome-wide example
+
+To get the full dataset of al fine-mapped PD loci, you can use the following
+function: 
+
+```R
+merged_DT <- echodata::get_Nalls2019_merged()
+
 ```
 
 # Summary plots
 
 ## Credible Set bin plot
 
-```{r}
-merged_DT <- echodata::get_Nalls2019_merged()
-
+```{r} 
 gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = merged_DT)
 ```
 
@@ -62,16 +70,17 @@ gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = merged_DT)
 ## Epigenomic data
 
 ```{r}
-gg_epi <- echoannot::peak_overlap_plot(merged_DT = merged_DT, 
-                                       include.NOTT2019_enhancers_promoters = TRUE,
-                                       include.NOTT2019_PLACseq = TRUE,
-                                       #### Omit many annot to save time ####
-                                       include.NOTT2019_peaks = FALSE,
-                                       include.CORCES2020_scATACpeaks = FALSE, 
-                                       include.CORCES2020_Cicero_coaccess = FALSE, 
-                                       include.CORCES2020_bulkATACpeaks = FALSE, 
-                                       include.CORCES2020_HiChIP_FitHiChIP_coaccess = FALSE,
-                                       include.CORCES2020_gene_annotations = FALSE)
+gg_epi <- echoannot::peak_overlap_plot(
+    merged_DT = merged_DT, 
+    include.NOTT2019_enhancers_promoters = TRUE,
+    include.NOTT2019_PLACseq = TRUE,
+    #### Omit many annotations to save time ####
+    include.NOTT2019_peaks = FALSE,
+    include.CORCES2020_scATACpeaks = FALSE, 
+    include.CORCES2020_Cicero_coaccess = FALSE, 
+    include.CORCES2020_bulkATACpeaks = FALSE, 
+    include.CORCES2020_HiChIP_FitHiChIP_coaccess = FALSE,
+    include.CORCES2020_gene_annotations = FALSE)
 ```
 
 ## Super summary plot
@@ -83,6 +92,11 @@ super_plot <- echoannot::super_summary_plot(merged_DT = merged_DT,
                                             plot_missense = FALSE)
 
 ```
+
+```{r Cleanup, include=FALSE}
+remove(super_plot, gg_epi, gg_cs_counts, merged_DT) 
+```
+
 
 # Session Info 
 

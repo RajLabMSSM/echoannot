@@ -7,15 +7,16 @@
 #' }
 #' @keywords internal
 #' @importFrom dplyr %>% mutate group_by case_when
+#' @importFrom data.table melt.data.table data.table
 get_CS_bins <- function(merged_DT) {
-    variable <- Method <- NULL
-
+    
+    variable <- Method <- NULL;
     locus_order <- get_CS_counts(merged_DT = merged_DT)
     max_CS_size <- sapply(locus_order[, -1], max, na.rm = TRUE) %>% max()
     labels <- c("0", "1", "2-4", "5-7", "8-10", "11-15", "16+")
     bin_counts <-
-        locus_order %>%
-        reshape2::melt(
+        data.table::data.table(locus_order) %>% 
+        data.table::melt.data.table(
             measure.vars = grep("*_size$",
                 colnames(locus_order),
                 value = TRUE

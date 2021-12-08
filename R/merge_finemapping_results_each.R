@@ -13,7 +13,7 @@ merge_finemapping_results_each <- function(study_dirs,
                                            force_new_merge = FALSE,
                                            nThread = 1,
                                            verbose = TRUE) {
-    Support <- Gene <- NULL
+    Support <- Gene <- NULL;
 
     if (file.exists(merged_path) & force_new_merge == FALSE) {
         merged_DT <- data.table::fread(merged_path, nThread = nThread)

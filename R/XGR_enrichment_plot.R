@@ -1,7 +1,12 @@
 #' Plot enrichment results
 #'
+#' Plot enrichment results from XGR annotations.
 #' @inheritParams ggplot2::ggsave
 #' @family XGR
+#' 
+#' @keywords internal
+#' @importFrom echodata snp_group_colorDict
+#' @importFrom stats as.formula
 #' @examples
 #' \dontrun{
 #' root <- file.path(
@@ -76,6 +81,9 @@ XGR_enrichment_plot <- function(enrich_res,
                                 height = 5,
                                 width = 5,
                                 dpi = 300) {
+    
+    requireNamespace("ggplot2")
+    SNP_group <- nOverlap <- FDR <- fc <- pvalue <- NULL;
     enrich_res <- dplyr::mutate(
         enrich_res,
         SNP_group = factor(SNP_group,
@@ -87,76 +95,76 @@ XGR_enrichment_plot <- function(enrich_res,
         nOverlap = ifelse(SNP_group == "Random", 10, nOverlap)
     )
     sum(enrich_res$fc == -Inf)
-    colorDict <- snp_group_colorDict()
+    colorDict <- echodata::snp_group_colorDict()
     if (plot_type == "bar") {
-        gp <- ggplot(
+        gp <- ggplot2::ggplot(
             data = subset(enrich_res, FDR <= FDR_thresh),
-            aes(x = SNP_group, y = fc, fill = SNP_group)
+            ggplot2::aes(x = SNP_group, y = fc, fill = SNP_group)
         ) +
             # geom_col(stat="identity", alpha=.5, show.legend = F) +
-            geom_boxplot() +
-            geom_jitter(height = 0, width = 0, alpha = .1, show.legend = F) +
-            scale_fill_manual(values = colorDict) +
-            # ggpubr::stat_compare_means(method = method,
-            #                            comparisons = comparisons,
-            #                            label = "p.signif", size=3, vjust = 1.5) +
-            facet_grid(
+            ggplot2::geom_boxplot() +
+            ggplot2::geom_jitter(height = 0, width = 0, alpha = .1,
+                                 show.legend = FALSE) +
+            ggplot2::scale_fill_manual(values = colorDict) +
+            ggplot2::facet_grid(
                 facets = if (is.null(facet_formula)) {
                     facet_formula
                 } else {
-                    as.formula(facet_formula)
+                    stats::as.formula(facet_formula)
                 },
                 scales = "free_y"
             ) +
-            labs(x = "SNP Group", title = title, subtitle = subtitle) +
-            theme_bw() +
-            theme(
-                strip.background = element_rect(fill = "grey20"),
-                strip.text = element_text(color = "white"),
-                axis.text.x = element_text(angle = 45, hjust = 1)
+            ggplot2::labs(x = "SNP Group", title = title, subtitle = subtitle) +
+            ggplot2::theme_bw() +
+            ggplot2::theme(
+                strip.background = ggplot2::element_rect(fill = "grey20"),
+                strip.text = ggplot2::element_text(color = "white"),
+                axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)
             )
     }
 
     if (plot_type == "point") {
-        gp <- ggplot(
+        gp <- ggplot2::ggplot(
             data = subset(enrich_res, FDR <= FDR_thresh),
-            aes(
+            ggplot2::aes(
                 x = log1p(fc), y = -log10(pvalue),
                 size = nOverlap, color = SNP_group, group = SNP_group,
                 fill = SNP_group,
                 shape = eval(parse(text = shape_var))
             )
         ) +
-            geom_smooth(
+            ggplot2::geom_smooth(
                 alpha = 0.1, size = 0, span = line_span,
                 method = line_method, formula = line_formula
             ) +
-            stat_smooth(
+            ggplot2::stat_smooth(
                 geom = "line", alpha = 0.3, size = 1, span = line_span,
                 method = line_method, formula = line_formula
             ) +
-            geom_point(alpha = .5) +
-            scale_color_manual(values = colorDict) +
-            scale_fill_manual(values = colorDict) +
-            scale_shape_manual(
+            ggplot2::geom_point(alpha = .5) +
+            ggplot2::scale_color_manual(values = colorDict) +
+            ggplot2::scale_fill_manual(values = colorDict) +
+            ggplot2::scale_shape_manual(
                 values = seq(12, (12 + dplyr::n_distinct(
                     enrich_res[[shape_var]]
                 )))
             ) +
-            geom_hline(yintercept = -log10(0.05), linetype = 2, alpha = .5) +
-            facet_grid(
+            ggplot2::geom_hline(yintercept = -log10(0.05), 
+                                linetype = 2, alpha = .5) +
+            ggplot2::facet_grid(
                 facets = if (is.null(facet_formula)) {
                     facet_formula
                 } else {
-                    as.formula(facet_formula)
+                    stats::as.formula(facet_formula)
                 },
                 scales = facet_scales
             ) +
-            labs(title = title, subtitle = subtitle, shape = shape_var) +
-            theme_bw() +
-            theme(
-                strip.background = element_rect(fill = "grey20"),
-                strip.text = element_text(color = "white")
+            ggplot2::labs(title = title, subtitle = subtitle, 
+                          shape = shape_var) +
+            ggplot2::theme_bw() +
+            ggplot2::theme(
+                strip.background = ggplot2::element_rect(fill = "grey20"),
+                strip.text = ggplot2::element_text(color = "white")
             )
     }
 

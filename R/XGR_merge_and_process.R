@@ -12,6 +12,9 @@
 XGR_merge_and_process <- function(grl.xgr,
                                   lib,
                                   n_top_sources = 10) {
+    
+    
+    Source <- NULL;
     # grl.xgr <- check_saved_XGR(results_path, lib)
     ## Make track
     ## Add and modify columns

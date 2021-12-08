@@ -45,6 +45,8 @@ XGR_plot_peaks <- function(gr.lib,
                            trim_xlims = FALSE) {
     # data("BST1"); dat <- BST1; show.legend=T;
     # fill_var="Assay"; facet_var="Source"; geom="density"; adjust=.2;
+    
+    requireNamespace("ggplot2")
     gr.lib$facet_label <- gsub(
         "_", "\n",
         GenomicRanges::mcols(gr.lib)[, facet_var]
@@ -53,7 +55,7 @@ XGR_plot_peaks <- function(gr.lib,
         # which = gr.snp,
         ggplot2::aes(fill = eval(parse(text = fill_var))),
         # formula(paste0(facet_var," ~ .")),
-        facets = formula("facet_label ~ ."),
+        facets = stats::formula("facet_label ~ ."),
         # fill = "magenta",
         color = "white", # NA
         geom = geom,
@@ -69,7 +71,7 @@ XGR_plot_peaks <- function(gr.lib,
     if (trim_xlims) {
         XGR_track <- suppressMessages(
             XGR_track +
-                xlim(min(dat$POS), max(dat$POS))
+                ggplot2::xlim(min(dat$POS), max(dat$POS))
         )
     }
     # ggbio::tracks(list("XGR"=XGR_track))

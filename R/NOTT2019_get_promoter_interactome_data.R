@@ -13,7 +13,9 @@ NOTT2019_get_promoter_interactome_data <- function(dat) {
     NOTT2019_interactome <- get_NOTT2019_interactome()
     annot_sub <-
         NOTT2019_interactome$H3K4me3_around_TSS_annotated_pe %>%
-        dplyr::rename(chr = Chr, start = Start, end = End) %>%
+        dplyr::rename(chr = Chr,
+                      start = Start,
+                      end = End) %>%
         subset(chr == paste0("chr", unique(dat$CHR)) &
             start >= min(dat$POS) &
             end <= max(dat$POS))

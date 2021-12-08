@@ -27,7 +27,7 @@ For full list of libraries see
 
 \item{save_path}{Save the results as a \code{data.frame}.}
 
-\item{nThread}{Multi-thread across libraries.}
+\item{nThread}{Number of threads to parallelise across libraries.}
 }
 \description{
 Automatically handles different file formats provided by XGR

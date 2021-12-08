@@ -34,7 +34,7 @@ If not supplied, uses the size of current graphics device.}
 "print" (300), or "screen" (72). Applies only to raster output types.}
 }
 \description{
-Plot enrichment results
+Plot enrichment results from XGR annotations.
 }
 \examples{
 \dontrun{
@@ -114,3 +114,4 @@ Other XGR:
 \code{\link{xgr_query}}
 }
 \concept{XGR}
+\keyword{internal}

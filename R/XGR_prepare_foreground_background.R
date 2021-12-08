@@ -19,7 +19,7 @@
 #' @keywords internal
 #' @examples
 #' \dontrun{
-#' fg_bg <- XGR_prepare_foreground_background(
+#' fg_bg <- echoannot:::XGR_prepare_foreground_background(
 #'     dat = echodata::get_Nalls2019_merged(),
 #'     foreground_filter = "Consensus_SNP==TRUE",
 #'     background_filter = "leadSNP==TRUE"
@@ -32,6 +32,8 @@ XGR_prepare_foreground_background <- function(dat,
                                               fg_sample_size = NULL,
                                               bg_sample_size = NULL,
                                               verbose = TRUE) {
+    
+    CHR <- POS <- SNP <- chrom <- chromStart <- chromEnd <- name <- NULL;
     if (!exists("sampling_df")) sampling_df <- dat
     messager("XGR:: Preparing foreground/background for enrichment test",
         v = verbose

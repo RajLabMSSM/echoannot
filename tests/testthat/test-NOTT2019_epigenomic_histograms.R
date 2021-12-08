@@ -4,7 +4,7 @@ test_that("NOTT2019_epigenomic_histograms works", {
     items_lv1 <- c("data","plot")
     items_lv2 <- c("raw","peaks")
     #### Full pipelne ####
-    nott2019_track <- echoannot::NOTT2019_epigenomic_histograms(
+    nott2019_track <- echoannot:: NOTT2019_epigenomic_histograms(
         dat = dat)
     testthat::expect_true(methods::is(nott2019_track$plot,"AssayData"))
     testthat::expect_true(methods::is(nott2019_track$data$raw,"GRanges"))

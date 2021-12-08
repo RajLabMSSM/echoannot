@@ -1,15 +1,22 @@
 #' Plot CS bin counts
+#' 
+#' Plot Credible Set bins counts for multiple fine-mapping method results.
+#' @param merged_DT Merge query data.
+#' @param show_plot Show plot. 
 #'
 #' @family summarise
-#' @examples
-#' bin_plot <- CS_bin_plot(merged_DT = echodata::get_Nalls2019_merged())
 #' @export
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom stats setNames
+#' @examples
+#' dat <- echodata::BST1 
+#' dat$Locus <- "BST1"
+#' bin_plot <- echoannot::CS_bin_plot(merged_DT = dat)
 CS_bin_plot <- function(merged_DT,
                         show_plot = TRUE) {
-    Method <- bin <- ..count.. <- NULL
-
+    
+    requireNamespace("ggplot2")
+    Method <- bin <- ..count.. <- NULL;
     bin_counts <- get_CS_bins(merged_DT = merged_DT)
     # Assign bin colors
     used_bins <- levels(bin_counts$bin)[levels(bin_counts$bin) %in%
@@ -51,7 +58,7 @@ CS_bin_plot <- function(merged_DT,
             legend.position = "top"
         ) +
         ggplot2::guides(fill = ggplot2::guide_legend(nrow = 1, reverse = TRUE))
-    if (show_plot) print(bin_plot)
+    if (show_plot) suppressWarnings(print(bin_plot))
     return(list(
         plot = bin_plot,
         data = bin_counts

@@ -13,16 +13,17 @@
 #' @param nThread Number of threads to parallelise downloads across.
 #' @param verbose Print messages.
 #' 
-#' @keywords internal
 #' @family NOTT2019
 #' @source
 #' \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
 #' \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
-#' @examples
-#' PEAKS <- NOTT2019_get_epigenomic_peaks() 
+#' 
+#' @export
 #' @importFrom data.table fread
 #' @importFrom parallel mclapply
 #' @importFrom echodata dt_to_granges
+#' @examples
+#' PEAKS <- echoannot::NOTT2019_get_epigenomic_peaks() 
 NOTT2019_get_epigenomic_peaks <- function(assays = c(
                                               "ATAC",
                                               "H3K27ac",

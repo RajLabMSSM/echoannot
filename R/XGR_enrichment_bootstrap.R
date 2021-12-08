@@ -22,6 +22,7 @@
 #' @importFrom parallel mclapply
 #' @importFrom dplyr %>%
 #' @importFrom stats p.adjust
+#' @importFrom echodata snp_group_filters
 XGR_enrichment_bootstrap <- function(gr,
                                      merged_dat,
                                      snp_groups = c(
@@ -47,6 +48,8 @@ XGR_enrichment_bootstrap <- function(gr,
                                      ),
                                      nThread = 1,
                                      verbose = TRUE) {
+    
+    SNP_group <- pvalue <- NULL;
     if (bootstrap) {
         messager("XGR:: Initiating bootstrap enrichment procedure", v = verbose)
     } else {
@@ -64,7 +67,9 @@ XGR_enrichment_bootstrap <- function(gr,
                  .background_filter = background_filter,
                  .fg_sample_size = fg_sample_size,
                  .bg_sample_size = bg_sample_size) {
-            snp_filters <- snp_group_filters(random_sample_size = .fg_sample_size)
+            snp_filters <- echodata::snp_group_filters(
+                random_sample_size = .fg_sample_size
+            )
             .foreground_filter <- snp_filters[snp_group]
             message(snp_group, " :: ", .foreground_filter)
             RES <- parallel::mclapply(seq(1, iterations),

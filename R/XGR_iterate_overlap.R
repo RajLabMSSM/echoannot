@@ -1,13 +1,12 @@
 #' Check overlap with XGR annotations
 #'
-#'
 #' Automatically handles different file formats provided by XGR
 #'  (e.g. varying kinds of nested/unnested \code{GRanges}).
 #' Then returns a \code{Granges} object with only the XGR annotation ranges
 #' that overlap with the SNPs in \code{dat}.
 #' The \code{GRanges} merges hits from \code{dat}.
 #'
-#' @param nThread Multi-thread across libraries.
+#' @param nThread Number of threads to parallelise across libraries.
 #' @param save_path Save the results as a \code{data.frame}.
 #' @inheritParams XGR_prepare_foreground_background
 #' @inheritParams XGR_download_and_standardize
@@ -31,6 +30,8 @@ XGR_iterate_overlap <- function(lib.selections =
                                 dat,
                                 save_path = FALSE,
                                 nThread = 1) {
+    
+    Consensus_SNP <- NULL;
     gr.lib <- XGR_download_and_standardize(
         lib.selections = lib.selections,
         dat = dat,

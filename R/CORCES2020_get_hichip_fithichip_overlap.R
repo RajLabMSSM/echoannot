@@ -9,12 +9,13 @@
 #' @param verbose Print messages.
 #'
 #' @family CORCES2020
+#' @importFrom GenomicRanges mcols
 #' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
 #' @export 
 CORCES2020_get_hichip_fithichip_overlap <- function(query_dat,
                                                     verbose = TRUE) {
     loops <- get_CORCES2020_hichip_fithichip_loop_calls()
-    # Anchor 1
+    #### Anchor 1 ####
     gr.anchor1 <- echotabix::liftover(
         sumstats_dt = loops,
         ref_genome = "hg38",
@@ -33,9 +34,9 @@ CORCES2020_get_hichip_fithichip_overlap <- function(query_dat,
         end_col.1 = "POS",
         dat2 = gr.anchor1
     )
-    gr.anchor1_hits$Anchor <- 1
+    GenomicRanges::mcols(gr.anchor1_hits)["Anchor"] <- 1
 
-    # Anchor 2
+    #### Anchor 2 ####
     gr.anchor2 <- echotabix::liftover(
         sumstats_dt = loops,
         ref_genome = "hg38",
@@ -53,14 +54,15 @@ CORCES2020_get_hichip_fithichip_overlap <- function(query_dat,
         start_col.1 = "POS",
         dat2 = gr.anchor2
     )
-    gr.anchor2_hits$Anchor <- 2
-    # Merge and report
+    GenomicRanges::mcols(gr.anchor2_hits)["Anchor"] <- 2
+    #### Merge and report ####
     gr.anchor <- rbind_granges(gr.anchor1_hits, gr.anchor2_hits)
-    gr.anchor$Assay <- "HiChIP_FitHiChIP"
+    GenomicRanges::mcols(gr.anchor)["Assay"] <- "HiChIP_FitHiChIP"
     # Have to make a pseudo cell-type col bc (i think)
     # this analysis was done on bulk data
-    gr.anchor$brain <- 1
-    messager("+ CORCES2020:: Found", length(gr.anchor),
+    GenomicRanges::mcols(gr.anchor)["brain"] <- 1
+    messager("+ CORCES2020:: Found", 
+             formatC(length(gr.anchor), big.mark = ","),
         "hits with HiChIP_FitHiChIP coaccessibility loop anchors.",
         v = verbose
     )

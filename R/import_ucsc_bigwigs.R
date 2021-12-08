@@ -56,7 +56,7 @@ import_ucsc_bigwigs <- function(query_dat,
                                             style = "UCSC",
                                             verbose = FALSE)   
     #### Check if file already exists ####
-    if(file.exists(save_path)){
+    if(!is.null(save_path) && file.exists(save_path)){
         messager("Importing previously downloaded file:",save_path,
                  v=verbose)
         bw.filt <- readRDS(save_path)

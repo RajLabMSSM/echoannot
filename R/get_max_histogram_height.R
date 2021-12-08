@@ -2,11 +2,12 @@
 #'
 #' @keywords internal
 #' @importFrom methods is
-#' @importFrom ggplot2 ggplot_build
 #' @importFrom DescTools RoundTo
+#' @importFrom echodata is_ggbio
 get_max_histogram_height <- function(gg,
                                      round_to = NULL,
                                      verbose = TRUE) {
+    requireNamespace("ggplot2")
     if (echodata::is_ggbio(gg)) {
         gg <- gg@ggplot
     }

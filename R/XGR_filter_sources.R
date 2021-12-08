@@ -12,6 +12,7 @@
 #' gr.filt <- echoannot::XGR_filter_sources(gr.lib = echoannot::xgr_query)
 XGR_filter_sources <- function(gr.lib,
                                n_top_sources = 5) {
+    Source <- NULL;
     top_sources <- data.frame(gr.lib) %>%
         dplyr::group_by(library, Source) %>%
         dplyr::tally(sort = TRUE)

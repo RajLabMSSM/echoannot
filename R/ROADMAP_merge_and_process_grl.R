@@ -14,6 +14,8 @@ ROADMAP_merge_and_process_grl <- function(grl.roadmap,
                                           n_top_tissues = 5,
                                           sep = " ",
                                           verbose = TRUE) {
+    
+    Source <- NULL;
     messager("Merging and processing ROADMAP annotations.", v = verbose)
     grl.ROADMAP_merged <- unlist(grl.roadmap)
     grl.ROADMAP_merged$Source <- names(grl.ROADMAP_merged)

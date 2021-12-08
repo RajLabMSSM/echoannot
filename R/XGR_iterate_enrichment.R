@@ -45,6 +45,8 @@ XGR_iterate_enrichment <- function(dat,
                                        ),
                                    save_path = FALSE,
                                    nThread = 1) {
+    
+    FDR <- nOverlap <- fc <- adjp <- pvalue <- NULL;
     fg_bg <- XGR_prepare_foreground_background(
         dat,
         foreground_filter = foreground_filter,

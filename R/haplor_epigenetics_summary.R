@@ -5,7 +5,7 @@
 #' @source
 #' \href{https://cran.r-project.org/web/packages/haploR/vignettes/haplor-vignette.html}{
 #' HaploR}
-#' @importFrom data.table data.table
+#' @importFrom data.table data.table .SD
 #' @importFrom dplyr %>%
 haplor_epigenetics_summary <- function(merged_results,
                                        tissue_list = c("BRN", "BLD"),
@@ -15,6 +15,7 @@ haplor_epigenetics_summary <- function(merged_results,
                                                "Promoter_histone_marks",
                                                "Enhancer_histone_marks"
                                            )) {
+    
     merged_results <- data.table::data.table(merged_results)
     summary_func <- function(ev) {
         boolean <- lapply(ev, function(x) {

@@ -5,7 +5,7 @@
 #' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
 #' @examples
 #' \dontrun{
-#' dat_melt <- CORCES2020_prepare_bulkATAC_peak_overlap(
+#' dat_melt <- echoannot:::CORCES2020_prepare_bulkATAC_peak_overlap(
 #'     merged_DT = echodata::get_Nalls2019_merged()
 #' )
 #' }
@@ -15,14 +15,14 @@
 #' @importFrom stats setNames
 CORCES2020_prepare_bulkATAC_peak_overlap <- function(
     merged_DT,
-     FDR_filter = NULL,
-     snp_filter = "Consensus_SNP==TRUE",
-     add_HiChIP_FitHiChIP = TRUE,
-     annotate_genes = FALSE,
-     return_counts = TRUE,
-     verbose = TRUE) {
+    FDR_filter = NULL,
+    snp_filter = "Consensus_SNP==TRUE",
+    add_HiChIP_FitHiChIP = TRUE,
+    annotate_genes = FALSE,
+    return_counts = TRUE,
+    verbose = TRUE) {
     
-    Peak_ID <- Cell_type <- Count <- NULL
+    Peak_ID <- Cell_type <- Count <- NULL;
     #### Get SNP groups  ####
     query_dat <- subset(merged_DT, eval(parse(text = snp_filter)),
         .drop = FALSE
@@ -34,7 +34,7 @@ CORCES2020_prepare_bulkATAC_peak_overlap <- function(
         cell_type_specific = FALSE,
         verbose = verbose
     )
-    annot_cols <- NULL
+    annot_cols <- NULL;
     if (annotate_genes) {
         annot_cols <- c("Gene_Symbol", "CTCF", 
                         "Distance_To_TSS", "Annotation")

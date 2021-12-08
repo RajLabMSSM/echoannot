@@ -13,7 +13,7 @@
 #' coloc_results_path <- file.path(
 #'     base_url, "_genome_wide/COLOC/coloc.eQTL_Catalogue_ALL.csv.gz"
 #' )
-#' gg_egene <- coloc_nominated_eGenes(coloc_results,
+#' gg_egene <- coloc_nominated_egenes(coloc_results,
 #'     merged_DT = merged_DT,
 #'     fill_var = NULL
 #' )
@@ -31,16 +31,15 @@
 #'         "multiGWAS.microgliaQTL_finemapping.csv.gz"
 #'     )
 #' )
-#' gg_egene <- coloc_nominated_eGenes(coloc_results,
+#' gg_egene <- coloc_nominated_egenes(coloc_results,
 #'     merged_DT = merged_DT,
 #'     fill_var = NULL
 #' )
 #' }
 #' @keywords internal
-#' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom dplyr %>% group_by top_n slice mutate desc arrange
 #' @importFrom data.table fread data.table
-coloc_nominated_eGenes <- function(coloc_results,
+coloc_nominated_egenes <- function(coloc_results,
                                    merged_DT,
                                    label_yaxis = TRUE,
                                    y_lab = "Locus",
@@ -51,8 +50,9 @@ coloc_nominated_eGenes <- function(coloc_results,
                                    nThread = 1,
                                    show_plot = TRUE,
                                    verbose = TRUE) {
+    
+    requireNamespace("ggplot2")
     PP.H4 <- eGene <- Locus.GWAS <- SNP.PP.H4 <- Locus <- dummy <- NULL
-
     # Check Corces gene annotations against eQTL/coloc eGenes
     messager("+ SUMMARISE:: Nominating genes by top colocalized eQTL eGenes",
         v = verbose
@@ -94,29 +94,30 @@ coloc_nominated_eGenes <- function(coloc_results,
         text_color <- "white"
     }
 
-    gg_egene <- ggplot(top_eGenes, aes(x = dummy, y = Locus)) +
-        labs(x = x_lab, y = y_lab) +
-        geom_tile(fill = "transparent") +
-        geom_text(aes(label = eGene), color = text_color, size = text_size) +
-        # scale_fill_viridis_c(end = .8, na.value = "transparent") +
-        # scale_fill_gradient(low = "blue", high = "red",
-        # na.value = "transparent") +
-        theme_bw() +
-        # scale_x_discrete(position = "top") +
-        theme( # axis.text.x = element_blank(),
+    gg_egene <- ggplot2::ggplot(top_eGenes, 
+                                ggplot2::aes(x = dummy, y = Locus)) +
+        ggplot2::labs(x = x_lab, y = y_lab) +
+        ggplot2::geom_tile(fill = "transparent") +
+        ggplot2::geom_text(ggplot2::aes(label = eGene), 
+                           color = text_color, size = text_size) +
+        ggplot2::theme_bw() +
+        ggplot2::theme(
             legend.box = "vertical",
             legend.position = "top",
-            legend.text = element_text(size = 8),
+            legend.text = ggplot2::element_text(size = 8),
             legend.text.align = .5,
-            plot.margin = unit(rep(.1, 4), "cm")
+            plot.margin = ggplot2::unit(rep(.1, 4), "cm")
         ) +
-        guides(
-            colour = guide_colourbar(title.position = "top", title.hjust = 0.5),
-            size = guide_legend(title.position = "top", title.hjust = 0.5)
+        ggplot2::guides(
+            colour = ggplot2::guide_colourbar(title.position = "top",
+                                              title.hjust = 0.5),
+            size = ggplot2::guide_legend(title.position = "top",
+                                         title.hjust = 0.5)
         ) +
-        scale_y_discrete(drop = F)
-    if (label_yaxis == F) {
-        gg_egene <- gg_egene + theme(axis.text.y = element_blank())
+        ggplot2::scale_y_discrete(drop = FALSE)
+    if (label_yaxis == FALSE) {
+        gg_egene <- gg_egene + 
+            ggplot2::theme(axis.text.y = ggplot2::element_blank())
     }
     if (show_plot) print(gg_egene)
     return(list(

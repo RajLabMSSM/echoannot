@@ -16,7 +16,8 @@ get_window_limits <- function(dat,
     # plot.zoom <- c("5000");
     # dat=echolocatoR::BST1;
     # index_as_center=T; genomic_units="Mb"; verbose=T;
-    #
+    
+    leadSNP <- NULL;
     plot.zoom <- if (is.null(plot.zoom)) "1x" else plot.zoom
     plot.zoom[!is.na(plot.zoom)] <- plot.zoom
     plot.zoom[!is.null(plot.zoom)] <- plot.zoom

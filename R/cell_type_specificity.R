@@ -4,7 +4,6 @@
 #' and then identify the number of SNPs overlapping by each cell type
 #'
 #' @keywords internal
-#' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom dplyr %>% top_n
 cell_type_specificity <- function(plot_dat,
                                   merged_DT,
@@ -15,8 +14,10 @@ cell_type_specificity <- function(plot_dat,
                                   show_genes = FALSE,
                                   x_strip_angle = 40,
                                   show_plot = TRUE) {
-    Count <- Locus <- Cell_group <- Assay_count <- Gene_Symbol <- Annotation <-
-        NULL
+    
+    requireNamespace("ggplot2")
+    Count <- Locus <- Cell_group <- Assay_count <- Gene_Symbol <-
+        Annotation <- Cell_type <- NULL
     Cell_group_dict <- c(
         "astrocytes" = "astrocytes",
         "microglia" = "microglia",
@@ -56,43 +57,45 @@ cell_type_specificity <- function(plot_dat,
         dat = cell_tally,
         merged_DT = merged_DT
     )
-    gg_tally <- ggplot(
+    gg_tally <- ggplot2::ggplot(
         data = cell_tally,
-        aes(x = Cell_group, y = Locus, fill = Assay_count)
+        ggplot2::aes(x = Cell_group, y = Locus, fill = Assay_count)
     ) +
-        geom_tile(color = "white") +
-        facet_grid(
+        ggplot2::geom_tile(color = "white") +
+        ggplot2::facet_grid(
             facets = . ~ Cell_group,
             scales = "free_x"
         ) +
-        scale_fill_viridis_c(na.value = "transparent") +
-        labs(y = y_lab) +
-        theme_bw() +
-        # scale_x_discrete(position = "top") +
-        theme(
-            axis.text.x = element_blank(),
-            # element_text(angle = x_text_angle, hjust = 0),
+        ggplot2::scale_fill_viridis_c(na.value = "transparent") +
+        ggplot2::labs(y = y_lab) +
+        ggplot2::theme_bw() + 
+        ggplot2::theme(
+            axis.text.x = ggplot2::element_blank(),
             legend.box = "horizontal",
             legend.position = "top",
-            legend.text = element_text(size = 8),
+            legend.text = ggplot2::element_text(size = 8),
             legend.text.align = .5,
-            strip.text.x = element_text(angle = x_strip_angle, color = "white"),
-            strip.background.x = element_rect(fill = "black"),
-            panel.spacing = unit(.1, "lines"),
-            plot.margin = unit(c(.1, 2, .1, .1), "cm")
+            strip.text.x = ggplot2::element_text(angle = x_strip_angle,
+                                                 color = "white"),
+            strip.background.x = ggplot2::element_rect(fill = "black"),
+            panel.spacing = ggplot2::unit(.1, "lines"),
+            plot.margin = ggplot2::unit(c(.1, 2, .1, .1), "cm")
         ) +
-        scale_y_discrete(drop = FALSE)
+        ggplot2::scale_y_discrete(drop = FALSE)
     if (show_genes) {
         gg_tally <- gg_tally +
-            geom_text(aes(label = eval(parse(text = "Gene_Symbol"))),
+            ggplot2::geom_text(
+                ggplot2::aes(label = eval(parse(text = "Gene_Symbol"))),
                 size = 3, color = "cyan"
             )
     }
     if (label_yaxis == F) {
-        gg_tally <- gg_tally + theme(axis.text.y = element_blank())
+        gg_tally <- gg_tally + 
+            ggplot2::theme(axis.text.y = ggplot2::element_blank())
     }
     if (label_yaxis == "right") {
-        gg_tally <- gg_tally + scale_y_discrete(position = "right")
+        gg_tally <- gg_tally + 
+            ggplot2::scale_y_discrete(position = "right")
     }
     if (show_plot) print(gg_tally)
     return(list(

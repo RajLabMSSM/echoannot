@@ -2,16 +2,27 @@
 #'
 #' Can optionally add \code{Cicero} coaccessibility scores,
 #' which are also derived from scATAC-seq data.
-#'
+#' @param query_dat Genomic summary statistics data to query with.
+#' @param FDR_filter Correct p-value threshold.
+#' @param add_cicero Whether to include 
+#' \href{https://www.bioconductor.org/packages/release/bioc/html/cicero.html}{
+#' cicero} results as well.
+#' @param cell_type_specific Whether to use bulk or cell-type-specific data.
+#' @param verbose Print messages.
+#' 
+#' @export
+#' @importFrom GenomicRanges mcols
 #' @family CORCES2020
 #' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
+#' @examples 
+#' query_dat <- echodata::BST1[1:100,]
+#' gr.hits <- echoannot::CORCES2020_get_ATAC_peak_overlap(query_dat = query_dat)
 CORCES2020_get_ATAC_peak_overlap <- function(query_dat,
                                              FDR_filter = NULL,
                                              add_cicero = TRUE,
                                              cell_type_specific = TRUE,
                                              verbose = TRUE) {
-    FDR <- Cicero <- NULL
-
+    FDR <- Cicero <- NULL;
     if (cell_type_specific) {
         messager("CORCES2020:: Extracting overlapping",
             "cell-type-specific scATAC-seq peaks",
@@ -45,7 +56,7 @@ CORCES2020_get_ATAC_peak_overlap <- function(query_dat,
         start_col.1 = "POS",
         dat2 = gr.peaks_lifted
     )
-    gr.hits$Assay <- Assay
+    GenomicRanges::mcols(gr.hits)["Assay"] <- Assay
     if (!is.null(FDR_filter)) {
         gr.hits <- subset(gr.hits, FDR < FDR_filter)
     }
@@ -91,7 +102,7 @@ CORCES2020_get_ATAC_peak_overlap <- function(query_dat,
         })
     }
     if (cell_type_specific == FALSE) {
-        gr.hits$brain <- 1
+        GenomicRanges::mcols(gr.hits)["brain"] <- 1
     }
     return(gr.hits)
 }

@@ -39,7 +39,7 @@ API access to brain cell type-specific epigenomic peaks (bed format)
 from Nott et al. (2019).
 }
 \examples{
-PEAKS <- NOTT2019_get_epigenomic_peaks() 
+PEAKS <- echoannot::NOTT2019_get_epigenomic_peaks() 
 }
 \seealso{
 Other NOTT2019: 
@@ -56,4 +56,3 @@ Other NOTT2019:
 \code{\link{get_NOTT2019_superenhancer_interactome}()}
 }
 \concept{NOTT2019}
-\keyword{internal}

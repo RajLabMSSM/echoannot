@@ -13,6 +13,7 @@
 #' @export
 #' @importFrom stats formula
 #' @importFrom echodata dt_to_granges
+#' @importFrom GenomicRanges mcols
 #' @examples
 #' nott2019_track <- echoannot::NOTT2019_epigenomic_histograms(
 #'     dat = echodata::BST1)
@@ -88,15 +89,16 @@ NOTT2019_epigenomic_histograms <- function(dat,
                                  xlims = xlims, 
                                  save_path = if(save_annot) {
                                      save_plot
-                                 } else {""}, 
+                                 } else {NULL}, 
                                  force_new = FALSE, 
                                  nThread = nThread, 
                                  verbose = verbose) 
     #### Additional preprocessing ####
-    bw.gr$Assay <- gsub("atac", "ATAC", bw.gr$Assay)
-    bw.gr$Cell_type <- gsub("oligodendrocytes", "oligo",
-                            bw.gr$Cell_type)
-
+    GenomicRanges::mcols(bw.gr)["Assay"] <- 
+        gsub("atac", "ATAC", bw.gr$Assay)
+    GenomicRanges::mcols(bw.gr)["Cell_type"] <- 
+        gsub("oligodendrocytes", "oligo", bw.gr$Cell_type)
+    #### Get previously called peaks ####
     PEAKS <- NOTT2019_get_epigenomic_peaks(
         nThread = nThread,
         verbose = verbose

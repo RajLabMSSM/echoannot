@@ -13,6 +13,7 @@ Corces et al., 2020 (Nature Genetics)}
 peak_overlap_plot(
   merged_DT,
   snp_filter = "Consensus_SNP==TRUE",
+  force_new = FALSE,
   include.NOTT2019_peaks = TRUE,
   include.NOTT2019_enhancers_promoters = TRUE,
   include.NOTT2019_PLACseq = TRUE,
@@ -28,9 +29,9 @@ peak_overlap_plot(
   label_yaxis = TRUE,
   x_strip_angle = 90,
   x_tick_angle = 40,
-  drop_empty_cols = F,
+  drop_empty_cols = FALSE,
   fill_title = paste(snp_filter, "\\nin epigenomic peaks"),
-  save_path = F,
+  save_path = FALSE,
   height = 11,
   width = 12,
   subplot_widths = c(1, 0.5),
@@ -38,6 +39,8 @@ peak_overlap_plot(
 )
 }
 \arguments{
+\item{force_new}{Don't use previously downloaded files.}
+
 \item{include.NOTT2019_peaks}{Plot SNP subset overlap with
 peaks from cell-type-specific bulk ATAC, H3K27ac, and H3K4me3 assays.}
 
@@ -63,11 +66,12 @@ gg_peaks <- echoannot::peak_overlap_plot(
 )
 #### UCS SNPs ####
 \dontrun{
+dat <- echodata::BST1
+datLocus <- "BST1"
 gg_peaks <- echoannot::peak_overlap_plot(
-    merged_DT = merged_DT,
+    merged_DT = dat,
     snp_filter = "Support>0",
-    fill_title = "UCS SNPs in epigenomic peaks"
-)
+    fill_title = "UCS SNPs in epigenomic peaks")
 }
 }
 \seealso{

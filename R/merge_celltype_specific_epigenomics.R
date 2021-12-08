@@ -73,10 +73,9 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         )
     #### Convert anchor 1 ####
     cicero.anchor1 <- cicero %>%
-        data.table::merge.data.table(data.table::data.table(
-            data.frame(gr.Corces2020.peaks)
-        ) %>%
-            dplyr::select(Peak_ID, Cell_type),
+        data.table::merge.data.table(
+            y = data.table::data.table(data.frame(gr.Corces2020.peaks)) %>%
+                dplyr::select(Peak_ID, Cell_type),
         by.x = "Peak_ID_Peak1",
         by.y = "Peak_ID"
         ) %>%

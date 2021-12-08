@@ -14,14 +14,14 @@
 #' @keywords internal 
 CORCES2020_prepare_scATAC_peak_overlap <- function(
     merged_DT,
-   FDR_filter = NULL,
-   snp_filter = "Consensus_SNP==TRUE",
-   add_cicero = TRUE,
-   annotate_genes = TRUE,
-   return_counts = TRUE,
-   verbose = TRUE) {
+    FDR_filter = NULL,
+    snp_filter = "Consensus_SNP==TRUE",
+    add_cicero = TRUE,
+    annotate_genes = TRUE,
+    return_counts = TRUE,
+    verbose = TRUE) {
     
-    Peak_ID <- Cell_type <- Count <- NULL
+    Peak_ID <- Cell_type <- Count <- NULL;
     cell_dict <- c(
         ExcitatoryNeurons = "neurons (+)",
         InhibitoryNeurons = "neurons (-)",
@@ -44,8 +44,9 @@ CORCES2020_prepare_scATAC_peak_overlap <- function(
     )
 
     annot_cols <- NULL
-    if (annotate_genes & length(gr.hits) > 0) {
-        annot_cols <- c("Gene_Symbol", "CTCF", "Distance_To_TSS", "Annotation")
+    if (annotate_genes && length(gr.hits) > 0) {
+        annot_cols <- c("Gene_Symbol", "CTCF",
+                        "Distance_To_TSS", "Annotation")
         messager(
             "CORCES2020:: Annotating peaks by cell-type-specific target genes",
             v = verbose

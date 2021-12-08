@@ -6,11 +6,18 @@
 \usage{
 CS_bin_plot(merged_DT, show_plot = TRUE)
 }
+\arguments{
+\item{merged_DT}{Merge query data.}
+
+\item{show_plot}{Show plot.}
+}
 \description{
-Plot CS bin counts
+Plot Credible Set bins counts for multiple fine-mapping method results.
 }
 \examples{
-bin_plot <- CS_bin_plot(merged_DT = echodata::get_Nalls2019_merged())
+dat <- echodata::BST1 
+dat$Locus <- "BST1"
+bin_plot <- echoannot::CS_bin_plot(merged_DT = dat)
 }
 \seealso{
 Other summarise: 

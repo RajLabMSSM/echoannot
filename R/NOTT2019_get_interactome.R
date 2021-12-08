@@ -13,7 +13,7 @@ NOTT2019_get_interactome <- function(annot_sub,
                                      marker_key,
                                      verbose = TRUE) {
     Coordinates <- Interaction <- chr <- Cell_type <- Element <- End <-
-        top.consensus.dist <- NULL
+        top.consensus.dist <- NULL;
 
     messager("+ NOTT2019:: Getting interactome data.", v = verbose)
     interact.cols <- grep("*_interactions", colnames(annot_sub), value = TRUE)

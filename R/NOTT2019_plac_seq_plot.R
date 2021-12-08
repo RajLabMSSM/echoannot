@@ -63,7 +63,7 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
     requireNamespace("ggbio")
     leadSNP <- SNP <- Consensus_SNP <- mean.PP <- Effect <- Support <-
         Start <- End <- consensus_snp_overlap <- y <- Element <-
-        POS <- P <- NULL 
+        POS <- P <- NULL;
     messager("NOTT2019:: Creating PLAC-seq interactome plot", v = verbose)
     if (!"Mb" %in% colnames(dat)) {
         dat$Mb <- dat$POS / 1000000

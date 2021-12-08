@@ -1,5 +1,6 @@
 #' Plot overlap between some SNP group and various epigenomic data
-#'
+#' 
+#' @param force_new Don't use previously downloaded files.
 #' @param include.NOTT2019_peaks Plot SNP subset overlap with
 #'  peaks from cell-type-specific bulk ATAC, H3K27ac, and H3K4me3 assays.
 #' @param include.NOTT2019_enhancers_promoters Plot SNP subset overlap with
@@ -16,28 +17,27 @@
 #' \href{https://doi.org/10.1038/s41588-020-00721-x}{
 #' Corces et al., 2020 (Nature Genetics)}
 #' @examples
+#' #### Data ####
 #' merged_DT <- echodata::get_Nalls2019_merged()
+#' 
 #' #### Consensus SNPs #####
 #' gg_peaks <- echoannot::peak_overlap_plot(
 #'     merged_DT = merged_DT,
-#'     snp_filter = "Consensus_SNP==T",
-#'     fill_title = "Consensus SNPs in epigenomic peaks"
-#' )
+#'     fill_title = "Consensus SNPs in epigenomic peaks")
 #' #### UCS SNPs ####
 #' \dontrun{
 #' gg_peaks <- echoannot::peak_overlap_plot(
 #'     merged_DT = merged_DT,
 #'     snp_filter = "Support>0",
-#'     fill_title = "UCS SNPs in epigenomic peaks"
-#' )
+#'     fill_title = "UCS SNPs in epigenomic peaks")
 #' }
 #' @export
-#' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom patchwork plot_layout
 #' @importFrom scales alpha
 #' @importFrom stats formula
 peak_overlap_plot <- function(merged_DT,
                               snp_filter = "Consensus_SNP==TRUE",
+                              force_new = FALSE,
                               include.NOTT2019_peaks = TRUE,
                               include.NOTT2019_enhancers_promoters = TRUE,
                               include.NOTT2019_PLACseq = TRUE,
@@ -54,10 +54,10 @@ peak_overlap_plot <- function(merged_DT,
                               label_yaxis = TRUE,
                               x_strip_angle = 90,
                               x_tick_angle = 40,
-                              drop_empty_cols = F,
+                              drop_empty_cols = FALSE,
                               fill_title = paste(snp_filter,
                                                  "\nin epigenomic peaks"),
-                              save_path = F,
+                              save_path = FALSE,
                               height = 11,
                               width = 12,
                               subplot_widths = c(1, .5),
@@ -70,8 +70,9 @@ peak_overlap_plot <- function(merged_DT,
     # x_strip_angle=90;  facets_formula=". ~ Cell_type";  drop_empty_cols=F; x_tick_angle=40;  snp_filter="Consensus_SNP==T";
     # fill_title=paste(snp_filter,"\nin epigenomic peaks"); subplot_widths = c(1,.5);plot_celltype_specificity_genes=F;
 
-    Locus <- Assay <- Count <- background <- NULL
-    if(!"merged_DT" %in% ls()) stop("merged_DT must be supplied.")
+    requireNamespace("ggplot2")
+    require_arg(arg = "merged_DT", ls_out = ls())
+    Locus <- Assay <- Count <- background <- NULL;
     dat_melt <- data.frame()
     ######## NOTT et al. 2019 #########
     if (include.NOTT2019_peaks) {
@@ -106,7 +107,8 @@ peak_overlap_plot <- function(merged_DT,
             )
             dat_melt.NOTTplac$background <- NA
             dat_melt.NOTTplac$Study <- "Nott et al. (2019)"
-            dat_melt <- base::rbind(dat_melt, dat_melt.NOTTplac, fill = TRUE)
+            dat_melt <- base::rbind(dat_melt, dat_melt.NOTTplac,
+                                    fill = TRUE)
         })
     }
 
@@ -122,7 +124,8 @@ peak_overlap_plot <- function(merged_DT,
             )
             dat_melt.CORCES_scPeaks$background <- NA
             dat_melt.CORCES_scPeaks$Study <- "Corces et al. (2020)"
-            dat_melt <- base::rbind(dat_melt, dat_melt.CORCES_scPeaks, fill = TRUE)
+            dat_melt <- base::rbind(dat_melt, dat_melt.CORCES_scPeaks, 
+                                    fill = TRUE)
         })
     }
     if (include.CORCES2020_bulkATACpeaks) {
@@ -131,8 +134,10 @@ peak_overlap_plot <- function(merged_DT,
                 CORCES2020_prepare_bulkATAC_peak_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter,
-                add_HiChIP_FitHiChIP = include.CORCES2020_HiChIP_FitHiChIP_coaccess,
-                annotate_genes = include.CORCES2020_gene_annotations,
+                add_HiChIP_FitHiChIP = 
+                    include.CORCES2020_HiChIP_FitHiChIP_coaccess,
+                annotate_genes = 
+                    include.CORCES2020_gene_annotations,
                 verbose = verbose
             )
             dat_melt.CORCES_bulkPeaks$background <- NA
@@ -147,9 +152,7 @@ peak_overlap_plot <- function(merged_DT,
     ## include.CORCES2020_bulkATACpeaks=F or no overlap was found
     if (!"Gene_Symbol" %in% colnames(dat_melt)) dat_melt$Gene_Symbol <- NA
     if (!"Annotation" %in% colnames(dat_melt)) dat_melt$Annotation <- NA
-
-
-
+    #### Order loci ####
     plot_dat <- order_loci(
         dat = dat_melt,
         merged_DT = merged_DT
@@ -183,12 +186,14 @@ peak_overlap_plot <- function(merged_DT,
     ### Make sure there's no missing loci
     # unique(plot_dat$Locus)==unique(merged_DT$Locus)
 
-    # Plot
-    gg_pks <- ggplot(data = plot_dat, aes(x = Assay, y = Locus, fill = Count)) +
-        geom_tile(color = "white") +
+    #### Plot ####
+    gg_pks <- ggplot2::ggplot(data = plot_dat, 
+                              ggplot2::aes(x = Assay, y = Locus,
+                                           fill = Count)) +
+        ggplot2::geom_tile(color = "white") +
         # scale_fill_manual(values = consensus_colors) +
         # scale_fill_discrete(na.value = "transparent") +
-        scale_fill_gradient(
+        ggplot2::scale_fill_gradient(
             na.value = "transparent",
             low = scales::alpha("blue", .7),
             high = scales::alpha("red", .7)
@@ -199,53 +204,52 @@ peak_overlap_plot <- function(merged_DT,
         # geom_rect( aes(xmin = Assay, xmax = dplyr::lead(Assay),
         # ymin = -0.5, ymax = Inf, fill = background),
         #           alpha = 0.5, color="grey") +
-        geom_tile(
+        ggplot2::geom_tile(
             data = subset(plot_dat, !is.na(background)),
-            aes(width = 0.9, height = 0.9), color = "cyan", size = .7
+            ggplot2::aes(width = 0.9, height = 0.9),
+            color = "cyan", size = .7
         ) +
-        facet_grid(
+        ggplot2::facet_grid(
             facets = stats::formula(facets_formula),
             scales = if (drop_empty_cols) "free_x" else "fixed",
             space = "free_x"
         ) +
-        scale_size_manual(values = c(dot = .5, no_dot = NA), guide = "none") +
-        labs(fill = fill_title) +
-        theme_bw() +
-        theme(
+        ggplot2::scale_size_manual(values = c(dot = .5, no_dot = NA),
+                                   guide = "none") +
+        ggplot2::labs(fill = fill_title) +
+        ggplot2::theme_bw() +
+        ggplot2::theme(
             legend.position = "top",
             legend.title.align = .5,
-            axis.text.x = element_text(
+            axis.text.x = ggplot2::element_text(
                 angle = x_tick_angle,
                 hjust = if (x_tick_angle > 0) 1 else NULL
             ),
             # legend.background =  element_rect(fill = "lightgray"),
-            legend.key = element_rect(colour = "gray60"),
-            axis.title.y = element_blank(),
-            strip.background = element_rect(fill = "grey90"),
-            strip.text.x = element_text(angle = x_strip_angle),
-            legend.text = element_text(size = 8),
+            legend.key = ggplot2::element_rect(colour = "gray60"),
+            axis.title.y = ggplot2::element_blank(),
+            strip.background = ggplot2::element_rect(fill = "grey90"),
+            strip.text.x = ggplot2::element_text(angle = x_strip_angle),
+            legend.text = ggplot2::element_text(size = 8),
             legend.text.align = .5,
-            # legend.key.size = unit(.5, units = "cm" ),
             legend.box = "horizontal",
-            panel.background = element_rect(fill = "transparent"),
-            # panel.grid = element_line(color="gray", size=5),
-            # panel.grid.major.x = element_line(color="gray", size=.5),
-            # panel.grid.major.x = element_line(color="gray", size=.5),
-
-            panel.grid.minor = element_line(color = "white", size = .5),
-            plot.margin = unit(rep(.1, 4), "cm")
+            panel.background = ggplot2::element_rect(fill = "transparent"),
+            panel.grid.minor = ggplot2::element_line(color = "white",
+                                                     size = .5),
+            plot.margin = ggplot2::unit(rep(.1, 4), "cm")
         ) +
-        guides(color = guide_legend(
-            nrow = 1, reverse = F,
+        ggplot2::guides(color = ggplot2::guide_legend(
+            nrow = 1, reverse = FALSE,
             title.position = "top",
             # label.position = "top",
             title.hjust = .5,
             label.hjust = -1
         )) +
         # Keep unused levels/Loci
-        scale_y_discrete(drop = FALSE)
-    if (label_yaxis == F) {
-        gg_pks <- gg_pks + theme(axis.text.y = element_blank())
+        ggplot2::scale_y_discrete(drop = FALSE)
+    if (label_yaxis == FALSE) {
+        gg_pks <- gg_pks +
+            ggplot2::theme(axis.text.y = ggplot2::element_blank())
     }
 
     if (plot_celltype_specificity) {
@@ -253,7 +257,7 @@ peak_overlap_plot <- function(merged_DT,
             gg_cells <- cell_type_specificity(
                 plot_dat = plot_dat,
                 merged_DT = merged_DT,
-                label_yaxis = F,
+                label_yaxis = FALSE,
                 show_genes = plot_celltype_specificity_genes,
                 y_lab = NULL,
                 x_strip_angle = x_strip_angle,

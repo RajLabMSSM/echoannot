@@ -1,10 +1,15 @@
 leadSNP_comparison <- function(top_SNPs,
                                merged_results) {
-    leadSNP <- finemappedSNP <- Overlap <-
+    
+    leadSNP <- finemappedSNP <- Overlap <- SNP <- Gene <- NULL;
         leadSNP_summary_table <- data.table::merge.data.table(
-            top_SNPs %>% dplyr::select(leadSNP = SNP, Gene),
-            merged_results %>% dplyr::select(finemappedSNP = SNP, Gene),
-            by = "Gene", all = T
+            x = top_SNPs %>% 
+                dplyr::select(leadSNP = SNP, Gene) %>% 
+                data.table::data.table(),
+            y = merged_results %>% 
+                dplyr::select(finemappedSNP = SNP, Gene) %>%
+                data.table::data.table(),
+            by = "Gene", all = TRUE
         ) %>%
         dplyr::group_by(Gene, leadSNP) %>%
         dplyr::mutate(Overlap = leadSNP %in% finemappedSNP) %>%

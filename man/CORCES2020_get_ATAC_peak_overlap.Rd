@@ -15,9 +15,26 @@ CORCES2020_get_ATAC_peak_overlap(
   verbose = TRUE
 )
 }
+\arguments{
+\item{query_dat}{Genomic summary statistics data to query with.}
+
+\item{FDR_filter}{Correct p-value threshold.}
+
+\item{add_cicero}{Whether to include 
+\href{https://www.bioconductor.org/packages/release/bioc/html/cicero.html}{
+cicero} results as well.}
+
+\item{cell_type_specific}{Whether to use bulk or cell-type-specific data.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Can optionally add \code{Cicero} coaccessibility scores,
 which are also derived from scATAC-seq data.
+}
+\examples{
+query_dat <- echodata::BST1[1:100,]
+gr.hits <- echoannot::CORCES2020_get_ATAC_peak_overlap(query_dat = query_dat)
 }
 \seealso{
 Other CORCES2020: 

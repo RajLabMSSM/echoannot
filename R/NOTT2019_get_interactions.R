@@ -8,13 +8,14 @@
 #' \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
 #' \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
 NOTT2019_get_interactions <- function(dat,
-                                      as.granges = FALSE) {
-    Name <- NULL
-
+                                      as.granges = FALSE,
+                                      verbose = TRUE) {
+    Name <- NULL;
     NOTT2019_interactome <- get_NOTT2019_interactome()
     selected_sheets <- grep("interactome$", names(NOTT2019_interactome),
         value = TRUE
     )
+    #### Import data ####
     interactomes <- lapply(selected_sheets, function(s) {
         messager("Importing", s, "...")
         # Read the sheet you want
@@ -22,7 +23,8 @@ NOTT2019_get_interactions <- function(dat,
         dat$Name <- s
         return(dat)
     }) %>% data.table::rbindlist()
-    # Anchor 1
+    
+    #### Anchor 1 ####
     interactomes.anchor1 <- granges_overlap(
         dat1 = dat,
         chrom_col.1 = "CHR",
@@ -33,8 +35,8 @@ NOTT2019_get_interactions <- function(dat,
         start_col.2 = "start1",
         end_col.2 = "end1"
     )
-    interactomes.anchor1$Anchor <- 1
-    # Anchor 2
+    GenomicRanges::mcols(interactomes.anchor1)["Anchor"] <- 1
+    #### Anchor 2 ####
     interactomes.anchor2 <- granges_overlap(
         dat1 = dat,
         chrom_col.1 = "CHR",
@@ -45,17 +47,18 @@ NOTT2019_get_interactions <- function(dat,
         start_col.2 = "start2",
         end_col.2 = "end2"
     )
-    interactomes.anchor2$Anchor <- 2
-    # Merge
+    GenomicRanges::mcols(interactomes.anchor2)["Anchor"] <- 2
+    #### Merge ####
     interactomes.anchor <- c(
         interactomes.anchor1,
         interactomes.anchor2
     )
-    # Modify
-    interactomes.anchor$Assay <- "PLAC"
+    #### Modify ####
+    GenomicRanges::mcols(interactomes.anchor)["Assay"] <- "PLAC"
     interactomes.anchor <- cbind(
         data.frame(interactomes.anchor),
-        tidyr::separate(data.frame(interactomes.anchor, check.names = FALSE),
+        tidyr::separate(data.frame(interactomes.anchor, 
+                                   check.names = FALSE),
             Name,
             into = c("Cell_type", "Element")
         )[, c("Cell_type", "Element")]
@@ -68,11 +71,14 @@ NOTT2019_get_interactions <- function(dat,
     interactomes.anchor$Cell_type <- cell_dict[interactomes.anchor$Cell_type]
 
     if (as.granges) {
-        interactomes.anchor <-
-            GenomicRanges::makeGRangesFromDataFrame(
-                interactomes.anchor,
-                keep.extra.columns = TRUE
-            )
+        interactomes.anchor <- echodata::dt_to_granges(
+            dat = interactomes.anchor %>% dplyr::select(-seqnames),
+            chrom_col = "CHR",
+            start_col = "start",
+            end_col = "end",
+            style = "NCBI",
+            verbose = verbose
+        ) 
     }
     return(interactomes.anchor)
 }

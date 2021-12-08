@@ -10,8 +10,8 @@
 #' }
 annotate_missense <- function(merged_DT,
                               snp_filter = "Support>0") {
-    refsnp_id <- Support <- Consensus_SNP <- NULL
-
+    
+    refsnp_id <- Support <- Consensus_SNP <- consequence_type_tv <- NULL 
     snp_info <- biomart_snp_info(
         snp_list = unique(subset(merged_DT, eval(parse(text = snp_filter)))$SNP)
     )

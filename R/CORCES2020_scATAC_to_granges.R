@@ -1,6 +1,6 @@
 CORCES2020_scATAC_to_granges <- function(standardize_cellTypes = FALSE) {
-    value <- NULL
-
+    
+    value <- NULL;
     scATAC <- data.table::melt.data.table(
         get_CORCES2020_scATACseq_celltype_peaks(),
         measure.vars = c(
@@ -26,7 +26,7 @@ CORCES2020_scATAC_to_granges <- function(standardize_cellTypes = FALSE) {
         style = "NCBI"
     )
     if (standardize_cellTypes) {
-        gr.Corces2020.peaks$Cell_type <-
+        GenomicRanges::mcols(gr.Corces2020.peaks)["Cell_type"] <-
             standardize_celltypes(gr.Corces2020.peaks$Cell_type)
     }
     return(gr.Corces2020.peaks)

@@ -2,6 +2,7 @@ XGR_plot_style <- function(xgr_track,
                            gr.filt,
                            lib_name,
                            palette = c("Spectral", "BrBG", "PiYG", "PuOr")) {
+    requireNamespace("ggplot2")
     #### further modify ####
     colourCount <- length(unique(gr.filt$Assay))
     trk_name <- paste("XGR:", lib_name)
@@ -23,7 +24,8 @@ XGR_plot_style <- function(xgr_track,
                 keyheight = .5,
                 keywidth = .5
             )) +
-            labs(y = paste(gsub("_", " ", trk_name), "\n", "density"))
+            ggplot2::labs(y = paste(gsub("_", " ", trk_name), 
+                                    "\n", "density"))
     )
     return(xgr_track)
 }

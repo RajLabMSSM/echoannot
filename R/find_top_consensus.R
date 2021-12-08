@@ -8,7 +8,7 @@
 find_top_consensus <- function(dat,
                                n_top = 1,
                                grouping_vars = c("Locus")) {
-    mean.PP <- NULL;
+    mean.PP <- Consensus_SNP <- NULL;
     #### Get top consensus SNPs ####
     top.consensus <- (dat %>%
         dplyr::group_by(dplyr::vars(grouping_vars)) %>%

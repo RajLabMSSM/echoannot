@@ -2,12 +2,16 @@
 
 ## Bug fixes 
 
-- Move as many Imports to Suggests as possible. 
-- GHA servers can't install XGR from CRAN. Switching to 
+* Move as many Imports to Suggests as possible. 
+* GHA servers can't install XGR from CRAN. Switching to 
 [GitHub remote](github::hfang-bristol/XGR) installation until they fix this. 
-- Removed docs/ folder. 
-- Reduced vignette size. 
-
+* Removed docs/ folder. 
+* Reduced vignette size. 
+* Transition all usage of `ggplot2` to `requireNamespace` method to reduce
+NAMESPACE.
+* Make all new col assignments in GRange objects use the proper `mcols` syntax.
+* New exports:
+    - `NOTT2019_get_epigenomic_peaks`
 
 # echoannot 0.99.2
 

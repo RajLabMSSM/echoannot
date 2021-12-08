@@ -23,7 +23,7 @@ NOTT2019_superenhancers <- function(dat) {
     )
     if (nrow(annot_sub) > 0) {
         merged_dat <- data.table::merge.data.table(
-            dat %>%
+            data.table::data.table(dat) %>%
                 dplyr::mutate(
                     chr = paste0("chr", CHR),
                     start = as.numeric(POS)

@@ -1,10 +1,10 @@
 NOTT2019_prepare_regulatory_overlap <- function(merged_DT,
                                                 snp_filter = "!is.na(SNP)",
                                                 return_counts = TRUE) {
-    Element <- NULL
-
+    Element <- NULL;
     gr.reg <- NOTT2019_get_regulatory_regions(as.granges = TRUE)
-    finemap_sub <- subset(merged_DT, eval(parse(text = snp_filter)), .drop = FALSE)
+    finemap_sub <- subset(merged_DT, eval(parse(text = snp_filter)), 
+                          .drop = FALSE)
     gr.hits.reg <- granges_overlap(
         dat1 = finemap_sub,
         chrom_col.1 = "CHR",
@@ -23,7 +23,7 @@ NOTT2019_prepare_regulatory_overlap <- function(merged_DT,
         )
         return(dat_melt.reg)
     } else {
-        gr.hits.reg$Assay <- gr.hits.reg$Element
+        GenomicRanges::mcols(gr.hits.reg)["Assay"] <- gr.hits.reg$Element
         return(gr.hits.reg)
     }
 }

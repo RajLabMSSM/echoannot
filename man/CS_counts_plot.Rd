@@ -14,11 +14,28 @@ CS_counts_plot(
   show_plot = TRUE
 )
 }
+\arguments{
+\item{merged_DT}{Merge query data.}
+
+\item{show_numbers}{Print numbers on top of bars.}
+
+\item{ylabel}{y-axis label.}
+
+\item{legend_nrow}{Number of rows for the legend to span over.}
+
+\item{label_yaxis}{Whether or not to label the y-axis.}
+
+\item{top_CS_only}{Only include the top 1 CS per fine-mapping method.}
+
+\item{show_plot}{Show plot.}
+}
 \description{
 Loci ordered by UCS size (smallest to largest).
 }
 \examples{
-gg_CS <- CS_counts_plot(merged_DT = echodata::get_Nalls2019_merged())
+dat <- echodata::BST1
+dat$Locus <- "BST1"
+gg_CS <- echoannot::CS_counts_plot(merged_DT = dat)
 }
 \seealso{
 Other summarise: 

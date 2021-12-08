@@ -53,6 +53,7 @@ merge_finemapping_results <- function(dataset = file.path(
                                       top_CS_only = FALSE,
                                       verbose = TRUE,
                                       nThread = 1) {
+    Gene <- Support <- NULL;
     if (from_storage) {
         messager("+ Gathering all fine-mapping results from storage...",
             v = verbose
@@ -147,7 +148,8 @@ merge_finemapping_results <- function(dataset = file.path(
             verbose = verbose
         )
         merged_results <- data.table::merge.data.table(
-            merged_results, HR_query,
+            x = data.table::data.table(merged_results),
+            y = data.table::data.table(HR_query),
             by.x = "SNP",
             by.y = "rsID",
             all = TRUE,
@@ -159,8 +161,9 @@ merge_finemapping_results <- function(dataset = file.path(
             snp_list = unique(merged_results$SNP),
             verbose = verbose
         )
-        merged_results <- data.table::merge.data.table(
-            merged_results, regDB_query,
+        merged_results <- data.table::merge.data.table( 
+            x = data.table::data.table(merged_results),
+            y = data.table::data.table(regDB_query),
             by.x = "SNP",
             by.y = "rsID",
             all = TRUE,
@@ -173,8 +176,9 @@ merge_finemapping_results <- function(dataset = file.path(
             snp_list = merged_results$SNP,
             verbose = verbose
         )
-        merged_results <- data.table::merge.data.table(
-            merged_results, biomart_query,
+        merged_results <- data.table::merge.data.table( 
+            x = data.table::data.table(merged_results),
+            y = data.table::data.table(biomart_query),
             by.x = "SNP",
             by.y = "refsnp_id",
             all = TRUE,

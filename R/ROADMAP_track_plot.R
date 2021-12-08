@@ -33,6 +33,8 @@ ROADMAP_track_plot <- function(grl.roadmap.filt,
                                show_plot = TRUE,
                                as.ggplot = TRUE,
                                verbose = TRUE) {
+    
+    ChromState <- NULL;
     messager("Generating ROADMAP track plot.", v = verbose)
     track.roadmap <- ggbio::autoplot(grl.roadmap.filt,
         which = gr.snp,

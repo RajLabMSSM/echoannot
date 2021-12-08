@@ -29,13 +29,15 @@ super_summary_plot <- function(merged_DT,
                                height = 15,
                                width = 13,
                                dpi = 300) {
+    
+    requireNamespace("ggplot2")
     bin_plot <- CS_bin_plot(
         merged_DT = merged_DT,
         show_plot = FALSE
     )
 
     if (!is.null(coloc_results)) {
-        gg_egene <- coloc_nominated_eGenes(
+        gg_egene <- coloc_nominated_egenes(
             coloc_results = coloc_results,
             merged_DT = merged_DT,
             PP_threshold = .8,

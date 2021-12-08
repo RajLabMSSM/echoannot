@@ -35,7 +35,7 @@ tests with XGR annotations.
 }
 \examples{
 \dontrun{
-fg_bg <- XGR_prepare_foreground_background(
+fg_bg <- echoannot:::XGR_prepare_foreground_background(
     dat = echodata::get_Nalls2019_merged(),
     foreground_filter = "Consensus_SNP==TRUE",
     background_filter = "leadSNP==TRUE"
