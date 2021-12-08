@@ -22,7 +22,7 @@ CS_counts_plot <- function(merged_DT,
     melt.dat <-
         locus_order %>%
         dplyr::mutate(Locus_UCS = paste0(Locus, "  (", UCS.CS_size, ")")) %>%
-        reshape2:::melt.data.frame(
+        reshape2::melt(
             measure.vars = grep(".CS_size$",
                 colnames(locus_order),
                 value = TRUE

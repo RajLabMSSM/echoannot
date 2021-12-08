@@ -6,12 +6,12 @@
 #' \href{https://cran.r-project.org/web/packages/haploR/vignettes/haplor-vignette.html}{
 #' HaploR}
 #'
-#' @keywords internal
-#' @importFrom haploR queryRegulome
+#' @keywords internal 
 #' @importFrom data.table as.data.table rbindlist
 haplor_regulomedb <- function(snp_list,
                               verbose = TRUE,
                               chunk_size = NA) {
+    requireNamespace("haploR")
     messager("+ Gathering annotation data from HaploReg...", v = verbose)
     # Break into smaller chunks
     snp_list <- unique(snp_list)

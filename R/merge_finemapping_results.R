@@ -146,7 +146,7 @@ merge_finemapping_results <- function(dataset = file.path(
             snp_list = unique(merged_results$SNP),
             verbose = verbose
         )
-        merged_results <- data.table:::merge.data.table(
+        merged_results <- data.table::merge.data.table(
             merged_results, HR_query,
             by.x = "SNP",
             by.y = "rsID",
@@ -159,7 +159,7 @@ merge_finemapping_results <- function(dataset = file.path(
             snp_list = unique(merged_results$SNP),
             verbose = verbose
         )
-        merged_results <- data.table:::merge.data.table(
+        merged_results <- data.table::merge.data.table(
             merged_results, regDB_query,
             by.x = "SNP",
             by.y = "rsID",
@@ -173,7 +173,7 @@ merge_finemapping_results <- function(dataset = file.path(
             snp_list = merged_results$SNP,
             verbose = verbose
         )
-        merged_results <- data.table:::merge.data.table(
+        merged_results <- data.table::merge.data.table(
             merged_results, biomart_query,
             by.x = "SNP",
             by.y = "refsnp_id",

@@ -27,8 +27,6 @@
 #'
 #' @family ROADMAP
 #' @keywords internal
-#' @importFrom GenomicRanges makeGRangesFromDataFrame
-#' @importFrom GenomeInfoDb seqlevelsStyle
 #' @importFrom data.table fread
 #' @importFrom echotabix query_tabular
 #' @importFrom echodata dt_to_granges

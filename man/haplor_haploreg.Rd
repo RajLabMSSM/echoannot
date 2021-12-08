@@ -8,7 +8,7 @@
 HaploR}
 }
 \usage{
-haplor_haploreg(snp_list, verbose = T, chunk_size = NA)
+haplor_haploreg(snp_list, verbose = TRUE, chunk_size = NA)
 }
 \description{
 Download SNP-wise annotations from HaploReg

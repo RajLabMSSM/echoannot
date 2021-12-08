@@ -1,3 +1,14 @@
+# echoannot 0.99.3
+
+## Bug fixes 
+
+- Move as many Imports to Suggests as possible. 
+- GHA servers can't install XGR from CRAN. Switching to 
+[GitHub remote](github::hfang-bristol/XGR) installation until they fix this. 
+- Removed docs/ folder. 
+- Reduced vignette size. 
+
+
 # echoannot 0.99.2
 
 ## New features 

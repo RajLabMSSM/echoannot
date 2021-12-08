@@ -6,15 +6,15 @@
 #' biomaRt}
 #'
 #' @keywords internal
-#' @importFrom biomaRt useMart getBM
 #' @importFrom dplyr %>%
-#'
-#' @examples
-#' \dontrun{
+#' @source 
+#' \code{
 #' # biomart_snps_to_geneInfo(c("rs114360492"))
 #' }
 biomart_snps_to_geneInfo <- function(snp_list,
                                      reference_genome = "grch37") {
+    
+    requireNamespace("biomaRt")
     ensembl_gene_stable_id <- ensembl <- NULL
     # listMarts()
     snp_mart <- biomaRt::useMart("ENSEMBL_MART_SNP",

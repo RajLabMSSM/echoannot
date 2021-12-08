@@ -6,8 +6,7 @@
 #' @export
 #' @importFrom dplyr %>%
 #' @importFrom stats as.formula median
-#' @importFrom DescTools Divisors
-#' @importFrom pheatmap pheatmap
+#' @importFrom DescTools Divisors 
 #' @importFrom grDevices png dev.off
 plot_dataset_overlap <- function(merged_DT,
                                  snp_filter = "!is.na(SNP)",
@@ -15,6 +14,7 @@ plot_dataset_overlap <- function(merged_DT,
                                  formula_str = "~ SNP + Dataset",
                                  triangle = FALSE,
                                  proxies = NULL) {
+    requireNamespace("pheatmap")
     snp_xtab <- subset(merged_DT, eval(parse(text = snp_filter)),
         .drop = FALSE
     ) %>%

@@ -8,7 +8,10 @@
 #'
 #' @keywords internal
 #' @importFrom data.table as.data.table rbindlist
-haplor_haploreg <- function(snp_list, verbose = T, chunk_size = NA) {
+haplor_haploreg <- function(snp_list,
+                            verbose = TRUE, 
+                            chunk_size = NA) {
+    requireNamespace("haploR")
     messager("+ Gathering annotation data from HaploReg...", v = verbose)
     # Break into smaller chunks
     snp_list <- unique(snp_list)
@@ -29,12 +32,12 @@ haplor_haploreg <- function(snp_list, verbose = T, chunk_size = NA) {
             epi = "vanilla",
             cons = "siphy",
             genetypes = "gencode",
-            url = "https://pubs.broadinstitute.org/mammals/haploreg/haploreg.php",
+            url = 
+                "https://pubs.broadinstitute.org/mammals/haploreg/haploreg.php",
             timeout = 500,
             encoding = "UTF-8",
             verbose = FALSE
-        )
-
+        ) 
         return(data.table::as.data.table(HR_query))
     }) %>% data.table::rbindlist()
 

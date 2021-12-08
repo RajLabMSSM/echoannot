@@ -6,17 +6,16 @@
 \source{
 \href{https://bioconductor.org/packages/release/bioc/html/biomaRt.html}{
 biomaRt}
+
+\code{
+# biomart_snps_to_geneInfo(c("rs114360492"))
+}
 }
 \usage{
 biomart_snps_to_geneInfo(snp_list, reference_genome = "grch37")
 }
 \description{
 Identify which genes SNPs belong to using Biomart
-}
-\examples{
-\dontrun{
-# biomart_snps_to_geneInfo(c("rs114360492"))
-}
 }
 \seealso{
 Other annotate: 

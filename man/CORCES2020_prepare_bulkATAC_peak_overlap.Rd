@@ -23,9 +23,11 @@ Prepare data to plot overlap between datatable of SNPs and
 cell-type-specific epigenomic peaks and coaccessibility data.
 }
 \examples{
+\dontrun{
 dat_melt <- CORCES2020_prepare_bulkATAC_peak_overlap(
     merged_DT = echodata::get_Nalls2019_merged()
 )
+}
 }
 \seealso{
 Other CORCES2020: 

@@ -10,6 +10,7 @@ ROADMAP_query(
   keyword_query = NULL,
   limit_files = NULL,
   conda_env = "echoR",
+  remove_tmps = TRUE,
   nThread = 1,
   verbose = TRUE
 )
@@ -24,6 +25,8 @@ SNPs to query Roadmap with.}
 (for faster testing).}
 
 \item{conda_env}{Conda environment to search for tabix in.}
+
+\item{remove_tmps}{Remove temporary files (e.g. "*.tbi").}
 
 \item{nThread}{Number of threads to parallelise queries over.}
 }

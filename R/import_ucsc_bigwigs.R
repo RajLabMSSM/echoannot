@@ -31,7 +31,7 @@
 #' @importFrom parallel mclapply
 #' @importFrom echodata dt_to_granges
 #' @importFrom GenomicRanges GRangesList seqnames start end mcols 
-#' @importFrom stringr str_to_title
+#' @importFrom DescTools StrCap
 #' @examples 
 #' bigwig_metadata <- echoannot::NOTT2019_bigwig_metadata[1,]
 #' query_dat = echodata::BST1
@@ -45,7 +45,7 @@ import_ucsc_bigwigs <- function(query_dat,
                                 save_path = tempfile(),
                                 force_new = FALSE,
                                 nThread = 1,
-                                verbose = TRUE){ 
+                                verbose = TRUE){  
     ## No longer used 
     bigwig_dir <- NULL
     #### Convert fine-map data to granges #### 
@@ -92,7 +92,7 @@ import_ucsc_bigwigs <- function(query_dat,
                 #### Processs Nott2019-specific columns ####
                 for(x in c("cell_type","assay")){
                     if(x %in% colnames(bigwig_metadata)){
-                        newcol <- stringr::str_to_title(x)
+                        newcol <- DescTools::StrCap(x)
                         GenomicRanges::mcols(bw.filt)[newcol] <-
                             bigwig_metadata[[x]][i]
                     }

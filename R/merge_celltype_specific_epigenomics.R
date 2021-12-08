@@ -10,12 +10,10 @@
 #' @export
 #' @importFrom tidyr separate
 #' @importFrom dplyr %>% mutate select
-#' @importFrom data.table rbindlist data.table
-#' @importFrom GenomicRanges makeGRangesFromDataFrame
-#' @importFrom GenomeInfoDb seqlevelsStyle
+#' @importFrom data.table rbindlist data.table 
 merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
-    id <- Cell_type <- Peak_ID <- Study <- Assay <- NULL
-
+    
+    id <- Cell_type <- Peak_ID <- Study <- Assay <- NULL 
     #### NOTT 2019 ####
     ## Peaks
     gr.Nott2019.peaks <- NOTT2019_get_epigenomic_peaks(
@@ -44,25 +42,21 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
             Assay = "PLAC", Study = "Nott2019.celltype_interactome"
         )
     gr.Nott2019.interactome <- c(
-        GenomicRanges::makeGRangesFromDataFrame(interactome %>%
-            dplyr::mutate(Anchor = 1),
-        seqnames.field = "chr1",
-        start.field = "start1",
-        end.field = "end1",
-        keep.extra.columns = TRUE
+        echodata::dt_to_granges(
+            dat = interactome %>% dplyr::mutate(Anchor = 1),
+            chrom_col = "chr1", 
+            start_col = "start1",
+            end_col = "end1", 
+            style = "NCBI"
         ),
-        GenomicRanges::makeGRangesFromDataFrame(interactome %>%
-            dplyr::mutate(Anchor = 2),
-        seqnames.field = "chr2",
-        start.field = "start2",
-        end.field = "end2",
-        keep.extra.columns = TRUE
+        echodata::dt_to_granges(
+            dat = interactome %>% dplyr::mutate(Anchor = 2),
+            chrom_col = "chr2", 
+            start_col = "start2",
+            end_col = "end2", 
+            style = "NCBI"
         )
-    )
-    suppressWarnings(
-        GenomeInfoDb::seqlevelsStyle(gr.Nott2019.interactome) <- "NCBI"
-    )
-
+    )  
     #### CORCES 2020 ####
     ## Peaks
     gr.Corces2020.peaks <- CORCES2020_scATAC_to_granges(
@@ -162,8 +156,7 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
             as_granges = TRUE,
             style = "NCBI"
         )
-    gr.Corces2020.fitchip <- c(fitchip.anchor1, fitchip.anchor2)
-
+    gr.Corces2020.fitchip <- c(fitchip.anchor1, fitchip.anchor2) 
     #### Merge all together ####
     gr.merged <- unlist(GenomicRanges::GRangesList(
         gr.Nott2019.peaks,
@@ -173,9 +166,7 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         gr.Corces2020.bulk_peaks,
         gr.Corces2020.cicero,
         gr.Corces2020.fitchip
-    ))
-    suppressWarnings(GenomeInfoDb::seqlevelsStyle(gr.merged) <- "NCBI")
-
+    ))  
     if (!keep_extra_cols) {
         gr.merged <- subset(gr.merged, select = c(Study, Assay, Cell_type))
     }

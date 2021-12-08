@@ -5,10 +5,8 @@
 #' @source
 #' \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
 #' \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
-#' @importFrom GenomicRanges makeGRangesFromDataFrame
 #' @importFrom parallel mclapply
-#' @importFrom data.table rbindlist
-#' @importFrom GenomeInfoDb seqlevelsStyle
+#' @importFrom data.table rbindlist 
 NOTT2019_get_regulatory_regions <- function(as.granges = FALSE,
                                             nThread = 1,
                                             verbose = TRUE) {

@@ -1,7 +1,7 @@
 Package: echoannot
 Type: Package
 Title: echoverse module: Annotate fine-mapping results
-Version: 0.99.2
+Version: 0.99.3
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -31,24 +31,21 @@ Imports:
     echotabix,
     dplyr,
     data.table,
-    utils, 
+    utils,
+    methods,
     stats, 
     tidyr,
-    parallel,
-    haploR,
+    parallel, 
     ggplot2,
     patchwork,
     ggbio,
     RColorBrewer,
     scales,
     GenomicRanges,
-    DescTools,
-    pheatmap,
+    DescTools, 
     grDevices,
     rtracklayer,
     S4Vectors,
-    GenomeInfoDb,
-    biomaRt,
     IRanges,
     XGR,
     piggyback
@@ -56,15 +53,18 @@ Suggests:
     markdown,
     rmarkdown,
     remotes,
-    knitr,
-    methods,
+    knitr, 
     BiocStyle,
     covr,
     testthat (>= 3.0.0),
-    corrplot
+    corrplot,
+    pheatmap,
+    haploR,
+    biomaRt
 Remotes:
     github::RajLabMSSM/echodata,
-    github::RajLabMSSM/echotabix
+    github::RajLabMSSM/echotabix,
+    github::hfang-bristol/XGR
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 License: GPL-3

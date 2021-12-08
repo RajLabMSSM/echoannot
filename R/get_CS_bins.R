@@ -15,7 +15,7 @@ get_CS_bins <- function(merged_DT) {
     labels <- c("0", "1", "2-4", "5-7", "8-10", "11-15", "16+")
     bin_counts <-
         locus_order %>%
-        reshape2:::melt.data.frame(
+        reshape2::melt(
             measure.vars = grep("*_size$",
                 colnames(locus_order),
                 value = TRUE

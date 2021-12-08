@@ -18,8 +18,7 @@
 #' @inheritParams echodata::dt_to_granges
 #' @family GRanges
 #' @export
-#' @importFrom GenomicRanges makeGRangesFromDataFrame mcols findOverlaps
-#' @importFrom GenomeInfoDb seqlevelsStyle
+#' @importFrom GenomicRanges mcols findOverlaps
 #' @importFrom S4Vectors queryHits subjectHits
 #' @importFrom echodata dt_to_granges
 #' @examples

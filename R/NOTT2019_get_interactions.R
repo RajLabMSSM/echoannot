@@ -2,6 +2,7 @@
 #'
 #' Brain cell-specific epigenomic data from Nott et al. (2019).
 #' @keywords internal
+#' @importFrom GenomicRanges makeGRangesFromDataFrame
 #' @family NOTT2019
 #' @source
 #' \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
@@ -68,7 +69,8 @@ NOTT2019_get_interactions <- function(dat,
 
     if (as.granges) {
         interactomes.anchor <-
-            GenomicRanges::makeGRangesFromDataFrame(interactomes.anchor,
+            GenomicRanges::makeGRangesFromDataFrame(
+                interactomes.anchor,
                 keep.extra.columns = TRUE
             )
     }

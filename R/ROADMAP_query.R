@@ -5,6 +5,7 @@
 #' @param limit_files Limit the number of annotation files queried
 #' (for faster testing).
 #' @param conda_env Conda environment to search for tabix in.
+#' @param remove_tmps Remove temporary files (e.g. "*.tbi").
 #' @param nThread Number of threads to parallelise queries over.
 #' @inheritParams  ROADMAP_tabix
 #'
@@ -23,6 +24,7 @@ ROADMAP_query <- function(results_path = file.path(tempdir(), "Roadmap"),
                           keyword_query = NULL,
                           limit_files = NULL,
                           conda_env = "echoR",
+                          remove_tmps = TRUE,
                           nThread = 1,
                           verbose = TRUE) {
     rm_start <- Sys.time()

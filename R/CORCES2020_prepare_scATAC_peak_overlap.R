@@ -1,16 +1,17 @@
-#' Prepare data to plot overlap between datatable of SNPs and
-#' cell-type-specific epigenomic peaks and coaccessibility data.
+#' Prepare CORCES2020 scATAC-seq peak overlap data
+#' 
+#' Prepare data to plot overlap between \link[data.table]{data.table} 
+#' of SNPs and cell-type-specific epigenomic peaks and coaccessibility data.
 #'
 #' @family CORCES2020
 #' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
 #' @source
 #' \code{
+#' merged_DT <- echodata::get_Nalls2019_merged()
 #' dat_melt <- echoannot:::CORCES2020_prepare_scATAC_peak_overlap(
-#'     merged_DT = echodata::get_Nalls2019_merged()
-#' )
+#' merged_DT = merged_DT)
 #' }
-#' @keywords internal
-#' @importFrom GenomicRanges makeGRangesFromDataFrame
+#' @keywords internal 
 CORCES2020_prepare_scATAC_peak_overlap <- function(
     merged_DT,
    FDR_filter = NULL,

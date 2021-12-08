@@ -1,7 +1,7 @@
 #' Bind GRanges with different mcols
 #'
 #' @family utils
-#' #' @examples
+#' @examples
 #' \dontrun{
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' gr.hits <- CORCES2020_get_ATAC_peak_overlap(dat = merged_DT)

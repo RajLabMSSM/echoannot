@@ -5,7 +5,6 @@
 #' @source
 #' \href{https://bioconductor.org/packages/release/bioc/html/biomaRt.html}{
 #' biomaRt}
-#' @importFrom biomaRt useMart getBM
 #' @importFrom data.table as.data.table
 biomart_snp_info <- function(snp_list,
                              reference_genome = "grch37",
@@ -26,6 +25,7 @@ biomart_snp_info <- function(snp_list,
                                  "validated"
                              ),
                              verbose = TRUE) {
+    requireNamespace("biomaRt")
     # library(biomaRt)
     messager("+ Gathering annotation data from Biomart...", v = verbose)
     mart <- biomaRt::useMart(

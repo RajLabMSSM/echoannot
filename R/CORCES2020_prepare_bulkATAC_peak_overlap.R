@@ -4,11 +4,13 @@
 #' @family CORCES2020
 #' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
 #' @examples
+#' \dontrun{
 #' dat_melt <- CORCES2020_prepare_bulkATAC_peak_overlap(
 #'     merged_DT = echodata::get_Nalls2019_merged()
 #' )
+#' }
 #' @keywords internal
-#' @importFrom GenomicRanges mcols makeGRangesFromDataFrame
+#' @importFrom GenomicRanges mcols
 #' @importFrom data.table melt.data.table data.table
 #' @importFrom stats setNames
 CORCES2020_prepare_bulkATAC_peak_overlap <- function(
