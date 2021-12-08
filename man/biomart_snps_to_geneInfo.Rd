@@ -21,7 +21,6 @@ Identify which genes SNPs belong to using Biomart
 \seealso{
 Other annotate: 
 \code{\link{annotate_missense}()},
-\code{\link{biomart_geneInfo}()},
 \code{\link{biomart_snp_info}()},
 \code{\link{haplor_epigenetics_enrichment}()},
 \code{\link{haplor_epigenetics_summary}()},

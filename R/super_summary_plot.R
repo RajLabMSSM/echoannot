@@ -1,8 +1,25 @@
 #' Merge all summary plots into one super plot
 #'
 #' @family summarise
+#' @param merged_DT Merge fine-mapping results data from
+#'  \link[echolocatoR]{finemap_loci}.
+#' @param snp_filter Filter to use apply to SNPs before plotting.
+#' @param coloc_results Colocalization results from 
+#' \href{https://github.com/RajLabMSSM/catalogueR}{catalogueR}.
+#' @param plot_missense Whether to include the missense mutations plot.
+#' \emph{Warning:} Can take a lot time to query Biomart.
+#' @param show_plot Show plot.
+#' @param save_plot Save plot.
+#' @inheritParams ggplot2::ggsave
+#' 
 #' @export
 #' @importFrom patchwork plot_spacer plot_layout
+#' @examples 
+#' \dontrun{
+#' merged_DT <- echodata::get_Nalls2019_merged() 
+#' super_plot <- echoannot::super_summary_plot(merged_DT = merged_DT,
+#'                                             plot_missense = FALSE)
+#' }
 super_summary_plot <- function(merged_DT,
                                snp_filter = "Consensus_SNP==TRUE",
                                coloc_results = NULL,
@@ -11,7 +28,7 @@ super_summary_plot <- function(merged_DT,
                                save_plot = FALSE,
                                height = 15,
                                width = 13,
-                               dpi = 500) {
+                               dpi = 300) {
     bin_plot <- CS_bin_plot(
         merged_DT = merged_DT,
         show_plot = FALSE
@@ -66,14 +83,14 @@ super_summary_plot <- function(merged_DT,
     gg_peaks <- peak_overlap_plot(
         merged_DT = merged_DT,
         snp_filter = snp_filter,
-        include.NOTT_2019_peaks = TRUE,
-        include.NOTT_2019_enhancers_promoters = TRUE,
-        include.NOTT_2019_PLACseq = TRUE,
-        include.CORCES_2020_scATACpeaks = TRUE,
-        include.CORCES_2020_Cicero_coaccess = FALSE,
-        include.CORCES_2020_bulkATACpeaks = TRUE,
-        include.CORCES_2020_HiChIP_FitHiChIP_coaccess = TRUE,
-        include.CORCES_2020_gene_annotations = TRUE,
+        include.NOTT2019_peaks = TRUE,
+        include.NOTT2019_enhancers_promoters = TRUE,
+        include.NOTT2019_PLACseq = TRUE,
+        include.CORCES2020_scATACpeaks = TRUE,
+        include.CORCES2020_Cicero_coaccess = FALSE,
+        include.CORCES2020_bulkATACpeaks = TRUE,
+        include.CORCES2020_HiChIP_FitHiChIP_coaccess = TRUE,
+        include.CORCES2020_gene_annotations = TRUE,
         plot_celltype_specificity = TRUE,
         facets_formula = ". ~ Cell_type",
         show_plot = FALSE,
@@ -83,7 +100,7 @@ super_summary_plot <- function(merged_DT,
         drop_empty_cols = TRUE,
         fill_title = paste(snp_filter, "SNPs\nin epigenomic peaks"),
         # save_path="~/Desktop/super_peak_plot.png",
-        verbose = T
+        verbose = TRUE
     )
     # Merge
     gg_merged <- (patchwork::plot_spacer() +
@@ -102,7 +119,8 @@ super_summary_plot <- function(merged_DT,
         ggplot2::ggsave(save_plot,
             gg_merged,
             dpi = dpi,
-            height = height, width = width
+            height = height, 
+            width = width
         )
     }
     return(list(

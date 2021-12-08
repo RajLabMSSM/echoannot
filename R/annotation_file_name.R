@@ -1,6 +1,3 @@
-#' Name annotation file
-#'
-#' @keywords internal
 annotation_file_name <- function(locus_dir,
                                  lib_name) {
     annot_dir <- file.path(locus_dir, "annotations")

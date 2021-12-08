@@ -1,33 +1,44 @@
-<!-- badges: start -->
-<!-- badger::badge_codecov() -->
-<!-- badger::badge_last_commit()  -->
-<!-- badger::badge_license() -->
-
-[![](https://codecov.io/gh/RajLabMSSM/echoannot/branch/main/graph/badge.svg)](https://codecov.io/gh/RajLabMSSM/echoannot)
-[![R-CMD-check](https://github.com/RajLabMSSM/echoannot/workflows/R-full/badge.svg)](https://github.com/RajLabMSSM/echoannot/actions)
+<img src='https://github.com/RajLabMSSM/echoannot/raw/main/inst/hex/hex.png' height='300'><br><br>
+[![](https://img.shields.io/badge/devel%20version-0.99.2-black.svg)](https://github.com/RajLabMSSM/echoannot)
+[![R build
+status](https://github.com/RajLabMSSM/echoannot/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RajLabMSSM/echoannot/actions)
 [![](https://img.shields.io/github/last-commit/RajLabMSSM/echoannot.svg)](https://github.com/RajLabMSSM/echoannot/commits/main)
-<!-- badges: end -->
+[![](https://codecov.io/gh/RajLabMSSM/echoannot/branch/main/graph/badge.svg)](https://codecov.io/gh/RajLabMSSM/echoannot)
+[![License:
+GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
+<h5>
+Author: <i>Brian M. Schilder</i>
+</h5>
+<h5>
+README updated: <i>Dec-07-2021</i>
+</h5>
 
-# echoverse: echoannot
+## `echoannot`: Functions for annotating genomic data with annotations and epigenomic data.
 
-## Fine-mapping results data
+This R package is part of the *echoverse* suite that supports
+[`echolocatoR`](https://github.com/RajLabMSSM/echolocatoR): an automated
+genomic fine-mapping pipeline.
 
-Provides both built-in fine-mapping results and API access to the
-[**echolocatoR Fine-mapping
-Portal**](https://rajlab.shinyapps.io/Fine_Mapping_Shiny/).
+If you use `echoannot`, please cite:
+
+> Jack Humphrey and Towfique Raj (NA). echoannot: echoverse module:
+> Annotate fine-mapping results. R package version 0.99.2.
+> <https://github.com/RajLabMSSM/echoannot>
+
+## Installation
 
 ``` r
-if(!"remotes" %in% rownames(installed.packages())){install.packages("remotes")}
+if(!require("remotes")) install.packages("remotes")
 
 remotes::install_github("RajLabMSSM/echoannot")
 library(echoannot)
 ```
 
-## [Documentation website](https://rajlabmssm.github.io/echoannot/)
+## Documentation
 
-## [Vignette](https://rajlabmssm.github.io/echoannot/articles/echoannot)
+### [Website](https://rajlabmssm.github.io/echoannot)
 
-<hr>
+### [Getting started](https://rajlabmssm.github.io/echoannot/articles/echoannot)
 
 ## Datasets
 
@@ -113,7 +124,9 @@ For more detailed information about each dataset, use `?`:
 
 -   API access to known per-SNP QTL and epigenomic data hits.
 
-## Creator
+<hr>
+
+## Contact
 
 <a href="https://bschilder.github.io/BMSchilder/" target="_blank">Brian
 M. Schilder, Bioinformatician II</a>  

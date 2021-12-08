@@ -1,11 +1,13 @@
 #' Merge fine-mapping results from all loci
 #'
-#' Gather fine-mapping results from \emph{echolocatoR} across all loci
+#' Gather fine-mapping results from \pkg{echolocatoR} across all loci
 #' and merge into a single data.frame.
 #'
-#' @param dataset Path to the folder you want to recursively search for results files within
+#' @param dataset Path to the folder you want to recursively search
+#' for results files within
 #'  (e.g. \url{"Data/GWAS/Nalls23andMe_2019"}).
-#' Set this to a path that includes multiple subfolders if you want to gather results
+#' Set this to a path that includes multiple subfolders if you want
+#' to gather results
 #' from multiple studies at once
 #' (e.g. \url{"Data/GWAS"}).
 #' @param minimum_support Filter SNPs by the minimum number
@@ -14,12 +16,16 @@
 #'  (regardless of other filtering criterion).
 #' @param xlsx_path Save merged data.frame as excel file.
 #' @param from_storage Search for stored results files.
-#' @param haploreg_annotation Annotate SNPs with HaploReg (using \code{HaploR}).
-#' @param regulomeDB_annotation Annotate SNPs with regulaomeDB (using \code{HaploR}).
+#' @param haploreg_annotation Annotate SNPs with HaploReg
+#'  (using \code{HaploR}).
+#' @param regulomeDB_annotation Annotate SNPs with regulomeDB
+#' (using \code{HaploR}).
 #' @param biomart_annotation Annotate SNPs with \code{biomart}.
-#' @param PP_threshold Mean posterior probability threshold to include SNPs in mean PP Credible Set
+#' @param PP_threshold Mean posterior probability threshold to
+#'  include SNPs in mean PP Credible Set
 #'  (averaged across all fine-mapping tools).
-#' @param consensus_thresh The minimum number of tools that have the SNPs in their Credible Set
+#' @param consensus_thresh The minimum number of tools that have the SNPs
+#' in their Credible Set
 #' to classify it as a \strong{Consensus_SNP}.
 #' @param exclude_methods Exclude certain fine-mapping methods when estimating
 #' \strong{mean.CS} and \strong{Consensus_SNP}.
@@ -27,7 +33,10 @@
 #'
 #' @export
 #' @importFrom dplyr %>%
-merge_finemapping_results <- function(dataset = "./Data/GWAS",
+merge_finemapping_results <- function(dataset = file.path(
+                                          tempdir(),
+                                          "Data/GWAS"
+                                      ),
                                       minimum_support = 1,
                                       include_leadSNPs = TRUE,
                                       LD_reference = NULL,
@@ -93,16 +102,19 @@ merge_finemapping_results <- function(dataset = "./Data/GWAS",
                         locus <- basename(dirname(dirname(md)))
                         messager("+ Importing results...", locus, v = verbose)
                         multi_data <- data.table::fread(md, nThread = nThread)
-                        multi_data <- update_cols(multi_data)
-                        multi_data <- assign_lead_SNP(
-                            new_DT = multi_data,
+                        multi_data <- echodata::update_cols(multi_data)
+                        multi_data <- echodata::assign_lead_snp(
+                            dat = multi_data,
                             verbose = verbose
                         )
                         if (!"Locus" %in% colnames(multi_data)) {
                             multi_data <- cbind(Locus = locus, multi_data)
                         }
                         if (!"Dataset" %in% colnames(multi_data)) {
-                            multi_data <- cbind(Dataset = basename(dn), multi_data)
+                            multi_data <- cbind(
+                                Dataset = basename(dn),
+                                multi_data
+                            )
                         }
                         return(multi_data)
                         # Bind loci
@@ -113,15 +125,12 @@ merge_finemapping_results <- function(dataset = "./Data/GWAS",
             }
         ) %>% data.table::rbindlist(fill = TRUE) # Bind datasets
     }
-
-
-    # Add/Update Support/Consensus cols
-    merged_results <- find_consensus_SNPs(
-        finemap_dat = finemap_results,
+    #### Add/Update Support/Consensus cols ####
+    merged_results <- echodata::find_consensus_snps(
+        dat = finemap_results,
         credset_thresh = PP_threshold,
         consensus_thresh = consensus_threshold,
         exclude_methods = exclude_methods,
-        top_CS_only = top_CS_only,
         verbose = verbose
     )
     merged_results <- subset(merged_results, Support >= minimum_support)

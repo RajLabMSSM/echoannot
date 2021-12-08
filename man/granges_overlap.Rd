@@ -2,24 +2,69 @@
 % Please edit documentation in R/granges_overlap.R
 \name{granges_overlap}
 \alias{granges_overlap}
-\title{Find overlap between genomic coordinates/ranges}
+\title{Find GenomicRanges overlap
+ 
+Find overlap genomic position overlap between two
+\link[GenomicRanges]{GRanges} objects.}
 \usage{
 granges_overlap(
   dat1,
   dat2,
   chrom_col.1 = "chrom",
   start_col.1 = "start",
-  end_col.1 = "end",
-  chrom_col.2 = chrom_col.1,
-  start_col.2 = start_col.1,
-  end_col.2 = end_col.1,
+  end_col.1 = start_col.1,
+  chrom_col.2 = "chrom",
+  start_col.2 = "start",
+  end_col.2 = end_col.2,
   return_merged = TRUE,
-  chr_format = "NCBI",
+  unique_only = TRUE,
+  style = "NCBI",
   verbose = FALSE
 )
 }
+\arguments{
+\item{dat1}{Dataset 1 
+(can be \link[GenomicRanges]{GRanges} or \link[data.table]{data.table}).}
+
+\item{dat2}{Dataset 2.
+(can be \link[GenomicRanges]{GRanges} or \link[data.table]{data.table}).}
+
+\item{chrom_col.1}{Name of the chromosome column in \code{dat1}.}
+
+\item{start_col.1}{Name of the start position column in \code{dat1}.}
+
+\item{end_col.1}{Name of the end position column in \code{dat2}.}
+
+\item{chrom_col.2}{Name of the chromosome column in \code{dat2}.}
+
+\item{start_col.2}{Name of the start position column in \code{dat2}.}
+
+\item{end_col.2}{Name of the end position column in \code{dat2}.}
+
+\item{return_merged}{Whether to return an object with columns
+from \code{dat1} and \code{dat2} merged.}
+
+\item{unique_only}{Only return unique rows.}
+
+\item{style}{GRanges style (e.g. "NCBI, "UCSC") 
+set by \link[GenomeInfoDb]{seqlevelsStyle}.}
+
+\item{verbose}{Print messages.}
+}
 \description{
-Find overlap between genomic coordinates/ranges
+Find GenomicRanges overlap
+ 
+Find overlap genomic position overlap between two
+\link[GenomicRanges]{GRanges} objects.
+}
+\examples{
+dat1 <- echodata::BST1
+dat2 <- echoannot::xgr_query
+GenomicRanges::mcols(dat2) <- NULL
+
+gr.hits <- echoannot::granges_overlap(dat1 = dat1, 
+                                      dat2 = dat2, 
+                                      chrom_col.1 = "CHR",
+                                      start_col.1 = "POS")
 }
 \concept{GRanges}
-\keyword{internal}

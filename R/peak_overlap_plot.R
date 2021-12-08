@@ -1,33 +1,36 @@
 #' Plot overlap between some SNP group and various epigenomic data
 #'
-#' @param include.NOTT_2019_peaks Plot SNP subset overlap with
+#' @param include.NOTT2019_peaks Plot SNP subset overlap with
 #'  peaks from cell-type-specific bulk ATAC, H3K27ac, and H3K4me3 assays.
-#' @param include.NOTT_2019_enhancers_promoters Plot SNP subset overlap with
+#' @param include.NOTT2019_enhancers_promoters Plot SNP subset overlap with
 #' cell enhancers and promoters.
-#' @param include.CORCES_2020_scATACpeaks Plot SNP subset overlap with
+#' @param include.CORCES2020_scATACpeaks Plot SNP subset overlap with
 #' cell-type-specific scATAC-seq peaks.
-#' @param include.CORCES_2020_Cicero_coaccess Plot SNP subset overlap with
+#' @param include.CORCES2020_Cicero_coaccess Plot SNP subset overlap with
 #' Cicero coaccessibility peaks (derived from scATACseq).
 #' @keywords internal
 #' @family summarise
 #' @source
 #' \href{https://science.sciencemag.org/content/366/6469/1134}{
-#' Nott et al. (2019)}
-#' \href{https://www.biorxiv.org/content/10.1101/2020.01.06.896159v1}{
-#' Corces et al. (2020/bioRxiv)}
+#' Nott et al., 2019 (The Lancet Neurology)}
+#' \href{https://doi.org/10.1038/s41588-020-00721-x}{
+#' Corces et al., 2020 (Nature Genetics)}
 #' @examples
-#' # Consensus SNPs
-#' gg_peaks <- peak_overlap_plot(
-#'     merged_DT = echodata::get_Nalls2019_merged(),
+#' merged_DT <- echodata::get_Nalls2019_merged()
+#' #### Consensus SNPs #####
+#' gg_peaks <- echoannot::peak_overlap_plot(
+#'     merged_DT = merged_DT,
 #'     snp_filter = "Consensus_SNP==T",
 #'     fill_title = "Consensus SNPs in epigenomic peaks"
 #' )
-#' # UCS SNPs
-#' gg_peaks <- peak_overlap_plot(
-#'     merged_DT = echodata::get_Nalls2019_merged(),
+#' #### UCS SNPs ####
+#' \dontrun{
+#' gg_peaks <- echoannot::peak_overlap_plot(
+#'     merged_DT = merged_DT,
 #'     snp_filter = "Support>0",
 #'     fill_title = "UCS SNPs in epigenomic peaks"
 #' )
+#' }
 #' @export
 #' @rawNamespace import(ggplot2, except = c(geom_rect, ggsave))
 #' @importFrom patchwork plot_layout
@@ -35,15 +38,15 @@
 #' @importFrom stats formula
 peak_overlap_plot <- function(merged_DT,
                               snp_filter = "Consensus_SNP==TRUE",
-                              include.NOTT_2019_peaks = TRUE,
-                              include.NOTT_2019_enhancers_promoters = TRUE,
-                              include.NOTT_2019_PLACseq = TRUE,
-                              include.CORCES_2020_scATACpeaks = TRUE,
-                              include.CORCES_2020_Cicero_coaccess = TRUE,
-                              include.CORCES_2020_bulkATACpeaks = TRUE,
-                              include.CORCES_2020_HiChIP_FitHiChIP_coaccess =
+                              include.NOTT2019_peaks = TRUE,
+                              include.NOTT2019_enhancers_promoters = TRUE,
+                              include.NOTT2019_PLACseq = TRUE,
+                              include.CORCES2020_scATACpeaks = TRUE,
+                              include.CORCES2020_Cicero_coaccess = TRUE,
+                              include.CORCES2020_bulkATACpeaks = TRUE,
+                              include.CORCES2020_HiChIP_FitHiChIP_coaccess =
                                   TRUE,
-                              include.CORCES_2020_gene_annotations = TRUE,
+                              include.CORCES2020_gene_annotations = TRUE,
                               plot_celltype_specificity = TRUE,
                               plot_celltype_specificity_genes = FALSE,
                               facets_formula = ". ~ Cell_type",
@@ -52,14 +55,15 @@ peak_overlap_plot <- function(merged_DT,
                               x_strip_angle = 90,
                               x_tick_angle = 40,
                               drop_empty_cols = F,
-                              fill_title = paste(snp_filter, "\nin epigenomic peaks"),
+                              fill_title = paste(snp_filter,
+                                                 "\nin epigenomic peaks"),
                               save_path = F,
                               height = 11,
                               width = 12,
                               subplot_widths = c(1, .5),
                               verbose = TRUE) {
-    # verbose=T;include.NOTT_2019_peaks=T; include.NOTT_2019_enhancers_promoters=T; include.NOTT_2019_PLACseq=T; include.CORCES_2020_scATACpeaks=T;
-    # include.CORCES_2020_Cicero_coaccess=T;include.CORCES_2020_bulkATACpeaks=T;include.CORCES_2020_HiChIP_FitHiChIP_coaccess=T;include.CORCES_2020_gene_annotations=T;
+    # verbose=T;include.NOTT2019_peaks=T; include.NOTT2019_enhancers_promoters=T; include.NOTT2019_PLACseq=T; include.CORCES2020_scATACpeaks=T;
+    # include.CORCES2020_Cicero_coaccess=T;include.CORCES2020_bulkATACpeaks=T;include.CORCES2020_HiChIP_FitHiChIP_coaccess=T;include.CORCES2020_gene_annotations=T;
     # no_no_loci<- c("HLA-DRB5","MAPT","ATG14","SP1","LMNB1","ATP6V0A1",
     #                "RETREG3","UBTF","FAM171A2","MAP3K14","CRHR1","MAPT-AS1","KANSL1","NSF","WNT3")
     # merged_DT <- subset(merged_DT, !Locus %in% no_no_loci)
@@ -67,12 +71,12 @@ peak_overlap_plot <- function(merged_DT,
     # fill_title=paste(snp_filter,"\nin epigenomic peaks"); subplot_widths = c(1,.5);plot_celltype_specificity_genes=F;
 
     Locus <- Assay <- Count <- background <- NULL
-
+    if(!"merged_DT" %in% ls()) stop("merged_DT must be supplied.")
     dat_melt <- data.frame()
     ######## NOTT et al. 2019 #########
-    if (include.NOTT_2019_peaks) {
+    if (include.NOTT2019_peaks) {
         try({
-            dat_melt.NOTTpeaks <- NOTT_2019.prepare_peak_overlap(
+            dat_melt.NOTTpeaks <- NOTT2019_prepare_peak_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter
             )
@@ -82,9 +86,9 @@ peak_overlap_plot <- function(merged_DT,
         })
     }
 
-    if (include.NOTT_2019_enhancers_promoters) {
+    if (include.NOTT2019_enhancers_promoters) {
         try({
-            dat_melt.NOTTreg <- NOTT_2019.prepare_regulatory_overlap(
+            dat_melt.NOTTreg <- NOTT2019_prepare_regulatory_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter
             )
@@ -94,9 +98,9 @@ peak_overlap_plot <- function(merged_DT,
         })
     }
 
-    if (include.NOTT_2019_PLACseq) {
+    if (include.NOTT2019_PLACseq) {
         try({
-            dat_melt.NOTTplac <- NOTT_2019.prepare_placseq_overlap(
+            dat_melt.NOTTplac <- NOTT2019_prepare_placseq_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter
             )
@@ -107,13 +111,13 @@ peak_overlap_plot <- function(merged_DT,
     }
 
     ######## CORCES et al. 2020 #########
-    if (include.CORCES_2020_scATACpeaks) {
+    if (include.CORCES2020_scATACpeaks) {
         try({
-            dat_melt.CORCES_scPeaks <- CORCES_2020.prepare_scATAC_peak_overlap(
+            dat_melt.CORCES_scPeaks <- CORCES2020_prepare_scATAC_peak_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter,
-                add_cicero = include.CORCES_2020_Cicero_coaccess,
-                annotate_genes = include.CORCES_2020_gene_annotations,
+                add_cicero = include.CORCES2020_Cicero_coaccess,
+                annotate_genes = include.CORCES2020_gene_annotations,
                 verbose = verbose
             )
             dat_melt.CORCES_scPeaks$background <- NA
@@ -121,13 +125,14 @@ peak_overlap_plot <- function(merged_DT,
             dat_melt <- base::rbind(dat_melt, dat_melt.CORCES_scPeaks, fill = TRUE)
         })
     }
-    if (include.CORCES_2020_bulkATACpeaks) {
+    if (include.CORCES2020_bulkATACpeaks) {
         try({
-            dat_melt.CORCES_bulkPeaks <- CORCES_2020.prepare_bulkATAC_peak_overlap(
+            dat_melt.CORCES_bulkPeaks <- 
+                CORCES2020_prepare_bulkATAC_peak_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter,
-                add_HiChIP_FitHiChIP = include.CORCES_2020_HiChIP_FitHiChIP_coaccess,
-                annotate_genes = include.CORCES_2020_gene_annotations,
+                add_HiChIP_FitHiChIP = include.CORCES2020_HiChIP_FitHiChIP_coaccess,
+                annotate_genes = include.CORCES2020_gene_annotations,
                 verbose = verbose
             )
             dat_melt.CORCES_bulkPeaks$background <- NA
@@ -139,7 +144,7 @@ peak_overlap_plot <- function(merged_DT,
         })
     }
     ## Account for situations where
-    ## include.CORCES_2020_bulkATACpeaks=F or no overlap was found
+    ## include.CORCES2020_bulkATACpeaks=F or no overlap was found
     if (!"Gene_Symbol" %in% colnames(dat_melt)) dat_melt$Gene_Symbol <- NA
     if (!"Annotation" %in% colnames(dat_melt)) dat_melt$Annotation <- NA
 

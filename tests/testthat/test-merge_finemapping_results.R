@@ -1,4 +1,5 @@
 test_that("merge_finemapping_results works", {
+    
     local_files <- echodata::portal_query(
         phenotypes = "parkinson",
         LD_panels = "UKB",

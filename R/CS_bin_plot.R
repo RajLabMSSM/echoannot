@@ -27,7 +27,7 @@ CS_bin_plot <- function(merged_DT,
         subset(bin_counts, Method != "mean"),
         ggplot2::aes(x = Method, fill = bin)
     ) +
-        gggplot2::eom_bar(
+        ggplot2::geom_bar(
             stat = "count", show.legend = TRUE,
             position = ggplot2::position_stack(reverse = FALSE), color = "white"
         ) +

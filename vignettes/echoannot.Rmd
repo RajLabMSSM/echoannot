@@ -1,34 +1,22 @@
 ---
-title: "echoannot: Getting Started" 
+title: "``r read.dcf('../DESCRIPTION', fields = 'Package')[1]``: Getting Started" 
 author: "<h4>Author: <i>Brian M. Schilder</i></h4>" 
-date: "<h4>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+date: "<h4>Updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
-  BiocStyle::html_document:
-    self_contained: yes
-    toc: true
-    toc_float: true
-    toc_depth: 3
-    code_folding: show
-    df_print: paged
+  BiocStyle::html_document
 vignette: >
-    %\VignetteIndexEntry{echoannot} 
+    %\VignetteIndexEntry{echoplot} 
     %\usepackage[utf8]{inputenc}
-    %\VignetteEngine{knitr::rmarkdown} 
-editor_options: 
-  markdown: 
-    wrap: 72
+    %\VignetteEngine{knitr::rmarkdown}
 ---
 
-
-```{r style, echo=FALSE, results='asis', message=FALSE}
-BiocStyle::markdown()
-knitr::opts_chunk$set(tidy = FALSE,
-                      message = FALSE)
+```{r setup, echo=FALSE, include=FALSE}
+pkg <- read.dcf("../DESCRIPTION", fields = "Package")[1]
+library(pkg, character.only = TRUE)
 ```
 
-```{r setup}
-library(echoannot)
-library(echodata)
+```R
+library(`r pkg`)
 ```
 
 # Merge and annotate 
@@ -52,7 +40,7 @@ dataset <- dirname(dirname(dirname(local_files)))
 merged_DT <- echoannot::merge_finemapping_results(dataset = dataset[1], 
                                                   minimum_support = 1,
                                                   haploreg_annotation = TRUE)
-knitr::kable(merged_DT)
+echodata::createDT(merged_DT)
 ```
 
 # Summary plots
@@ -60,28 +48,30 @@ knitr::kable(merged_DT)
 ## Credible Set bin plot
 
 ```{r}
-gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = echodata::get_Nalls2019_merged())
+merged_DT <- echodata::get_Nalls2019_merged()
+
+gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = merged_DT)
 ```
+
 ## Credible Set counts plot
 
 ```{r}
-gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = echodata::get_Nalls2019_merged())
+gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = merged_DT)
 ```
-
 
 ## Epigenomic data
 
 ```{r}
-gg_epi <- echoannot::peak_overlap_plot(merged_DT =  echodata::get_Nalls2019_merged(), 
-                                       include.NOTT_2019_enhancers_promoters = TRUE,
-                                       include.NOTT_2019_PLACseq = TRUE,
+gg_epi <- echoannot::peak_overlap_plot(merged_DT = merged_DT, 
+                                       include.NOTT2019_enhancers_promoters = TRUE,
+                                       include.NOTT2019_PLACseq = TRUE,
                                        #### Omit many annot to save time ####
-                                       include.NOTT_2019_peaks = FALSE,
-                                       include.CORCES_2020_scATACpeaks = FALSE, 
-                                       include.CORCES_2020_Cicero_coaccess = FALSE, 
-                                       include.CORCES_2020_bulkATACpeaks = FALSE, 
-                                       include.CORCES_2020_HiChIP_FitHiChIP_coaccess = FALSE,
-                                       include.CORCES_2020_gene_annotations = FALSE)
+                                       include.NOTT2019_peaks = FALSE,
+                                       include.CORCES2020_scATACpeaks = FALSE, 
+                                       include.CORCES2020_Cicero_coaccess = FALSE, 
+                                       include.CORCES2020_bulkATACpeaks = FALSE, 
+                                       include.CORCES2020_HiChIP_FitHiChIP_coaccess = FALSE,
+                                       include.CORCES2020_gene_annotations = FALSE)
 ```
 
 ## Super summary plot
@@ -89,11 +79,10 @@ gg_epi <- echoannot::peak_overlap_plot(merged_DT =  echodata::get_Nalls2019_merg
 Creates one big merged plot using the subfunctions above.
 
 ```{r, eval=FALSE} 
-super_plot <- echoannot::super_summary_plot(merged_DT = echodata::get_Nalls2019_merged(), 
+super_plot <- echoannot::super_summary_plot(merged_DT = merged_DT, 
                                             plot_missense = FALSE)
 
 ```
-
 
 # Session Info 
 

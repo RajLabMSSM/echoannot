@@ -1,73 +1,85 @@
-#' Find overlap between genomic coordinates/ranges
-#'
+#' Find GenomicRanges overlap
+#'  
+#' Find overlap genomic position overlap between two
+#' \link[GenomicRanges]{GRanges} objects.
+#' @param dat1 Dataset 1 
+#' (can be \link[GenomicRanges]{GRanges} or \link[data.table]{data.table}).
+#' @param dat2 Dataset 2.
+#' (can be \link[GenomicRanges]{GRanges} or \link[data.table]{data.table}).
+#' @param chrom_col.1 Name of the chromosome column in \code{dat1}.
+#' @param start_col.1 Name of the start position column in \code{dat1}.
+#' @param end_col.1 Name of the end position column in \code{dat2}.
+#' @param chrom_col.2 Name of the chromosome column in \code{dat2}.
+#' @param start_col.2 Name of the start position column in \code{dat2}.
+#' @param end_col.2 Name of the end position column in \code{dat2}.
+#' @param return_merged Whether to return an object with columns
+#'  from \code{dat1} and \code{dat2} merged.
+#' @param unique_only Only return unique rows. 
+#' @inheritParams echodata::dt_to_granges
 #' @family GRanges
-#' @keywords internal
+#' @export
 #' @importFrom GenomicRanges makeGRangesFromDataFrame mcols findOverlaps
 #' @importFrom GenomeInfoDb seqlevelsStyle
 #' @importFrom S4Vectors queryHits subjectHits
+#' @importFrom echodata dt_to_granges
+#' @examples
+#' dat1 <- echodata::BST1
+#' dat2 <- echoannot::xgr_query
+#' GenomicRanges::mcols(dat2) <- NULL
+#' 
+#' gr.hits <- echoannot::granges_overlap(dat1 = dat1, 
+#'                                       dat2 = dat2, 
+#'                                       chrom_col.1 = "CHR",
+#'                                       start_col.1 = "POS")
 granges_overlap <- function(dat1,
                             dat2,
                             chrom_col.1 = "chrom",
                             start_col.1 = "start",
-                            end_col.1 = "end",
-                            chrom_col.2 = chrom_col.1,
-                            start_col.2 = start_col.1,
-                            end_col.2 = end_col.1,
+                            end_col.1 = start_col.1,
+                            chrom_col.2 = "chrom",
+                            start_col.2 = "start",
+                            end_col.2 = end_col.2,
                             return_merged = TRUE,
-                            chr_format = "NCBI",
+                            unique_only = TRUE,
+                            style = "NCBI",
                             verbose = FALSE) {
-    # dat1
-    if (is_granges(dat1)) {
-        messager("+ dat1 already in GRanges format", v = verbose)
-        gr.dat1 <- dat1
-    } else {
-        gr.dat1 <- GenomicRanges::makeGRangesFromDataFrame(
-            dat1,
-            seqnames.field = chrom_col.1,
-            start.field = start_col.1,
-            end.field = end_col.1,
-            ignore.strand = TRUE,
-            keep.extra.columns = TRUE
-        )
-    }
-    # dat2
-    if (is_granges(dat2)) {
-        messager("+ dat2 already in GRanges format", v = verbose)
-        gr.dat2 <- dat2
-    } else {
-        messager("+ Converting dat2 to GRanges", v = verbose)
-        gr.dat2 <- GenomicRanges::makeGRangesFromDataFrame(
-            dat2,
-            seqnames.field = chrom_col.2,
-            start.field = start_col.2,
-            end.field = end_col.2,
-            ignore.strand = TRUE,
-            keep.extra.columns = TRUE
-        )
-    }
-    # Standardize seqnames format
-    suppressWarnings(GenomeInfoDb::seqlevelsStyle(gr.dat1) <- chr_format)
-    suppressWarnings(GenomeInfoDb::seqlevelsStyle(gr.dat2) <- chr_format)
+    messager("Determing overlap between 2 GRanges objects.",v=verbose)
+    #### dat1 ####
+    gr.dat1 <- echodata::dt_to_granges(
+        dat = dat1,
+        chrom_col = chrom_col.1,
+        start_col = start_col.1, 
+        end_col = end_col.1,
+        style = style)
+    ##### dat2 ####
+    gr.dat2 <- echodata::dt_to_granges(
+        dat = dat2,
+        chrom_col = chrom_col.2,
+        start_col = start_col.2,
+        end_col = end_col.2,
+        style = style,
+        verbose = verbose)
+    #### Find overlap ####
     hits <- GenomicRanges::findOverlaps(
         query = gr.dat1,
         subject = gr.dat2
-    )
+    ) 
     gr.hits <- gr.dat2[S4Vectors::subjectHits(hits), ]
+    #### Merge ####
     if (return_merged) {
         messager("+ Merging both GRanges.", v = verbose)
         GenomicRanges::mcols(gr.hits) <- cbind(
             GenomicRanges::mcols(gr.hits),
             GenomicRanges::mcols(gr.dat1[S4Vectors::queryHits(hits), ])
         )
-    }
-
-    # gr.hits <- cbind(mcols(gr.regions[ S4Vectors::subjectHits(hits), ] ),
-    #                         mcols(gr.consensus[S4Vectors::queryHits(hits),]) )
+    } 
+    #### Only return unique rows ####
+    if(unique_only) gr.hits <- unique(gr.hits)
+    #### Report ####
     message(
         "", formatC(nrow(GenomicRanges::mcols(gr.hits)), big.mark = ","),
         " query SNP(s) detected with reference overlap."
-    )
-    # print(data.frame(mcols(gr.hits[,c("Name","SNP")])) )
-    suppressWarnings(GenomeInfoDb::seqlevelsStyle(gr.hits) <- chr_format)
+    ) 
+    #### Return ####
     return(gr.hits)
 }

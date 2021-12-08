@@ -5,7 +5,7 @@
 \title{Merge fine-mapping results from all loci}
 \usage{
 merge_finemapping_results(
-  dataset = "./Data/GWAS",
+  dataset = file.path(tempdir(), "Data/GWAS"),
   minimum_support = 1,
   include_leadSNPs = TRUE,
   LD_reference = NULL,
@@ -23,9 +23,11 @@ merge_finemapping_results(
 )
 }
 \arguments{
-\item{dataset}{Path to the folder you want to recursively search for results files within
+\item{dataset}{Path to the folder you want to recursively search
+for results files within
  (e.g. \url{"Data/GWAS/Nalls23andMe_2019"}).
-Set this to a path that includes multiple subfolders if you want to gather results
+Set this to a path that includes multiple subfolders if you want
+to gather results
 from multiple studies at once
 (e.g. \url{"Data/GWAS"}).}
 
@@ -37,13 +39,16 @@ of fine-mapping tools that contained the SNP in their Credible Set.}
 
 \item{from_storage}{Search for stored results files.}
 
-\item{haploreg_annotation}{Annotate SNPs with HaploReg (using \code{HaploR}).}
+\item{haploreg_annotation}{Annotate SNPs with HaploReg
+(using \code{HaploR}).}
 
-\item{regulomeDB_annotation}{Annotate SNPs with regulaomeDB (using \code{HaploR}).}
+\item{regulomeDB_annotation}{Annotate SNPs with regulomeDB
+(using \code{HaploR}).}
 
 \item{biomart_annotation}{Annotate SNPs with \code{biomart}.}
 
-\item{PP_threshold}{Mean posterior probability threshold to include SNPs in mean PP Credible Set
+\item{PP_threshold}{Mean posterior probability threshold to
+include SNPs in mean PP Credible Set
 (averaged across all fine-mapping tools).}
 
 \item{exclude_methods}{Exclude certain fine-mapping methods when estimating
@@ -53,10 +58,11 @@ of fine-mapping tools that contained the SNP in their Credible Set.}
 
 \item{xlsx_path}{Save merged data.frame as excel file.}
 
-\item{consensus_thresh}{The minimum number of tools that have the SNPs in their Credible Set
+\item{consensus_thresh}{The minimum number of tools that have the SNPs
+in their Credible Set
 to classify it as a \strong{Consensus_SNP}.}
 }
 \description{
-Gather fine-mapping results from \emph{echolocatoR} across all loci
+Gather fine-mapping results from \pkg{echolocatoR} across all loci
 and merge into a single data.frame.
 }

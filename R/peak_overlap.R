@@ -4,20 +4,20 @@
 #' @importFrom GenomicRanges GRanges
 peak_overlap <- function(merged_DT,
                          snp_filter = "!is.na(SNP)",
-                         include.NOTT_2019_peaks = TRUE,
-                         include.NOTT_2019_enhancers_promoters = TRUE,
-                         include.NOTT_2019_PLACseq = TRUE,
-                         include.CORCES_2020_scATACpeaks = TRUE,
-                         include.CORCES_2020_Cicero_coaccess = TRUE,
-                         include.CORCES_2020_bulkATACpeaks = TRUE,
-                         include.CORCES_2020_HiChIP_FitHiChIP_coaccess = TRUE,
-                         include.CORCES_2020_gene_annotations = TRUE,
+                         include.NOTT2019_peaks = TRUE,
+                         include.NOTT2019_enhancers_promoters = TRUE,
+                         include.NOTT2019_PLACseq = TRUE,
+                         include.CORCES2020_scATACpeaks = TRUE,
+                         include.CORCES2020_Cicero_coaccess = TRUE,
+                         include.CORCES2020_bulkATACpeaks = TRUE,
+                         include.CORCES2020_HiChIP_FitHiChIP_coaccess = TRUE,
+                         include.CORCES2020_gene_annotations = TRUE,
                          verbose = T) {
     gr.hits <- GenomicRanges::GRanges()
     ######## NOTT et al. 2019 #########
-    if (include.NOTT_2019_peaks) {
+    if (include.NOTT2019_peaks) {
         try({
-            NOTTpeaks <- NOTT_2019.prepare_peak_overlap(
+            NOTTpeaks <- NOTT2019_prepare_peak_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter,
                 return_counts = FALSE
@@ -28,9 +28,9 @@ peak_overlap <- function(merged_DT,
         })
     }
 
-    if (include.NOTT_2019_enhancers_promoters) {
+    if (include.NOTT2019_enhancers_promoters) {
         try({
-            NOTTreg <- NOTT_2019.prepare_regulatory_overlap(
+            NOTTreg <- NOTT2019_prepare_regulatory_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter,
                 return_counts = FALSE
@@ -42,9 +42,9 @@ peak_overlap <- function(merged_DT,
         })
     }
 
-    if (include.NOTT_2019_PLACseq) {
+    if (include.NOTT2019_PLACseq) {
         try({
-            NOTTplac <- NOTT_2019.prepare_placseq_overlap(
+            NOTTplac <- NOTT2019_prepare_placseq_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter,
                 return_counts = FALSE
@@ -57,13 +57,13 @@ peak_overlap <- function(merged_DT,
     }
 
     ######## CORCES et al. 2020 #########
-    if (include.CORCES_2020_scATACpeaks) {
+    if (include.CORCES2020_scATACpeaks) {
         try({
-            CORCES_scPeaks <- CORCES_2020.prepare_scATAC_peak_overlap(
+            CORCES_scPeaks <- CORCES2020_prepare_scATAC_peak_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter,
-                add_cicero = include.CORCES_2020_Cicero_coaccess,
-                annotate_genes = include.CORCES_2020_gene_annotations,
+                add_cicero = include.CORCES2020_Cicero_coaccess,
+                annotate_genes = include.CORCES2020_gene_annotations,
                 verbose = verbose,
                 return_counts = FALSE
             )
@@ -73,13 +73,13 @@ peak_overlap <- function(merged_DT,
             gr.hits <- c(gr.hits, CORCES_scPeaks)
         })
     }
-    if (include.CORCES_2020_bulkATACpeaks) {
+    if (include.CORCES2020_bulkATACpeaks) {
         try({
-            CORCES_bulkPeaks <- CORCES_2020.prepare_bulkATAC_peak_overlap(
+            CORCES_bulkPeaks <- CORCES2020_prepare_bulkATAC_peak_overlap(
                 merged_DT = merged_DT,
                 snp_filter = snp_filter,
-                add_HiChIP_FitHiChIP = include.CORCES_2020_HiChIP_FitHiChIP_coaccess,
-                annotate_genes = include.CORCES_2020_gene_annotations,
+                add_HiChIP_FitHiChIP = include.CORCES2020_HiChIP_FitHiChIP_coaccess,
+                annotate_genes = include.CORCES2020_gene_annotations,
                 verbose = verbose,
                 return_counts = FALSE
             )

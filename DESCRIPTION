@@ -1,7 +1,7 @@
 Package: echoannot
 Type: Package
 Title: echoverse module: Annotate fine-mapping results
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -19,13 +19,12 @@ Authors@R:
            email = "towfique.raj@mssm.edu",
            comment = c(ORCID = "0000-0002-9355-5704"))
            ) 
-Description: echoverse module: Annotate fine-mapping results.
+Description: echoverse module: Functions for annotating genomic data with annotations and epigenomic data.
 URL: https://github.com/RajLabMSSM/echoannot
 BugReports: https://github.com/RajLabMSSM/echoannot/issues
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 4.1)
-SystemRequirements: Python (>= 3.7.0)
 biocViews:
 Imports: 
     echodata,
@@ -58,6 +57,7 @@ Suggests:
     rmarkdown,
     remotes,
     knitr,
+    methods,
     BiocStyle,
     covr,
     testthat (>= 3.0.0),

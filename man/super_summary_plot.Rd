@@ -13,11 +13,43 @@ super_summary_plot(
   save_plot = FALSE,
   height = 15,
   width = 13,
-  dpi = 500
+  dpi = 300
 )
+}
+\arguments{
+\item{merged_DT}{Merge fine-mapping results data from
+\link[echolocatoR]{finemap_loci}.}
+
+\item{snp_filter}{Filter to use apply to SNPs before plotting.}
+
+\item{coloc_results}{Colocalization results from 
+\href{https://github.com/RajLabMSSM/catalogueR}{catalogueR}.}
+
+\item{plot_missense}{Whether to include the missense mutations plot.
+\emph{Warning:} Can take a lot time to query Biomart.}
+
+\item{show_plot}{Show plot.}
+
+\item{save_plot}{Save plot.}
+
+\item{height}{Plot size in \code{units} ("in", "cm", "mm", or "px").
+If not supplied, uses the size of current graphics device.}
+
+\item{width}{Plot size in \code{units} ("in", "cm", "mm", or "px").
+If not supplied, uses the size of current graphics device.}
+
+\item{dpi}{Plot resolution. Also accepts a string input: "retina" (320),
+"print" (300), or "screen" (72). Applies only to raster output types.}
 }
 \description{
 Merge all summary plots into one super plot
+}
+\examples{
+\dontrun{
+merged_DT <- echodata::get_Nalls2019_merged() 
+super_plot <- echoannot::super_summary_plot(merged_DT = merged_DT,
+                                            plot_missense = FALSE)
+}
 }
 \seealso{
 Other summarise: 

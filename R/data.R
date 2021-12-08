@@ -4,18 +4,36 @@
 #'  on UCSC Genome Browser.
 #' bigWig files contain the genomic ranges from each epigenomic assay,
 #' as well as a Score column which describes the peaks of the aggregate reads.
-#' @family NOTT_2019
+#' @family NOTT2019
 #' @source \url{https://science.sciencemag.org/content/366/6469/1134}
-#' @examples
-#' \dontrun{
-#' NOTT_2019.bigwig_metadata <- data.table::data.table(
+#' @source
+#' \code{
+#' NOTT2019_bigwig_metadata <- data.table::data.table(
 #'     readxl::read_excel(
 #'         file.path(
 #'             "~/Desktop/Fine_Mapping/echolocatoR/annotations",
-#'             "Nott_2019/Nott_2019.snEpigenomics.xlsx"
+#'             "NOTT2019/NOTT2019_snEpigenomics.xlsx"
 #'         )
 #'     )
 #' )
-#' usethis::use_data(NOTT_2019.bigwig_metadata, overwrite = TRUE)
+#' usethis::use_data(NOTT2019_bigwig_metadata, overwrite = TRUE)
 #' }
-"NOTT_2019.bigwig_metadata"
+#' @usage data("NOTT2019_bigwig_metadata")
+"NOTT2019_bigwig_metadata"
+
+
+#' Example XGR query
+#'
+#' Example XGR query results from \pkg{XGR} via
+#' \link[echoannot]{XGR_download_and_standardize} using the
+#' "ENCODE_DNaseI_ClusteredV3_CellTypes" dataset.
+#' @family XGR
+#' @source
+#' \code{
+#' xgr_query <- echoannot::XGR_download_and_standardize(
+#'     c("ENCODE_DNaseI_ClusteredV3_CellTypes"),
+#'     dat = echodata::BST1)
+#' }
+#' usethis::use_data(xgr_query, overwrite = TRUE)
+#' @usage data("xgr_query")
+"xgr_query"

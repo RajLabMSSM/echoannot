@@ -18,20 +18,20 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
 
     #### NOTT 2019 ####
     ## Peaks
-    gr.Nott2019.peaks <- NOTT_2019.get_epigenomic_peaks(
-        convert_to_GRanges = TRUE,
+    gr.Nott2019.peaks <- NOTT2019_get_epigenomic_peaks(
+        convert_to_granges = TRUE,
         nThread = 1
     ) %>%
         subset(select = -c(start, end))
     gr.Nott2019.peaks$Study <- "Nott2019.celltype_peaks"
     ### Regulatory regions
-    gr.Nott2019.regions <- NOTT_2019.get_regulatory_regions(as.granges = TRUE)
+    gr.Nott2019.regions <- NOTT2019_get_regulatory_regions(as.granges = TRUE)
     gr.Nott2019.regions$Study <- "Nott2019.celltype_regions"
     gr.Nott2019.regions$Assay <- gr.Nott2019.regions$Element
     ### Interactome
-    NOTT_2019.interactome <- echoannot::get_NOTT_2019.interactome()
-    interactome <- NOTT_2019.interactome[
-        grep("interactome", names(NOTT_2019.interactome))
+    NOTT2019_interactome <- get_NOTT2019_interactome()
+    interactome <- NOTT2019_interactome[
+        grep("interactome", names(NOTT2019_interactome))
     ] %>%
         data.table::rbindlist(idcol = "id") %>%
         tidyr::separate(id,
@@ -65,14 +65,14 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
 
     #### CORCES 2020 ####
     ## Peaks
-    gr.Corces2020.peaks <- CORCES_2020.scATAC_to_granges(
+    gr.Corces2020.peaks <- CORCES2020_scATAC_to_granges(
         standardize_cellTypes = TRUE
     )
     gr.Corces2020.peaks$Study <- "Corces2020.celltype_peaks"
 
     ## Cicero Interactome
     #### Assign cell types to interactome
-    cicero <- echoannot::get_CORCES_2020.cicero_coaccessibility() %>%
+    cicero <- get_CORCES2020_cicero_coaccessibility() %>%
         dplyr::mutate(
             Study = "Corces2020.celltype_interactome",
             Assay = "cicero"
@@ -87,8 +87,8 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         by.y = "Peak_ID"
         ) %>%
         echotabix::liftover(
-            convert_ref_genome = "hg19",
             ref_genome = "hg38",
+            convert_ref_genome = "hg19",
             chrom_col = "hg38_Chromosome_Peak1",
             start_col = "hg38_Start_Peak1",
             end_col = "hg38_Stop_Peak1",
@@ -105,8 +105,8 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         by.y = "Peak_ID"
         ) %>%
         echotabix::liftover(
-            convert_ref_genome = "hg19",
             ref_genome = "hg38",
+            convert_ref_genome = "hg19",
             chrom_col = "hg38_Chromosome_Peak2",
             start_col = "hg38_Start_Peak2",
             end_col = "hg38_Stop_Peak2",
@@ -117,16 +117,16 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
 
 
     ### Bulk ATACseq peaks
-    gr.Corces2020.bulk_peaks <- 
-        echoannot::get_CORCES_2020.bulkATACseq_peaks() %>%
+    gr.Corces2020.bulk_peaks <-
+        get_CORCES2020_bulkATACseq_peaks() %>%
         dplyr::mutate(
             Study = "Corces2020.bulk_peaks",
             Assay = "ATAC",
             Cell_type = "brain"
         ) %>%
         echotabix::liftover(
-            convert_ref_genome = "hg19",
             ref_genome = "hg38",
+            convert_ref_genome = "hg19",
             chrom_col = "hg38_Chromosome",
             start_col = "hg38_Start",
             end_col = "hg38_Stop",
@@ -135,7 +135,7 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         )
 
     ### FitChip interactome
-    fitchip <- echoannot::get_CORCES_2020.HiChIP_FitHiChIP_loop_calls() %>%
+    fitchip <- get_CORCES2020_hichip_fithichip_loop_calls() %>%
         dplyr::mutate(
             Study = "Corces2020.bulk_interactome",
             Cell_type = "brain", Assay = "HiChIP_FitHiChIP"
@@ -143,8 +143,8 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
     fitchip.anchor1 <- fitchip %>%
         dplyr::mutate(Anchor = 1) %>%
         echotabix::liftover(
-            convert_ref_genome = "hg19",
             ref_genome = "hg38",
+            convert_ref_genome = "hg19",
             chrom_col = "hg38_Chromosome_Anchor1",
             start_col = "hg38_Start_Anchor1",
             end_col = "hg38_Stop_Anchor1",
@@ -154,8 +154,8 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
     fitchip.anchor2 <- fitchip %>%
         dplyr::mutate(Anchor = 2) %>%
         echotabix::liftover(
-            convert_ref_genome = "hg19",
             ref_genome = "hg38",
+            convert_ref_genome = "hg19",
             chrom_col = "hg38_Chromosome_Anchor2",
             start_col = "hg38_Start_Anchor2",
             end_col = "hg38_Stop_Anchor2",

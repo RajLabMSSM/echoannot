@@ -5,22 +5,22 @@
 \title{Plot overlap between some SNP group and various epigenomic data}
 \source{
 \href{https://science.sciencemag.org/content/366/6469/1134}{
-Nott et al. (2019)}
-\href{https://www.biorxiv.org/content/10.1101/2020.01.06.896159v1}{
-Corces et al. (2020/bioRxiv)}
+Nott et al., 2019 (The Lancet Neurology)}
+\href{https://doi.org/10.1038/s41588-020-00721-x}{
+Corces et al., 2020 (Nature Genetics)}
 }
 \usage{
 peak_overlap_plot(
   merged_DT,
   snp_filter = "Consensus_SNP==TRUE",
-  include.NOTT_2019_peaks = TRUE,
-  include.NOTT_2019_enhancers_promoters = TRUE,
-  include.NOTT_2019_PLACseq = TRUE,
-  include.CORCES_2020_scATACpeaks = TRUE,
-  include.CORCES_2020_Cicero_coaccess = TRUE,
-  include.CORCES_2020_bulkATACpeaks = TRUE,
-  include.CORCES_2020_HiChIP_FitHiChIP_coaccess = TRUE,
-  include.CORCES_2020_gene_annotations = TRUE,
+  include.NOTT2019_peaks = TRUE,
+  include.NOTT2019_enhancers_promoters = TRUE,
+  include.NOTT2019_PLACseq = TRUE,
+  include.CORCES2020_scATACpeaks = TRUE,
+  include.CORCES2020_Cicero_coaccess = TRUE,
+  include.CORCES2020_bulkATACpeaks = TRUE,
+  include.CORCES2020_HiChIP_FitHiChIP_coaccess = TRUE,
+  include.CORCES2020_gene_annotations = TRUE,
   plot_celltype_specificity = TRUE,
   plot_celltype_specificity_genes = FALSE,
   facets_formula = ". ~ Cell_type",
@@ -38,34 +38,37 @@ peak_overlap_plot(
 )
 }
 \arguments{
-\item{include.NOTT_2019_peaks}{Plot SNP subset overlap with
+\item{include.NOTT2019_peaks}{Plot SNP subset overlap with
 peaks from cell-type-specific bulk ATAC, H3K27ac, and H3K4me3 assays.}
 
-\item{include.NOTT_2019_enhancers_promoters}{Plot SNP subset overlap with
+\item{include.NOTT2019_enhancers_promoters}{Plot SNP subset overlap with
 cell enhancers and promoters.}
 
-\item{include.CORCES_2020_scATACpeaks}{Plot SNP subset overlap with
+\item{include.CORCES2020_scATACpeaks}{Plot SNP subset overlap with
 cell-type-specific scATAC-seq peaks.}
 
-\item{include.CORCES_2020_Cicero_coaccess}{Plot SNP subset overlap with
+\item{include.CORCES2020_Cicero_coaccess}{Plot SNP subset overlap with
 Cicero coaccessibility peaks (derived from scATACseq).}
 }
 \description{
 Plot overlap between some SNP group and various epigenomic data
 }
 \examples{
-# Consensus SNPs
-gg_peaks <- peak_overlap_plot(
-    merged_DT = echodata::get_Nalls2019_merged(),
+merged_DT <- echodata::get_Nalls2019_merged()
+#### Consensus SNPs #####
+gg_peaks <- echoannot::peak_overlap_plot(
+    merged_DT = merged_DT,
     snp_filter = "Consensus_SNP==T",
     fill_title = "Consensus SNPs in epigenomic peaks"
 )
-# UCS SNPs
-gg_peaks <- peak_overlap_plot(
-    merged_DT = echodata::get_Nalls2019_merged(),
+#### UCS SNPs ####
+\dontrun{
+gg_peaks <- echoannot::peak_overlap_plot(
+    merged_DT = merged_DT,
     snp_filter = "Support>0",
     fill_title = "UCS SNPs in epigenomic peaks"
 )
+}
 }
 \seealso{
 Other summarise: 

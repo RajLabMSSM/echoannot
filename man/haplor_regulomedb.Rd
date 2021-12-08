@@ -16,7 +16,6 @@ Download SNP-wise annotations from RegulomeDB
 \seealso{
 Other annotate: 
 \code{\link{annotate_missense}()},
-\code{\link{biomart_geneInfo}()},
 \code{\link{biomart_snp_info}()},
 \code{\link{biomart_snps_to_geneInfo}()},
 \code{\link{haplor_epigenetics_enrichment}()},
