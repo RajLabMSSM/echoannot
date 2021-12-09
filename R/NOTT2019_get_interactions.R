@@ -11,6 +11,7 @@ NOTT2019_get_interactions <- function(dat,
                                       as.granges = FALSE,
                                       verbose = TRUE) {
     Name <- NULL;
+    messager("++ NOTT2019:: Getting interaction anchors data.",v=verbose)
     NOTT2019_interactome <- get_NOTT2019_interactome()
     selected_sheets <- grep("interactome$", names(NOTT2019_interactome),
         value = TRUE

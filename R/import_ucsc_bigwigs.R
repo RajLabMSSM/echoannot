@@ -104,7 +104,7 @@ import_ucsc_bigwigs <- function(query_dat,
         bw.cols <- bigwig_metadata$name
         # names(bw.grlist) <- bw.cols
         bw.gr <- unlist(GenomicRanges::GRangesList(bw.grlist))
-        #### Define xlimits ####
+        #### Define x_limits ####
         ## Useful for making zoomed locus plots
         if(!is.null(xlims)){
             bw.gr <- subset(

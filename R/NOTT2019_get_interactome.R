@@ -15,7 +15,7 @@ NOTT2019_get_interactome <- function(annot_sub,
     Coordinates <- Interaction <- chr <- Cell_type <- Element <- End <-
         top.consensus.dist <- NULL;
 
-    messager("+ NOTT2019:: Getting interactome data.", v = verbose)
+    messager("++ NOTT2019:: Getting interactome data.", v = verbose)
     interact.cols <- grep("*_interactions", colnames(annot_sub), value = TRUE)
     interact.DT <- lapply(interact.cols, function(column) {
         coords <- strsplit(annot_sub[, column][[1]], ",")

@@ -4,12 +4,10 @@
 \alias{tracks_to_ggplot_list}
 \title{Convert ggbio tracks plot to ggplot2 list}
 \usage{
-tracks_to_ggplot_list(trks, verbose = TRUE)
+tracks_to_ggplot_list(trks)
 }
 \arguments{
 \item{trks}{ggbio tracks plot.}
-
-\item{verbose}{Print messages.}
 }
 \description{
 Convert \link[ggbio]{tracks} plot to a named list of 

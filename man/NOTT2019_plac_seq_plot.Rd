@@ -32,23 +32,29 @@ NOTT2019_plac_seq_plot(
   height = 7,
   width = 7,
   dpi = 300,
-  as_ggplot = TRUE,
+  return_as = "Track",
   nThread = 1,
   verbose = TRUE
 )
+}
+\arguments{
+\item{return_as}{Plot class to convert \code{plot_list} to:
+\itemize{
+\item{"ggplot"}{\link[ggplot2]{ggplot}}
+\item{"ggbio"}{\link[ggbio]{ggbio}}
+\item{"patchwork"}{\pkg{patchwork}}
+\item{"Tracks"}{\link[ggbio]{tracks}}
+\item{NULL}{Return original object.}
+}}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Plot brain cell-specific interactome data from
  \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}.
 }
 \examples{
-dat <- echodata::BST1
-locus_dir <- file.path(tempdir(), echodata::locus_dir)
-trks_plus_lines <- echoannot::NOTT2019_plac_seq_plot(
-    dat = dat,
-    locus_dir = locus_dir,
-    highlight_plac = TRUE
-) 
+trks_plus_lines <- echoannot::NOTT2019_plac_seq_plot(dat = echodata::BST1) 
 }
 \seealso{
 Other NOTT2019: 

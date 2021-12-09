@@ -4,7 +4,7 @@
 \alias{NOTT2019_get_promoter_celltypes}
 \title{Get promoter cell types}
 \usage{
-NOTT2019_get_promoter_celltypes(annot_sub, marker_key)
+NOTT2019_get_promoter_celltypes(annot_sub, marker_key, verbose = TRUE)
 }
 \description{
 Brain cell-specific epigenomic data from Nott et al. (2019).

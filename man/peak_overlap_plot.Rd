@@ -57,19 +57,17 @@ Cicero coaccessibility peaks (derived from scATACseq).}
 Plot overlap between some SNP group and various epigenomic data
 }
 \examples{
+#### Data ####
 merged_DT <- echodata::get_Nalls2019_merged()
+
 #### Consensus SNPs #####
 gg_peaks <- echoannot::peak_overlap_plot(
     merged_DT = merged_DT,
-    snp_filter = "Consensus_SNP==T",
-    fill_title = "Consensus SNPs in epigenomic peaks"
-)
+    fill_title = "Consensus SNPs in epigenomic peaks")
 #### UCS SNPs ####
 \dontrun{
-dat <- echodata::BST1
-datLocus <- "BST1"
 gg_peaks <- echoannot::peak_overlap_plot(
-    merged_DT = dat,
+    merged_DT = merged_DT,
     snp_filter = "Support>0",
     fill_title = "UCS SNPs in epigenomic peaks")
 }

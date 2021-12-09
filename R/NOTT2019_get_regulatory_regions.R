@@ -11,6 +11,7 @@ NOTT2019_get_regulatory_regions <- function(as.granges = FALSE,
                                             nThread = 1,
                                             verbose = TRUE) {
     Name <- Cell_type <- NULL;
+    messager("++ NOTT2019:: Getting regulatory regions data.",v=verbose)
     NOTT2019_interactome <- get_NOTT2019_interactome()
     selected_sheets <- grep("promoters$|enhancers$",
         names(NOTT2019_interactome),

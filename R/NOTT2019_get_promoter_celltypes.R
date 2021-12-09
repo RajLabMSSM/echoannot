@@ -4,7 +4,10 @@
 #' @keywords internal
 #' @family NOTT2019
 NOTT2019_get_promoter_celltypes <- function(annot_sub,
-                                            marker_key) {
+                                            marker_key,
+                                            verbose = TRUE) {
+    messager("++ NOTT2019:: Getting promoter cell-type-specific data.",
+             v=verbose)
     promoter.cols <- grep("*_active_promoter",
         colnames(annot_sub),
         value = TRUE

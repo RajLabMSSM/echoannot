@@ -10,6 +10,7 @@
 \usage{
 NOTT2019_epigenomic_histograms(
   dat,
+  bigwig_metadata = echoannot::NOTT2019_bigwig_metadata,
   locus_dir = tempdir(),
   show_plot = TRUE,
   save_plot = FALSE,
@@ -37,6 +38,20 @@ NOTT2019_epigenomic_histograms(
 \arguments{
 \item{dat}{Fine-mapping results data from \link[echolocatoR]{finemap_loci}.}
 
+\item{bigwig_metadata}{Metadata table with at 
+least the following two columns:
+\itemize{
+\item{"name"}{Unique name of the file.}
+\item{"data_link"}{URL to UCSC genome browser bigwig file.}
+}}
+
+\item{full_data}{Whether to download the full data 
+(genomic ranges of all sequence reads) as opposed
+to a reduced representation of the data as a single vector 
+(i.e. the aggregated reads "score"). 
+Setting \code{full_data=TRUE} is necessary for creating
+ histograms and density plots.}
+
 \item{dpi}{dpi to use for raster graphics}
 
 \item{height}{height (defaults to the height of current
@@ -44,13 +59,18 @@ NOTT2019_epigenomic_histograms(
 
 \item{width}{width (defaults to the width of current
   plotting window)}
+
+\item{nThread}{Number of threads to parallelise downloads across.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Brain cell-specific epigenomic data from Nott et al. (2019).
 }
 \examples{
 nott2019_track <- echoannot::NOTT2019_epigenomic_histograms(
-    dat = echodata::BST1)
+    dat = echodata::BST1, 
+    bigwig_metadata = echoannot::NOTT2019_bigwig_metadata[1:2,])
 }
 \seealso{
 Other NOTT2019: 

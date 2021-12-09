@@ -4,6 +4,7 @@
 #' 
 #' @param dat Fine-mapping results data from \link[echolocatoR]{finemap_loci}.
 #' @inheritParams ggbio::ggsave
+#' @inheritParams import_ucsc_bigwigs
 #' 
 #' @family NOTT2019
 #' @source
@@ -16,8 +17,10 @@
 #' @importFrom GenomicRanges mcols
 #' @examples
 #' nott2019_track <- echoannot::NOTT2019_epigenomic_histograms(
-#'     dat = echodata::BST1)
+#'     dat = echodata::BST1, 
+#'     bigwig_metadata = echoannot::NOTT2019_bigwig_metadata[1:2,])
 NOTT2019_epigenomic_histograms <- function(dat,
+                                           bigwig_metadata = echoannot::NOTT2019_bigwig_metadata,
                                            locus_dir = tempdir(),
                                            show_plot = TRUE,
                                            save_plot = FALSE,
@@ -55,8 +58,7 @@ NOTT2019_epigenomic_histograms <- function(dat,
 
     messager("NOTT2019:: Creating epigenomic histograms plot",
              v = verbose)
-    #### Import BigWig annotation metadata ####
-    bigwig_metadata <- echoannot::NOTT2019_bigwig_metadata
+    #### Import BigWig annotation metadata #### 
     # Some bigWig files were initially loaded to UCSC GB,
     # but then later taken down by the authors....
     # However I saved these files on Minerva beforehand.
@@ -253,8 +255,7 @@ NOTT2019_epigenomic_histograms <- function(dat,
     }
     #### Return 2 ####
     if (as_ggplot) {
-        gg_list <- tracks_to_ggplot_list(trks = trks_plus_lines,
-                                         verbose = verbose)
+        gg_list <- tracks_to_ggplot_list(trks = trks_plus_lines)
         return(list(data=list(raw=bw.gr,
                               peaks=gr.peaks),
                     plot=gg_list))

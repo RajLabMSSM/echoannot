@@ -1,5 +1,9 @@
 # echoannot 0.99.3
 
+## New features
+
+* Added function `convert_plots`.
+
 ## Bug fixes 
 
 * Move as many Imports to Suggests as possible. 
@@ -10,6 +14,8 @@
 * Transition all usage of `ggplot2` to `requireNamespace` method to reduce
 NAMESPACE.
 * Make all new col assignments in GRange objects use the proper `mcols` syntax.
+* Make sure all GRanges in UCSC format in `NOTT2019_plac_seq_plot`.
+* Subdivide `NOTT2019_plac_seq_plot` into subfunctions. 
 * New exports:
     - `NOTT2019_get_epigenomic_peaks`
 
