@@ -3,6 +3,7 @@
 ## Bug fixes 
 
 * Update to match latest `echotabix` changes.
+* Update GHA workflow.
 
 # echoannot 0.99.3
 
