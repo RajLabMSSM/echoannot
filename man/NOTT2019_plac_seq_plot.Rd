@@ -15,14 +15,14 @@ NOTT2019_plac_seq_plot(
   print_plot = TRUE,
   save_plot = TRUE,
   return_interaction_track = FALSE,
-  xlims = NULL,
+  x_limits = NULL,
   zoom_window = NULL,
   index_SNP = NULL,
-  genomic_units = "Mb",
+  genomic_units = "POS",
   color_dict = c(enhancers = "springgreen2", promoters = "purple", anchors = "black"),
   return_consensus_overlap = TRUE,
   show_arches = TRUE,
-  highlight_plac = FALSE,
+  highlight_plac = TRUE,
   show_regulatory_rects = TRUE,
   show_anchors = TRUE,
   strip.text.y.angle = 0,
@@ -32,12 +32,22 @@ NOTT2019_plac_seq_plot(
   height = 7,
   width = 7,
   dpi = 300,
-  return_as = "Track",
+  return_as = "Tracks",
   nThread = 1,
   verbose = TRUE
 )
 }
 \arguments{
+\item{x_limits}{x-axis limits to be applied to all plots
+(useful when trying to keep a common coordinate system).}
+
+\item{highlight_plac}{Whether to scale opacity of PLAC-seq interactions 
+(arches) such that interactions with anchors containing Consensus SNPs 
+will be colored darker (Default: \code{TRUE}).
+If \code{FALSE}, will instead apply the same opacity level
+ to all interactions.
+ @param genomic_units The genomic units that should be used for the x-axis.}
+
 \item{return_as}{Plot class to convert \code{plot_list} to:
 \itemize{
 \item{"ggplot"}{\link[ggplot2]{ggplot}}

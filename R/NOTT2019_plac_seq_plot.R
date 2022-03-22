@@ -9,7 +9,7 @@
 #' \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
 #' @param highlight_plac Whether to scale opacity of PLAC-seq interactions 
 #' (arches) such that interactions with anchors containing Consensus SNPs 
-#' will be colored darker (Default: \code{TRUE).
+#' will be colored darker (Default: \code{TRUE}).
 #' If \code{FALSE}, will instead apply the same opacity level
 #'  to all interactions.
 #'  @param genomic_units The genomic units that should be used for the x-axis.

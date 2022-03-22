@@ -44,16 +44,16 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
     gr.Nott2019.interactome <- c(
         echodata::dt_to_granges(
             dat = interactome %>% dplyr::mutate(Anchor = 1),
-            chrom_col = "chr1", 
-            start_col = "start1",
-            end_col = "end1", 
+            query_chrom_col = "chr1", 
+            query_start_col = "start1",
+            query_end_col = "end1", 
             style = "NCBI"
         ),
         echodata::dt_to_granges(
             dat = interactome %>% dplyr::mutate(Anchor = 2),
-            chrom_col = "chr2", 
-            start_col = "start2",
-            end_col = "end2", 
+            query_chrom_col = "chr2", 
+            query_start_col = "start2",
+            query_end_col = "end2", 
             style = "NCBI"
         )
     )  
@@ -80,11 +80,11 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         by.y = "Peak_ID"
         ) %>%
         echotabix::liftover(
-            ref_genome = "hg38",
-            convert_ref_genome = "hg19",
-            chrom_col = "hg38_Chromosome_Peak1",
-            start_col = "hg38_Start_Peak1",
-            end_col = "hg38_Stop_Peak1",
+            query_genome = "hg38",
+            target_genome = "hg19",
+            query_chrom_col = "hg38_Chromosome_Peak1",
+            query_start_col = "hg38_Start_Peak1",
+            query_end_col = "hg38_Stop_Peak1",
             as_granges = TRUE,
             style = "NCBI"
         )
@@ -98,11 +98,11 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         by.y = "Peak_ID"
         ) %>%
         echotabix::liftover(
-            ref_genome = "hg38",
-            convert_ref_genome = "hg19",
-            chrom_col = "hg38_Chromosome_Peak2",
-            start_col = "hg38_Start_Peak2",
-            end_col = "hg38_Stop_Peak2",
+            query_genome = "hg38",
+            target_genome = "hg19",
+            query_chrom_col = "hg38_Chromosome_Peak2",
+            query_start_col = "hg38_Start_Peak2",
+            query_end_col = "hg38_Stop_Peak2",
             as_granges = TRUE,
             style = "NCBI"
         )
@@ -118,11 +118,11 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
             Cell_type = "brain"
         ) %>%
         echotabix::liftover(
-            ref_genome = "hg38",
-            convert_ref_genome = "hg19",
-            chrom_col = "hg38_Chromosome",
-            start_col = "hg38_Start",
-            end_col = "hg38_Stop",
+            query_genome = "hg38",
+            target_genome = "hg19",
+            query_chrom_col = "hg38_Chromosome",
+            query_start_col = "hg38_Start",
+            query_end_col = "hg38_Stop",
             as_granges = TRUE,
             style = "NCBI"
         )
@@ -136,22 +136,22 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
     fitchip.anchor1 <- fitchip %>%
         dplyr::mutate(Anchor = 1) %>%
         echotabix::liftover(
-            ref_genome = "hg38",
-            convert_ref_genome = "hg19",
-            chrom_col = "hg38_Chromosome_Anchor1",
-            start_col = "hg38_Start_Anchor1",
-            end_col = "hg38_Stop_Anchor1",
+            query_genome = "hg38",
+            target_genome = "hg19",
+            query_chrom_col = "hg38_Chromosome_Anchor1",
+            query_start_col = "hg38_Start_Anchor1",
+            query_end_col = "hg38_Stop_Anchor1",
             as_granges = TRUE,
             style = "NCBI"
         )
     fitchip.anchor2 <- fitchip %>%
         dplyr::mutate(Anchor = 2) %>%
         echotabix::liftover(
-            ref_genome = "hg38",
-            convert_ref_genome = "hg19",
-            chrom_col = "hg38_Chromosome_Anchor2",
-            start_col = "hg38_Start_Anchor2",
-            end_col = "hg38_Stop_Anchor2",
+            query_genome = "hg38",
+            target_genome = "hg19",
+            query_chrom_col = "hg38_Chromosome_Anchor2",
+            query_start_col = "hg38_Start_Anchor2",
+            query_end_col = "hg38_Stop_Anchor2",
             as_granges = TRUE,
             style = "NCBI"
         )

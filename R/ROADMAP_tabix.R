@@ -28,7 +28,7 @@
 #' @family ROADMAP
 #' @keywords internal
 #' @importFrom data.table fread
-#' @importFrom echotabix query_tabular
+#' @importFrom echotabix query
 #' @importFrom echodata dt_to_granges
 ROADMAP_tabix <- function(results_path =
                               tempfile(fileext = "ROADMAP_query.csv.gz"),
@@ -49,12 +49,12 @@ ROADMAP_tabix <- function(results_path =
         fname
     ) # _15_coreMarks_stateno.bed.gz
     #### Qiuery remote tabix file ####
-    dat <- echotabix::query_tabular(
-        fullSS_tabix = URL,
-        chrom = chrom,
-        start_pos = min_pos,
-        end_pos = max_pos,
-        local = FALSE,
+    query_granges <- echotabix::construct_query(query_chrom = chrom, 
+                                                query_start_pos = min_pos, 
+                                                query_end_pos = max_pos)
+    dat <- echotabix::query(
+        target_path = URL,
+        query_granges = query_granges,
         verbose = verbose
     )
     dat <- dat[, paste0("V", seq(1, 4))]

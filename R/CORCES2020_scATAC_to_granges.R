@@ -17,11 +17,11 @@ CORCES2020_scATAC_to_granges <- function(standardize_cellTypes = FALSE) {
     scATAC$Study <- "Corces2020.peaks"
     gr.Corces2020.peaks <- echotabix::liftover(
         dat = scATAC,
-        ref_genome = "hg38",
-        convert_ref_genome = "hg19",
-        chrom_col = "hg38_Chromosome",
-        start_col = "hg38_Start",
-        end_col = "hg38_Stop",
+        query_genome = "hg38",
+        target_genome = "hg19",
+        query_chrom_col = "hg38_Chromosome",
+        query_start_col = "hg38_Start",
+        query_end_col = "hg38_Stop",
         as_granges = TRUE,
         style = "NCBI"
     )

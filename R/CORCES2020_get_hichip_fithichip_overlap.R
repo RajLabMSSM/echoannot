@@ -17,12 +17,12 @@ CORCES2020_get_hichip_fithichip_overlap <- function(query_dat,
     loops <- get_CORCES2020_hichip_fithichip_loop_calls()
     #### Anchor 1 ####
     gr.anchor1 <- echotabix::liftover(
-        sumstats_dt = loops,
-        ref_genome = "hg38",
-        convert_ref_genome = "hg19",
-        chrom_col = "hg38_Chromosome_Anchor1",
-        start_col = "hg38_Start_Anchor1",
-        end_col = "hg38_Stop_Anchor1",
+        dat = loops,
+        query_genome = "hg38",
+        target_genome = "hg19",
+        query_chrom_col = "hg38_Chromosome_Anchor1",
+        query_start_col = "hg38_Start_Anchor1",
+        query_end_col = "hg38_Stop_Anchor1",
         verbose = FALSE,
         as_granges = TRUE,
         style = "NCBI"
@@ -38,12 +38,12 @@ CORCES2020_get_hichip_fithichip_overlap <- function(query_dat,
 
     #### Anchor 2 ####
     gr.anchor2 <- echotabix::liftover(
-        sumstats_dt = loops,
-        ref_genome = "hg38",
-        convert_ref_genome = "hg19",
-        chrom_col = "hg38_Chromosome_Anchor2",
-        start_col = "hg38_Start_Anchor2",
-        end_col = "hg38_Stop_Anchor2",
+        dat = loops,
+        query_genome = "hg38",
+        target_genome = "hg19",
+        query_chrom_col = "hg38_Chromosome_Anchor2",
+        query_start_col = "hg38_Start_Anchor2",
+        query_end_col = "hg38_Stop_Anchor2",
         verbose = FALSE,
         as_granges = TRUE,
         style = "NCBI"
