@@ -1,3 +1,12 @@
+# echoannot 0.99.4
+
+## New features 
+
+* New functions
+    - `import_peaks`: Search for peak files in GEO/ENCODE, or compute them 
+    from bedGraph files. 
+    - `call_peaks`: Call peaks from bedGraph files using `MACSr`. 
+
 # echoannot 0.99.3
 
 ## Bug fixes 
