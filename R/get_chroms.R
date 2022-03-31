@@ -1,3 +1,14 @@
+#' Get chromosomes
+#' 
+#' Query a bedGraph file by a subset of chromosomes.
+#' This allows you to query whole chromosomes at a time, without needing to
+#' import the entire bedGraph file.
+#' @keywords internal
+#' @source \href{https://github.com/Bioconductor/BiocGenerics/issues/12}{
+#' GitHub Issues: conflicts with BiocGenerics::%in%}
+#' @importFrom regioneR getGenome
+#' @importFrom GenomicRanges seqnames 
+#' @importFrom rtracklayer import export
 get_chroms <- function(URL, 
                        chroms = NULL,
                        build = "hg38",
@@ -13,8 +24,7 @@ get_chroms <- function(URL,
     #         "selected_chroms","bedgraph",sep = ".")
     # )
     # chroms <- "chr6" 
-    messager("Importing chromosomes:",paste(chroms,collapse = ","),
-             v=verbose)
+    messager("Importing chromosomes:",paste(chroms,collapse = ","),v=verbose)
     chroms <- unique(as.character(chroms))
     all_chrom <- regioneR::getGenome(genome = build)
     messager("+ Selecting available chromosomes.",v=verbose)
@@ -22,8 +32,9 @@ get_chroms <- function(URL,
     ## and interferes with S4Vectors::%in% when loaded.
     ## Use grepl instead.
     select_chrom <- if(!is.null(chroms)){
-        all_chrom[grepl(paste(paste0("^",chroms,"$"),collapse = "|"),
-                        as.character(GenomicRanges::seqnames(all_chrom))), ]
+        # all_chrom[grepl(paste(paste0("^",chroms,"$"),collapse = "|"),
+        #                 as.character(GenomicRanges::seqnames(all_chrom))), ]
+        all_chrom[GenomicRanges::seqnames(all_chrom) %in% chroms, ]
     } else {all_chrom} 
     if(length(select_chrom)==0) {
         stop("No matching chromosomes could be identified.")

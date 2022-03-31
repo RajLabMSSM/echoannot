@@ -1,3 +1,14 @@
+#' Import peaks: GEO
+#' 
+#' Import narrow/broad/generic peaks from GEO, or compute peaks with 
+#' \link[echoannot]{call_peaks}.
+#' 
+#' @param gsm GEO GSM id (e.g. "GSM4271282").
+#' 
+#' @inheritParams import_peaks
+#' @keywords internal 
+#' @importFrom GEOquery getGEO
+#' @importFrom GenomicRanges seqnames
 import_peaks_geo <- function(gsm,  
                              build,
                              query_granges,
@@ -116,7 +127,7 @@ import_peaks_geo <- function(gsm,
         #### Import bedGraph subset #### 
         if(!is.null(query_granges)){
             ## Import the entire chromosome to accurately compute peaks.
-            gr <- get_chroms(URL = bedGraph[1], 
+            gr <- import_bedgraph_chroms(URL = bedGraph[1], 
                              chroms = chroms, 
                              build = build, 
                              import_format = "bedGraph", 
