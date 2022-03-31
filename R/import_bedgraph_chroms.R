@@ -6,13 +6,13 @@
 #' @keywords internal
 #' @source \href{https://github.com/Bioconductor/BiocGenerics/issues/12}{
 #' GitHub Issues: conflicts with BiocGenerics}
-get_chroms <- function(URL, 
-                       chroms = NULL,
-                       build = "hg38",
-                       import_format = "bedGraph",
-                       export_format = import_format,
-                       save_path = NULL,
-                       verbose = TRUE){
+import_bedgraph_chroms <- function(URL, 
+                                   chroms = NULL,
+                                   build = "hg38",
+                                   import_format = "bedGraph",
+                                   export_format = import_format,
+                                   save_path = NULL,
+                                   verbose = TRUE){
     
     # save_path <- file.path(
     #     tempdir(), 
