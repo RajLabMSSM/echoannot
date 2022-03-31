@@ -5,10 +5,7 @@
 #' import the entire bedGraph file.
 #' @keywords internal
 #' @source \href{https://github.com/Bioconductor/BiocGenerics/issues/12}{
-#' GitHub Issues: conflicts with BiocGenerics::%in%}
-#' @importFrom regioneR getGenome
-#' @importFrom GenomicRanges seqnames 
-#' @importFrom rtracklayer import export
+#' GitHub Issues: conflicts with BiocGenerics}
 get_chroms <- function(URL, 
                        chroms = NULL,
                        build = "hg38",
@@ -28,9 +25,10 @@ get_chroms <- function(URL,
     chroms <- unique(as.character(chroms))
     all_chrom <- regioneR::getGenome(genome = build)
     messager("+ Selecting available chromosomes.",v=verbose)
-    ## WARNING! BiocGenerics::%in% does not work properly 
-    ## and interferes with S4Vectors::%in% when loaded.
-    ## Use grepl instead.
+    ## WARNING! BiocGenerics::%in% does not work as expected
+    ## and interferes with S4Vectors::%in% when loaded unless explicitly
+    ## imported in the roxygen notes.
+    ## Using grepl instead.
     select_chrom <- if(!is.null(chroms)){
         # all_chrom[grepl(paste(paste0("^",chroms,"$"),collapse = "|"),
         #                 as.character(GenomicRanges::seqnames(all_chrom))), ]
