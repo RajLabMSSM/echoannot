@@ -61,7 +61,8 @@ Suggests:
     corrplot,
     pheatmap,
     haploR,
-    biomaRt
+    biomaRt,
+    MACSr
 Remotes:
     github::RajLabMSSM/echodata,
     github::RajLabMSSM/echotabix,
