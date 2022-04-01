@@ -3,48 +3,47 @@
 #' Import narrow/broad/generic peaks from GEO, or compute peaks with 
 #' \link[echoannot]{call_peaks}.
 #' 
+#' Must import \link[methods]{new} in my function
+#' because it seems \link[GEOquery]{getGEO} forgot to do this 
+#' (only works when you load the entire \pkg{GEOquery} package first).
+#' 
 #' @param gsm GEO GSM id (e.g. "GSM4271282").
 #' 
 #' @inheritParams import_peaks
 #' @keywords internal 
-#' @importFrom GEOquery getGEO
-#' @importFrom GenomicRanges seqnames
+#' @import BiocGenerics 
+#' @importFrom GenomicRanges seqnames mcols GRangesList
+#' @importFrom rtracklayer import import.bedGraph
+#' @importFrom data.table fread 
+#' @importFrom echotabix liftover
+#' @importFrom echodata dt_to_granges
 import_peaks_geo <- function(gsm,  
                              build,
                              query_granges,
                              query_granges_build,
                              cutoff = NULL,
                              peaks_dir = tempdir(),
+                             regex_queries = list(
+                                 narrowPeaks="narrowpeak",
+                                 broadPeaks="broadpeak",
+                                 genericPeaks="peak",
+                                 bedGraph="bedgraph|graph.gz|bdg.gz"
+                             ),
                              verbose = TRUE){
     
-    messager("Determining available file types.",
-                         v=verbose) 
+    messager("Determining available file types.",v=verbose) 
     #### Determine which chroms to query ####
     chroms <- if(!is.null(query_granges)){
         unique(GenomicRanges::seqnames(query_granges))    
     } else{NULL} 
-    #### Get URL ####
-    g <- GEOquery::getGEO(GEO = gsm) 
-    #### Determine file types ####
-    supp_urls <- g@header[
-        grep("^supplementary_file_*",names(g@header))
-    ]
-    messager(length(supp_urls),"supplementary file(s) found:",
-             paste("\n -",basename(unlist(supp_urls)),collapse = ""),
-             v=verbose)
-    narrowPeaks <- grep("narrowpeak", unlist(supp_urls),
-                        ignore.case = TRUE, value = TRUE)
-    broadPeaks <- grep("broadpeak", unlist(supp_urls),
-                       ignore.case = TRUE, value = TRUE)
-    genericPeaks <- grep("peak", unlist(supp_urls),
-                        ignore.case = TRUE, value = TRUE)
-    bedGraph <- grep("bedgraph|graph.gz|bdg.gz",unlist(supp_urls), 
-                     ignore.case = TRUE, value = TRUE)
-    
+    #### Get links to supplementary files on GEO ####
+    links <- get_geo_supplementary_files(gsm = gsm,
+                                         regex_queries = regex_queries,
+                                         verbose = verbose) 
     #### If files include narrowPeaks, import directly #### 
-    if(length(narrowPeaks)>0){
+    if(length(links$narrowPeaks)>0){
         messager("Using pre-computed narrowPeak files.",v=verbose)
-        peaks <- lapply(narrowPeaks, function(f){
+        peaks <- lapply(links$narrowPeaks, function(f){
             # p <- get_chroms(URL = f, chroms = chroms) 
             p <- rtracklayer::import(con = f, which = query_granges)
             GenomicRanges::mcols(p)$source <- basename(f)
@@ -63,9 +62,9 @@ import_peaks_geo <- function(gsm,
         } 
         
     #### If files include broadPeaks, import directly #### 
-    } else if(length(broadPeaks)>0){
+    } else if(length(links$broadPeaks)>0){
         messager("Using pre-computed broadPeak files.",v=verbose)
-        peaks <- lapply(broadPeaks, function(f){
+        peaks <- lapply(links$broadPeaks, function(f){
             # p <- get_chroms(URL = f,  chroms = chroms) 
             p <- rtracklayer::import(con = f, which = query_granges)
             GenomicRanges::mcols(p)$source <- basename(f)
@@ -84,9 +83,9 @@ import_peaks_geo <- function(gsm,
         } 
         
     #### If files include generic peaks, import directly #### 
-    } else if(length(genericPeaks)>0){
+    } else if(length(links$genericPeaks)>0){
         messager("Using pre-computed generic peak files.",v=verbose)
-        peaks <- lapply(genericPeaks, function(f){
+        peaks <- lapply(links$genericPeaks, function(f){
             tryCatch({
                 ### not all files parse very cleanly 
                 dat <- data.table::fread(f)
@@ -122,19 +121,19 @@ import_peaks_geo <- function(gsm,
                                          style = "UCSC")
         } 
     #### Else, call peaks from bedGraph #### 
-    } else if(length(bedGraph)>0){
+    } else if(length(links$bedGraph)>0){
         messager("Computing peaks from bedGraph file.",v=verbose)
         #### Import bedGraph subset #### 
         if(!is.null(query_granges)){
             ## Import the entire chromosome to accurately compute peaks.
-            gr <- import_bedgraph_chroms(URL = bedGraph[1], 
-                             chroms = chroms, 
-                             build = build, 
-                             import_format = "bedGraph", 
-                             verbose = verbose) 
+            gr <- import_bedgraph_chroms(URL = links$bedGraph[1], 
+                                         chroms = chroms, 
+                                         build = build, 
+                                         import_format = "bedGraph", 
+                                         verbose = verbose) 
         } else {
             ## Import the entire genome.
-            gr <- rtracklayer::import.bedGraph(con = bedGraph[1])
+            gr <- rtracklayer::import.bedGraph(con = links$bedGraph[1])
         }
         #### Liftover (if necessary) #### 
         if(!is.null(query_granges_build)){

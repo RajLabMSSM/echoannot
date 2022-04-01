@@ -53,7 +53,7 @@ test_that("import_peaks works", {
                                    builds = "hg19")
     testthat::expect_true(names(grl)==ids)
     testthat::expect_true(methods::is(grl[[1]], "GRanges"))
-    testthat::expect_length(grl[[1]], 15)
+    testthat::expect_length(grl[[1]], 18112)
     remove(grl)
     
     

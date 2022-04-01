@@ -6,6 +6,7 @@
     - `import_peaks`: Search for peak files in GEO/ENCODE, or compute them 
     from bedGraph files. 
     - `call_peaks`: Call peaks from bedGraph files using `MACSr`. 
+    - `test_enrichment`: Run permutation enrichment tests.
 
 # echoannot 0.99.3
 

@@ -3,9 +3,14 @@
 #' Query a bedGraph file by a subset of chromosomes.
 #' This allows you to query whole chromosomes at a time, without needing to
 #' import the entire bedGraph file.
-#' @keywords internal
 #' @source \href{https://github.com/Bioconductor/BiocGenerics/issues/12}{
 #' GitHub Issues: conflicts with BiocGenerics}
+#' 
+#' @keywords internal
+#' @importFrom GenomicRanges seqnames
+#' @importFrom rtracklayer import export
+#' @importFrom regioneR getGenome
+#' @importFrom BiocGenerics %in%
 import_bedgraph_chroms <- function(URL, 
                                    chroms = NULL,
                                    build = "hg38",
@@ -30,9 +35,9 @@ import_bedgraph_chroms <- function(URL,
     ## imported in the roxygen notes.
     ## Using grepl instead.
     select_chrom <- if(!is.null(chroms)){
-        # all_chrom[grepl(paste(paste0("^",chroms,"$"),collapse = "|"),
-        #                 as.character(GenomicRanges::seqnames(all_chrom))), ]
-        all_chrom[GenomicRanges::seqnames(all_chrom) %in% chroms, ]
+        all_chrom[grepl(paste(paste0("^",chroms,"$"),collapse = "|"),
+                        as.character(GenomicRanges::seqnames(all_chrom))), ]
+        # all_chrom[GenomicRanges::seqnames(all_chrom) %in% chroms, ]
     } else {all_chrom} 
     if(length(select_chrom)==0) {
         stop("No matching chromosomes could be identified.")
@@ -49,7 +54,8 @@ import_bedgraph_chroms <- function(URL,
                             format = export_format)
         return(save_path)
     } else {
-        messager("Returning,",import_format,"of length",length(gr),v=verbose)
+        messager("Returning",import_format,"of length",
+                 formatC(length(gr),big.mark = ","),v=verbose)
         return(gr)
     } 
 }

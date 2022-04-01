@@ -47,6 +47,7 @@ Imports:
     grDevices,
     rtracklayer,
     S4Vectors,
+    BiocGenerics,
     IRanges,
     XGR,
     piggyback

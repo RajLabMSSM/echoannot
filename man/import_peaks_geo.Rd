@@ -11,6 +11,8 @@ import_peaks_geo(
   query_granges_build,
   cutoff = NULL,
   peaks_dir = tempdir(),
+  regex_queries = list(narrowPeaks = "narrowpeak", broadPeaks = "broadpeak",
+    genericPeaks = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz"),
   verbose = TRUE
 )
 }
@@ -37,5 +39,10 @@ through a \code{cutoff_analysis}.}
 \description{
 Import narrow/broad/generic peaks from GEO, or compute peaks with 
 \link[echoannot]{call_peaks}.
+}
+\details{
+Must import \link[methods]{new} in my function
+because it seems \link[GEOquery]{getGEO} forgot to do this 
+(only works when you load the entire \pkg{GEOquery} package first).
 }
 \keyword{internal}

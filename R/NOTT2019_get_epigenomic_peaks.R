@@ -19,6 +19,7 @@
 #' \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
 #' 
 #' @export
+#' @importFrom dplyr %>%
 #' @importFrom data.table fread
 #' @importFrom parallel mclapply
 #' @importFrom echodata dt_to_granges
@@ -89,7 +90,7 @@ NOTT2019_get_epigenomic_peaks <- function(assays = c(
         }, mc.cores = nThread) %>% data.table::rbindlist()
         
         if (convert_to_granges) { 
-            gr.peaks <- echodata::dt_to_granges(dat = PEAKS,
+            PEAKS <- echodata::dt_to_granges(dat = PEAKS,
                                       chrom_col = "chr", 
                                       start_col = "start", 
                                       end_col = "end", 

@@ -72,7 +72,7 @@ import_peaks <- function(ids,
     } else { 
         # chip_meta <- chip_meta[!is.na(Accession.no) & Accession.no!="",]
         chip_list <- stats::setNames(ids,ids)
-        messager("Querying",length(chip_list),"samples.",v=verbose)
+        messager("Querying",length(chip_list),"sample(s).",v=verbose)
         grl <- mapply(ids, FUN = function(no){
             cat(paste("\nQuery:",no,"\n"))
             tryCatch({
