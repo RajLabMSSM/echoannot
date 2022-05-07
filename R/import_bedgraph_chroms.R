@@ -9,7 +9,6 @@
 #' @keywords internal
 #' @importFrom GenomicRanges seqnames
 #' @importFrom rtracklayer import export
-#' @importFrom regioneR getGenome
 #' @importFrom BiocGenerics %in%
 import_bedgraph_chroms <- function(URL, 
                                    chroms = NULL,
@@ -18,7 +17,7 @@ import_bedgraph_chroms <- function(URL,
                                    export_format = import_format,
                                    save_path = NULL,
                                    verbose = TRUE){
-    
+    requireNamespace("regioneR")
     # save_path <- file.path(
     #     tempdir(), 
     #     paste(

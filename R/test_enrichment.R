@@ -12,7 +12,6 @@
 #' 
 #' @export
 #' @importFrom dplyr %>%
-#' @importFrom regioneR overlapPermTest numOverlaps meanDistance
 #' @importFrom data.table data.table rbindlist 
 test_enrichment <- function(grlist1,
                             grlist2, 
@@ -21,6 +20,7 @@ test_enrichment <- function(grlist1,
                             alternative = "auto",
                             verbose = TRUE,
                             ...){
+    requireNamespace("regioneR")
     #### Check inputs #### 
     grlist1 <- check_grlist(grlist=grlist1)
     grlist2 <- check_grlist(grlist=grlist2)

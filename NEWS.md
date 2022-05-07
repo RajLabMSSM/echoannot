@@ -2,7 +2,7 @@
 
 ## Bug fixes 
 
-- Add `GEOquery` to Suggests.
+- Add `GEOquery` and `regioneR` to Suggests.
 
 # echoannot 0.99.4
 
