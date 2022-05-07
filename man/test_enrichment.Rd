@@ -8,7 +8,7 @@ test_enrichment(
   grlist1,
   grlist2,
   ntimes = 50,
-  genome,
+  genome = "hg19",
   alternative = "auto",
   verbose = TRUE,
   ...

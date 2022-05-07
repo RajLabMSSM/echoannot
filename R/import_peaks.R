@@ -96,7 +96,7 @@ import_peaks <- function(ids,
                 } else if(startsWith(toupper(no),"ENCF")){
                     stop("Under construction.")
                 } else {
-                    messager("Accession.no not reocognized. Skipping:",no,
+                    messager("id not recognized. Skipping:",no,
                              v=verbose)
                     return(NA)
                 }

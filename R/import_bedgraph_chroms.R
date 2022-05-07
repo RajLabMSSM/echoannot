@@ -30,22 +30,21 @@ import_bedgraph_chroms <- function(URL,
     chroms <- unique(as.character(chroms))
     all_chrom <- regioneR::getGenome(genome = build)
     messager("+ Selecting available chromosomes.",v=verbose)
-    ## WARNING! BiocGenerics::%in% does not work as expected
-    ## and interferes with S4Vectors::%in% when loaded unless explicitly
-    ## imported in the roxygen notes.
-    ## Using grepl instead.
-    select_chrom <- if(!is.null(chroms)){
-        all_chrom[grepl(paste(paste0("^",chroms,"$"),collapse = "|"),
-                        as.character(GenomicRanges::seqnames(all_chrom))), ]
-        # all_chrom[GenomicRanges::seqnames(all_chrom) %in% chroms, ]
-    } else {all_chrom} 
+    select_chrom <- regioneR::filterChromosomes(A = all_chrom,
+                                                keep.chr = chroms)
     if(length(select_chrom)==0) {
         stop("No matching chromosomes could be identified.")
     }
     messager("+ Importing as:",import_format,v=verbose)
     gr <- rtracklayer::import(con = URL, 
                               which = select_chrom,
-                              format = import_format)
+                              format = import_format) 
+    # gr <- rtracklayer::import.bw(con = URL, 
+    #                           which = echodata::dt_to_granges(select_chrom, style = 'NCBI'))
+    # path <- file.path("~/Downloads",basename(URL))
+    # download.file(URL, path)
+    # path <- R.utils::gunzip(path, destname = gsub(".bw$","2.bw",path), overwrite=TRUE)
+    # path
    #### Save or return directly ####
     if(!is.null(save_path)) { 
         messager("+ Writing chromosome subset ==>",save_path, v=verbose)

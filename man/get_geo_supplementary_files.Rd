@@ -7,14 +7,15 @@
 get_geo_supplementary_files(
   gsm,
   regex_queries = list(narrowPeaks = "narrowpeak", broadPeaks = "broadpeak",
-    genericPeaks = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz"),
+    genericPeaks = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz", bigWig = "bigwig|bw$"),
   verbose = TRUE
 )
 }
 \arguments{
 \item{gsm}{GEO GSM id.}
 
-\item{regex_queries}{Named list of queries.}
+\item{regex_queries}{Named list of queries.
+Matches will be case-insensitive.}
 
 \item{verbose}{Print messages.}
 }

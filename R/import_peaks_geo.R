@@ -8,8 +8,10 @@
 #' (only works when you load the entire \pkg{GEOquery} package first).
 #' 
 #' @param gsm GEO GSM id (e.g. "GSM4271282").
-#' 
 #' @inheritParams import_peaks
+#' 
+#' @returns Named list of peak files in \link[GenomicRanges]{GRanges} format.
+#' 
 #' @keywords internal 
 #' @import BiocGenerics 
 #' @importFrom GenomicRanges seqnames mcols GRangesList
@@ -27,7 +29,8 @@ import_peaks_geo <- function(gsm,
                                  narrowPeaks="narrowpeak",
                                  broadPeaks="broadpeak",
                                  genericPeaks="peak",
-                                 bedGraph="bedgraph|graph.gz|bdg.gz"
+                                 bedGraph="bedgraph|graph.gz|bdg.gz",
+                                 bigWig="bigwig|bw$"
                              ),
                              verbose = TRUE){
     
@@ -120,7 +123,7 @@ import_peaks_geo <- function(gsm,
                                          as_granges = TRUE, 
                                          style = "UCSC")
         } 
-    #### Else, call peaks from bedGraph #### 
+    #### Call peaks from bedGraph #### 
     } else if(length(links$bedGraph)>0){
         messager("Computing peaks from bedGraph file.",v=verbose)
         #### Import bedGraph subset #### 
@@ -148,6 +151,48 @@ import_peaks_geo <- function(gsm,
         tmp_lifted <- tempfile(
             fileext = paste(gsm,"lifted.bedgraph",sep=".")
         )
+        rtracklayer::export.bedGraph(object = gr,
+                                     con = tmp_lifted)
+        #### Call peaks ####
+        peaks <- call_peaks(bedgraph_path = tmp_lifted,
+                            cutoff = cutoff,
+                            outdir = peaks_dir,
+                            outputfile = paste(
+                                gsm,
+                                paste(chroms,collapse = ";"),
+                                "peaks.bed",
+                                sep=".")
+        ) 
+    #### Call peaks from bigWig #### 
+    } else if(length(links$bigWig)>0){
+        messager("Computing peaks from bigWig file.",v=verbose)
+        #### Import bigWig subset #### 
+        if(!is.null(query_granges)){
+            ## Import the entire chromosome to accurately compute peaks.
+            gr <- import_bedgraph_chroms(URL = links$bigWig[1], 
+                                         chroms = chroms, 
+                                         build = build, 
+                                         import_format = "BigWig",
+                                         verbose = verbose) 
+        } else {
+            ## Import the entire genome.
+            gr <- rtracklayer::import.bw(con = links$bigWig[1])
+        }
+        #### Fix seqinfo ####
+        gr <- fix_seqinfo(gr = gr, 
+                          build = build, 
+                          verbose = verbose)
+        #### Liftover (if necessary) #### 
+        if(!is.null(query_granges_build)){
+            gr <- echotabix::liftover(dat = gr, 
+                                      query_genome = build,
+                                      target_genome = query_granges_build, 
+                                      as_granges = TRUE, 
+                                      style = "UCSC")
+        }  
+        #### Save lifted subset ####
+        messager("Writing (lifted) bigWig subset as bedGraph.",v=verbose)
+        tmp_lifted <- tempfile(fileext = paste(gsm,"lifted.bedgraph",sep="."))
         rtracklayer::export.bedGraph(object = gr,
                                      con = tmp_lifted)
         #### Call peaks ####

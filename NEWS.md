@@ -1,3 +1,9 @@
+# echoannot 0.99.5
+
+## Bug fixes 
+
+- Add `GEOquery` to Suggests. 
+
 # echoannot 0.99.4
 
 ## New features 

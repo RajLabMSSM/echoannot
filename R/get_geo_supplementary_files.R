@@ -4,18 +4,20 @@
 #' \code{regex_queries}.
 #' @param gsm GEO GSM id.
 #' @param regex_queries Named list of queries.
+#' Matches will be case-insensitive.
 #' @param verbose Print messages.
 #' @keywords internal
 #' @importFrom methods new
-#' @importFrom GEOquery getGEO
 get_geo_supplementary_files <- function(gsm,
-                                        regex_queries=list(
+                                        regex_queries = list(
                                             narrowPeaks="narrowpeak",
                                             broadPeaks="broadpeak",
                                             genericPeaks="peak",
-                                            bedGraph="bedgraph|graph.gz|bdg.gz"
+                                            bedGraph="bedgraph|graph.gz|bdg.gz",
+                                            bigWig="bigwig|bw$"
                                             ),
                                         verbose=TRUE){
+    requireNamespace("GEOquery")
     #### Get metadata ####
     g <- GEOquery::getGEO(GEO = gsm) 
     #### Determine file types ####

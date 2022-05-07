@@ -12,7 +12,7 @@ import_peaks_geo(
   cutoff = NULL,
   peaks_dir = tempdir(),
   regex_queries = list(narrowPeaks = "narrowpeak", broadPeaks = "broadpeak",
-    genericPeaks = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz"),
+    genericPeaks = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz", bigWig = "bigwig|bw$"),
   verbose = TRUE
 )
 }
@@ -35,6 +35,9 @@ through a \code{cutoff_analysis}.}
 (only used when calling peaks from bedGraph files).}
 
 \item{verbose}{Print messages.}
+}
+\value{
+Named list of peak files in \link[GenomicRanges]{GRanges} format.
 }
 \description{
 Import narrow/broad/generic peaks from GEO, or compute peaks with 

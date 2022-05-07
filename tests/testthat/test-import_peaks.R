@@ -1,10 +1,11 @@
 test_that("import_peaks works", {
     
     #### setup ####
-    ids <- "GSM2101439"
     query_granges <- GenomicRanges::GRanges("chr6:165169213-167169213")
     
+    
     #### genericPeaks: Without query_granges ####
+    ids <- "GSM2101439" 
     grl <- echoannot::import_peaks(ids = ids,
                                    builds = "hg19")
     testthat::expect_true(names(grl)==ids)
@@ -13,6 +14,7 @@ test_that("import_peaks works", {
     remove(grl)
     
     #### genericPeaks: With query_granges #### 
+    ids <- "GSM2101439" 
     grl <- echoannot::import_peaks(ids = ids,
                                    builds = "hg19",
                                    query_granges = query_granges, 
@@ -67,4 +69,18 @@ test_that("import_peaks works", {
     testthat::expect_true(methods::is(grl[[1]], "GRanges"))
     testthat::expect_length(grl[[1]], 15)
     remove(grl)
+    
+    
+    #### called peaks from bigWig: With query_granges #### 
+    ## broken until further notice:
+    ## https://github.com/lawremi/rtracklayer/issues/62
+    # ids <- "GSM5684359"
+    # grl <- echoannot::import_peaks(ids = ids,
+    #                                builds = "hg38",
+    #                                query_granges = query_granges, 
+    #                                query_granges_build = "hg38")
+    # testthat::expect_true(names(grl)==ids)
+    # testthat::expect_true(methods::is(grl[[1]], "GRanges"))
+    # testthat::expect_length(grl[[1]], 15)
+    # remove(grl)
 })

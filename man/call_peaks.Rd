@@ -7,19 +7,43 @@
 call_peaks(
   bedgraph_path,
   cutoff = NULL,
+  minlen = 200L,
+  maxgap = 30L,
+  call_summits = TRUE,
+  trackline = TRUE,
+  log = TRUE,
   outdir = tempdir(),
-  outputfile = "bdg_peakcall.bed",
+  outputfile = "MACSr.peaks.bed",
   return_path = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
-\item{bedgraph_path}{Path to bedGraph file.}
+\item{bedgraph_path}{Path to bedGraph file. 
+Can instead provide a bigWig file, 
+but this will first be converted to bedGraph format, 
+which can take some time if trying to convert data from across the entire
+genome.}
 
 \item{cutoff}{Cutoff depends on which method you used for score track.
 If the file contains pvalue scores from MACS3, score 5 means pvalue 1e-5.
 If \code{NULL}, a reasonable \code{cutoff} value will be inferred 
 through a \code{cutoff_analysis}.}
+
+\item{minlen}{minimum length of peak, better to set it as d
+value. DEFAULT: 200", default = 200.}
+
+\item{maxgap}{maximum gap between significant points in a peak,
+better to set it as tag size. DEFAULT: 30", default = 30.}
+
+\item{call_summits}{If set, MACS will use a more sophisticated
+approach to find all summits in each enriched peak region
+DEFAULT: False",default=False.}
+
+\item{trackline}{Tells MACS not to include trackline with bedGraph
+files. The trackline is required by UCSC.}
+
+\item{log}{Whether to capture logs.}
 
 \item{outdir}{Directory to store \code{cutoff_analysis} 
 report and peak file in.}
@@ -32,10 +56,21 @@ or the peak data itself as a \link[GenomicRanges]{GRanges} object.}
 \item{verbose}{Print messages.}
 }
 \description{
-Call peaks from a bedGraph file using \link[MACSr]{bdgpeakcall}, 
+Call peaks from a bedGraph or bigWig file using \link[MACSr]{bdgpeakcall}, 
 which is a wrapper for the \emph{MACS3} command line tool.
 Can automatically infer a reasonable \code{cutoff} threshold as well.
 }
 \examples{
+#### Get bedGraph subset ####
+## Normally, you'd call peaks on the entire chromosome, 
+## or even the whole genome. But for demo purposes we'll just use one locus.
+gsm <- "GSM4703766" 
+links <- echoannot:::get_geo_supplementary_files(gsm = gsm) 
+query_granges <- GenomicRanges::GRanges("chr6:165169213-167169213")
+gr <- rtracklayer::import(con = links$bedGraph, which = query_granges)
+tmp <- tempfile(fileext = ".bedgraph")
+rtracklayer::export.bedGraph(object = gr, con = tmp)
 
+#### Call peaks #### 
+peaks <- echoannot::call_peaks(bedgraph_path = tmp)
 }
