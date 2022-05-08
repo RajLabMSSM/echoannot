@@ -26,7 +26,7 @@ add_regulatory_rects <- function(NOTT.interact_trk,
                 data = regions,
                 stat = "identity",
                 rect.height = rect_height,
-                ggplot2::aes(y = y, fill = Element),
+                ggplot2::aes_string(y = "y", fill = "Element"),
                 alpha = .7, inherit.aes = FALSE,
                 color = "transparent",
                 hjust = 0

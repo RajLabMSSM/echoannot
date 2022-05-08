@@ -26,7 +26,7 @@ ROADMAP_track_plot(
   geom = "density",
   adjust = 0.2,
   show_plot = TRUE,
-  as.ggplot = TRUE,
+  as_ggplot = TRUE,
   verbose = TRUE
 )
 }

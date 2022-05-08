@@ -15,11 +15,10 @@ NOTT2019_epigenomic_histograms(
   show_plot = TRUE,
   save_plot = FALSE,
   full_data = TRUE,
-  bigwig_dir = NULL,
   return_assay_track = FALSE,
   binwidth = 200,
   density_adjust = 0.2,
-  plot.zoom = "1x",
+  zoom = "1x",
   strip.text.y.angle = 90,
   xtext = TRUE,
   geom = "density",
@@ -45,12 +44,63 @@ least the following two columns:
 \item{"data_link"}{URL to UCSC genome browser bigwig file.}
 }}
 
+\item{locus_dir}{Locus-specific directory.}
+
+\item{show_plot}{Show plot.}
+
+\item{save_plot}{Whether to save the plot.}
+
 \item{full_data}{Whether to download the full data 
 (genomic ranges of all sequence reads) as opposed
 to a reduced representation of the data as a single vector 
 (i.e. the aggregated reads "score"). 
 Setting \code{full_data=TRUE} is necessary for creating
  histograms and density plots.}
+
+\item{return_assay_track}{Return only the assay track 
+(before adding the rest of the tracks and showing the plot).}
+
+\item{binwidth}{
+    width of the bins.
+  }
+
+\item{density_adjust}{Passed to \code{adjust} argument in 
+\link[ggplot2]{geom_density}.}
+
+\item{zoom}{Zoom into the center of the locus when plotting
+(without editing the fine-mapping results file).
+You can provide either:
+\itemize{
+\item{The size of your plot window in terms of basepairs
+(e.g. \code{zoom=50000} for a 50kb window)}.
+\item{How much you want to zoom in (e.g. \code{zoom="1x"}
+for the full locus, \code{zoom="2x"}
+for 2x zoom into the center of the locus, etc.)}.
+}
+You can pass a list of window sizes (e.g. \code{c(50000,100000,500000)})
+to automatically generate
+multiple views of each locus.
+This can even be a mix of different style inputs: e.g.
+ \code{c("1x","4.5x",25000)}.}
+
+\item{strip.text.y.angle}{Angle of the y-axis facet labels.}
+
+\item{xtext}{Whether to include x-axis title and text.}
+
+\item{geom}{
+    Geom to use (Single character for now). Please see section Geometry
+    for details.
+  }
+
+\item{plot_formula}{Formula passed to \code{facets} argument in 
+\link[ggplot2]{facet_grid}.}
+
+\item{fill_var}{Variable name to use for plot \code{fill} argument.}
+
+\item{genomic_units}{Which genomic units to return window limits in.}
+
+\item{as_ggplot}{Return plot as \code{ggplot2} 
+(\code{TRUE}) or \code{Tracks} (\code{FALSE}) object.}
 
 \item{dpi}{dpi to use for raster graphics}
 
@@ -61,6 +111,8 @@ Setting \code{full_data=TRUE} is necessary for creating
   plotting window)}
 
 \item{nThread}{Number of threads to parallelise downloads across.}
+
+\item{save_annot}{Save the queried subset of bigwig annotations.}
 
 \item{verbose}{Print messages.}
 }

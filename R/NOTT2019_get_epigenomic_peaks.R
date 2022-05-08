@@ -4,7 +4,7 @@
 #' from Nott et al. (2019).
 #' 
 #' @param assays Which epigenomic assays to import data from.
-#' @param cell_type Which cell-type to import data from.
+#' @param cell_types Which cell-types to import data from.
 #' @param convert_to_granges Whether to convert the peaks to a 
 #' \link[GenomicRanges]{GRanges} object.
 #' 

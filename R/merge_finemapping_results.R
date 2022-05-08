@@ -14,25 +14,26 @@
 #'  of fine-mapping tools that contained the SNP in their Credible Set.
 #' @param include_leadSNPs Include lead GWAS/QTL SNPs per locus
 #'  (regardless of other filtering criterion).
-#' @param xlsx_path Save merged data.frame as excel file.
 #' @param from_storage Search for stored results files.
 #' @param haploreg_annotation Annotate SNPs with HaploReg
 #'  (using \code{HaploR}).
 #' @param regulomeDB_annotation Annotate SNPs with regulomeDB
 #' (using \code{HaploR}).
 #' @param biomart_annotation Annotate SNPs with \code{biomart}.
-#' @param PP_threshold Mean posterior probability threshold to
-#'  include SNPs in mean PP Credible Set
-#'  (averaged across all fine-mapping tools).
-#' @param consensus_thresh The minimum number of tools that have the SNPs
-#' in their Credible Set
-#' to classify it as a \strong{Consensus_SNP}.
 #' @param exclude_methods Exclude certain fine-mapping methods when estimating
 #' \strong{mean.CS} and \strong{Consensus_SNP}.
+#' @param save_path Path to save merged table to.
+#' @param top_CS_only Only include the top 1 CS per fine-mapping method.
+#' @param nThread Number of threads to parallelise across.
 #' @param verbose Print messages.
+#' @inheritParams echoLD::get_LD
+#' @inheritParams echodata::find_consensus_snps
 #'
 #' @export
-#' @importFrom dplyr %>%
+#' @importFrom dplyr %>% rename
+#' @importFrom echodata find_consensus_snps update_cols assign_lead_snp
+#' @importFrom data.table merge.data.table data.table rbindlist
+#' @importFrom parallel mclapply
 merge_finemapping_results <- function(dataset = file.path(
                                           tempdir(),
                                           "Data/GWAS"
@@ -47,8 +48,8 @@ merge_finemapping_results <- function(dataset = file.path(
                                       haploreg_annotation = FALSE,
                                       regulomeDB_annotation = FALSE,
                                       biomart_annotation = FALSE,
-                                      PP_threshold = .95,
-                                      consensus_threshold = 2,
+                                      credset_thresh = .95,
+                                      consensus_thresh = 2,
                                       exclude_methods = NULL,
                                       top_CS_only = FALSE,
                                       verbose = TRUE,
@@ -129,8 +130,8 @@ merge_finemapping_results <- function(dataset = file.path(
     #### Add/Update Support/Consensus cols ####
     merged_results <- echodata::find_consensus_snps(
         dat = finemap_results,
-        credset_thresh = PP_threshold,
-        consensus_thresh = consensus_threshold,
+        credset_thresh = credset_thresh,
+        consensus_thresh = consensus_thresh,
         exclude_methods = exclude_methods,
         verbose = verbose
     )

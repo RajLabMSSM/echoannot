@@ -1,8 +1,15 @@
 #' Plot any missense variants
 #' 
 #' Plot any missense variants in fine-mapped data.
+#' @param label_yaxis Whether to label the y-axis.
+#' @param x_label x-axis title.
+#' @param show_numbers Whether to plot the numeric values or not.
+#' @inheritParams super_summary_plot
+#' @inheritParams ggplot2::geom_tile
+#' 
 #' @family annotate
 #' @export
+#' @importFrom echodata get_CS_counts
 #' @examples
 #' \dontrun{
 #' merged_DT <- echodata::get_Nalls2019_merged()
@@ -25,7 +32,7 @@ plot_missense <- function(merged_DT,
     
     requireNamespace("ggplot2")
     . <- SNP <- Missense <- Locus <- dummy <- NULL;
-    locus_order <- get_CS_counts(merged_DT = merged_DT)
+    locus_order <- echodata::get_CS_counts(merged_DT = merged_DT)
     annotated_DT <- annotate_missense(
         merged_DT = merged_DT,
         snp_filter = snp_filter

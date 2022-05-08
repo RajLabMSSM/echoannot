@@ -42,6 +42,8 @@ character vectors defining arbitrary tag sequences. If any element in the
 list is a scalar and one of \code{'a'}, \code{'A'}, \code{'1'}, \verb{'i}, or \code{'I'}, this level
 will be expanded to the expected sequence.}
 
+\item{params_list}{A list of parameters to pass to \link[ggbio]{tracks}.}
+
 \item{verbose}{Print messages.}
 }
 \description{

@@ -11,3 +11,6 @@
 
 Dockerfile
 ^LICENSE\.md$
+
+.*\.tbi$
+vignettes/*\.tbi$

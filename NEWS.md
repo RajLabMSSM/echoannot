@@ -1,8 +1,21 @@
 # echoannot 0.99.5
 
+## New features 
+
+* Moved `get_CS_counts`/`get_CS_bins` to `echodata`.   
+* Cache remote data resources in `echoannot`-specific folder. 
+* Remove XGR GitHub installation in favor of CRAN (working now). 
+* Pass all CRAN checks. 
+
 ## Bug fixes 
 
-- Add `GEOquery` and `regioneR` to Suggests.
+* Added `R.utils`/`tools` to *Imports*.  
+* Added `GEOquery`/`regioneR`/
+`BSgenome.Hsapiens.UCSC.hg38`/`BSgenome.Hsapiens.UCSC.hg19` to *Suggests*.  
+* Updated GHA workflow to account for git security changes. 
+* Fixed `convert_plots` when converting `Tracks` to list of ggplots.
+* Fixed `merge_celltype_specific_epigenomics`
+    - Added caching mechanism. 
 
 # echoannot 0.99.4
 

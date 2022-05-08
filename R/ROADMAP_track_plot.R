@@ -31,7 +31,7 @@ ROADMAP_track_plot <- function(grl.roadmap.filt,
                                geom = "density",
                                adjust = .2,
                                show_plot = TRUE,
-                               as.ggplot = TRUE,
+                               as_ggplot = TRUE,
                                verbose = TRUE) {
     
     ChromState <- NULL;
@@ -62,7 +62,7 @@ ROADMAP_track_plot <- function(grl.roadmap.filt,
     if (show_plot) {
         print(track.roadmap)
     }
-    if (as.ggplot) {
+    if (as_ggplot) {
         return(track.roadmap@ggplot)
     } else {
         return(track.roadmap)

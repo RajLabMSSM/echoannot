@@ -11,9 +11,24 @@
 #' (arches) such that interactions with anchors containing Consensus SNPs 
 #' will be colored darker (Default: \code{TRUE}).
 #' If \code{FALSE}, will instead apply the same opacity level
-#'  to all interactions.
-#'  @param genomic_units The genomic units that should be used for the x-axis.
+#'  to all interactions. 
+#' @param print_plot Print plot.
+#' @param return_interaction_track Return only the interaction track 
+#' (before completing the plot and showing it). 
+#' @param zoom_window Zoom window.
+#' @param index_SNP Index/lead SNP RSID.
+#' @param color_dict Named list of colors for each regulatory element. 
+#' @param show_regulatory_rects Show enhancers/promoters as rectangles. 
+#' @param show_anchors Show PLAC-seq anchors. 
+#' @param point_size Point size of each SNP in the GWAS/fine-mapping plots.
+#' @param strip.text.y.angle Angle of the y-axis facet labels. 
+#' @inheritParams NOTT2019_epigenomic_histograms
 #' @inheritParams convert_plots
+#' @inheritParams ggbio::ggsave
+#' @inheritParams ggplot2::theme
+#' @inheritParams ggbio::autoplot
+#' @inheritParams import_ucsc_bigwigs
+#' @inheritParams get_window_limits
 #' 
 #' @export
 #' @importFrom IRanges IRanges
@@ -21,6 +36,7 @@
 #' @importFrom dplyr %>% top_n
 #' @importFrom GenomicRanges seqnames start end GRanges findOverlaps
 #' @importFrom S4Vectors subjectHits
+#' @importFrom methods show
 #' @examples
 #' trks_plus_lines <- echoannot::NOTT2019_plac_seq_plot(dat = echodata::BST1) 
 NOTT2019_plac_seq_plot <- function(dat = NULL,
@@ -37,9 +53,7 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
                                        "enhancers" = "springgreen2",
                                        "promoters" = "purple",
                                        "anchors" = "black"
-                                   ),
-                                   return_consensus_overlap = TRUE,
-                                   show_arches = TRUE,
+                                   ), 
                                    highlight_plac = TRUE,
                                    show_regulatory_rects = TRUE,
                                    show_anchors = TRUE,
@@ -96,8 +110,8 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
     ##### Get zoom window x_limits ####
     if (!is.null(zoom_window)) {
         x_limits <- get_zoom_xlims(lead.pos = lead.pos,
-                                zoom_window = zoom_window,
-                                verbose = verbose)
+                                   zoom_window = zoom_window,
+                                   verbose = verbose)
     }
     #### Get promoter interactome data ####
     annot_sub <- NOTT2019_get_promoter_interactome_data(dat = dat)
@@ -115,7 +129,7 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
     #### get promoter/enhancers ####
     regions <- NOTT2019_get_regulatory_regions(
         nThread = nThread,
-        as.granges = TRUE,
+        as_granges = TRUE,
         verbose = verbose
     )
     #### regions needs to be in dat range #### 
@@ -132,7 +146,7 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
     if (show_anchors) {
         interact.anchors <- NOTT2019_get_interactions(
             dat = dat,
-            as.granges = TRUE,
+            as_granges = TRUE,
             verbose = verbose
         )
         GenomicRanges::mcols(interact.anchors)["Element"] <- "anchors"
@@ -192,7 +206,9 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
     if (return_interaction_track) {
         #### Print ####
         if (print_plot){
-            suppressMessages(suppressWarnings(print(NOTT.interact_trk))) 
+            suppressMessages(suppressWarnings(
+                methods::show(NOTT.interact_trk)
+            )) 
         }
         #### Return ####
         early_return <- convert_plots(

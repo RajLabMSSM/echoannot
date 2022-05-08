@@ -46,7 +46,7 @@ coloc_nominated_egenes <- function(coloc_results,
                                    x_lab = NULL,
                                    fill_var = "PP.H4",
                                    text_size = 2,
-                                   PP_threshold = NULL,
+                                   credset_thresh = NULL,
                                    nThread = 1,
                                    show_plot = TRUE,
                                    verbose = TRUE) {
@@ -67,7 +67,7 @@ coloc_nominated_egenes <- function(coloc_results,
     # if('gene' %in%)
 
     top_eGenes <- dat %>%
-        subset(PP.H4 > if (is.null(PP_threshold)) 0 else PP_threshold) %>%
+        subset(PP.H4 > if (is.null(credset_thresh)) 0 else credset_thresh) %>%
         # Remove RP11 and other spurious RP genes
         subset(!(startsWith(eGene, "RP") | eGene == "NA" | is.na(eGene))) %>%
         dplyr::group_by(Locus.GWAS) %>%

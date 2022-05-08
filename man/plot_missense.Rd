@@ -14,6 +14,26 @@ plot_missense(
   show_plot = TRUE
 )
 }
+\arguments{
+\item{merged_DT}{Merged fine-mapping results data from
+\link[echolocatoR]{finemap_loci}.}
+
+\item{snp_filter}{Filter to use apply to SNPs before plotting.}
+
+\item{label_yaxis}{Whether to label the y-axis.}
+
+\item{x_label}{x-axis title.}
+
+\item{show.legend}{logical. Should this layer be included in the legends?
+\code{NA}, the default, includes if any aesthetics are mapped.
+\code{FALSE} never includes, and \code{TRUE} always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.}
+
+\item{show_numbers}{Whether to plot the numeric values or not.}
+
+\item{show_plot}{Show plot.}
+}
 \description{
 Plot any missense variants in fine-mapped data.
 }

@@ -2,11 +2,16 @@
 % Please edit documentation in R/get_data.R
 \name{get_data}
 \alias{get_data}
-\title{get data via \pkg{piggyback}}
+\title{Get data}
 \usage{
-get_data(fname, repo = "RajLabMSSM/echoannot", overwrite = FALSE)
+get_data(
+  fname,
+  repo = "RajLabMSSM/echoannot",
+  save_dir = tools::R_user_dir("echoannot", which = "cache"),
+  overwrite = FALSE
+)
 }
 \description{
-get data via \pkg{piggyback}
+Download remote resources stored on GitHub Releases via \pkg{piggyback}.
 }
 \keyword{internal}

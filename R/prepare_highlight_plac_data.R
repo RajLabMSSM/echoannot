@@ -1,6 +1,7 @@
 prepare_highlight_plac_data <- function(dat,
                                         interact.DT,
                                         verbose = TRUE){
+    Consensus_SNP <- NULL;
     
     messager("Preparing data for highlighting PLAC-seq interactions.",
              v=verbose)

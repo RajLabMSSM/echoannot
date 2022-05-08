@@ -6,16 +6,19 @@
 #' @param ylabel y-axis label.
 #' @param label_yaxis Whether or not to label the y-axis.
 #' @param legend_nrow Number of rows for the legend to span over.
-#' @param top_CS_only Only include the top 1 CS per fine-mapping method.
 #' @inheritParams CS_bin_plot
+#' @inheritParams merge_finemapping_results
+#' 
 #' @family summarise
+#' @export
+#' @importFrom dplyr %>% mutate arrange
+#' @importFrom data.table melt.data.table data.table
+#' @importFrom echodata get_CS_counts
+#' 
 #' @examples
 #' dat <- echodata::BST1
 #' dat$Locus <- "BST1"
 #' gg_CS <- echoannot::CS_counts_plot(merged_DT = dat)
-#' @export
-#' @importFrom dplyr %>% mutate arrange
-#' @importFrom data.table melt.data.table data.table
 CS_counts_plot <- function(merged_DT,
                            show_numbers = TRUE,
                            ylabel = "Locus",
@@ -27,7 +30,7 @@ CS_counts_plot <- function(merged_DT,
     requireNamespace("ggplot2")
     Locus <- UCS.CS_size <- Method <- `Credible Set size` <-
         CS <- Locus_UCS <- NULL
-    locus_order <- get_CS_counts(merged_DT,
+    locus_order <- echodata::get_CS_counts(merged_DT,
         top_CS_only = top_CS_only
     )
     melt.dat <-

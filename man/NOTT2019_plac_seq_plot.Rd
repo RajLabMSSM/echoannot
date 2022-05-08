@@ -20,8 +20,6 @@ NOTT2019_plac_seq_plot(
   index_SNP = NULL,
   genomic_units = "POS",
   color_dict = c(enhancers = "springgreen2", promoters = "purple", anchors = "black"),
-  return_consensus_overlap = TRUE,
-  show_arches = TRUE,
   highlight_plac = TRUE,
   show_regulatory_rects = TRUE,
   show_anchors = TRUE,
@@ -38,15 +36,56 @@ NOTT2019_plac_seq_plot(
 )
 }
 \arguments{
+\item{dat}{Fine-mapping results data from \link[echolocatoR]{finemap_loci}.}
+
+\item{locus_dir}{Locus-specific directory.}
+
+\item{title}{all title elements: plot, axes, legends (\code{\link[ggplot2:element]{element_text()}};
+inherits from \code{text})}
+
+\item{print_plot}{Print plot.}
+
+\item{save_plot}{Whether to save the plot.}
+
+\item{return_interaction_track}{Return only the interaction track 
+(before completing the plot and showing it).}
+
 \item{x_limits}{x-axis limits to be applied to all plots
 (useful when trying to keep a common coordinate system).}
+
+\item{zoom_window}{Zoom window.}
+
+\item{index_SNP}{Index/lead SNP RSID.}
+
+\item{genomic_units}{Which genomic units to return window limits in.}
+
+\item{color_dict}{Named list of colors for each regulatory element.}
 
 \item{highlight_plac}{Whether to scale opacity of PLAC-seq interactions 
 (arches) such that interactions with anchors containing Consensus SNPs 
 will be colored darker (Default: \code{TRUE}).
 If \code{FALSE}, will instead apply the same opacity level
- to all interactions.
- @param genomic_units The genomic units that should be used for the x-axis.}
+ to all interactions.}
+
+\item{show_regulatory_rects}{Show enhancers/promoters as rectangles.}
+
+\item{show_anchors}{Show PLAC-seq anchors.}
+
+\item{strip.text.y.angle}{Angle of the y-axis facet labels.}
+
+\item{xtext}{Whether to include x-axis title and text.}
+
+\item{save_annot}{Save the queried subset of bigwig annotations.}
+
+\item{point_size}{Point size of each SNP in the GWAS/fine-mapping plots.}
+
+\item{height}{height (defaults to the height of current
+  plotting window)}
+
+\item{width}{width (defaults to the width of current
+  plotting window)}
+
+\item{dpi}{dpi to use for raster graphics}
 
 \item{return_as}{Plot class to convert \code{plot_list} to:
 \itemize{
@@ -56,6 +95,8 @@ If \code{FALSE}, will instead apply the same opacity level
 \item{"Tracks"}{\link[ggbio]{tracks}}
 \item{NULL}{Return original object.}
 }}
+
+\item{nThread}{Number of threads to parallelise downloads across.}
 
 \item{verbose}{Print messages.}
 }

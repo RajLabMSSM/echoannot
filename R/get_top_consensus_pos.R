@@ -1,5 +1,14 @@
+#' Get top consensus position
+#' 
+#' Get the genomic position of the top fine-mapped Consensus SNP.
+#' @param dat Data
+#' @param xvar Genomic position column name.
+#' @keywords internal
+#' @importFrom dplyr %>% top_n
 get_top_consensus_pos <- function(dat,
                                   xvar){ 
+    mean.PP <- Effect <- Consensus_SNP <- Support <- NULL;
+    
     consensus.pos <- get_consensus_pos(dat = dat, 
                                        xvar = xvar)
     if (length(consensus.pos) > 0) {

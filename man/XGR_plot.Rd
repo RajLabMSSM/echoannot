@@ -27,6 +27,17 @@ XGR_plot(
 \item{POS}{position}
 }}
 
+\item{lib_name}{Which XGR annotations to check overlap with.
+For full list of libraries see
+\href{http://XGR_r-forge.r-project.org/#annotations-at-the-genomic-region-level}{
+ here.}
+ Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.}
+
+\item{locus_dir}{Locus-specific directory.}
+
+\item{palette}{Palette name to be passed to \code{name} argument in 
+\link[RColorBrewer]{brewer.pal}.}
+
 \item{fill_var}{Fill variable.}
 
 \item{facet_var}{Row facet variable.}
@@ -41,6 +52,11 @@ XGR_plot(
 even if the file already exists locally (Default: \code{FALSE}).}
 
 \item{show_plot}{Print the plot.}
+
+\item{nThread}{Number of threads 
+to parallelise downloading annotations over.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 List with the "data" and the "plot".

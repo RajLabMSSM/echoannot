@@ -33,6 +33,8 @@ Imports:
     dplyr,
     data.table,
     utils,
+    R.utils,
+    tools,
     methods,
     stats, 
     tidyr,
@@ -66,12 +68,13 @@ Suggests:
     MACSr,
     TxDb.Hsapiens.UCSC.hg19.knownGene,
     TxDb.Hsapiens.UCSC.hg38.knownGene,
+    BSgenome.Hsapiens.UCSC.hg19,
+    BSgenome.Hsapiens.UCSC.hg38,
     GEOquery,
     regioneR
 Remotes:
     github::RajLabMSSM/echodata,
-    github::RajLabMSSM/echotabix,
-    github::hfang-bristol/XGR
+    github::RajLabMSSM/echotabix
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 License: GPL-3

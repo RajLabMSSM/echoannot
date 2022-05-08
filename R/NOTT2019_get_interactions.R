@@ -8,7 +8,7 @@
 #' \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
 #' \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
 NOTT2019_get_interactions <- function(dat,
-                                      as.granges = FALSE,
+                                      as_granges = FALSE,
                                       verbose = TRUE) {
     Name <- NULL;
     messager("++ NOTT2019:: Getting interaction anchors data.",v=verbose)
@@ -71,7 +71,7 @@ NOTT2019_get_interactions <- function(dat,
     )
     interactomes.anchor$Cell_type <- cell_dict[interactomes.anchor$Cell_type]
 
-    if (as.granges) {
+    if (as_granges) {
         interactomes.anchor <- echodata::dt_to_granges(
             dat = interactomes.anchor %>% dplyr::select(-seqnames),
             chrom_col = "CHR",

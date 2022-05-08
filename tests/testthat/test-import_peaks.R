@@ -3,7 +3,7 @@ test_that("import_peaks works", {
     #### setup ####
     query_granges <- GenomicRanges::GRanges("chr6:165169213-167169213")
     
-    
+
     #### genericPeaks: Without query_granges ####
     ids <- "GSM2101439" 
     grl <- echoannot::import_peaks(ids = ids,

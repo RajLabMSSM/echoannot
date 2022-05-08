@@ -18,7 +18,7 @@ create_finemap_track <- function(dat,
     
     if(genomic_units=="Mb"){
         gg <- ggbio_to_mb(gg = gg, 
-                          v=verbose)
+                          verbose = verbose)
     }
     return(gg)
 }

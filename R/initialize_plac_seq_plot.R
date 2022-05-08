@@ -14,11 +14,11 @@ initialize_plac_seq_plot <- function(interact.DT,
             ggbio::ggbio() +
             ggbio::geom_arch(
                 data = interact.DT,
-                ggplot2::aes(
-                    x = Start,
+                ggplot2::aes_string(
+                    x = "Start",
                     y = interact_y,
-                    xend = End,
-                    alpha = consensus_snp_overlap
+                    xend = "End",
+                    alpha = "consensus_snp_overlap"
                 ),
                 max.height = max.height, colour = "black"
             ) + 
@@ -33,9 +33,9 @@ initialize_plac_seq_plot <- function(interact.DT,
             ggbio::geom_arch(
                 data = interact.DT, alpha = 0.25, color = "black",
                 max.height = max.height,
-                ggplot2::aes(x = Start,
-                             y = interact_y,
-                             xend = End)
+                ggplot2::aes_string(x = "Start",
+                                    y = interact_y,
+                                    xend = "End")
             ) +
             ggplot2::labs(y = NULL)
     }

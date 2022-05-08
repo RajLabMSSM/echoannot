@@ -2,7 +2,7 @@ NOTT2019_prepare_regulatory_overlap <- function(merged_DT,
                                                 snp_filter = "!is.na(SNP)",
                                                 return_counts = TRUE) {
     Element <- NULL;
-    gr.reg <- NOTT2019_get_regulatory_regions(as.granges = TRUE)
+    gr.reg <- NOTT2019_get_regulatory_regions(as_granges = TRUE)
     finemap_sub <- subset(merged_DT, eval(parse(text = snp_filter)), 
                           .drop = FALSE)
     gr.hits.reg <- granges_overlap(

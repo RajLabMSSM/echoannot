@@ -14,8 +14,8 @@ merge_finemapping_results(
   haploreg_annotation = FALSE,
   regulomeDB_annotation = FALSE,
   biomart_annotation = FALSE,
-  PP_threshold = 0.95,
-  consensus_threshold = 2,
+  credset_thresh = 0.95,
+  consensus_thresh = 2,
   exclude_methods = NULL,
   top_CS_only = FALSE,
   verbose = TRUE,
@@ -37,6 +37,18 @@ of fine-mapping tools that contained the SNP in their Credible Set.}
 \item{include_leadSNPs}{Include lead GWAS/QTL SNPs per locus
 (regardless of other filtering criterion).}
 
+\item{LD_reference}{LD reference to use:
+\itemize{
+\item{"1KGphase1" : }{1000 Genomes Project Phase 1}
+\item{"1KGphase3" : }{1000 Genomes Project Phase 3}
+\item{"UKB" : }{Pre-computed LD from a British
+European-decent subset of UK Biobank.}
+\item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
+to compute LD matrix from.}
+}}
+
+\item{save_path}{Path to save merged table to.}
+
 \item{from_storage}{Search for stored results files.}
 
 \item{haploreg_annotation}{Annotate SNPs with HaploReg
@@ -47,20 +59,22 @@ of fine-mapping tools that contained the SNP in their Credible Set.}
 
 \item{biomart_annotation}{Annotate SNPs with \code{biomart}.}
 
-\item{PP_threshold}{Mean posterior probability threshold to
-include SNPs in mean PP Credible Set
-(averaged across all fine-mapping tools).}
+\item{credset_thresh}{The minimum mean Posterior Probability
+(across all fine-mapping methods used) of SNPs to be included in 
+the "mean.CS" column.}
+
+\item{consensus_thresh}{The minimum number of fine-mapping tools 
+in which a SNP is in the Credible Set in order to be included in the 
+"Consensus_SNP" column.}
 
 \item{exclude_methods}{Exclude certain fine-mapping methods when estimating
 \strong{mean.CS} and \strong{Consensus_SNP}.}
 
+\item{top_CS_only}{Only include the top 1 CS per fine-mapping method.}
+
 \item{verbose}{Print messages.}
 
-\item{xlsx_path}{Save merged data.frame as excel file.}
-
-\item{consensus_thresh}{The minimum number of tools that have the SNPs
-in their Credible Set
-to classify it as a \strong{Consensus_SNP}.}
+\item{nThread}{Number of threads to parallelise across.}
 }
 \description{
 Gather fine-mapping results from \pkg{echolocatoR} across all loci

@@ -12,7 +12,7 @@ coloc_nominated_egenes(
   x_lab = NULL,
   fill_var = "PP.H4",
   text_size = 2,
-  PP_threshold = NULL,
+  credset_thresh = NULL,
   nThread = 1,
   show_plot = TRUE,
   verbose = TRUE

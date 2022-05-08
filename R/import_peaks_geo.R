@@ -117,7 +117,7 @@ import_peaks_geo <- function(gsm,
             unlist() 
         #### Liftover (if necessary) #### 
         if(!is.null(query_granges_build)){
-            peaks <- echotabix::liftover(dat =  peaks, 
+            peaks <- echotabix::liftover(dat = peaks, 
                                          query_genome = build,
                                          target_genome = query_granges_build, 
                                          as_granges = TRUE, 

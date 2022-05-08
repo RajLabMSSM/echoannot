@@ -16,7 +16,8 @@ XGR_iterate_overlap(
 \item{lib.selections}{Which XGR annotations to check overlap with.
 For full list of libraries see
 \href{http://XGR_r-forge.r-project.org/#annotations-at-the-genomic-region-level}{
- here.}}
+ here.}
+ Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.}
 
 \item{dat}{Data.frame with at least the following columns:
 \describe{

@@ -18,6 +18,13 @@ import_bedgraph_chroms <- function(URL,
                                    save_path = NULL,
                                    verbose = TRUE){
     requireNamespace("regioneR")
+    if(tolower(build) %in% c("hg19","grch37")){
+        requireNamespace("BSgenome.Hsapiens.UCSC.hg19")     
+    }
+    if(tolower(build) %in% c("hg38","grch38")){
+        requireNamespace("BSgenome.Hsapiens.UCSC.hg38")     
+    }
+    
     # save_path <- file.path(
     #     tempdir(), 
     #     paste(
@@ -38,11 +45,13 @@ import_bedgraph_chroms <- function(URL,
     gr <- rtracklayer::import(con = URL, 
                               which = select_chrom,
                               format = import_format) 
-    # gr <- rtracklayer::import.bw(con = URL, 
-    #                           which = echodata::dt_to_granges(select_chrom, style = 'NCBI'))
+    # gr <- rtracklayer::import.bw(
+    #     con = URL,
+    #     which = echodata::dt_to_granges(select_chrom, style = 'NCBI'))
     # path <- file.path("~/Downloads",basename(URL))
     # download.file(URL, path)
-    # path <- R.utils::gunzip(path, destname = gsub(".bw$","2.bw",path), overwrite=TRUE)
+    # path <- R.utils::gunzip(path, destname = gsub(".bw$","2.bw",path),
+    #                         overwrite=TRUE)
     # path
    #### Save or return directly ####
     if(!is.null(save_path)) { 

@@ -15,7 +15,7 @@ XGR_plot_style <- function(xgr_track,
             ) +
             ggplot2::scale_fill_manual(
                 values = grDevices::colorRampPalette(
-                    RColorBrewer::brewer.pal(8, palette[1])
+                    RColorBrewer::brewer.pal(8, name = palette[1])
                 )(colourCount)
             ) +
             ggplot2::scale_y_continuous(n.breaks = 3) +

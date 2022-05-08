@@ -6,6 +6,7 @@
 #' For full list of libraries see
 #' \href{http://XGR_r-forge.r-project.org/#annotations-at-the-genomic-region-level}{
 #'  here.}
+#'  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.
 #' @param as_grangesList Return as a \code{GRangesList},
 #'  instead of a single merged \code{GRanges} object.
 #' @param dat Fine-mapping results.

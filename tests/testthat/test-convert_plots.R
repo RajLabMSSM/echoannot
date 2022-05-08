@@ -1,7 +1,8 @@
 test_that("convert_plots works", {
   
     #### Create example plot_list ####
-    gg <- ggplot2::ggplot(mtcars, ggplot2::aes(mpg, cyl)) + ggplot2::geom_point()
+    gg <- ggplot2::ggplot(mtcars, ggplot2::aes(mpg, cyl)) + 
+        ggplot2::geom_point()
     plot_list <- lapply(seq_len(3), function(x) gg)
 
     ##### As ggplot #####

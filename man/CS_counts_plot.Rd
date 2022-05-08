@@ -15,7 +15,8 @@ CS_counts_plot(
 )
 }
 \arguments{
-\item{merged_DT}{Merge query data.}
+\item{merged_DT}{Merged fine-mapping results data from
+\link[echolocatoR]{finemap_loci}.}
 
 \item{show_numbers}{Print numbers on top of bars.}
 
@@ -40,8 +41,6 @@ gg_CS <- echoannot::CS_counts_plot(merged_DT = dat)
 \seealso{
 Other summarise: 
 \code{\link{CS_bin_plot}()},
-\code{\link{get_CS_bins}()},
-\code{\link{get_CS_counts}()},
 \code{\link{get_SNPgroup_counts}()},
 \code{\link{peak_overlap_plot}()},
 \code{\link{plot_dataset_overlap}()},

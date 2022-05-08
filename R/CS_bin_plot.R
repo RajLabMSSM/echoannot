@@ -1,13 +1,15 @@
 #' Plot CS bin counts
 #' 
 #' Plot Credible Set bins counts for multiple fine-mapping method results.
-#' @param merged_DT Merge query data.
+#' @param merged_DT Merged fine-mapping results data from
+#'  \link[echolocatoR]{finemap_loci}.
 #' @param show_plot Show plot. 
 #'
 #' @family summarise
 #' @export
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom stats setNames
+#' @importFrom echodata get_CS_bins
 #' @examples
 #' dat <- echodata::BST1 
 #' dat$Locus <- "BST1"
@@ -17,7 +19,8 @@ CS_bin_plot <- function(merged_DT,
     
     requireNamespace("ggplot2")
     Method <- bin <- ..count.. <- NULL;
-    bin_counts <- get_CS_bins(merged_DT = merged_DT)
+    
+    bin_counts <- echodata::get_CS_bins(merged_DT = merged_DT)
     # Assign bin colors
     used_bins <- levels(bin_counts$bin)[levels(bin_counts$bin) %in%
         unique(bin_counts$bin)]

@@ -15,8 +15,17 @@
 #' \link[echoannot]{XGR_filter_assays}).
 #' @param force_new Download and prepare a new query
 #' even if the file already exists locally (Default: \code{FALSE}).
-#' 
-#'
+#' @param lib_name Which XGR annotations to check overlap with.
+#' For full list of libraries see
+#' \href{http://XGR_r-forge.r-project.org/#annotations-at-the-genomic-region-level}{
+#'  here.}
+#'  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.
+#' @param locus_dir Locus-specific directory. 
+#' @param palette Palette name to be passed to \code{name} argument in 
+#' \link[RColorBrewer]{brewer.pal}.
+#' @param nThread Number of threads 
+#' to parallelise downloading annotations over.
+#' @param verbose Print messages.
 #' @inheritParams XGR_plot_peaks
 #' @inheritParams XGR_prepare_foreground_background
 #' @return List with the "data" and the "plot".

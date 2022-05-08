@@ -21,6 +21,8 @@ NOTT2019_get_epigenomic_peaks(
 \arguments{
 \item{assays}{Which epigenomic assays to import data from.}
 
+\item{cell_types}{Which cell-types to import data from.}
+
 \item{convert_to_granges}{Whether to convert the peaks to a 
 \link[GenomicRanges]{GRanges} object.}
 
@@ -31,8 +33,6 @@ NOTT2019_get_epigenomic_peaks(
 \item{nThread}{Number of threads to parallelise downloads across.}
 
 \item{verbose}{Print messages.}
-
-\item{cell_type}{Which cell-type to import data from.}
 }
 \description{
 API access to brain cell type-specific epigenomic peaks (bed format)

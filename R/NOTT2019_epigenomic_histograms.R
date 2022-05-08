@@ -3,8 +3,27 @@
 #' Brain cell-specific epigenomic data from Nott et al. (2019).
 #' 
 #' @param dat Fine-mapping results data from \link[echolocatoR]{finemap_loci}.
+#' @param locus_dir Locus-specific directory.
+#' @param show_plot Show plot.
+#' @param save_plot Whether to save the plot. 
+#' @param return_assay_track Return only the assay track 
+#' (before adding the rest of the tracks and showing the plot).
+#' @param density_adjust Passed to \code{adjust} argument in 
+#' \link[ggplot2]{geom_density}.
+#' @param xtext Whether to include x-axis title and text. 
+#' @param plot_formula Formula passed to \code{facets} argument in 
+#' \link[ggplot2]{facet_grid}. 
+#' @param fill_var Variable name to use for plot \code{fill} argument.
+#' @param as_ggplot Return plot as \code{ggplot2} 
+#' (\code{TRUE}) or \code{Tracks} (\code{FALSE}) object. 
+#' @param save_annot Save the queried subset of bigwig annotations.
+#' @param strip.text.y.angle Angle of the y-axis facet labels. 
+#' 
 #' @inheritParams ggbio::ggsave
+#' @inheritParams ggplot2::theme
+#' @inheritParams ggbio::autoplot
 #' @inheritParams import_ucsc_bigwigs
+#' @inheritParams get_window_limits
 #' 
 #' @family NOTT2019
 #' @source
@@ -19,34 +38,34 @@
 #' nott2019_track <- echoannot::NOTT2019_epigenomic_histograms(
 #'     dat = echodata::BST1, 
 #'     bigwig_metadata = echoannot::NOTT2019_bigwig_metadata[1:2,])
-NOTT2019_epigenomic_histograms <- function(dat,
-                                           bigwig_metadata = echoannot::NOTT2019_bigwig_metadata,
-                                           locus_dir = tempdir(),
-                                           show_plot = TRUE,
-                                           save_plot = FALSE,
-                                           full_data = TRUE,
-                                           bigwig_dir = NULL,
-                                           return_assay_track = FALSE,
-                                           binwidth = 200,
-                                           density_adjust = .2,
-                                           plot.zoom = "1x",
-                                           strip.text.y.angle = 90,
-                                           xtext = TRUE,
-                                           geom = "density",
-                                           plot_formula = "Cell_type ~.",
-                                           fill_var = "Assay", 
-                                           genomic_units = "Mb",
-                                           as_ggplot = TRUE,
-                                           dpi = 300, 
-                                           height = 15, 
-                                           width = 8,
-                                           nThread = 1,
-                                           save_annot = FALSE,
-                                           verbose = TRUE) {  
+NOTT2019_epigenomic_histograms <- function(
+        dat,
+        bigwig_metadata = echoannot::NOTT2019_bigwig_metadata,
+        locus_dir = tempdir(),
+        show_plot = TRUE,
+        save_plot = FALSE,
+        full_data = TRUE,
+        return_assay_track = FALSE,
+        binwidth = 200,
+        density_adjust = .2,
+        zoom = "1x",
+        strip.text.y.angle = 90,
+        xtext = TRUE,
+        geom = "density",
+        plot_formula = "Cell_type ~.",
+        fill_var = "Assay", 
+        genomic_units = "Mb",
+        as_ggplot = TRUE,
+        dpi = 300, 
+        height = 15, 
+        width = 8,
+        nThread = 1,
+        save_annot = FALSE,
+        verbose = TRUE) {  
     # show_plot=T;save_plot=T;full_data=T;return_assay_track=F;
     # binwidth=2500; geom="histogram"; plot_formula="Cell_type ~.";
     # show_regulatory_rects=T;  bigwig_dir=NULL; verbose=T; nThread=1;
-    # plot.zoom=500000; fill_var="Assay";plot.zoom = "1x";
+    # zoom=500000; fill_var="Assay";zoom = "1x";
     # density_adjust=.2; strip.text.y.angle=0; dat <- echodata::BST1;
     # save_annot=T; locus_dir <- tempdir(); fill_var="Assay";
     # genomic_units="Mb"; save_path <- tempfile()
@@ -81,7 +100,7 @@ NOTT2019_epigenomic_histograms <- function(dat,
     #### Get min/max genomic coordinates ####
     xlims <- get_window_limits(
         dat = dat,
-        plot.zoom = plot.zoom,
+        zoom = zoom,
         genomic_units = "POS"
     )
     ##### Import data from UCSC ####
@@ -147,7 +166,7 @@ NOTT2019_epigenomic_histograms <- function(dat,
             rect.height = rect_height,
             ggplot2::aes_string(y = "y", fill = fill_var),
             alpha = .25,
-            hjust = 1,
+            # hjust = 1,
             color = "transparent"
         ) +
         ggplot2::facet_grid(facets = stats::formula(plot_formula)) +

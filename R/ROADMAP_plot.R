@@ -6,6 +6,12 @@
 #'
 #' @param n_top Number of top annotations to be plotted
 #' (passed to \link[echoannot]{ROADMAP_merge_and_process_grl}). 
+#' @param lib_name Name of the data library to use.
+#' @param locus_dir Locus-specific directory.
+#' @param roadmap_query Search all columns in the Roadmap annotations metadata
+#' and only query annotations that contain your keywords.
+#' Can provide multiple keywords in list form:
+#' \code{c("placenta","liver","monocytes")}
 #'
 #' @inheritParams XGR_plot
 #' @inheritParams ROADMAP_query

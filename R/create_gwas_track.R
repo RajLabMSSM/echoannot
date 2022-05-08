@@ -12,7 +12,7 @@ create_gwas_track <- function(dat,
         ggplot2::theme_classic()
     if(genomic_units=="Mb"){
         gg <- ggbio_to_mb(gg = gg, 
-                          v=verbose)
+                          verbose = verbose)
     }
     return(gg)
 }

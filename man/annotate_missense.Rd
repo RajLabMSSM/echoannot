@@ -6,15 +6,20 @@
 \usage{
 annotate_missense(merged_DT, snp_filter = "Support>0")
 }
+\arguments{
+\item{merged_DT}{Merged fine-mapping results data from
+\link[echolocatoR]{finemap_loci}.}
+
+\item{snp_filter}{Row-wise filter to apply to \code{merged_DT} filter 
+(provided as a string).}
+}
 \description{
-Annotate any missense variants
+Annotate any missense variants with \link[biomaRt]{getBM}.
 }
 \examples{
 \dontrun{
-annotated_DT <- annotate_missense(
-    merged_DT = echodata::get_Nalls2019_merged(),
-    snp_filter = "Support>0"
-)
+merged_DT <- echodata::get_Nalls2019_merged()
+annotated_DT <- annotate_missense(merged_DT = merged_DT)
 }
 }
 \seealso{

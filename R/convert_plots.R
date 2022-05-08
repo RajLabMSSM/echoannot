@@ -19,6 +19,7 @@
 #' }
 #' @param x_limits x-axis limits to be applied to all plots
 #'  (useful when trying to keep a common coordinate system).
+#' @param params_list A list of parameters to pass to \link[ggbio]{tracks}.
 #' @param verbose Print messages.
 #' @inheritParams patchwork::plot_annotation
 #' 
@@ -54,7 +55,12 @@ convert_plots <- function(plot_list,
                           verbose = TRUE){
     if(is.null(return_as)) return(plot_list)
     opts <- c("ggplot","ggbio","patchwork","Tracks") 
-    if(!is.list(plot_list)) plot_list <- list("plot"=plot_list) 
+    if(methods::is(plot_list,"Tracks")){
+        plot_list <- plot_list@plot
+    }
+    if(!is.list(plot_list)) {
+        plot_list <- list("plot"=plot_list) 
+    }
     #### Ensure plot_list has names ####
     if(is.null(names(plot_list))){
         messager("Automatically naming plot_list.",v=verbose)

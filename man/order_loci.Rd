@@ -16,7 +16,6 @@ order_loci(
 Order loci by UCS size, or alphabetically
 }
 \examples{
-data("merged_DT")
 \dontrun{
 merged_DT <- echodata::get_Nalls2019_merged()
 merged_DT <- order_loci(

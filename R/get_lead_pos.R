@@ -1,6 +1,8 @@
 get_lead_pos <- function(dat,
                          xvar,
                          index_SNP){
+    leadSNP <- SNP <- NULL;
+    
     if (is.null(index_SNP)) {
         lead.pos <- subset(dat, leadSNP==TRUE)[[xvar]]
     } else {

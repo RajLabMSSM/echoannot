@@ -25,6 +25,15 @@ ROADMAP_plot(
 \item{POS}{position}
 }}
 
+\item{roadmap_query}{Search all columns in the Roadmap annotations metadata
+and only query annotations that contain your keywords.
+Can provide multiple keywords in list form:
+\code{c("placenta","liver","monocytes")}}
+
+\item{lib_name}{Name of the data library to use.}
+
+\item{locus_dir}{Locus-specific directory.}
+
 \item{n_top}{Number of top annotations to be plotted
 (passed to \link[echoannot]{ROADMAP_merge_and_process_grl}).}
 
@@ -35,7 +44,10 @@ even if the file already exists locally (Default: \code{FALSE}).}
 
 \item{conda_env}{Conda environment to search for tabix in.}
 
-\item{nThread}{Number of threads to parallelise queries over.}
+\item{nThread}{Number of threads 
+to parallelise downloading annotations over.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 A named list containing:

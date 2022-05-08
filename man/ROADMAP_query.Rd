@@ -21,6 +21,11 @@ ROADMAP_query(
 \item{gr.snp}{\code{\link[GenomicRanges]{GRanges}} object of
 SNPs to query Roadmap with.}
 
+\item{keyword_query}{Search all columns in the Roadmap annotations metadata
+and only query annotations that contain your keywords.
+Can provide multiple keywords in list form:
+\code{c("placenta","liver","monocytes")}}
+
 \item{limit_files}{Limit the number of annotation files queried
 (for faster testing).}
 
@@ -29,6 +34,8 @@ SNPs to query Roadmap with.}
 \item{remove_tmps}{Remove temporary files (e.g. "*.tbi").}
 
 \item{nThread}{Number of threads to parallelise queries over.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Query Roadmap by genomic coordinates

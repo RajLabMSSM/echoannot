@@ -7,7 +7,9 @@
 #' @param conda_env Conda environment to search for tabix in.
 #' @param remove_tmps Remove temporary files (e.g. "*.tbi").
 #' @param nThread Number of threads to parallelise queries over.
-#' @inheritParams  ROADMAP_tabix
+#' @param verbose Print messages.
+#' @inheritParams ROADMAP_tabix
+#' @inheritParams ROADMAP_construct_reference
 #'
 #' @family ROADMAP
 #' @export

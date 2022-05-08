@@ -19,7 +19,17 @@ test_enrichment(
 
 \item{grlist2}{Second list of \link[GenomicRanges]{GRanges} objects.}
 
+\item{ntimes}{number of permutations}
+
+\item{genome}{The reference genome to use. A valid genome object. 
+Either a GenomicRanges or data.frame containing one region per whole 
+chromosome or a character uniquely identifying a genome in 
+BSgenome (e.g. "hg19", "mm10" but not "hg"). 
+Internally it uses getGenomeAndMask.}
+
 \item{alternative}{the alternative hypothesis must be one of \code{"greater"}, \code{"less"} or \code{"auto"}. If \code{"auto"}, the alternative will be decided depending on the data.}
+
+\item{verbose}{Print messages.}
 
 \item{...}{Additional arguments passed to \link[regioneR]{overlapPermTest}.}
 }

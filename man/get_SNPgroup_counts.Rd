@@ -2,23 +2,27 @@
 % Please edit documentation in R/get_SNPgroup_counts.R
 \name{get_SNPgroup_counts}
 \alias{get_SNPgroup_counts}
-\title{Tally locus-specific SNP group sizes}
+\title{Get SNP group counts}
 \usage{
 get_SNPgroup_counts(merged_DT, grouping_vars = "Locus")
 }
+\arguments{
+\item{merged_DT}{Merged fine-mapping results data from
+\link[echolocatoR]{finemap_loci}.}
+
+\item{grouping_vars}{Column names in \code{merged_DT} to group counts by.}
+}
 \description{
-Tally locus-specific SNP group sizes
+Tally locus-specific SNP group sizes.
 }
 \examples{
-data("merged_DT")
-snp_groups <- get_SNPgroup_counts(merged_DT = echodata::get_Nalls2019_merged())
+merged_DT <- echodata::get_Nalls2019_merged()
+snp_groups <- get_SNPgroup_counts(merged_DT = merged_DT)
 }
 \seealso{
 Other summarise: 
 \code{\link{CS_bin_plot}()},
 \code{\link{CS_counts_plot}()},
-\code{\link{get_CS_bins}()},
-\code{\link{get_CS_counts}()},
 \code{\link{peak_overlap_plot}()},
 \code{\link{plot_dataset_overlap}()},
 \code{\link{results_report}()},

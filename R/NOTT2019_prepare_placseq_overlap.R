@@ -23,7 +23,7 @@ NOTT2019_prepare_placseq_overlap <- function(merged_DT,
     } else {
         interactome <- NOTT2019_get_interactions(
             dat = dat,
-            as.granges = TRUE
+            as_granges = TRUE
         )
         return(interactome)
     }

@@ -1,5 +1,17 @@
+#' Add Mb
+#' 
+#' Add column containing genomic coordinate in units of megabasepairs ("Mb").
+#' @param dat Data.
+#' @param pos_col Genomic position column name.
+#' @keywords internal
+#' @importFrom echodata is_granges
+#' @importFrom GenomicRanges mcols
+#' @importFrom methods is
+#' @importFrom data.table :=
 add_mb <- function(dat,
                    pos_col = "POS"){
+    Mb <- NULL;
+    
     if (!"Mb" %in% colnames(dat)) {
         if(echodata::is_granges(dat)){
             GenomicRanges::mcols(dat)["Mb"] <- dat[pos_col] / 1000000

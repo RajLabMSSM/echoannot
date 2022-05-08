@@ -9,20 +9,37 @@ plot_dataset_overlap(
   snp_filter = "!is.na(SNP)",
   filename = NA,
   formula_str = "~ SNP + Dataset",
-  triangle = FALSE,
-  proxies = NULL
+  triangle = FALSE
 )
+}
+\arguments{
+\item{merged_DT}{Merged fine-mapping results data from
+\link[echolocatoR]{finemap_loci}.}
+
+\item{snp_filter}{Filter to use apply to SNPs before plotting.}
+
+\item{filename}{Path to save file to as PNG.}
+
+\item{formula_str}{Formula passed to \link[stats]{xtabs}.}
+
+\item{triangle}{Plot correlation matrix as a square or a triangle.}
 }
 \description{
 Cross-tabulate SNP overlap (after applying filter)
 between each pair of studies.
 }
+\examples{
+\dontrun{
+    merged_DT <- echodata::get_Nalls2019_merged()
+    merged_DT$Dataset <- rep(c("Dataset1","Dataset2"),nrow(merged_DT)/2)
+    snp_xprod <- plot_dataset_overlap(merged_DT = merged_DT)
+    
+}
+}
 \seealso{
 Other summarise: 
 \code{\link{CS_bin_plot}()},
 \code{\link{CS_counts_plot}()},
-\code{\link{get_CS_bins}()},
-\code{\link{get_CS_counts}()},
 \code{\link{get_SNPgroup_counts}()},
 \code{\link{peak_overlap_plot}()},
 \code{\link{results_report}()},

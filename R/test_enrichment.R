@@ -7,8 +7,15 @@
 #' 
 #' @param grlist1 First list of \link[GenomicRanges]{GRanges} objects.
 #' @param grlist2 Second list of \link[GenomicRanges]{GRanges} objects.
+#' @param genome The reference genome to use. A valid genome object. 
+#' Either a GenomicRanges or data.frame containing one region per whole 
+#' chromosome or a character uniquely identifying a genome in 
+#' BSgenome (e.g. "hg19", "mm10" but not "hg"). 
+#' Internally it uses getGenomeAndMask.
+#' @param verbose Print messages.
 #' @param ... Additional arguments passed to \link[regioneR]{overlapPermTest}.
 #' @inheritParams regioneR::overlapPermTest
+#' @inheritParams regioneR::permTest 
 #' 
 #' @export
 #' @importFrom dplyr %>%

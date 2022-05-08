@@ -2,20 +2,28 @@
 % Please edit documentation in R/NOTT2019_get_regulatory_regions.R
 \name{NOTT2019_get_regulatory_regions}
 \alias{NOTT2019_get_regulatory_regions}
-\title{Plot brain cell-specific epigenomic data}
+\title{Get regulatory regions: Nott2019}
 \source{
 \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
 \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
 }
 \usage{
 NOTT2019_get_regulatory_regions(
-  as.granges = FALSE,
+  as_granges = FALSE,
   nThread = 1,
   verbose = TRUE
 )
 }
+\arguments{
+\item{as_granges}{Return results a \link[GenomicRanges]{GRanges} object
+instead of a \link[data.table]{data.table}.}
+
+\item{nThread}{Number of threads to parallelize across.}
+
+\item{verbose}{Print messages.}
+}
 \description{
-Plot brain cell-specific epigenomic data
+Get epigenomic peak ranges from Nott2019.
 }
 \seealso{
 Other NOTT2019: 
@@ -32,4 +40,3 @@ Other NOTT2019:
 \code{\link{get_NOTT2019_superenhancer_interactome}()}
 }
 \concept{NOTT2019}
-\keyword{internal}

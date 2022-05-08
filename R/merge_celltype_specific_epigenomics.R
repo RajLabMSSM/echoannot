@@ -4,26 +4,45 @@
 #' (Nott 2019, Corces 2020) into a single \link[GenomicRanges]{GRanges} object.
 #' @param keep_extra_cols Keep extra columns
 #' that are not shared across all annotations.
-#'
-#' @examples
-#' gr.merged <- echoannot::merge_celltype_specific_epigenomics()
+#' @param save_path Path to save merged results to.
+#' @param force_new If cached merged results already exist, ignore them
+#' and recreate the file anyway. 
+#' @param verbose Print messages.
 #' @export
 #' @importFrom tidyr separate
 #' @importFrom dplyr %>% mutate select
 #' @importFrom data.table rbindlist data.table 
-merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
+#' @importFrom echotabix liftover
+#' @importFrom tools R_user_dir
+#' @examples
+#' gr.merged <- echoannot::merge_celltype_specific_epigenomics()
+merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE,
+                                                save_path = file.path(
+                                                    tools::R_user_dir(
+                                                        package = "echoannot",
+                                                        which = "cache"),
+                                    "merge_celltype_specific_epigenomics.rds"
+                                                ),
+                                    force_new = FALSE,
+                                    verbose = TRUE
+                                                ) {
     
     id <- Cell_type <- Peak_ID <- Study <- Assay <- NULL 
+    
+    if(file.exists(save_path) && isFALSE(force_new)){
+        messager("Importing pre-processed gr.merged",v=verbose)
+        gr.merged <- readRDS(save_path)
+        return(gr.merged)
+    } 
     #### NOTT 2019 ####
     ## Peaks
     gr.Nott2019.peaks <- NOTT2019_get_epigenomic_peaks(
         convert_to_granges = TRUE,
         nThread = 1
-    ) %>%
-        subset(select = -c(start, end))
+    )
     gr.Nott2019.peaks$Study <- "Nott2019.celltype_peaks"
     ### Regulatory regions
-    gr.Nott2019.regions <- NOTT2019_get_regulatory_regions(as.granges = TRUE)
+    gr.Nott2019.regions <- NOTT2019_get_regulatory_regions(as_granges = TRUE)
     gr.Nott2019.regions$Study <- "Nott2019.celltype_regions"
     gr.Nott2019.regions$Assay <- gr.Nott2019.regions$Element
     ### Interactome
@@ -34,7 +53,7 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
         data.table::rbindlist(idcol = "id") %>%
         tidyr::separate(id,
             sep = " ",
-            emove = FALSE,
+            remove = FALSE,
             into = c("Cell_type", "Data_type")
         ) %>%
         dplyr::mutate(
@@ -44,16 +63,16 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
     gr.Nott2019.interactome <- c(
         echodata::dt_to_granges(
             dat = interactome %>% dplyr::mutate(Anchor = 1),
-            query_chrom_col = "chr1", 
-            query_start_col = "start1",
-            query_end_col = "end1", 
+            chrom_col = "chr1", 
+            start_col = "start1",
+            end_col = "end1", 
             style = "NCBI"
         ),
         echodata::dt_to_granges(
             dat = interactome %>% dplyr::mutate(Anchor = 2),
-            query_chrom_col = "chr2", 
-            query_start_col = "start2",
-            query_end_col = "end2", 
+            chrom_col = "chr2", 
+            start_col = "start2",
+            end_col = "end2", 
             style = "NCBI"
         )
     )  
@@ -168,6 +187,11 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE) {
     ))  
     if (!keep_extra_cols) {
         gr.merged <- subset(gr.merged, select = c(Study, Assay, Cell_type))
+    } 
+    if(!is.null(save_path)){
+        messager("Caching gr.merged ==>",save_path,v=verbose)
+        dir.create(dirname(save_path),showWarnings = FALSE, recursive = TRUE)
+        saveRDS(object = gr.merged,file = save_path)
     }
     return(gr.merged)
 }

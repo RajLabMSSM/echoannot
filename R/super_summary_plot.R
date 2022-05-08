@@ -1,7 +1,7 @@
 #' Merge all summary plots into one super plot
 #'
 #' @family summarise
-#' @param merged_DT Merge fine-mapping results data from
+#' @param merged_DT Merged fine-mapping results data from
 #'  \link[echolocatoR]{finemap_loci}.
 #' @param snp_filter Filter to use apply to SNPs before plotting.
 #' @param coloc_results Colocalization results from 
@@ -40,7 +40,7 @@ super_summary_plot <- function(merged_DT,
         gg_egene <- coloc_nominated_egenes(
             coloc_results = coloc_results,
             merged_DT = merged_DT,
-            PP_threshold = .8,
+            credset_thresh = .8,
             fill_var = NULL,
             text_size = 2.5,
             y_lab = "Locus",

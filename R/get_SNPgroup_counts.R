@@ -1,10 +1,15 @@
-#' Tally locus-specific SNP group sizes
-#'
+#' Get SNP group counts
+#' 
+#' Tally locus-specific SNP group sizes.
+#' @param grouping_vars Column names in \code{merged_DT} to group counts by.
+#' @inheritParams super_summary_plot
+#' 
 #' @family summarise
-#' @examples
-#' data("merged_DT")
-#' snp_groups <- get_SNPgroup_counts(merged_DT = echodata::get_Nalls2019_merged())
+#' @export
 #' @importFrom dplyr %>%
+#' @examples
+#' merged_DT <- echodata::get_Nalls2019_merged()
+#' snp_groups <- get_SNPgroup_counts(merged_DT = merged_DT)
 get_SNPgroup_counts <- function(merged_DT,
                                 grouping_vars = "Locus") {
     SNP <- P <- Support <- Consensus_SNP <- mean.PP <- leadSNP <-

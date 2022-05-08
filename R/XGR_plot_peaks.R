@@ -10,8 +10,10 @@
 #' @param locus [Optional] Locus name.
 #' @param adjust The granularity of the peaks.
 #' @param show_plot Print the plot.
+#' @param trim_xlims Trim the x-axis limits.
 #' @return \code{ggbio} track plot.
 #' @inheritParams XGR_prepare_foreground_background
+#' @inheritParams NOTT2019_epigenomic_histograms
 #' @inheritParams ggbio::autoplot
 #'
 #' @family XGR
@@ -40,8 +42,8 @@ XGR_plot_peaks <- function(gr.lib,
                            locus = NULL,
                            adjust = .2,
                            show_plot = TRUE,
-                           show.legend = TRUE,
-                           as.ggplot = TRUE,
+                           legend = TRUE,
+                           as_ggplot = TRUE,
                            trim_xlims = FALSE) {
     # data("BST1"); dat <- BST1; show.legend=T;
     # fill_var="Assay"; facet_var="Source"; geom="density"; adjust=.2;
@@ -64,7 +66,7 @@ XGR_plot_peaks <- function(gr.lib,
         # bins=50,
         size = .1,
         alpha = .7,
-        show.legend = show.legend
+        legend = legend
     ) +
         ggplot2::theme_bw() +
         ggplot2::labs(fill = fill_var)
@@ -76,7 +78,7 @@ XGR_plot_peaks <- function(gr.lib,
     }
     # ggbio::tracks(list("XGR"=XGR_track))
     if (show_plot) print(XGR_track)
-    if (as.ggplot) {
+    if (as_ggplot) {
         return(XGR_track@ggplot)
     } else {
         return(XGR_track)

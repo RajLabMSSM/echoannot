@@ -1,7 +1,7 @@
 #' Fix bigWig
 #' 
 #' Fix issues with \link[GenomicRanges]{GRanges} object
-#' imported by \link[rtracklayer]{import}, 
+#' imported by \code{rtracklayer::import}, 
 #' Original solution described 
 #' \href{https://www.biostars.org/p/374709/#374727 }{here}.
 #' 

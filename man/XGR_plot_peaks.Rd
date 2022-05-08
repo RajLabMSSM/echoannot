@@ -13,8 +13,8 @@ XGR_plot_peaks(
   locus = NULL,
   adjust = 0.2,
   show_plot = TRUE,
-  show.legend = TRUE,
-  as.ggplot = TRUE,
+  legend = TRUE,
+  as_ggplot = TRUE,
   trim_xlims = FALSE
 )
 }
@@ -39,6 +39,16 @@ XGR_plot_peaks(
 \item{adjust}{The granularity of the peaks.}
 
 \item{show_plot}{Print the plot.}
+
+\item{legend}{
+    A logical value indicates whether to show legend or not. Default is
+    \code{TRUE}
+  }
+
+\item{as_ggplot}{Return plot as \code{ggplot2} 
+(\code{TRUE}) or \code{Tracks} (\code{FALSE}) object.}
+
+\item{trim_xlims}{Trim the x-axis limits.}
 }
 \value{
 \code{ggbio} track plot.

@@ -7,7 +7,8 @@
 CS_bin_plot(merged_DT, show_plot = TRUE)
 }
 \arguments{
-\item{merged_DT}{Merge query data.}
+\item{merged_DT}{Merged fine-mapping results data from
+\link[echolocatoR]{finemap_loci}.}
 
 \item{show_plot}{Show plot.}
 }
@@ -22,8 +23,6 @@ bin_plot <- echoannot::CS_bin_plot(merged_DT = dat)
 \seealso{
 Other summarise: 
 \code{\link{CS_counts_plot}()},
-\code{\link{get_CS_bins}()},
-\code{\link{get_CS_counts}()},
 \code{\link{get_SNPgroup_counts}()},
 \code{\link{peak_overlap_plot}()},
 \code{\link{plot_dataset_overlap}()},

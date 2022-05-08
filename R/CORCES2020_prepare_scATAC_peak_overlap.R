@@ -12,6 +12,7 @@
 #' merged_DT = merged_DT)
 #' }
 #' @keywords internal 
+#' @importFrom echodata get_CS_counts
 CORCES2020_prepare_scATAC_peak_overlap <- function(
     merged_DT,
     FDR_filter = NULL,
@@ -91,7 +92,7 @@ CORCES2020_prepare_scATAC_peak_overlap <- function(
         dat_melt$background <- NA
 
         # Make sure locus order kept
-        locus_order <- get_CS_counts(merged_DT)
+        locus_order <- echodata::get_CS_counts(merged_DT)
         dat_melt$Locus <- factor(dat_melt$Locus,
             levels = locus_order$Locus,
             ordered = TRUE
