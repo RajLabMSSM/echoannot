@@ -5,8 +5,8 @@
 #' @importFrom GenomicRanges makeGRangesFromDataFrame
 #' @family NOTT2019
 #' @source
-#' \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
-#' \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
+#' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+#'
 NOTT2019_get_interactions <- function(dat,
                                       as_granges = FALSE,
                                       verbose = TRUE) {

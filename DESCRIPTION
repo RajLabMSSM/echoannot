@@ -74,7 +74,8 @@ Suggests:
     regioneR
 Remotes:
     github::RajLabMSSM/echodata,
-    github::RajLabMSSM/echotabix
+    github::RajLabMSSM/echotabix,
+    github::hfang-bristol/XGR
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 License: GPL-3

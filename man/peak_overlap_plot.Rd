@@ -4,7 +4,7 @@
 \alias{peak_overlap_plot}
 \title{Plot overlap between some SNP group and various epigenomic data}
 \source{
-\href{https://science.sciencemag.org/content/366/6469/1134}{
+\href{https://doi.org/10.1126/science.aay0793}{
 Nott et al., 2019 (The Lancet Neurology)}
 \href{https://doi.org/10.1038/s41588-020-00721-x}{
 Corces et al., 2020 (Nature Genetics)}

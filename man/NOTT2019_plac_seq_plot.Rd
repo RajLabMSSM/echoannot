@@ -4,8 +4,7 @@
 \alias{NOTT2019_plac_seq_plot}
 \title{Plot brain cell-specific interactome data}
 \source{
-\href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}
-\url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
+\href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
 }
 \usage{
 NOTT2019_plac_seq_plot(
@@ -102,7 +101,7 @@ If \code{FALSE}, will instead apply the same opacity level
 }
 \description{
 Plot brain cell-specific interactome data from
- \href{https://science.sciencemag.org/content/366/6469/1134}{Nott et al. (2019)}.
+ \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}.
 }
 \examples{
 trks_plus_lines <- echoannot::NOTT2019_plac_seq_plot(dat = echodata::BST1) 

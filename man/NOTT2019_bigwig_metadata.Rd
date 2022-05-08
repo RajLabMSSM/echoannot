@@ -8,7 +8,7 @@
 An object of class \code{data.table} (inherits from \code{data.frame}) with 18 rows and 14 columns.
 }
 \source{
-\url{https://science.sciencemag.org/content/366/6469/1134}
+\url{https://doi.org/10.1126/science.aay0793}
 
 \code{
 NOTT2019_bigwig_metadata <- data.table::data.table(

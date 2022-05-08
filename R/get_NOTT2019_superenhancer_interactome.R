@@ -1,11 +1,11 @@
 #' Brain cell type-specific interactomes with superenhancers
 #'
-#' Originally from \href{https://science.sciencemag.org/content/366/6469/1134}{
+#' Originally from \href{https://doi.org/10.1126/science.aay0793}{
 #' Nott et al. (2019)}.
 #' Specifically: \emph{aay0793-Nott-Table-S6.xlsx}.
 #'
 #' @family NOTT2019
-#' @source \url{https://science.sciencemag.org/content/366/6469/1134}
+#' @source \url{https://doi.org/10.1126/science.aay0793}
 #' @examples
 #' \dontrun{
 #' NOTT2019_superenhancer_interactome <- data.table::data.table(

@@ -4,7 +4,8 @@
 
 * Moved `get_CS_counts`/`get_CS_bins` to `echodata`.   
 * Cache remote data resources in `echoannot`-specific folder. 
-* Remove XGR GitHub installation in favor of CRAN (working now). 
+* Add XGR GitHub installation again (CRAN installation not working again?). 
+* Shorten Nott2019 ref links. 
 * Pass all CRAN checks. 
 
 ## Bug fixes 

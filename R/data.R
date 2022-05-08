@@ -5,7 +5,7 @@
 #' bigWig files contain the genomic ranges from each epigenomic assay,
 #' as well as a Score column which describes the peaks of the aggregate reads.
 #' @family NOTT2019
-#' @source \url{https://science.sciencemag.org/content/366/6469/1134}
+#' @source \url{https://doi.org/10.1126/science.aay0793}
 #' @source
 #' \code{
 #' NOTT2019_bigwig_metadata <- data.table::data.table(
