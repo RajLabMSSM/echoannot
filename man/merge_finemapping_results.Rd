@@ -43,8 +43,6 @@ of fine-mapping tools that contained the SNP in their Credible Set.}
 \item{"1KGphase3" : }{1000 Genomes Project Phase 3}
 \item{"UKB" : }{Pre-computed LD from a British
 European-decent subset of UK Biobank.}
-\item{"<vcf_path>" : }{User-supplied path to a custom VCF file 
-to compute LD matrix from.}
 }}
 
 \item{save_path}{Path to save merged table to.}

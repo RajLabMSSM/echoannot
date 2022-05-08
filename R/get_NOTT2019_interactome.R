@@ -7,8 +7,8 @@
 #'
 #' @family NOTT2019
 #' @source \url{https://doi.org/10.1126/science.aay0793}
-#' @examples
-#' \dontrun{
+#' @source
+#' \code{
 #' file <- file.path(
 #'     "~/Desktop/Fine_Mapping/echolocatoR/annotations",
 #'     "NOTT2019/aay0793-Nott-Table-S5.xlsx"
@@ -42,6 +42,8 @@
 #' )
 #' }
 #' @export
+#' @examples 
+#' NOTT2019_interactome <- get_NOTT2019_interactome()
 get_NOTT2019_interactome <- function() {
     tmp <- get_data(fname = "NOTT2019_interactome.rds")
     dat <- readRDS(tmp)

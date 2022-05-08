@@ -5,17 +5,8 @@
 \title{Brain cell type-specific enhancers, promoters, and interactomes}
 \source{
 \url{https://doi.org/10.1126/science.aay0793}
-}
-\usage{
-get_NOTT2019_interactome()
-}
-\description{
-Originally from \href{https://doi.org/10.1126/science.aay0793}{
-Nott et al. (2019)}.
-Specifically: \emph{aay0793-Nott-Table-S5.xlsx}.
-}
-\examples{
-\dontrun{
+
+\code{
 file <- file.path(
     "~/Desktop/Fine_Mapping/echolocatoR/annotations",
     "NOTT2019/aay0793-Nott-Table-S5.xlsx"
@@ -48,6 +39,17 @@ piggyback::pb_upload(
     repo = "RajLabMSSM/echoannot"
 )
 }
+}
+\usage{
+get_NOTT2019_interactome()
+}
+\description{
+Originally from \href{https://doi.org/10.1126/science.aay0793}{
+Nott et al. (2019)}.
+Specifically: \emph{aay0793-Nott-Table-S5.xlsx}.
+}
+\examples{
+NOTT2019_interactome <- get_NOTT2019_interactome()
 }
 \seealso{
 Other NOTT2019: 

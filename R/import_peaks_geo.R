@@ -9,13 +9,14 @@
 #' 
 #' @param gsm GEO GSM id (e.g. "GSM4271282").
 #' @inheritParams import_peaks
+#' @inheritParams base::options
 #' 
 #' @returns Named list of peak files in \link[GenomicRanges]{GRanges} format.
 #' 
 #' @keywords internal 
-#' @import BiocGenerics 
+#' @importFrom BiocGenerics %in%
 #' @importFrom GenomicRanges seqnames mcols GRangesList
-#' @importFrom rtracklayer import import.bedGraph
+#' @importFrom rtracklayer import import.bedGraph export.bedGraph
 #' @importFrom data.table fread 
 #' @importFrom echotabix liftover
 #' @importFrom echodata dt_to_granges
@@ -32,9 +33,12 @@ import_peaks_geo <- function(gsm,
                                  bedGraph="bedgraph|graph.gz|bdg.gz",
                                  bigWig="bigwig|bw$"
                              ),
+                             timeout = 3*60,
                              verbose = TRUE){
-    
+   
     messager("Determining available file types.",v=verbose) 
+    #### Set timeout ####
+    options(timeout = timeout)
     #### Determine which chroms to query ####
     chroms <- if(!is.null(query_granges)){
         unique(GenomicRanges::seqnames(query_granges))    
@@ -48,7 +52,8 @@ import_peaks_geo <- function(gsm,
         messager("Using pre-computed narrowPeak files.",v=verbose)
         peaks <- lapply(links$narrowPeaks, function(f){
             # p <- get_chroms(URL = f, chroms = chroms) 
-            p <- rtracklayer::import(con = f, which = query_granges)
+            p <- rtracklayer::import(con = f, 
+                                     which = query_granges)
             GenomicRanges::mcols(p)$source <- basename(f)
             return(p)
         }) %>% 

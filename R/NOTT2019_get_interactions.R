@@ -6,7 +6,6 @@
 #' @family NOTT2019
 #' @source
 #' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
-#'
 NOTT2019_get_interactions <- function(dat,
                                       as_granges = FALSE,
                                       verbose = TRUE) {

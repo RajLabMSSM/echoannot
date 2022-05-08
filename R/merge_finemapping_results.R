@@ -73,8 +73,8 @@ merge_finemapping_results <- function(dataset = file.path(
                 basename(multifinemap_pattern),
                 basename(multifinemap_pattern2)
             ), collapse = "|"),
-            recursive = T,
-            full.names = T
+            recursive = TRUE,
+            full.names = TRUE
         ) %>% unique()
         if (length(multi_dirs) == 0) {
             stop("+ No multi-finemap files found.")

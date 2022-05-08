@@ -17,6 +17,7 @@
 * Fixed `convert_plots` when converting `Tracks` to list of ggplots.
 * Fixed `merge_celltype_specific_epigenomics`
     - Added caching mechanism. 
+* Use `echodata::<locus>` data instead of portal data for *Getting started* vignette.
 
 # echoannot 0.99.4
 

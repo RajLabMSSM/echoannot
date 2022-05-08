@@ -48,7 +48,7 @@ import_peaks <- function(ids,
                          peaks_dir = tempdir(),
                          save_path = tempfile(fileext = "grl.hg38.rds"),
                          verbose = TRUE){
-     
+    
     #### Check builds ####
     if(length(builds)>1 && (length(builds)!=length(ids))){
         stop("builds must be same length as ids.")

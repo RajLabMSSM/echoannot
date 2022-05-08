@@ -13,6 +13,7 @@ import_peaks_geo(
   peaks_dir = tempdir(),
   regex_queries = list(narrowPeaks = "narrowpeak", broadPeaks = "broadpeak",
     genericPeaks = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz", bigWig = "bigwig|bw$"),
+  timeout = 3 * 60,
   verbose = TRUE
 )
 }

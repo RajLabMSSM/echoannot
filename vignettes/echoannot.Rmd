@@ -23,21 +23,30 @@ library(`r pkg`)
 
 ## Import results 
 
-Import pre-calculated fine-mapping results from the [**echolocatoR Fine-mapping Portal**](https://rajlab.shinyapps.io/Fine_Mapping_Shiny/).
+Import pre-calculated fine-mapping results.
 
 ```{r}
-local_files <- echodata::portal_query(phenotypes = "parkinson",
-                                      LD_panels = "UKB", 
-                                      loci = c("BST1","LRRK2","MEX3C"),
-                                      file_types = "multi_finemap")
+library(echodata)
+
+dataset <- file.path(tempdir(),"Nalls23andMe_2019")
+dir.create(dataset, showWarnings = FALSE, recursive = TRUE)
+loci <- c("BST1","LRRK2","MEX3C")
+for(l in loci){
+    data.table::fwrite(
+        x = eval(parse(text = l)), 
+        file = file.path(dataset,paste(l,"multi_finemap.csv.gz",sep=".")))
+}
+# local_files <- echodata::portal_query(phenotypes = "parkinson",
+#                                       LD_panels = "UKB", 
+#                                       loci = c("BST1","LRRK2","MEX3C"),
+#                                       file_types = "multi_finemap")
 ```
 
 
 Merge (and annotate) SNP-wise fine-mapping results.
 
-```{r}
-dataset <- dirname(dirname(dirname(local_files)))
-merged_DT <- echoannot::merge_finemapping_results(dataset = dataset[1], 
+```{r} 
+merged_DT <- echoannot:: merge_finemapping_results(dataset = dataset, 
                                                   minimum_support = 1,
                                                   haploreg_annotation = TRUE)
 knitr::kable(head(merged_DT))
