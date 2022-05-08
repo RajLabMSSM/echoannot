@@ -25,8 +25,8 @@ ROADMAP_query <- function(results_path = file.path(tempdir(), "Roadmap"),
                           gr.snp,
                           keyword_query = NULL,
                           limit_files = NULL,
-                          conda_env = "echoR",
                           remove_tmps = TRUE,
+                          conda_env = "echoR_mini",
                           nThread = 1,
                           verbose = TRUE) {
     rm_start <- Sys.time()
@@ -57,6 +57,7 @@ ROADMAP_query <- function(results_path = file.path(tempdir(), "Roadmap"),
                     min_pos = min(GenomicRanges::start(gr.snp.), na.rm = TRUE),
                     max_pos = max(GenomicRanges::end(gr.snp.), na.rm = TRUE),
                     eid = eid,
+                    conda_env = conda_env,
                     convert_to_granges = TRUE
                 )
             })

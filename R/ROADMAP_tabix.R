@@ -37,16 +37,18 @@ ROADMAP_tabix <- function(results_path =
                           max_pos,
                           eid,
                           convert_to_granges = TRUE,
+                          conda_env = "echoR_mini",
                           verbose = TRUE) {
     dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
     chrom <- paste0("chr", gsub("chr", "", tolower(chrom)))
     tbx_start <- Sys.time()
     messager("Downloading Roadmap Chromatin Marks:", eid, v = verbose)
     fname <- paste0(eid, "_15_coreMarks_dense.bed.bgz")
-    URL <- file.path(
+    URL <- paste(
         "https://egg2.wustl.edu/roadmap/data/byFileType",
         "chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final",
-        fname
+        fname,
+        sep="/"
     ) # _15_coreMarks_stateno.bed.gz
     #### Qiuery remote tabix file ####
     query_granges <- echotabix::construct_query(query_chrom = chrom, 
@@ -55,6 +57,7 @@ ROADMAP_tabix <- function(results_path =
     dat <- echotabix::query(
         target_path = URL,
         query_granges = query_granges,
+        conda_env = conda_env,
         verbose = verbose
     )
     dat <- dat[, paste0("V", seq(1, 4))]
@@ -71,7 +74,8 @@ ROADMAP_tabix <- function(results_path =
         )
     }
     tbx_end <- Sys.time()
-    messager("BED subset downloaded in", round(tbx_end - tbx_start, 3), "seconds",
+    messager("BED subset downloaded in", 
+             round(tbx_end - tbx_start, 3), "seconds",
         v = verbose
     )
     return(dat)

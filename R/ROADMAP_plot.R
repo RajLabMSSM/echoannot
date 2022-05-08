@@ -39,7 +39,7 @@ ROADMAP_plot <- function(dat,
                          n_top = 5,
                          force_new = FALSE,
                          show_plot = FALSE, 
-                         conda_env = "echoR",
+                         conda_env = "echoR_mini",
                          nThread = 1,
                          verbose = TRUE) {
     messager("echoannot:: Plotting ROADMAP annotations.", v = verbose)

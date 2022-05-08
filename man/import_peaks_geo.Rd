@@ -3,6 +3,10 @@
 \name{import_peaks_geo}
 \alias{import_peaks_geo}
 \title{Import peaks: GEO}
+\source{
+\href{https://github.com/ropensci/rtweet/issues/229}{
+curl connection timeout issues}
+}
 \usage{
 import_peaks_geo(
   gsm,

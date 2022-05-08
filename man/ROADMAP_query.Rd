@@ -9,8 +9,8 @@ ROADMAP_query(
   gr.snp,
   keyword_query = NULL,
   limit_files = NULL,
-  conda_env = "echoR",
   remove_tmps = TRUE,
+  conda_env = "echoR_mini",
   nThread = 1,
   verbose = TRUE
 )
@@ -29,9 +29,9 @@ Can provide multiple keywords in list form:
 \item{limit_files}{Limit the number of annotation files queried
 (for faster testing).}
 
-\item{conda_env}{Conda environment to search for tabix in.}
-
 \item{remove_tmps}{Remove temporary files (e.g. "*.tbi").}
+
+\item{conda_env}{Conda environment to search for tabix in.}
 
 \item{nThread}{Number of threads to parallelise queries over.}
 

@@ -11,6 +11,7 @@ ROADMAP_tabix(
   max_pos,
   eid,
   convert_to_granges = TRUE,
+  conda_env = "echoR_mini",
   verbose = TRUE
 )
 }

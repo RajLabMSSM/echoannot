@@ -6,7 +6,8 @@
 #' Must import \link[methods]{new} in my function
 #' because it seems \link[GEOquery]{getGEO} forgot to do this 
 #' (only works when you load the entire \pkg{GEOquery} package first).
-#' 
+#' @source \href{https://github.com/ropensci/rtweet/issues/229}{
+#' curl connection timeout issues}
 #' @param gsm GEO GSM id (e.g. "GSM4271282").
 #' @inheritParams import_peaks
 #' @inheritParams base::options
@@ -20,6 +21,7 @@
 #' @importFrom data.table fread 
 #' @importFrom echotabix liftover
 #' @importFrom echodata dt_to_granges
+#' @importFrom httr set_config config
 import_peaks_geo <- function(gsm,  
                              build,
                              query_granges,
@@ -39,6 +41,9 @@ import_peaks_geo <- function(gsm,
     messager("Determining available file types.",v=verbose) 
     #### Set timeout ####
     options(timeout = timeout)
+    # opts <- httr::timeout(seconds = timeout) 
+    httr::set_config(config = httr::config(connecttimeout = timeout),
+                     override = TRUE)
     #### Determine which chroms to query ####
     chroms <- if(!is.null(query_granges)){
         unique(GenomicRanges::seqnames(query_granges))    
