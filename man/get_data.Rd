@@ -11,6 +11,16 @@ get_data(
   overwrite = FALSE
 )
 }
+\arguments{
+\item{fname}{File name.}
+
+\item{repo}{GitHub repository name.}
+
+\item{save_dir}{Local directory to cache data in.}
+
+\item{overwrite}{Should any local files of the same name be overwritten?
+default \code{TRUE}.}
+}
 \description{
 Download remote resources stored on GitHub Releases via \pkg{piggyback}.
 }

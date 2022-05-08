@@ -34,6 +34,9 @@
 #' @importFrom echodata find_consensus_snps update_cols assign_lead_snp
 #' @importFrom data.table merge.data.table data.table rbindlist
 #' @importFrom parallel mclapply
+#' @examples
+#' dataset <- echodata::get_Nalls2019_loci(return_dir = TRUE)
+#' merged_DT <- echoannot:: merge_finemapping_results(dataset = dataset)
 merge_finemapping_results <- function(dataset = file.path(
                                           tempdir(),
                                           "Data/GWAS"

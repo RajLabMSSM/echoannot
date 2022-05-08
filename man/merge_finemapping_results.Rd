@@ -78,3 +78,7 @@ in which a SNP is in the Credible Set in order to be included in the
 Gather fine-mapping results from \pkg{echolocatoR} across all loci
 and merge into a single data.frame.
 }
+\examples{
+dataset <- echodata::get_Nalls2019_loci(return_dir = TRUE)
+merged_DT <- echoannot:: merge_finemapping_results(dataset = dataset)
+}

@@ -26,27 +26,14 @@ library(`r pkg`)
 Import pre-calculated fine-mapping results.
 
 ```{r}
-library(echodata)
-
-dataset <- file.path(tempdir(),"Nalls23andMe_2019")
-dir.create(dataset, showWarnings = FALSE, recursive = TRUE)
-loci <- c("BST1","LRRK2","MEX3C")
-for(l in loci){
-    data.table::fwrite(
-        x = eval(parse(text = l)), 
-        file = file.path(dataset,paste(l,"multi_finemap.csv.gz",sep=".")))
-}
-# local_files <- echodata::portal_query(phenotypes = "parkinson",
-#                                       LD_panels = "UKB", 
-#                                       loci = c("BST1","LRRK2","MEX3C"),
-#                                       file_types = "multi_finemap")
+dataset <- echodata::get_Nalls2019_loci(return_dir = TRUE)
 ```
 
 
 Merge (and annotate) SNP-wise fine-mapping results.
 
 ```{r} 
-merged_DT <- echoannot:: merge_finemapping_results(dataset = dataset, 
+merged_DT <- echoannot::merge_finemapping_results(dataset = dataset, 
                                                   minimum_support = 1,
                                                   haploreg_annotation = TRUE)
 knitr::kable(head(merged_DT))
