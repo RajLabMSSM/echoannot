@@ -7,6 +7,7 @@
 #' @keywords internal
 #' @importFrom echodata snp_group_colorDict
 #' @importFrom stats as.formula
+#' @importFrom methods show
 #' @examples
 #' \dontrun{
 #' root <- file.path(
@@ -168,7 +169,7 @@ XGR_enrichment_plot <- function(enrich_res,
             )
     }
 
-    if (show_plot) print(gp)
+    if (show_plot) methods::show(gp)
 
     if (save_plot != FALSE) {
         ggplot2::ggsave(save_plot, gp,

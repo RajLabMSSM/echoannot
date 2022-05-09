@@ -11,7 +11,7 @@ NOTT2019_get_epigenomic_peaks(
   assays = c("ATAC", "H3K27ac", "H3K4me3"),
   cell_types = c("neurons", "microglia", "oligo", "astrocytes"),
   convert_to_granges = TRUE,
-  save_dir = tempdir(),
+  save_dir = tools::R_user_dir(package = "echoannot", which = "cache"),
   force_new = FALSE,
   nThread = 1,
   verbose = TRUE

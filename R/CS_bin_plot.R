@@ -9,6 +9,7 @@
 #' @export
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom stats setNames
+#' @importFrom methods show
 #' @importFrom echodata get_CS_bins
 #' @examples
 #' dat <- echodata::BST1 
@@ -61,7 +62,7 @@ CS_bin_plot <- function(merged_DT,
             legend.position = "top"
         ) +
         ggplot2::guides(fill = ggplot2::guide_legend(nrow = 1, reverse = TRUE))
-    if (show_plot) suppressWarnings(print(bin_plot))
+    if (show_plot) suppressWarnings(methods::show(bin_plot))
     return(list(
         plot = bin_plot,
         data = bin_counts

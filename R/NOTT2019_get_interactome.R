@@ -56,6 +56,5 @@ NOTT2019_get_interactome <- function(annot_sub,
         dplyr::mutate(top.consensus.dist = End - top.consensus.pos) %>%
         dplyr::group_by(Cell_type) %>%
         dplyr::summarise(top.consensus.dist = mean(top.consensus.dist))
-    # print(summarise_top.consensus.dist)
     return(interact.DT)
 }

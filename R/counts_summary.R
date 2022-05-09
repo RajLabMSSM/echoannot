@@ -55,20 +55,25 @@ counts_summary <- function(top_SNPs,
     means <- c(
         Locus = " ",
         Dataset = "[Average]",
-        candidate_counts[, c("Total_SNPs", "CS", "Consensus_SNPs")] %>% colMeans() %>% round(1),
-        leadSNP_in_CredSet = paste0(round(sum(candidate_counts$leadSNP_in_CredSet) / dim(candidate_counts)[1] * 100, 2), "%"),
+        candidate_counts[, c("Total_SNPs", "CS", "Consensus_SNPs")] %>% 
+            colMeans() %>% round(1),
+        leadSNP_in_CredSet = paste0(
+            round(sum(candidate_counts$leadSNP_in_CredSet) /
+                      dim(candidate_counts)[1] * 100, 2),
+            "%"),
         CredSet_rsids = "",
         Conensus_rsids = ""
     )
     # Add averages
     candidate_counts <- suppressWarnings(rbind(candidate_counts, means))
-    percent_model_convergence <- round(sum(candidate_counts$Consensus_SNPs > 0) / length(candidate_counts$Consensus_SNPs) * 100, 2)
+    percent_model_convergence <- round(
+        sum(candidate_counts$Consensus_SNPs > 0) /
+            length(candidate_counts$Consensus_SNPs) * 100, 2)
     max_consensus_set <- max(candidate_counts$Consensus_SNPs)
     # Check if lead SNP is in the credible sets for each locus
     messager("\n + All", max_consensus, "models converged upon 1 to",
         max_consensus_set, "SNPs in", percent_model_convergence, "% of loci.",
         v = verbose
-    )
-    # createDT_html(candidate_counts) %>% print()
+    ) 
     return(candidate_counts)
 }

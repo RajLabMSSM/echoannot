@@ -37,14 +37,16 @@ NOTT2019_get_epigenomic_peaks <- function(assays = c(
                                               "astrocytes"
                                           ),
                                           convert_to_granges = TRUE,
-                                          save_dir = tempdir(),
+                                          save_dir = tools::R_user_dir(
+                                              package = "echoannot", 
+                                              which = "cache"),
                                           force_new = FALSE,
                                           nThread = 1,
                                           verbose = TRUE) {
     #### Prepare paths ####
-    baseURL <- file.path(
+    baseURL <- paste(
         "https://raw.githubusercontent.com/nottalexi",
-        "brain-cell-type-peak-files/master"
+        "brain-cell-type-peak-files/master",sep="/"
     )
     local_path <- file.path(save_dir, "NOTT2019_epigenomic_peaks.rds")
     #### Download or import existing data ####

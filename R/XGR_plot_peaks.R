@@ -19,6 +19,7 @@
 #' @family XGR
 #' @export
 #' @importFrom GenomicRanges mcols
+#' @importFrom methods show
 #' @examples
 #' #### Import example query ####
 #' gr.lib <- echoannot::xgr_query
@@ -77,7 +78,7 @@ XGR_plot_peaks <- function(gr.lib,
         )
     }
     # ggbio::tracks(list("XGR"=XGR_track))
-    if (show_plot) print(XGR_track)
+    if (show_plot) methods::show(XGR_track)
     if (as_ggplot) {
         return(XGR_track@ggplot)
     } else {

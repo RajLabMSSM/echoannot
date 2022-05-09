@@ -13,6 +13,7 @@
 #' @export
 #' @importFrom dplyr %>% mutate arrange
 #' @importFrom data.table melt.data.table data.table
+#' @importFrom methods show
 #' @importFrom echodata get_CS_counts
 #' 
 #' @examples
@@ -108,7 +109,7 @@ CS_counts_plot <- function(merged_DT,
     if (label_yaxis == FALSE) {
         gg_CS <- gg_CS + ggplot2::theme(axis.text.y = ggplot2::element_blank())
     }
-    if (show_plot) suppressWarnings(print(gg_CS))
+    if (show_plot) suppressWarnings(methods::show(gg_CS))
     return(list(
         plot = gg_CS,
         data = melt.dat

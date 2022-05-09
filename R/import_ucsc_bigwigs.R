@@ -28,8 +28,9 @@
 #' @param verbose Print messages.
 #' 
 #' @export
-#' @importFrom parallel mclapply
 #' @importFrom echodata dt_to_granges
+#' @importFrom echotabix construct_query
+#' @importFrom parallel mclapply
 #' @importFrom GenomicRanges GRangesList seqnames start end mcols 
 #' @importFrom DescTools StrCap
 #' @examples 
@@ -50,13 +51,14 @@ import_ucsc_bigwigs <- function(query_dat,
     bigwig_dir <- NULL
     #### Convert fine-map data to granges #### 
     # ! IMPORTANT !: Needs to be in chr1 format in order to query! 
-    gr.query_dat <- echodata::dt_to_granges(dat = query_dat,
-                                            chrom_col = "CHR",
-                                            start_col = "POS",
-                                            style = "UCSC",
-                                            verbose = FALSE)   
+    gr.query_dat <- echotabix::construct_query(query_dat = query_dat, 
+                                               as_blocks = FALSE,
+                                               style = "UCSC",
+                                               verbose = verbose) 
     #### Check if file already exists ####
-    if(!is.null(save_path) && file.exists(save_path)){
+    if(!is.null(save_path) && 
+       file.exists(save_path) && 
+       isFALSE(force_new)){
         messager("Importing previously downloaded file:",save_path,
                  v=verbose)
         bw.filt <- readRDS(save_path)

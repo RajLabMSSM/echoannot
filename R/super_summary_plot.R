@@ -14,6 +14,7 @@
 #' 
 #' @export
 #' @importFrom patchwork plot_spacer plot_layout
+#' @importFrom methods show
 #' @examples 
 #' \dontrun{
 #' merged_DT <- echodata::get_Nalls2019_merged() 
@@ -116,7 +117,7 @@ super_summary_plot <- function(merged_DT,
             ))) +
         patchwork::plot_layout(heights = c(.15, 1), ncol = 1)
 
-    if (show_plot) print(gg_merged)
+    if (show_plot) methods::show(gg_merged)
     if (save_plot != FALSE) {
         ggplot2::ggsave(save_plot,
             gg_merged,

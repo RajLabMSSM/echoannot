@@ -26,6 +26,7 @@
 #' @importFrom ggbio autoplot
 #' @importFrom ggplot2 aes theme_classic theme  element_text
 #' @importFrom ggplot2 guides guide_legend scale_y_continuous
+#' @importFrom methods show
 ROADMAP_track_plot <- function(grl.roadmap.filt,
                                gr.snp = NULL,
                                geom = "density",
@@ -60,7 +61,7 @@ ROADMAP_track_plot <- function(grl.roadmap.filt,
         )) +
         ggplot2::scale_y_continuous(n.breaks = 3)
     if (show_plot) {
-        print(track.roadmap)
+        methods::show(track.roadmap)
     }
     if (as_ggplot) {
         return(track.roadmap@ggplot)

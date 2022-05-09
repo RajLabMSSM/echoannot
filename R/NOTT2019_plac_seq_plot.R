@@ -12,7 +12,7 @@
 #' will be colored darker (Default: \code{TRUE}).
 #' If \code{FALSE}, will instead apply the same opacity level
 #'  to all interactions. 
-#' @param print_plot Print plot.
+#' @param show_plot Print plot.
 #' @param return_interaction_track Return only the interaction track 
 #' (before completing the plot and showing it). 
 #' @param zoom_window Zoom window.
@@ -42,7 +42,7 @@
 NOTT2019_plac_seq_plot <- function(dat = NULL,
                                    locus_dir = NULL,
                                    title = NULL,
-                                   print_plot = TRUE,
+                                   show_plot = TRUE,
                                    save_plot = TRUE,
                                    return_interaction_track = FALSE,
                                    x_limits = NULL,
@@ -67,7 +67,7 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
                                    return_as = "Tracks",
                                    nThread = 1,
                                    verbose = TRUE) {
-    # dat=echoannot::BST1; print_plot=T; save_plot=T; title=NULL;
+    # dat=echoannot::BST1; show_plot=T; save_plot=T; title=NULL;
     # x_limits=NULL; zoom_window=NULL; return_consensus_overlap =T; nThread=1;
     # highlight_plac=F; point_size=2;  index_SNP=NULL;
     # color_dict=c("enhancers"="springgreen",
@@ -205,7 +205,7 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
     #### Interaction track ####
     if (return_interaction_track) {
         #### Print ####
-        if (print_plot){
+        if (show_plot){
             suppressMessages(suppressWarnings(
                 methods::show(NOTT.interact_trk)
             )) 
@@ -268,8 +268,8 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
             )
         }
         #### Print ####
-        if (print_plot){
-            suppressMessages(suppressWarnings(print(plot_list))) 
+        if (show_plot){
+            suppressMessages(suppressWarnings(methods::show(plot_list))) 
         }
         #### Return ####
         return(plot_list)

@@ -35,6 +35,7 @@
 #' @importFrom patchwork plot_layout
 #' @importFrom scales alpha
 #' @importFrom stats formula
+#' @importFrom methods show
 peak_overlap_plot <- function(merged_DT,
                               snp_filter = "Consensus_SNP==TRUE",
                               force_new = FALSE,
@@ -268,7 +269,7 @@ peak_overlap_plot <- function(merged_DT,
         })
     }
 
-    if (show_plot) print(gg_pks)
+    if (show_plot) methods::show(gg_pks)
     if (save_path != FALSE) {
         messager("+ Saving plot ==>", save_path, v = verbose)
         ggplot2::ggsave(save_path, gg_pks, height = height, width = width)

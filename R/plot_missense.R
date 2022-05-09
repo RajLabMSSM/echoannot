@@ -10,6 +10,7 @@
 #' @family annotate
 #' @export
 #' @importFrom echodata get_CS_counts
+#' @importFrom methods show
 #' @examples
 #' \dontrun{
 #' merged_DT <- echodata::get_Nalls2019_merged()

@@ -11,7 +11,7 @@ NOTT2019_plac_seq_plot(
   dat = NULL,
   locus_dir = NULL,
   title = NULL,
-  print_plot = TRUE,
+  show_plot = TRUE,
   save_plot = TRUE,
   return_interaction_track = FALSE,
   x_limits = NULL,
@@ -42,7 +42,7 @@ NOTT2019_plac_seq_plot(
 \item{title}{all title elements: plot, axes, legends (\code{\link[ggplot2:element]{element_text()}};
 inherits from \code{text})}
 
-\item{print_plot}{Print plot.}
+\item{show_plot}{Print plot.}
 
 \item{save_plot}{Whether to save the plot.}
 

@@ -5,6 +5,7 @@
 #'
 #' @keywords internal
 #' @importFrom dplyr %>% top_n
+#' @importFrom methods show
 cell_type_specificity <- function(plot_dat,
                                   merged_DT,
                                   min_count = NULL,
@@ -97,7 +98,7 @@ cell_type_specificity <- function(plot_dat,
         gg_tally <- gg_tally + 
             ggplot2::scale_y_discrete(position = "right")
     }
-    if (show_plot) print(gg_tally)
+    if (show_plot) methods::show(gg_tally)
     return(list(
         plot = gg_tally,
         data = cell_tally

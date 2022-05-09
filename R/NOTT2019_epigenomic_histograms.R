@@ -34,6 +34,7 @@
 #' @importFrom stats formula
 #' @importFrom echodata dt_to_granges
 #' @importFrom GenomicRanges mcols
+#' @importFrom methods show
 #' @examples
 #' nott2019_track <- echoannot::NOTT2019_epigenomic_histograms(
 #'     dat = echodata::BST1, 
@@ -62,17 +63,12 @@ NOTT2019_epigenomic_histograms <- function(
         nThread = 1,
         save_annot = FALSE,
         verbose = TRUE) {  
-    # show_plot=T;save_plot=T;full_data=T;return_assay_track=F;
-    # binwidth=2500; geom="histogram"; plot_formula="Cell_type ~.";
-    # show_regulatory_rects=T;  bigwig_dir=NULL; verbose=T; nThread=1;
-    # zoom=500000; fill_var="Assay";zoom = "1x";
-    # density_adjust=.2; strip.text.y.angle=0; dat <- echodata::BST1;
-    # save_annot=T; locus_dir <- tempdir(); fill_var="Assay";
-    # genomic_units="Mb"; save_path <- tempfile()
-    
+     
+    # echoverseTemplate:::source_all(packages = "dplyr")
+    # echoverseTemplate:::args2vars(NOTT2019_epigenomic_histograms)
     requireNamespace("ggplot2")
     requireNamespace("ggbio")
-    UCSC_available <- cell_type <- P <- mean.PP <- gene <- leadSNP <-
+    UCSC_available <- cell_type <- P <- mean.PP <- leadSNP <-
         Consensus_SNP <- NULL
 
     messager("NOTT2019:: Creating epigenomic histograms plot",
@@ -109,7 +105,11 @@ NOTT2019_epigenomic_histograms <- function(
                                  full_data = full_data,
                                  xlims = xlims, 
                                  save_path = if(save_annot) {
-                                     save_plot
+                                     file.path(
+                                         tempdir(),
+                                         paste(basename(locus_dir),
+                                               "Nott2019_bigwig.rds",
+                                               sep="_"))
                                  } else {NULL}, 
                                  force_new = FALSE, 
                                  nThread = nThread, 
@@ -217,8 +217,9 @@ NOTT2019_epigenomic_histograms <- function(
         "Nott_etal_2019" = nott_tracks
     )
     # Fuse all tracks
+    locus_name <- if(locus_dir!=tempdir()) basename(locus_dir) else NULL
     params_list <- list(
-        title = paste0(gene, 
+        title = paste0(locus_name, 
                        " [", formatC(
                            length(GenomicRanges::seqnames(gr.dat)),
                            big.mark = ","), 
@@ -256,7 +257,7 @@ NOTT2019_epigenomic_histograms <- function(
                    linetype = "solid")
 
     if (show_plot) {
-        print(trks_plus_lines)
+        methods::show(trks_plus_lines)
     }
     if (save_plot) {
         save_path <- file.path(

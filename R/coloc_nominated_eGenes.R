@@ -39,6 +39,7 @@
 #' @keywords internal
 #' @importFrom dplyr %>% group_by top_n slice mutate desc arrange
 #' @importFrom data.table fread data.table
+#' @importFrom methods show
 coloc_nominated_egenes <- function(coloc_results,
                                    merged_DT,
                                    label_yaxis = TRUE,
@@ -119,7 +120,7 @@ coloc_nominated_egenes <- function(coloc_results,
         gg_egene <- gg_egene + 
             ggplot2::theme(axis.text.y = ggplot2::element_blank())
     }
-    if (show_plot) print(gg_egene)
+    if (show_plot) methods::show(gg_egene)
     return(list(
         data = data.table::data.table(top_eGenes),
         plot = gg_egene

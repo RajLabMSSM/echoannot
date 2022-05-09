@@ -7,6 +7,7 @@
 #' @family summarise
 #' @export
 #' @importFrom dplyr %>%
+#' @importFrom methods show
 #' @examples
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' snp_groups <- get_SNPgroup_counts(merged_DT = merged_DT)
@@ -45,11 +46,13 @@ get_SNPgroup_counts <- function(merged_DT,
             )
     )
     message("Report:: all loci:")
-    print(snp_groups[, !colnames(snp_groups) %in% grouping_vars] %>%
+    methods::show(
+        snp_groups[, !colnames(snp_groups) %in% grouping_vars] %>%
         colSums() / dplyr::n_distinct(snp_groups$Locus))
     message("Report:: loci with at least one Consensus SNP:")
     consensus_present <- subset(snp_groups, Consensus > 0)
-    print(consensus_present[, !colnames(consensus_present) %in%
+    methods::show(
+        consensus_present[, !colnames(consensus_present) %in%
         grouping_vars] %>%
         colSums() / dplyr::n_distinct(consensus_present$Locus))
     return(data.frame(snp_groups))

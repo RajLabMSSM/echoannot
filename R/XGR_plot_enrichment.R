@@ -3,6 +3,7 @@
 #' Plot XGR enrichment.
 #' @family XGR
 #' @keywords internal
+#' @importFrom methods show
 #' @examples
 #' \dontrun{
 #' enrich_res <- XGR_iterate_enrichment(
@@ -64,7 +65,7 @@ XGR_plot_enrichment <- function(enrich_res,
             plot.subtitle = ggplot2::element_text(hjust = .5)
         )
     if (show_plot) {
-        print(gp)
+        methods::show(gp)
     }
     return(gp)
 }

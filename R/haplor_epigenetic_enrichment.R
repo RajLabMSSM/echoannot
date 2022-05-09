@@ -1,6 +1,7 @@
 #' Test for enrichment of \code{HaploR} annotations
 #'
 #' @keywords internal
+#' @importFrom methods show
 #' @family annotate
 #' @source
 #' \href{https://cran.r-project.org/web/packages/haploR/vignettes/haplor-vignette.html}{
@@ -44,11 +45,11 @@ haplor_epigenetics_enrichment <- function(snp_list1,
             chisq.results <- stats::chisq.test(cont_tab,
                 simulate.p.value = TRUE
             )
-            print(chisq.results)
+            methods::show(chisq.results)
         }
         if (fisher) {
             fisher.results <- stats::fisher.test(cont_tab)
-            print(fisher.results)
+            methods::show(fisher.results)
         }
     }
 }
