@@ -39,7 +39,7 @@ NOTT2019_plac_seq_plot(
 
 \item{locus_dir}{Locus-specific directory.}
 
-\item{title}{all title elements: plot, axes, legends (\code{\link[ggplot2:element]{element_text()}};
+\item{title}{all title elements: plot, axes, legends (\code{\link[ggplot2:element_text]{element_text()}};
 inherits from \code{text})}
 
 \item{show_plot}{Print plot.}

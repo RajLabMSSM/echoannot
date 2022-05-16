@@ -18,7 +18,7 @@ initialize_plac_seq_plot <- function(interact.DT,
                     x = "Start",
                     y = interact_y,
                     xend = "End",
-                    alpha = "consensus_snp_overlap"
+                    alpha = "target_snp_overlap"
                 ),
                 max.height = max.height, colour = "black"
             ) + 

@@ -1,3 +1,14 @@
+# echoannot 0.99.6
+
+## New features 
+
+* `XGR_download_and_standardize`: Set `dat=NULL` to return genome-wide data.
+
+## Bug fixes 
+
+* `prepare_highlight_plac_data`: Allow to plot overlap with any SNP group 
+(not just consensus SNPs).  
+
 # echoannot 0.99.5
 
 ## New features 

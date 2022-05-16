@@ -78,8 +78,7 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
     requireNamespace("ggplot2")
     requireNamespace("ggbio")
     leadSNP <- SNP <- Consensus_SNP <- mean.PP <- Effect <- Support <-
-        Start <- End <- consensus_snp_overlap <- y <- Element <-
-        POS <- P <- NULL;
+        Start <- End <- y <- Element <- POS <- P <- NULL;
     messager("NOTT2019:: Creating PLAC-seq interactome plot", v = verbose)
     dat <- add_mb(dat = dat)
     xvar <- genomic_units

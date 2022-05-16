@@ -8,7 +8,7 @@ XGR_download_and_standardize(
   lib.selections = c("ENCODE_TFBS_ClusteredV3_CellTypes", "TFBS_Conserved",
     "Uniform_TFBS"),
   as_grangesList = FALSE,
-  dat,
+  dat = NULL,
   nThread = 1
 )
 }
@@ -22,7 +22,8 @@ For full list of libraries see
 \item{as_grangesList}{Return as a \code{GRangesList},
 instead of a single merged \code{GRanges} object.}
 
-\item{dat}{Fine-mapping results.}
+\item{dat}{data.table of genomic coordinates to query XGR with.
+Set as \code{NULL} to return genome-wide data.}
 
 \item{nThread}{Number of cores to parallelise across.}
 }

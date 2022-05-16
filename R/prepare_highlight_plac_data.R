@@ -1,22 +1,27 @@
 prepare_highlight_plac_data <- function(dat,
                                         interact.DT,
+                                        snp_filter="Support>0",
                                         verbose = TRUE){
-    Consensus_SNP <- NULL;
     
-    messager("Preparing data for highlighting PLAC-seq interactions.",
+    messager("Preparing data for highlighting PLAC-seq interactions",
+             "that overlap with SNP subset:",snp_filter,
              v=verbose)
-    consensus_snps <- subset(dat, Consensus_SNP == TRUE)
-    consensus_snps$CHR <- paste0("chr", consensus_snps$CHR)
+    target_snps <- subset(dat, eval(parse(text = snp_filter)))
+    if(length(target_snps)==0){
+        stp <- "No target SNPs overlapped with PLAC-seq anchors."
+        stop(stp)
+    } 
+    target_snps$CHR <- paste0("chr", target_snps$CHR)
     ## make GRanges
-    consensus.gr <- GenomicRanges::GRanges(
-        seqnames = consensus_snps$CHR,
+    target.gr <- GenomicRanges::GRanges(
+        seqnames = target_snps$CHR,
         ranges = IRanges::IRanges(
-            start = consensus_snps$POS - 1,
-            end = consensus_snps$POS
+            start = target_snps$POS - 1,
+            end = target_snps$POS
         )
     )
     #### Convert to UCSC format ####
-    consensus.gr <- echodata::dt_to_granges(dat = consensus.gr,
+    target.gr <- echodata::dt_to_granges(dat = target.gr,
                                             style = "UCSC",
                                             verbose = FALSE)
     plac_start.gr <- GenomicRanges::GRanges(
@@ -41,18 +46,18 @@ prepare_highlight_plac_data <- function(dat,
                                            verbose = FALSE)
     #### find overlaps ####
     end_overlaps <- GenomicRanges::findOverlaps(
-        query = consensus.gr,
+        query = target.gr,
         subject = plac_end.gr
     )
     start_overlaps <- GenomicRanges::findOverlaps(
-        query = consensus.gr,
+        query = target.gr,
         subject = plac_start.gr
     )
     all_overlaps <- unique(c(
         S4Vectors::subjectHits(end_overlaps),
         S4Vectors::subjectHits(start_overlaps)
     )) 
-    interact.DT$consensus_snp_overlap <- FALSE
-    interact.DT$consensus_snp_overlap[all_overlaps] <- TRUE
+    interact.DT$target_snp_overlap <- FALSE
+    interact.DT$target_snp_overlap[all_overlaps] <- TRUE
     return(interact.DT)
 }

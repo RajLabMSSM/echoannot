@@ -9,7 +9,8 @@
 #'  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.
 #' @param as_grangesList Return as a \code{GRangesList},
 #'  instead of a single merged \code{GRanges} object.
-#' @param dat Fine-mapping results.
+#' @param dat data.table of genomic coordinates to query XGR with.
+#' Set as \code{NULL} to return genome-wide data.
 #' @param nThread Number of cores to parallelise across.
 #'
 #' @return GRangesList
@@ -31,7 +32,7 @@ XGR_download_and_standardize <- function(lib.selections = c(
                                              "Uniform_TFBS"
                                          ),
                                          as_grangesList = FALSE,
-                                         dat,
+                                         dat=NULL,
                                          nThread = 1) {
     # Iterate over XGR libraries
     gr.lib <- lapply(lib.selections, function(lib.name) {
@@ -63,13 +64,15 @@ XGR_download_and_standardize <- function(lib.selections = c(
         # Merge lists together
         if (!is.null(all_GRL)) {
             ALL_GRL <- unlist(GenomicRanges::GRangesList(all_GRL))
-            ALL_GRL <- granges_overlap(
-                dat1 = dat,
-                chrom_col.1 = "CHR",
-                start_col.1 = "POS",
-                end_col.1 = "POS",
-                dat2 = ALL_GRL
-            )
+            if(!is.null(dat)){
+                ALL_GRL <- granges_overlap(
+                    dat1 = dat,
+                    chrom_col.1 = "CHR",
+                    start_col.1 = "POS",
+                    end_col.1 = "POS",
+                    dat2 = ALL_GRL
+                )
+            }
             # Parse metadata
             ALL_GRL$library <- lib.name
             ALL_GRL$fullname <- names(ALL_GRL)

@@ -1,7 +1,7 @@
 Package: echoannot
 Type: Package
 Title: echoverse module: Annotate fine-mapping results
-Version: 0.99.5
+Version: 0.99.6
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -77,7 +77,7 @@ Remotes:
     github::RajLabMSSM/echodata,
     github::RajLabMSSM/echotabix,
     github::hfang-bristol/XGR
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3
