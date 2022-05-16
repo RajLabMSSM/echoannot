@@ -7,7 +7,7 @@ prepare_highlight_plac_data <- function(dat,
              "that overlap with SNP subset:",snp_filter,
              v=verbose)
     target_snps <- subset(dat, eval(parse(text = snp_filter)))
-    if(length(target_snps)==0){
+    if(nrow(target_snps)==0){
         stp <- "No target SNPs overlapped with PLAC-seq anchors."
         stop(stp)
     } 
