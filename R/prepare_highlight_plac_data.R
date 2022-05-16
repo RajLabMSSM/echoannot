@@ -1,6 +1,7 @@
 prepare_highlight_plac_data <- function(dat,
                                         interact.DT,
                                         snp_filter="Support>0",
+                                        anchor_size=5000,
                                         verbose = TRUE){
     
     messager("Preparing data for highlighting PLAC-seq interactions",
@@ -10,25 +11,16 @@ prepare_highlight_plac_data <- function(dat,
     if(nrow(target_snps)==0){
         stp <- "No target SNPs overlapped with PLAC-seq anchors."
         stop(stp)
-    } 
-    target_snps$CHR <- paste0("chr", target_snps$CHR)
-    ## make GRanges
-    target.gr <- GenomicRanges::GRanges(
-        seqnames = target_snps$CHR,
-        ranges = IRanges::IRanges(
-            start = target_snps$POS - 1,
-            end = target_snps$POS
-        )
-    )
+    }  
     #### Convert to UCSC format ####
-    target.gr <- echodata::dt_to_granges(dat = target.gr,
-                                            style = "UCSC",
-                                            verbose = FALSE)
+    target.gr <- echodata::dt_to_granges(dat = target_snps,
+                                         style = "UCSC", 
+                                         verbose = FALSE) 
     plac_start.gr <- GenomicRanges::GRanges(
         seqnames = interact.DT$chr,
         ranges = IRanges::IRanges(
-            start = interact.DT$Start - 5000,
-            end = interact.DT$Start
+            start = interact.DT$Start - (anchor_size/2),
+            end = interact.DT$Start + (anchor_size/2)
         )
     )
     plac_start.gr <- echodata::dt_to_granges(dat = plac_start.gr,
@@ -37,8 +29,8 @@ prepare_highlight_plac_data <- function(dat,
     plac_end.gr <- GenomicRanges::GRanges(
         seqnames = interact.DT$chr,
         ranges = IRanges::IRanges(
-            start = interact.DT$End,
-            end = interact.DT$End + 5000
+            start = interact.DT$End - (anchor_size/2),
+            end = interact.DT$End + (anchor_size/2)
         )
     )
     plac_end.gr <- echodata::dt_to_granges(dat = plac_end.gr,

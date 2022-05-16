@@ -3,6 +3,8 @@
 ## New features 
 
 * `XGR_download_and_standardize`: Set `dat=NULL` to return genome-wide data.
+* New vignette: *cell_type_specific_epigenomics*, 
+    with Nott2019 and Corces2020 data.
 
 ## Bug fixes 
 

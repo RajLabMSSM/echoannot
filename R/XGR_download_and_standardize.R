@@ -9,7 +9,7 @@
 #'  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.
 #' @param as_grangesList Return as a \code{GRangesList},
 #'  instead of a single merged \code{GRanges} object.
-#' @param dat data.table of genomic coordinates to query XGR with.
+#' @param dat data.table of genomic coordinates to query with.
 #' Set as \code{NULL} to return genome-wide data.
 #' @param nThread Number of cores to parallelise across.
 #'

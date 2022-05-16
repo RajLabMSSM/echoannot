@@ -7,10 +7,18 @@
 \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
 }
 \usage{
-NOTT2019_get_promoter_interactome_data(dat)
+NOTT2019_get_promoter_interactome_data(dat = NULL)
+}
+\arguments{
+\item{dat}{data.table of genomic coordinates to query with.
+Set as \code{NULL} to return genome-wide data.}
 }
 \description{
 Brain cell-specific epigenomic data from Nott et al. (2019).
+}
+\examples{
+dat <- echodata::BST1
+annot_sub <- NOTT2019_get_promoter_interactome_data(dat=dat)
 }
 \seealso{
 Other NOTT2019: 
@@ -27,4 +35,3 @@ Other NOTT2019:
 \code{\link{get_NOTT2019_superenhancer_interactome}()}
 }
 \concept{NOTT2019}
-\keyword{internal}

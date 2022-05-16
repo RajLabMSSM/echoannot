@@ -22,7 +22,7 @@ For full list of libraries see
 \item{as_grangesList}{Return as a \code{GRangesList},
 instead of a single merged \code{GRanges} object.}
 
-\item{dat}{data.table of genomic coordinates to query XGR with.
+\item{dat}{data.table of genomic coordinates to query with.
 Set as \code{NULL} to return genome-wide data.}
 
 \item{nThread}{Number of cores to parallelise across.}

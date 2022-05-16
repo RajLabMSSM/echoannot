@@ -10,12 +10,27 @@
 NOTT2019_get_interactome(
   annot_sub,
   top.consensus.pos,
-  marker_key,
+  marker_key = NOTT2019_marker_key(),
   verbose = TRUE
 )
 }
+\arguments{
+\item{annot_sub}{annot_sub}
+
+\item{top.consensus.pos}{Top Consensus SNP position.}
+
+\item{marker_key}{Marker key.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Brain cell-specific epigenomic data from Nott et al. (2019).
+}
+\examples{
+dat <- echodata::BST1
+annot_sub <- NOTT2019_get_promoter_interactome_data(dat = dat)
+interact.DT <- NOTT2019_get_interactome(annot_sub=annot_sub, 
+                                        top.consensus.pos = 15712787)
 }
 \seealso{
 Other NOTT2019: 
@@ -32,4 +47,3 @@ Other NOTT2019:
 \code{\link{get_NOTT2019_superenhancer_interactome}()}
 }
 \concept{NOTT2019}
-\keyword{internal}

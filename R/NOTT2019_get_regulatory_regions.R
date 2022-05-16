@@ -12,6 +12,8 @@
 #'
 #' @importFrom parallel mclapply
 #' @importFrom data.table rbindlist 
+#' @examples 
+#' regions <- NOTT2019_get_regulatory_regions()
 NOTT2019_get_regulatory_regions <- function(as_granges = FALSE,
                                             nThread = 1,
                                             verbose = TRUE) {

@@ -1,16 +1,25 @@
 #' Import cell type-specific interactomes
 #'
 #' Brain cell-specific epigenomic data from Nott et al. (2019).
-#' @keywords internal
+#' @param annot_sub annot_sub
+#' @param top.consensus.pos Top Consensus SNP position.
+#' @param marker_key Marker key.
+#' @param verbose Print messages.
+#' 
+#' @export
 #' @family NOTT2019
 #' @source
 #' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
-#'
 #' @importFrom dplyr %>% mutate group_by summarise
 #' @importFrom data.table data.table rbindlist
+#' @examples 
+#' dat <- echodata::BST1
+#' annot_sub <- NOTT2019_get_promoter_interactome_data(dat = dat)
+#' interact.DT <- NOTT2019_get_interactome(annot_sub=annot_sub, 
+#'                                         top.consensus.pos = 15712787)
 NOTT2019_get_interactome <- function(annot_sub,
                                      top.consensus.pos,
-                                     marker_key,
+                                     marker_key=NOTT2019_marker_key(),
                                      verbose = TRUE) {
     Coordinates <- Interaction <- chr <- Cell_type <- Element <- End <-
         top.consensus.dist <- NULL;
@@ -52,9 +61,9 @@ NOTT2019_get_interactome <- function(annot_sub,
     interact.DT$Start <- as.numeric(interact.DT$Start)
     interact.DT$End <- as.numeric(interact.DT$End)
     # Summarise distance from different celltype enhancer interactions
-    summarise_top.consensus.dist <- interact.DT %>%
-        dplyr::mutate(top.consensus.dist = End - top.consensus.pos) %>%
-        dplyr::group_by(Cell_type) %>%
-        dplyr::summarise(top.consensus.dist = mean(top.consensus.dist))
+    # summarise_top.consensus.dist <- interact.DT %>%
+    #     dplyr::mutate(top.consensus.dist = End - top.consensus.pos) %>%
+    #     dplyr::group_by(Cell_type) %>%
+    #     dplyr::summarise(top.consensus.dist = mean(top.consensus.dist))
     return(interact.DT)
 }

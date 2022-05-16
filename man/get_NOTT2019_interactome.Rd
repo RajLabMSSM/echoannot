@@ -39,6 +39,10 @@ piggyback::pb_upload(
     repo = "RajLabMSSM/echoannot"
 )
 }
+
+\code{
+NOTT2019_interactome <- get_NOTT2019_interactome()
+}
 }
 \usage{
 get_NOTT2019_interactome()
@@ -47,9 +51,6 @@ get_NOTT2019_interactome()
 Originally from \href{https://doi.org/10.1126/science.aay0793}{
 Nott et al. (2019)}.
 Specifically: \emph{aay0793-Nott-Table-S5.xlsx}.
-}
-\examples{
-NOTT2019_interactome <- get_NOTT2019_interactome()
 }
 \seealso{
 Other NOTT2019: 
@@ -66,3 +67,4 @@ Other NOTT2019:
 \code{\link{get_NOTT2019_superenhancer_interactome}()}
 }
 \concept{NOTT2019}
+\keyword{internal}

@@ -89,10 +89,7 @@ NOTT2019_plac_seq_plot <- function(dat = NULL,
                 verbose = FALSE
             )
     }
-    marker_key <- list(
-        PU1 = "microglia", Olig2 = "oligo",
-        NeuN = "neurons", LHX2 = "astrocytes"
-    )
+    marker_key <- NOTT2019_marker_key()
     lead.pos <- get_lead_pos(dat = dat, 
                              xvar = xvar,
                              index_SNP = index_SNP)

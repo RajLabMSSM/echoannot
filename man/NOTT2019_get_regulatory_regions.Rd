@@ -24,6 +24,9 @@ instead of a \link[data.table]{data.table}.}
 \description{
 Get epigenomic peak ranges from Nott2019.
 }
+\examples{
+regions <- NOTT2019_get_regulatory_regions()
+}
 \seealso{
 Other NOTT2019: 
 \code{\link{NOTT2019_bigwig_metadata}},

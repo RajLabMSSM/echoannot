@@ -1,4 +1,3 @@
-
 #' Brain cell type-specific enhancers, promoters, and interactomes
 #'
 #' Originally from \href{https://doi.org/10.1126/science.aay0793}{
@@ -41,9 +40,11 @@
 #'     repo = "RajLabMSSM/echoannot"
 #' )
 #' }
-#' @export
-#' @examples 
+#' @keywords internal
+#' @source
+#' \code{
 #' NOTT2019_interactome <- get_NOTT2019_interactome()
+#' }
 get_NOTT2019_interactome <- function() {
     tmp <- get_data(fname = "NOTT2019_interactome.rds")
     dat <- readRDS(tmp)
