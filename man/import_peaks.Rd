@@ -6,13 +6,18 @@
 \usage{
 import_peaks(
   ids,
-  builds,
+  builds = "hg19",
   query_granges = NULL,
   query_granges_build = NULL,
+  query_by_chromosome = FALSE,
   force_new = FALSE,
   cutoff = NULL,
+  split_chromosomes = FALSE,
+  regex_queries = list(narrowPeak = "narrowpeak", broadPeak = "broadpeak", genericPeak
+    = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz", bigWig = "bigwig|bw$"),
   peaks_dir = tempdir(),
   save_path = tempfile(fileext = "grl.hg38.rds"),
+  nThread = 1,
   verbose = TRUE
 )
 }
@@ -44,10 +49,21 @@ If the file contains pvalue scores from MACS3, score 5 means pvalue 1e-5.
 If \code{NULL}, a reasonable \code{cutoff} value will be inferred 
 through a \code{cutoff_analysis}.}
 
+\item{split_chromosomes}{Split single-threaded query 
+into multi-threaded query across chromosomes. 
+This is can be helpful especially when calling peaks from 
+large bigWig/bedGraph files.
+The number of threads used is set by the \code{nThread} argument.}
+
+\item{regex_queries}{Named list of queries.
+Matches will be case-insensitive.}
+
 \item{peaks_dir}{Directory to save peaks to 
 (only used when calling peaks from bedGraph files).}
 
 \item{save_path}{Path to save query results to in \emph{.rds} format.}
+
+\item{nThread}{Number of threads to parallelize across.}
 
 \item{verbose}{Print messages.}
 }
@@ -65,5 +81,5 @@ Automatically detects which database each accession ID is from
 and queries a subset of ranges specified in \code{query_granges}.
 }
 \examples{
-grl <- echoannot::import_peaks(ids = "GSM4271282", builds = "hg19")
+grl <- echoannot::import_peaks(ids = "GSM4271282")
 }

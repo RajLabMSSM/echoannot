@@ -1,3 +1,27 @@
+# echoannot 0.99.7
+
+## New features 
+
+* `import_peaks_geo`:
+    - Can now import/call peaks in parallel, 
+    by splitting queries across chromosomes. 
+    - Can now import >1 peak type at a time, 
+    and documents it in "peaktype" col. 
+* `import_peaks`: 
+    - Pass up args: `regex_queries`, `split_chromosomes`
+* New function: `process_ids`:
+    - Able to get GSM sample names from GSE project ID.
+* Split `import_peaks_geo` into separate`import_peaks_*` functions 
+for each file type.
+    
+## Bug fixes 
+
+* When only one peak type is returned from GEO search, 
+prevent `mapply` from turning the results into a matrix with `SIMPLIFY=FALSE`. 
+* Return empty `GenomicRanges::GRanges()` 
+instead of error/NA/NULL during errors, so you can still merge at the end. 
+    
+    
 # echoannot 0.99.6
 
 ## New features 

@@ -6,6 +6,9 @@
 \source{
 \href{https://github.com/ropensci/rtweet/issues/229}{
 curl connection timeout issues}
+
+\href{https://github.com/Bioconductor/BiocParallel/issues/111}{
+Issue with importing bigWig files in parallel}
 }
 \usage{
 import_peaks_geo(
@@ -13,11 +16,13 @@ import_peaks_geo(
   build,
   query_granges,
   query_granges_build,
+  split_chromosomes = FALSE,
   cutoff = NULL,
+  regex_queries = list(narrowPeak = "narrowpeak", broadPeak = "broadpeak", genericPeak
+    = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz", bigWig = "bigwig|bw$"),
   peaks_dir = tempdir(),
-  regex_queries = list(narrowPeaks = "narrowpeak", broadPeaks = "broadpeak",
-    genericPeaks = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz", bigWig = "bigwig|bw$"),
   timeout = 3 * 60,
+  nThread = 1,
   verbose = TRUE
 )
 }
@@ -31,13 +36,24 @@ regions to extract from each sample.}
 \item{query_granges_build}{[Optional]
 Genome build that \code{query_granges} is aligned to.}
 
+\item{split_chromosomes}{Split single-threaded query 
+into multi-threaded query across chromosomes. 
+This is can be helpful especially when calling peaks from 
+large bigWig/bedGraph files.
+The number of threads used is set by the \code{nThread} argument.}
+
 \item{cutoff}{Cutoff depends on which method you used for score track.
 If the file contains pvalue scores from MACS3, score 5 means pvalue 1e-5.
 If \code{NULL}, a reasonable \code{cutoff} value will be inferred 
 through a \code{cutoff_analysis}.}
 
+\item{regex_queries}{Named list of queries.
+Matches will be case-insensitive.}
+
 \item{peaks_dir}{Directory to save peaks to 
 (only used when calling peaks from bedGraph files).}
+
+\item{nThread}{Number of threads to parallelize across.}
 
 \item{verbose}{Print messages.}
 }

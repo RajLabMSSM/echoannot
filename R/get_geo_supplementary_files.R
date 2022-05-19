@@ -10,9 +10,9 @@
 #' @importFrom methods new
 get_geo_supplementary_files <- function(gsm,
                                         regex_queries = list(
-                                            narrowPeaks="narrowpeak",
-                                            broadPeaks="broadpeak",
-                                            genericPeaks="peak",
+                                            narrowPeak="narrowpeak",
+                                            broadPeak="broadpeak",
+                                            genericPeak="peak",
                                             bedGraph="bedgraph|graph.gz|bdg.gz",
                                             bigWig="bigwig|bw$"
                                             ),
@@ -24,12 +24,25 @@ get_geo_supplementary_files <- function(gsm,
     supp_urls <- g@header[
         grep("^supplementary_file_*",names(g@header))
     ]
-    messager(length(supp_urls),"supplementary file(s) found:",
-             paste("\n -",basename(unlist(supp_urls)),collapse = ""),
-             v=verbose)
+    # messager(length(supp_urls),"supplementary file(s) found:",
+    #          paste("\n -",paste("...",basename(unlist(supp_urls)),sep="/"),
+    #                collapse = ""),
+    #          v=verbose)
     links <- mapply(regex_queries,FUN=function(x){
         grep(x, unlist(supp_urls),
              ignore.case = TRUE, value = TRUE)
-    })
+    }, SIMPLIFY = FALSE) 
+    #### Remove empty slots #####
+    links <- links[mapply(links, FUN=function(x){length(x)>0})] 
+    #### Report ####
+    messager("Found link(s) for",length(links),
+             if(length(links)>1) "categories." else "category.") 
+    for(nm in names(links)){
+        messager(nm,":",
+                 paste("\n>>>",links[[nm]], collapse = "")
+                 )
+    }
+    ## make more forgiving of casing 
+    names(links) <- tolower(names(links))
     return(links)
 }

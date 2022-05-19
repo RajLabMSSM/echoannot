@@ -4,7 +4,7 @@
 \alias{message_parallel}
 \title{Send messages to console even from within parallel processes}
 \usage{
-message_parallel(...)
+message_parallel(..., v = TRUE)
 }
 \value{
 A message

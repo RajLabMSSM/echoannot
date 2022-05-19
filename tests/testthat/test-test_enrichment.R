@@ -3,15 +3,15 @@ test_that("test_enrichment works", {
     query_granges <- GenomicRanges::GRanges("chr6:165169213-167169213")
     
     ids1 <- "GSM2101439"
-    #### genericPeaks: Without query_granges ####
+    #### genericPeak: Without query_granges ####
     grlist1 <- echoannot::import_peaks(ids = ids1,
                                    builds = "hg19",
                                    query_granges = query_granges, 
                                    query_granges_build = "hg38") 
     
     
-    #### narrowPeaks: With query_granges #### 
-    #### broadPeaks: With query_granges #### 
+    #### narrowPeak: With query_granges #### 
+    #### broadPeak: With query_granges #### 
     ids2 <- c("GSM945244","GSM1003455")
     grlist2 <- echoannot::import_peaks(ids = ids2,
                                    builds = "hg19",

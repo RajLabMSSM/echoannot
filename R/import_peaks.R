@@ -27,8 +27,16 @@
 #' @param peaks_dir Directory to save peaks to 
 #' (only used when calling peaks from bedGraph files).
 #' @param save_path Path to save query results to in \emph{.rds} format.
+#' @param split_chromosomes Split single-threaded query 
+#' into multi-threaded query across chromosomes. 
+#' This is can be helpful especially when calling peaks from 
+#' large bigWig/bedGraph files.
+#' The number of threads used is set by the \code{nThread} argument. 
+#' @param nThread Number of threads to parallelize across.
 #' @param verbose Print messages.
 #' @inheritParams call_peaks
+#' @inheritParams get_geo_supplementary_files
+#' @inheritParams BiocParallel::MulticoreParam
 #' 
 #' @returns 
 #' A named list of peak files in  \link[GenomicRanges]{GRanges} format.
@@ -37,22 +45,36 @@
 #' 
 #' @export
 #' @importFrom stats setNames
+#' @importFrom GenomicRanges GRanges
 #' @examples 
-#' grl <- echoannot::import_peaks(ids = "GSM4271282", builds = "hg19")
+#' grl <- echoannot::import_peaks(ids = "GSM4271282")
 import_peaks <- function(ids,
-                         builds,
+                         builds = "hg19",
                          query_granges = NULL, 
                          query_granges_build = NULL,
+                         query_by_chromosome = FALSE,
                          force_new = FALSE, 
                          cutoff = NULL,
+                         split_chromosomes = FALSE,
+                         regex_queries = list(
+                             narrowPeak="narrowpeak",
+                             broadPeak="broadpeak",
+                             genericPeak="peak",
+                             bedGraph="bedgraph|graph.gz|bdg.gz",
+                             bigWig="bigwig|bw$"
+                         ),
                          peaks_dir = tempdir(),
                          save_path = tempfile(fileext = "grl.hg38.rds"),
+                         nThread = 1,
                          verbose = TRUE){
     
     #### Check builds ####
     if(length(builds)>1 && (length(builds)!=length(ids))){
         stop("builds must be same length as ids.")
     } 
+    #### Get GSM names ####
+    ids <- process_ids(ids = ids, 
+                       verbose = verbose) 
     #### Check query_granges ####
     if(!is.null(query_granges)){
         ## Standardise to UCSC style 
@@ -62,7 +84,7 @@ import_peaks <- function(ids,
         if(is.null(query_granges_build)){
             stop("query_granges_build must be set when using query_granges.")
         }
-    }
+    } 
     #### Check for pre-existing data ####
     if((!is.null(save_path)) && 
        file.exists(save_path) & 
@@ -70,9 +92,8 @@ import_peaks <- function(ids,
         messager("Importing stored peaks data.",v=verbose)
         grl <- readRDS(save_path)
     } else { 
-        # chip_meta <- chip_meta[!is.na(Accession.no) & Accession.no!="",]
-        chip_list <- stats::setNames(ids,ids)
-        messager("Querying",length(chip_list),"sample(s).",v=verbose)
+        ids <- stats::setNames(ids,ids) 
+        messager("Querying",length(ids),"sample(s).",v=verbose)
         grl <- mapply(ids, FUN = function(no){
             cat(paste("\nQuery:",no,"\n"))
             tryCatch({
@@ -90,18 +111,21 @@ import_peaks <- function(ids,
                                      query_granges = query_granges,
                                      query_granges_build = query_granges_build,
                                      cutoff = cutoff,
+                                     regex_queries = regex_queries,
                                      peaks_dir = peaks_dir,
+                                     split_chromosomes = split_chromosomes,
+                                     nThread = nThread,
                                      verbose = verbose) 
                 #### Import peaks: ENCODE ####
                 } else if(startsWith(toupper(no),"ENCF")){
-                    stop("Under construction.")
+                    messager("Under construction.")
+                    return(GenomicRanges::GRanges())
                 } else {
                     messager("id not recognized. Skipping:",no,
                              v=verbose)
-                    return(NA)
-                }
-                
-            }, error=function(e) {message(e); NA}) 
+                    return(GenomicRanges::GRanges())
+                } 
+            }, error=function(e) {message(e); GenomicRanges::GRanges()}) 
         })
         #### Save ####
         if(!is.null(save_path)){

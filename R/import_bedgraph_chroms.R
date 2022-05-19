@@ -23,23 +23,17 @@ import_bedgraph_chroms <- function(URL,
     }
     if(tolower(build) %in% c("hg38","grch38")){
         requireNamespace("BSgenome.Hsapiens.UCSC.hg38")     
-    }
+    } 
+    chroms <- paste0("chr",gsub("chr","",unique(as.character(chroms))))
+    messager("Importing chromosome(s):",paste(chroms,collapse = ","),v=verbose)
+     
+    # messager("+ Selecting available chromosomes.",v=verbose)
+    select_chrom <- regioneR::filterChromosomes(
+        A = regioneR::getGenome(genome = build),
+        keep.chr = chroms)
     
-    # save_path <- file.path(
-    #     tempdir(), 
-    #     paste(
-    #         gsub(".bedgraph.gz$|.graph.gz$","",basename(URL)),
-    #         "selected_chroms","bedgraph",sep = ".")
-    # )
-    # chroms <- "chr6" 
-    messager("Importing chromosomes:",paste(chroms,collapse = ","),v=verbose)
-    chroms <- unique(as.character(chroms))
-    all_chrom <- regioneR::getGenome(genome = build)
-    messager("+ Selecting available chromosomes.",v=verbose)
-    select_chrom <- regioneR::filterChromosomes(A = all_chrom,
-                                                keep.chr = chroms)
     if(length(select_chrom)==0) {
-        stop("No matching chromosomes could be identified.")
+        stop("No matching chromosomes could be identified.\n")
     }
     messager("+ Importing as:",import_format,v=verbose)
     gr <- rtracklayer::import(con = URL, 

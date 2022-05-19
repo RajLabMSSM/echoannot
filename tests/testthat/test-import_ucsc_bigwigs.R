@@ -1,6 +1,5 @@
 test_that("import_ucsc_bigwigs works", {
   
-    
     bigwig_metadata <- echoannot::NOTT2019_bigwig_metadata[1,]
     query_dat = echodata::BST1
 

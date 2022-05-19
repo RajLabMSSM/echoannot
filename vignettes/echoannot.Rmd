@@ -26,7 +26,7 @@ library(`r pkg`)
 Import pre-calculated fine-mapping results.
 
 ```{r}
-dataset <- echodata::get_Nalls2019_loci(return_dir = TRUE)
+dataset <- echodata::get_Nalls2019_loci(return_dir = TRUE) 
 ```
 
 

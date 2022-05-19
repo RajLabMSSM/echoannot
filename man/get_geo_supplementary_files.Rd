@@ -6,8 +6,8 @@
 \usage{
 get_geo_supplementary_files(
   gsm,
-  regex_queries = list(narrowPeaks = "narrowpeak", broadPeaks = "broadpeak",
-    genericPeaks = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz", bigWig = "bigwig|bw$"),
+  regex_queries = list(narrowPeak = "narrowpeak", broadPeak = "broadpeak", genericPeak
+    = "peak", bedGraph = "bedgraph|graph.gz|bdg.gz", bigWig = "bigwig|bw$"),
   verbose = TRUE
 )
 }

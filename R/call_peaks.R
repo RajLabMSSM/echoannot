@@ -69,7 +69,8 @@ call_peaks <- function(bedgraph_path,
     if(is_bigwig(bedgraph_path)){ 
         messager("Converting bigWig --> bedGraph.",v=verbose)
         gr <- rtracklayer::import(bedgraph_path)
-        bedgraph_path2 <- gsub("bigwig$|bw$","bedGraph",bedgraph_path, ignore.case = TRUE)
+        bedgraph_path2 <- gsub("bigwig$|bw$","bedGraph",bedgraph_path,
+                               ignore.case = TRUE)
         rtracklayer::export.bedGraph(object = gr, con = bedgraph_path2)
         bedgraph_path <- bedgraph_path2
     }
@@ -96,11 +97,13 @@ call_peaks <- function(bedgraph_path,
                               trackline = trackline,
                               log = log,
                               outdir = outdir,
-                              outputfile = outputfile, )
+                              outputfile = outputfile)
     if(return_path) {
         return(out$outputs)
     } else {
         peaks <- rtracklayer::import.bed(out$outputs)
+        messager(formatC(length(peaks),big.mark = ","),"peaks called.",
+                 v=verbose)
         return(peaks)
     }
 }
