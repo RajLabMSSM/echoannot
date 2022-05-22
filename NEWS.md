@@ -1,3 +1,10 @@
+# echoannot 0.99.8
+
+## New features
+
+* Split `peakyfinders` from `echoannot`. 
+
+
 # echoannot 0.99.7
 
 ## New features 

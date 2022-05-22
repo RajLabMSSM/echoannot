@@ -1,7 +1,7 @@
 Package: echoannot
 Type: Package
 Title: echoverse module: Annotate fine-mapping results
-Version: 0.99.6
+Version: 0.99.7
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -52,8 +52,7 @@ Imports:
     BiocGenerics,
     IRanges,
     XGR,
-    piggyback,
-    httr
+    piggyback
 Suggests:
     markdown,
     rmarkdown,
@@ -66,12 +65,6 @@ Suggests:
     pheatmap,
     haploR,
     biomaRt,
-    MACSr,
-    TxDb.Hsapiens.UCSC.hg19.knownGene,
-    TxDb.Hsapiens.UCSC.hg38.knownGene,
-    BSgenome.Hsapiens.UCSC.hg19,
-    BSgenome.Hsapiens.UCSC.hg38,
-    GEOquery,
     regioneR
 Remotes:
     github::RajLabMSSM/echodata,

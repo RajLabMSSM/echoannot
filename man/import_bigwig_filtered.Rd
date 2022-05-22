@@ -17,6 +17,9 @@ object to query the bigwig file with.}
 or just the "score" column which summarizes the height of
 the aggregated reads across the genome (\code{full_data=TRUE}).}
 }
+\value{
+\link[GenomicRanges]{GRanges}
+}
 \description{
 Import a subset of a bigwig file
 based on the coordinates in a \link[GenomicRanges]{GRanges} 

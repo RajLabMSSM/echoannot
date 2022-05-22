@@ -11,6 +11,8 @@
 #' or just the "score" column which summarizes the height of
 #' the aggregated reads across the genome (\code{full_data=TRUE}).
 #' 
+#' @returns \link[GenomicRanges]{GRanges}
+#' 
 #' @keywords internal
 #' @importFrom GenomicRanges mcols start end
 #' @importFrom rtracklayer import.bw
