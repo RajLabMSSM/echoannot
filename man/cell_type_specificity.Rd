@@ -7,6 +7,7 @@
 cell_type_specificity(
   plot_dat,
   merged_DT,
+  plot_specificity = TRUE,
   min_count = NULL,
   top_celltype_only = FALSE,
   label_yaxis = TRUE,
@@ -15,6 +16,10 @@ cell_type_specificity(
   x_strip_angle = 40,
   show_plot = TRUE
 )
+}
+\arguments{
+\item{plot_specificity}{Plot cell-type specificity scores 
+for locus instead of raw assay overlap counts.}
 }
 \description{
 Aggregate SNP overlap across various epigenomic datasets

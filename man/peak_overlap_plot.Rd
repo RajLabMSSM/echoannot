@@ -63,7 +63,7 @@ merged_DT <- echodata::get_Nalls2019_merged()
 #### Consensus SNPs #####
 gg_peaks <- echoannot::peak_overlap_plot(
     merged_DT = merged_DT,
-    fill_title = "Consensus SNPs in epigenomic peaks")
+    plot_celltype_specificity = TRUE)
 #### UCS SNPs ####
 \dontrun{
 gg_peaks <- echoannot::peak_overlap_plot(

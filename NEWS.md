@@ -3,6 +3,8 @@
 ## New features
 
 * Split `peakyfinders` from `echoannot`. 
+* `cell_type_specifity`: Derive a EWCE-inspired specificity score 
+for each cell-type and show in plot. 
 
 
 # echoannot 0.99.7

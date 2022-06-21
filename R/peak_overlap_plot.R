@@ -15,7 +15,12 @@
 #' \href{https://doi.org/10.1126/science.aay0793}{
 #' Nott et al., 2019 (The Lancet Neurology)}
 #' \href{https://doi.org/10.1038/s41588-020-00721-x}{
-#' Corces et al., 2020 (Nature Genetics)}
+#' Corces et al., 2020 (Nature Genetics)} 
+#' @export
+#' @importFrom patchwork plot_layout
+#' @importFrom scales alpha
+#' @importFrom stats formula
+#' @importFrom methods show
 #' @examples
 #' #### Data ####
 #' merged_DT <- echodata::get_Nalls2019_merged()
@@ -23,7 +28,7 @@
 #' #### Consensus SNPs #####
 #' gg_peaks <- echoannot::peak_overlap_plot(
 #'     merged_DT = merged_DT,
-#'     fill_title = "Consensus SNPs in epigenomic peaks")
+#'     plot_celltype_specificity = TRUE)
 #' #### UCS SNPs ####
 #' \dontrun{
 #' gg_peaks <- echoannot::peak_overlap_plot(
@@ -31,11 +36,6 @@
 #'     snp_filter = "Support>0",
 #'     fill_title = "UCS SNPs in epigenomic peaks")
 #' }
-#' @export
-#' @importFrom patchwork plot_layout
-#' @importFrom scales alpha
-#' @importFrom stats formula
-#' @importFrom methods show
 peak_overlap_plot <- function(merged_DT,
                               snp_filter = "Consensus_SNP==TRUE",
                               force_new = FALSE,
@@ -254,6 +254,7 @@ peak_overlap_plot <- function(merged_DT,
     }
 
     if (plot_celltype_specificity) {
+        gg_cells <- NULL
         try({
             gg_cells <- cell_type_specificity(
                 plot_dat = plot_dat,
@@ -276,6 +277,7 @@ peak_overlap_plot <- function(merged_DT,
     }
     return(list(
         data = dat_melt,
-        plot = gg_pks
+        plot = gg_pks,
+        cell_type_specificity = gg_cells
     ))
 }

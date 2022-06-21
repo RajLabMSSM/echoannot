@@ -9,7 +9,8 @@ count_and_melt <- function(merged_annot,
         )[, .(
             Count = dplyr::n_distinct(SNP[eval(parse(text = snp_filter))],
                 na.rm = TRUE
-            )
+            ),
+            SNP = unique(SNP[eval(parse(text = snp_filter))])
         ),
         by = grouping_vars
         ]
