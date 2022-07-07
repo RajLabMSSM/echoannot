@@ -6,6 +6,10 @@
 * `cell_type_specifity`: Derive a EWCE-inspired specificity score 
 for each cell-type and show in plot. 
 
+## Bug fixes 
+
+* `merged_finemap_results`: Fix overwriting `multifinemap_pattern`. 
+
 
 # echoannot 0.99.7
 

@@ -82,5 +82,5 @@ and merge into a single data.frame.
 }
 \examples{
 dataset <- echodata::get_Nalls2019_loci(return_dir = TRUE)
-merged_DT <- echoannot:: merge_finemapping_results(dataset = dataset)
+merged_DT <- echoannot::merge_finemapping_results(dataset = dataset)
 }

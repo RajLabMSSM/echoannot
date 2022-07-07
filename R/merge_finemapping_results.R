@@ -36,7 +36,7 @@
 #' @importFrom parallel mclapply
 #' @examples
 #' dataset <- echodata::get_Nalls2019_loci(return_dir = TRUE)
-#' merged_DT <- echoannot:: merge_finemapping_results(dataset = dataset)
+#' merged_DT <- echoannot::merge_finemapping_results(dataset = dataset)
 merge_finemapping_results <- function(dataset = file.path(
                                           tempdir(),
                                           "Data/GWAS"
@@ -63,11 +63,9 @@ merge_finemapping_results <- function(dataset = file.path(
             v = verbose
         )
         # Find all multi-finemap_results files
-        multifinemap_pattern <-
-            multifinemap_pattern <-
+        multifinemap_pattern <- 
             file.path(dataset, paste0("*.*Multi-finemap.tsv*"))
-        multifinemap_pattern2 <-
-            multifinemap_pattern <-
+        multifinemap_pattern2 <- 
             file.path(dataset, paste0("*.*multi_finemap.csv*"))
 
         multi_dirs <- list.files(
@@ -78,7 +76,7 @@ merge_finemapping_results <- function(dataset = file.path(
             ), collapse = "|"),
             recursive = TRUE,
             full.names = TRUE
-        ) %>% unique()
+        ) |> unique()
         if (length(multi_dirs) == 0) {
             stop("+ No multi-finemap files found.")
         } else {
