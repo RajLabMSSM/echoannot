@@ -8,7 +8,7 @@
 #' @family ROADMAP
 #' @keywords internal
 #' @importFrom IRanges overlapsAny
-#' @importFrom dplyr %>% group_by tally n_distinct
+#' @importFrom dplyr group_by tally n_distinct
 ROADMAP_merge_and_process_grl <- function(grl.roadmap,
                                           gr.snp,
                                           n_top_tissues = 5,
@@ -26,15 +26,15 @@ ROADMAP_merge_and_process_grl <- function(grl.roadmap,
             function(ROW) {
                 base::strsplit(ROW, "_")[[1]][2]
             }
-        ) %>% unlist()
+        ) |> unlist()
     grl.roadmap.filt <- grl.ROADMAP_merged[unlist(lapply(
         grl.roadmap, function(e) {
             IRanges::overlapsAny(e, gr.snp, minoverlap = 1)
         }
     ))]
     if (!is.null(n_top_tissues)) {
-        top_tissues <- data.frame(grl.roadmap.filt) %>%
-            dplyr::group_by(Source) %>%
+        top_tissues <- data.frame(grl.roadmap.filt) |>
+            dplyr::group_by(Source) |>
             dplyr::tally(sort = TRUE)
         grl.roadmap.filt <- subset(
             grl.roadmap.filt,

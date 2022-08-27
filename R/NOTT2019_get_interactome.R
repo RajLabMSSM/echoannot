@@ -10,7 +10,7 @@
 #' @family NOTT2019
 #' @source
 #' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
-#' @importFrom dplyr %>% mutate group_by summarise
+#' @importFrom dplyr mutate group_by summarise
 #' @importFrom data.table data.table rbindlist
 #' @examples 
 #' dat <- echodata::BST1
@@ -36,34 +36,34 @@ NOTT2019_get_interactome <- function(annot_sub,
                 ],
                 Coordinates = coord
             )
-        }) %>% data.table::rbindlist()
+        }) |> data.table::rbindlist()
         return(coord.dt)
-    }) %>% data.table::rbindlist()
+    }) |> data.table::rbindlist()
     interact.DT <- subset(
         interact.DT,
         !is.na(Coordinates) & Coordinates != ""
-    ) %>%
+    ) |>
         tidyr::separate(
             col = Coordinates,
             into = c("chr", "Start", "End"), sep = ":|-"
-        ) %>%
+        ) |>
         tidyr::separate(
             col = Interaction, into = c("Marker", "Element", NA),
             sep = "_", remove = FALSE
         )
-    interact.DT <- interact.DT %>%
+    interact.DT <- interact.DT |>
         # Standardize CHR (NCBI format)
         dplyr::mutate(
             chr = gsub("chr", "", chr),
             Cell_type_interaction = paste(Cell_type, "-", Element)
         )
-    interact.DT$Cell_type <- interact.DT$Cell_type %>% as.character()
+    interact.DT$Cell_type <- interact.DT$Cell_type |> as.character()
     interact.DT$Start <- as.numeric(interact.DT$Start)
     interact.DT$End <- as.numeric(interact.DT$End)
     # Summarise distance from different celltype enhancer interactions
-    # summarise_top.consensus.dist <- interact.DT %>%
-    #     dplyr::mutate(top.consensus.dist = End - top.consensus.pos) %>%
-    #     dplyr::group_by(Cell_type) %>%
+    # summarise_top.consensus.dist <- interact.DT |>
+    #     dplyr::mutate(top.consensus.dist = End - top.consensus.pos) |>
+    #     dplyr::group_by(Cell_type) |>
     #     dplyr::summarise(top.consensus.dist = mean(top.consensus.dist))
     return(interact.DT)
 }

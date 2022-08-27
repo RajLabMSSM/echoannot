@@ -10,6 +10,9 @@
 #' \emph{Warning:} Can take a lot time to query Biomart.
 #' @param show_plot Show plot.
 #' @param save_plot Save plot.
+#' @param height Plot height.
+#' @param width Plot width.
+#' @inheritParams echodata::find_consensus_snps
 #' @inheritParams ggplot2::ggsave
 #' 
 #' @export
@@ -24,6 +27,7 @@
 super_summary_plot <- function(merged_DT,
                                snp_filter = "Consensus_SNP==TRUE",
                                coloc_results = NULL,
+                               credset_thresh = .8,
                                plot_missense = TRUE,
                                show_plot = TRUE,
                                save_plot = FALSE,
@@ -41,7 +45,7 @@ super_summary_plot <- function(merged_DT,
         gg_egene <- coloc_nominated_egenes(
             coloc_results = coloc_results,
             merged_DT = merged_DT,
-            credset_thresh = .8,
+            credset_thresh = credset_thresh,
             fill_var = NULL,
             text_size = 2.5,
             y_lab = "Locus",

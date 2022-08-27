@@ -14,7 +14,7 @@ NOTT2019_prepare_regulatory_overlap <- function(merged_DT,
     )
     if (return_counts) {
         merged_annot.reg <- find_top_consensus(
-            dat = data.frame(gr.hits.reg) %>% dplyr::rename(Assay = Element),
+            dat = data.frame(gr.hits.reg) |> dplyr::rename(Assay = Element),
             grouping_vars = c("Locus", "Cell_type", "Assay")
         )
         dat_melt.reg <- count_and_melt(

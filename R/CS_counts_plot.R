@@ -11,7 +11,7 @@
 #' 
 #' @family summarise
 #' @export
-#' @importFrom dplyr %>% mutate arrange
+#' @importFrom dplyr mutate arrange
 #' @importFrom data.table melt.data.table data.table
 #' @importFrom methods show
 #' @importFrom echodata get_CS_counts
@@ -35,9 +35,9 @@ CS_counts_plot <- function(merged_DT,
         top_CS_only = top_CS_only
     )
     melt.dat <-
-        locus_order %>%
-        dplyr::mutate(Locus_UCS = paste0(Locus, "  (", UCS.CS_size, ")")) %>%
-        data.table::data.table() %>%
+        locus_order |>
+        dplyr::mutate(Locus_UCS = paste0(Locus, "  (", UCS.CS_size, ")")) |>
+        data.table::data.table() |>
         data.table::melt.data.table(
             measure.vars = grep(".CS_size$",
                 colnames(locus_order),
@@ -45,10 +45,10 @@ CS_counts_plot <- function(merged_DT,
             ),
             variable.name = "CS",
             value.name = "Credible Set size"
-        ) %>%
-        dplyr::mutate(Method = gsub(".CS_size$", "", CS)) %>%
-        dplyr::arrange(Locus, Method) %>%
-        dplyr::mutate(Method = factor(Method)) %>%
+        ) |>
+        dplyr::mutate(Method = gsub(".CS_size$", "", CS)) |>
+        dplyr::arrange(Locus, Method) |>
+        dplyr::mutate(Method = factor(Method)) |>
         subset(Method != "mean")
     melt.dat <- order_loci(dat = melt.dat, merged_DT = merged_DT)
     melt.dat[melt.dat$`Credible Set size` == 0 |

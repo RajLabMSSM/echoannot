@@ -20,7 +20,6 @@
 #' }
 #' @importFrom data.table rbindlist fwrite
 #' @importFrom parallel mclapply
-#' @importFrom dplyr %>%
 #' @importFrom stats p.adjust
 #' @importFrom echodata snp_group_filters
 XGR_enrichment_bootstrap <- function(gr,
@@ -93,14 +92,14 @@ XGR_enrichment_bootstrap <- function(gr,
                     })
                 },
                 mc.cores = nThread
-            ) %>% data.table::rbindlist(fill = TRUE)
+            ) |> data.table::rbindlist(fill = TRUE)
             RES$SNP_group <- snp_group
             return(RES)
         }
-    ) %>% data.table::rbindlist(fill = T)
+    ) |> data.table::rbindlist(fill = T)
 
     # Post-process
-    RES_GROUPS <- RES_GROUPS %>%
+    RES_GROUPS <- RES_GROUPS |>
         dplyr::mutate(
             SNP_group = factor(SNP_group,
                 levels = unique(SNP_group),

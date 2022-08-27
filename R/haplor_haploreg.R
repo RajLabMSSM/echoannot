@@ -39,7 +39,7 @@ haplor_haploreg <- function(snp_list,
             verbose = FALSE
         ) 
         return(data.table::as.data.table(HR_query))
-    }) %>% data.table::rbindlist()
+    }) |> data.table::rbindlist()
 
     return(HR_query)
 }

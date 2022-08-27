@@ -29,7 +29,7 @@ haplor_regulomedb <- function(snp_list,
             verbose = FALSE
         )
         return(data.table::as.data.table(rdb_query))
-    }) %>% data.table::rbindlist()
+    }) |> data.table::rbindlist()
 
     return(rDB_query)
 }

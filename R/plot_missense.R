@@ -45,7 +45,7 @@ plot_missense <- function(merged_DT,
                 na.rm = TRUE
             )),
             by = c("Locus")
-        ] %>%
+        ] |>
         dplyr::mutate(
             Locus = factor(Locus,
                 levels = unique(locus_order$Locus),

@@ -8,7 +8,7 @@
 #' @family XGR
 #' @keywords internal
 #' @importFrom GenomicRanges start end
-#' @importFrom dplyr %>% group_by tally
+#' @importFrom dplyr group_by tally
 XGR_merge_and_process <- function(grl.xgr,
                                   lib,
                                   n_top_sources = 10) {
@@ -26,7 +26,7 @@ XGR_merge_and_process <- function(grl.xgr,
         function(e) {
             strsplit(e, sep)[[1]][1]
         }
-    ) %>%
+    ) |>
         unlist()
     # grl.XGR_merged$Source <- gsub("_","\n", grl.XGR_merged$Source)
     grl.XGR_merged$Assay <- lapply(
@@ -34,14 +34,14 @@ XGR_merge_and_process <- function(grl.xgr,
         function(e) {
             strsplit(e, sep)[[1]][2]
         }
-    ) %>%
+    ) |>
         unlist()
     grl.XGR_merged$Start <- GenomicRanges::start(grl.XGR_merged)
     grl.XGR_merged$End <- GenomicRanges::end(grl.XGR_merged)
     # Filter
-    top_sources <- grl.XGR_merged %>%
-        data.frame() %>%
-        dplyr::group_by(Source) %>%
+    top_sources <- grl.XGR_merged |>
+        data.frame() |>
+        dplyr::group_by(Source) |>
         dplyr::tally(sort = T)
     grl.XGR_merged.filt <- subset(
         grl.XGR_merged,
@@ -50,7 +50,7 @@ XGR_merge_and_process <- function(grl.xgr,
     # Count
     # snp.pos <- subset(gr.snp, SNP %in% c("rs7294619"))$POS
     # snp.sub <- subset(grl.XGR_merged,
-    # Start<=snp.pos & End>=snp.pos) %>% data.frame()
+    # Start<=snp.pos & End>=snp.pos) |> data.frame()
     grl.XGR_merged.filt$Source_Assay <- paste0(
         grl.XGR_merged.filt$Source,
         "_", grl.XGR_merged.filt$Assay

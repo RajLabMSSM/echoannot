@@ -30,7 +30,7 @@
 #' @inheritParams echodata::find_consensus_snps
 #'
 #' @export
-#' @importFrom dplyr %>% rename
+#' @importFrom dplyr rename
 #' @importFrom echodata find_consensus_snps update_cols assign_lead_snp
 #' @importFrom data.table merge.data.table data.table rbindlist
 #' @importFrom parallel mclapply
@@ -91,7 +91,7 @@ merge_finemapping_results <- function(dataset = file.path(
             )
             loci <- loci[!duplicated(loci)]
         }
-        dataset_names <- dirname(dirname(dirname(multi_dirs))) %>% unique()
+        dataset_names <- dirname(dirname(dirname(multi_dirs))) |> unique()
         # Loop through each GENE
         finemap_results <- lapply(
             dataset_names,
@@ -123,10 +123,10 @@ merge_finemapping_results <- function(dataset = file.path(
                         # Bind loci
                     },
                     mc.cores = nThread
-                ) %>%
+                ) |>
                     data.table::rbindlist(fill = TRUE)
             }
-        ) %>% data.table::rbindlist(fill = TRUE) # Bind datasets
+        ) |> data.table::rbindlist(fill = TRUE) # Bind datasets
     }
     #### Add/Update Support/Consensus cols ####
     merged_results <- echodata::find_consensus_snps(
@@ -138,8 +138,8 @@ merge_finemapping_results <- function(dataset = file.path(
     )
     merged_results <- subset(merged_results, Support >= minimum_support)
     if (!"Locus" %in% colnames(merged_results)) {
-        merged_results <- merged_results %>%
-            dplyr::rename(Locus = Gene) %>%
+        merged_results <- merged_results |>
+            dplyr::rename(Locus = Gene) |>
             data.table::data.table()
     }
 

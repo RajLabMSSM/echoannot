@@ -35,11 +35,11 @@ haplor_epigenetics_enrichment <- function(snp_list1,
         )
         # Create contingency table
         cont_tab <- rbind(
-            list1 = summ1[epi_var, c("Hits", "Total_SNPs")] %>%
+            list1 = summ1[epi_var, c("Hits", "Total_SNPs")] |>
                 unlist(),
-            list2 = summ2[epi_var, c("Hits", "Total_SNPs")] %>%
+            list2 = summ2[epi_var, c("Hits", "Total_SNPs")] |>
                 unlist()
-        ) %>% as.table()
+        ) |> as.table()
         # Conduct tests
         if (chisq) {
             chisq.results <- stats::chisq.test(cont_tab,

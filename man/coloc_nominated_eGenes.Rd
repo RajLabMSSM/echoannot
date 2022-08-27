@@ -18,6 +18,13 @@ coloc_nominated_egenes(
   verbose = TRUE
 )
 }
+\arguments{
+\item{credset_thresh}{The minimum mean Posterior Probability
+(across all fine-mapping methods used) of SNPs to be included in 
+the "mean.CS" column.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Across all GWAS-QTL colocalization tests across all studies,
 take the eGene with the highest colocalziation probability (PP.H4)

@@ -7,14 +7,14 @@
 #' @inheritParams XGR_plot_peaks
 #' @export
 #' @family XGR
-#' @importFrom dplyr %>% n_distinct group_by tally
+#' @importFrom dplyr n_distinct group_by tally
 #' @examples
 #' gr.filt <- echoannot::XGR_filter_sources(gr.lib = echoannot::xgr_query)
 XGR_filter_sources <- function(gr.lib,
                                n_top_sources = 5) {
     Source <- NULL;
-    top_sources <- data.frame(gr.lib) %>%
-        dplyr::group_by(library, Source) %>%
+    top_sources <- data.frame(gr.lib) |>
+        dplyr::group_by(library, Source) |>
         dplyr::tally(sort = TRUE)
     if (!is.null(n_top_sources)) {
         gr.filt <- subset(

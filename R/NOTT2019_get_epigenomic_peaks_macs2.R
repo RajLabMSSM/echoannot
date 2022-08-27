@@ -32,7 +32,7 @@
 #         peak$Fresh_frozen <- meta$fresh_frozen
 #         peak$Marker  <- meta$marker
 #         return(peak)
-#     },mc.cores = nThread) %>% GenomicRanges::GRangesList()
+#     },mc.cores = nThread) |> GenomicRanges::GRangesList()
 #     PEAKS.merged <- unlist(PEAKS)
 #     PEAKS.merged$peak_type <- PEAKS.merged
 #     return(PEAKS.merged)

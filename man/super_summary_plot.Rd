@@ -8,6 +8,7 @@ super_summary_plot(
   merged_DT,
   snp_filter = "Consensus_SNP==TRUE",
   coloc_results = NULL,
+  credset_thresh = 0.8,
   plot_missense = TRUE,
   show_plot = TRUE,
   save_plot = FALSE,
@@ -25,12 +26,20 @@ super_summary_plot(
 \item{coloc_results}{Colocalization results from 
 \href{https://github.com/RajLabMSSM/catalogueR}{catalogueR}.}
 
+\item{credset_thresh}{The minimum mean Posterior Probability
+(across all fine-mapping methods used) of SNPs to be included in 
+the "mean.CS" column.}
+
 \item{plot_missense}{Whether to include the missense mutations plot.
 \emph{Warning:} Can take a lot time to query Biomart.}
 
 \item{show_plot}{Show plot.}
 
 \item{save_plot}{Save plot.}
+
+\item{height}{Plot height.}
+
+\item{width}{Plot width.}
 
 \item{dpi}{Plot resolution. Also accepts a string input: "retina" (320),
 "print" (300), or "screen" (72). Applies only to raster output types.}

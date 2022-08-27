@@ -11,7 +11,7 @@
 #' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
 #'
 #' @importFrom data.table data.table merge.data.table
-#' @importFrom dplyr %>% mutate
+#' @importFrom dplyr mutate
 NOTT2019_superenhancers <- function(dat) {
     chr <- CHR <- POS <- s6 <- NULL
 
@@ -23,11 +23,11 @@ NOTT2019_superenhancers <- function(dat) {
     )
     if (nrow(annot_sub) > 0) {
         merged_dat <- data.table::merge.data.table(
-            data.table::data.table(dat) %>%
+            data.table::data.table(dat) |>
                 dplyr::mutate(
                     chr = paste0("chr", CHR),
                     start = as.numeric(POS)
-                ) %>%
+                ) |>
                 data.table::data.table(),
             data.table::data.table(s6),
             by = c("chr", "start")

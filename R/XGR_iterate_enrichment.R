@@ -21,7 +21,7 @@
 #' @importFrom parallel mclapply
 #' @importFrom XGR xGRviaGenomicAnno xRDataLoader
 #' @importFrom stats p.adjust
-#' @importFrom dplyr %>% mutate arrange
+#' @importFrom dplyr mutate arrange
 XGR_iterate_enrichment <- function(dat,
                                    foreground_filter = "Consensus_SNP",
                                    background_filter = "leadSNP",
@@ -85,7 +85,7 @@ XGR_iterate_enrichment <- function(dat,
                     GR.annotation = grl
                 )
                 return(et)
-            }) %>% data.table::rbindlist()
+            }) |> data.table::rbindlist()
             eTerm$lib <- lib.name
             eTerm$fullname <- names(unlist(GR.annotations))
             eTerm$source <- lapply(
@@ -93,21 +93,21 @@ XGR_iterate_enrichment <- function(dat,
                 function(e) {
                     strsplit(e, "[.]")[[1]][1]
                 }
-            ) %>%
+            ) |>
                 as.character()
             eTerm$assay <- lapply(
                 eTerm$fullname,
                 function(e) {
                     strsplit(e, "[.]")[[1]][2]
                 }
-            ) %>%
+            ) |>
                 as.character()
         })
         return(eTerm)
     }, mc.cores = nThread)
 
     # Re-calculate corrected p-val to account for multiple dbs tested
-    enrich_res <- data.table::rbindlist(database_results) %>%
+    enrich_res <- data.table::rbindlist(database_results) |>
         dplyr::mutate(
             FDR = stats::p.adjust(
                 p = pvalue,
@@ -117,9 +117,9 @@ XGR_iterate_enrichment <- function(dat,
                 p = pvalue,
                 method = "bonferroni"
             )
-        ) %>%
-        dplyr::arrange(FDR, -nOverlap, -fc) %>%
-        subset(adjp < 0.05) %>%
+        ) |>
+        dplyr::arrange(FDR, -nOverlap, -fc) |>
+        subset(adjp < 0.05) |>
         data.table::data.table()
     if (save_path != FALSE) {
         data.table::fwrite(enrich_res, save_path, quote = FALSE)

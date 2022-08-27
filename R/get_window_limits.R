@@ -92,7 +92,7 @@ get_window_limits <- function(dat,
             xlims <- xlims / 1000000
         }
         return(xlims)
-    }) %>% `names<-`(zoom)
+    }) |> `names<-`(zoom)
 
     # For backwards compatibility
     if (length(xlims_list) == 1) {

@@ -6,7 +6,7 @@
 #' @param plot_specificity Plot cell-type specificity scores 
 #' for locus instead of raw assay overlap counts. 
 #' @keywords internal
-#' @importFrom dplyr %>% top_n group_by slice_max
+#' @importFrom dplyr top_n group_by slice_max
 #' @importFrom methods show
 #' @importFrom data.table data.table dcast merge.data.table
 cell_type_specificity <- function(plot_dat,
@@ -35,16 +35,16 @@ cell_type_specificity <- function(plot_dat,
         "brain" = "brain"
     )
 
-    cell_tally <- data.table::data.table(plot_dat) %>%
-        unique() %>%
+    cell_tally <- data.table::data.table(plot_dat) |>
+        unique() |>
         dplyr::mutate(
             Assay_count = ifelse(Count > 0, 1, 0), # Set any overlap ==1
             Cell_group = factor(Cell_group_dict[Cell_type],
                 levels = unique(unname(Cell_group_dict)),
                 ordered = TRUE
             )
-        ) %>%
-        dplyr::group_by(Locus, Cell_group, .drop = FALSE) %>%
+        ) |>
+        dplyr::group_by(Locus, Cell_group, .drop = FALSE) |>
         dplyr::summarise(
             Assay_count = sum(Assay_count, na.rm = TRUE),
             SNP_Count = sum(Count, na.rm = TRUE),
@@ -55,8 +55,8 @@ cell_type_specificity <- function(plot_dat,
             Annotation = paste(unique(as.character(
                 stats::na.omit(Annotation)
                 )), collapse = ";")
-        ) %>%
-        unique() %>%
+        ) |>
+        unique() |>
         data.table::data.table()
     #### Compute specificity score ####
     counts <- data.table::dcast(cell_tally, 
@@ -72,13 +72,13 @@ cell_type_specificity <- function(plot_dat,
             data = specificity, 
             id.vars = "Locus", 
             variable.name = "Cell_group", 
-            value.name = "Specificity") %>%
+            value.name = "Specificity") |>
             data.table::merge.data.table(y = cell_tally)
     }
     #### Only choose top cell-type per locus ####
     if (top_celltype_only) {
-        cell_tally <- cell_tally %>%
-            dplyr::group_by(Locus) %>%
+        cell_tally <- cell_tally |>
+            dplyr::group_by(Locus) |>
             dplyr::slice_max(n = 1, order_by = Assay_count)
     }
     if (!is.null(min_count)) {

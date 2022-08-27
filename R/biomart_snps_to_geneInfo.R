@@ -6,7 +6,6 @@
 #' biomaRt}
 #'
 #' @keywords internal
-#' @importFrom dplyr %>%
 #' @source 
 #' \code{
 #' # biomart_snps_to_geneInfo(c("rs114360492"))
@@ -49,10 +48,10 @@ biomart_snps_to_geneInfo <- function(snp_list,
             "chromosome_name", "start_position", "end_position"
         )
     )
-    snp_results <- snp_results %>%
+    snp_results <- snp_results |>
         mutate(ensembl = strsplit(
             as.character(ensembl_gene_stable_id), ";"
-        )) %>%
+        )) |>
         tidyr::unnest(ensembl)
     merged_df <- data.table(gene_results,
         key = "ensembl_gene_id"

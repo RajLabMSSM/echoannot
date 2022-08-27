@@ -52,7 +52,7 @@ XGR_enrichment <- function(gr,
     # Create all combinations
     # if(!is.null(grouping_vars)){
     #   combos <- expand.grid(sapply( subset(data.frame(gr),
-    # select=grouping_vars), unique)) %>%
+    # select=grouping_vars), unique)) |>
     #     `colnames<-`(grouping_vars)
     #   if(length(grouping_vars)<2) {combos$dummy1 <- 1; gr$dummy1 <- 1; }
     # }else {
@@ -98,7 +98,7 @@ XGR_enrichment <- function(gr,
             }
             return(res)
         }
-    ) %>% data.table::rbindlist()
+    ) |> data.table::rbindlist()
     RES$fg_filter <- if (is.null(foreground_filter)) {
         NA
     } else {

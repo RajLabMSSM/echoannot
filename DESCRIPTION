@@ -24,9 +24,9 @@ Description: echoverse module: Functions for annotating genomic data
 URL: https://github.com/RajLabMSSM/echoannot
 BugReports: https://github.com/RajLabMSSM/echoannot/issues
 Encoding: UTF-8
-LazyData: true
 Depends: R (>= 4.0.0)
 biocViews:
+    Genetics, FunctionalGenomics, SystemsBiology
 Imports: 
     echodata,
     echotabix,
@@ -65,12 +65,18 @@ Suggests:
     pheatmap,
     haploR,
     biomaRt,
-    regioneR
+    regioneR,
+    motifbreakR,
+    SNPlocs.Hsapiens.dbSNP144.GRCh37,
+    SNPlocs.Hsapiens.dbSNP144.GRCh38,
+    BSgenome.Hsapiens.UCSC.hg19,
+    BSgenome.Hsapiens.UCSC.hg38,
+    BiocParallel
 Remotes:
     github::RajLabMSSM/echodata,
     github::RajLabMSSM/echotabix,
     github::hfang-bristol/XGR
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1.9000
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3

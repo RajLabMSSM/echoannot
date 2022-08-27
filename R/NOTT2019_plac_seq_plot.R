@@ -33,7 +33,7 @@
 #' @export
 #' @importFrom IRanges IRanges
 #' @importFrom echodata find_consensus_snps
-#' @importFrom dplyr %>% top_n
+#' @importFrom dplyr top_n
 #' @importFrom GenomicRanges seqnames start end GRanges findOverlaps
 #' @importFrom S4Vectors subjectHits
 #' @importFrom methods show

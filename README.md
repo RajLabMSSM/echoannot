@@ -1,29 +1,27 @@
 <img src='https://github.com/RajLabMSSM/echoannot/raw/main/inst/hex/hex.png' height='300'><br><br>
-[![](https://img.shields.io/badge/devel%20version-0.99.2-black.svg)](https://github.com/RajLabMSSM/echoannot)
+[![](https://img.shields.io/badge/devel%20version-0.99.7-black.svg)](https://github.com/RajLabMSSM/echoannot)
 [![R build
 status](https://github.com/RajLabMSSM/echoannot/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RajLabMSSM/echoannot/actions)
 [![](https://img.shields.io/github/last-commit/RajLabMSSM/echoannot.svg)](https://github.com/RajLabMSSM/echoannot/commits/main)
-[![](https://codecov.io/gh/RajLabMSSM/echoannot/branch/main/graph/badge.svg)](https://codecov.io/gh/RajLabMSSM/echoannot)
+[![](https://app.codecov.io/gh/RajLabMSSM/echoannot/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RajLabMSSM/echoannot)
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 <h5>
 Author: <i>Brian M. Schilder</i>
 </h5>
 <h5>
-README updated: <i>Dec-07-2021</i>
+README updated: <i>Aug-27-2022</i>
 </h5>
 
-## `echoannot`: Functions for annotating genomic data with annotations and epigenomic data.
+## `echoannot`: Functions for annotating genomic data
+
+with annotations and epigenomic data.
 
 This R package is part of the *echoverse* suite that supports
 [`echolocatoR`](https://github.com/RajLabMSSM/echolocatoR): an automated
 genomic fine-mapping pipeline.
 
 If you use `echoannot`, please cite:
-
-> Jack Humphrey and Towfique Raj (NA). echoannot: echoverse module:
-> Annotate fine-mapping results. R package version 0.99.2.
-> <https://github.com/RajLabMSSM/echoannot>
 
 ## Installation
 

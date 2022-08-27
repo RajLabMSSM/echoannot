@@ -5,7 +5,7 @@
 #' and assign it as the most likely causal gene in that locus.
 #'
 #' eQTL queries and colocalization test done with \pkg{catalogueR}.
-#'
+#' @inheritParams echodata::find_consensus_snps
 #' @examples
 #' \dontrun{
 #' merged_DT <- echodata::get_Nalls2019_merged()
@@ -37,7 +37,7 @@
 #' )
 #' }
 #' @keywords internal
-#' @importFrom dplyr %>% group_by top_n slice mutate desc arrange
+#' @importFrom dplyr group_by top_n slice mutate desc arrange
 #' @importFrom data.table fread data.table
 #' @importFrom methods show
 coloc_nominated_egenes <- function(coloc_results,
@@ -67,19 +67,19 @@ coloc_nominated_egenes <- function(coloc_results,
     # for(column %in% c("gene","snp","chr"))
     # if('gene' %in%)
 
-    top_eGenes <- dat %>%
-        subset(PP.H4 > if (is.null(credset_thresh)) 0 else credset_thresh) %>%
+    top_eGenes <- dat |>
+        subset(PP.H4 > if (is.null(credset_thresh)) 0 else credset_thresh) |>
         # Remove RP11 and other spurious RP genes
-        subset(!(startsWith(eGene, "RP") | eGene == "NA" | is.na(eGene))) %>%
-        dplyr::group_by(Locus.GWAS) %>%
-        dplyr::top_n(n = 1, wt = PP.H4) %>%
+        subset(!(startsWith(eGene, "RP") | eGene == "NA" | is.na(eGene))) |>
+        dplyr::group_by(Locus.GWAS) |>
+        dplyr::top_n(n = 1, wt = PP.H4) |>
         # Ensure only 1 eGene per Locus
         dplyr::arrange(
             dplyr::desc(PP.H4),
             dplyr::desc(SNP.PP.H4)
-        ) %>%
-        dplyr::group_by(Locus.GWAS) %>%
-        dplyr::slice(1) %>%
+        ) |>
+        dplyr::group_by(Locus.GWAS) |>
+        dplyr::slice(1) |>
         dplyr::mutate(Locus = as.character(Locus.GWAS))
 
     top_eGenes <- order_loci(

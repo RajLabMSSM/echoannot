@@ -5,8 +5,7 @@
 #' @source
 #' \href{https://cran.r-project.org/web/packages/haploR/vignettes/haplor-vignette.html}{
 #' HaploR}
-#' @importFrom data.table data.table .SD
-#' @importFrom dplyr %>%
+#' @importFrom data.table data.table .SD 
 haplor_epigenetics_summary <- function(merged_results,
                                        tissue_list = c("BRN", "BLD"),
                                        # Chromatin_Marks
@@ -19,9 +18,9 @@ haplor_epigenetics_summary <- function(merged_results,
     merged_results <- data.table::data.table(merged_results)
     summary_func <- function(ev) {
         boolean <- lapply(ev, function(x) {
-            intersect(tissue_list, strsplit(as.character(x), ", ")[[1]]) %>%
+            intersect(tissue_list, strsplit(as.character(x), ", ")[[1]]) |>
                 length() > 0
-        }) %>% unlist()
+        }) |> unlist()
         n_hits <- dim(merged_results[boolean, ])[1]
         Total <- dim(merged_results)[1]
         Percent_Total <- round(n_hits / Total * 100, 2)
@@ -33,7 +32,7 @@ haplor_epigenetics_summary <- function(merged_results,
     }
     epi_summary <- merged_results[, lapply(.SD, summary_func),
         .SDcols = epigenetic_variables
-    ] %>% t()
+    ] |> t()
     colnames(epi_summary) <- c("Hits", "Total_SNPs", "Percent_Total")
     messager(epi_summary)
     return(epi_summary)

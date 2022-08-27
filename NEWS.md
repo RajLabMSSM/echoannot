@@ -1,3 +1,14 @@
+# echoannot 0.99.9
+
+## New features
+
+* Added `MOTIFBREAKR` suite of functions.
+    - Fully documented.
+    - First attempts to get parallelization working.  
+    - Passes up other args from `motifbreakR` core functions. 
+    - Saves motif plots as PDFs. 
+* Added `get_bpparam` function.
+
 # echoannot 0.99.8
 
 ## New features

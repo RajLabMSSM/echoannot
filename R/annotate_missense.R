@@ -8,7 +8,7 @@
 #' 
 #' @family annotate
 #' @export
-#' @importFrom dplyr %>% group_by summarise
+#' @importFrom dplyr group_by summarise
 #' @importFrom data.table data.table merge.data.table
 #' @examples
 #' \dontrun{
@@ -25,13 +25,13 @@ annotate_missense <- function(merged_DT,
     )
     # unique(snp_info$consequence_type_tv)
     missense <- suppressMessages(
-        snp_info %>%
-            dplyr::group_by(refsnp_id) %>%
+        snp_info |>
+            dplyr::group_by(refsnp_id) |>
             dplyr::summarise(Missense = ifelse(
                 any(consequence_type_tv == "missense_variant",
                     na.rm = TRUE
                 ), TRUE, FALSE
-            )) %>%
+            )) |>
             data.table::data.table()
     )
     merged_DT <- data.table::merge.data.table(merged_DT, missense,
@@ -39,8 +39,8 @@ annotate_missense <- function(merged_DT,
         by.x = "SNP",
         by.y = "refsnp_id"
     )
-    # missense_counts <- suppressMessages(merged_DT %>% 
-    #                                         dplyr::group_by(Locus) %>%
+    # missense_counts <- suppressMessages(merged_DT |> 
+    #                                         dplyr::group_by(Locus) |>
     #   dplyr::summarise(Missense=sum(Missense, na.rm=TRUE)))
     messager(
         sum(subset(merged_DT, Support > 0)$Missense, na.rm = TRUE),

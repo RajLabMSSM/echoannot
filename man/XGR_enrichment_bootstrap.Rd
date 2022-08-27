@@ -7,8 +7,8 @@
 XGR_enrichment_bootstrap(
   gr,
   merged_dat,
-  snp_groups = c("Random", "GWAS lead", "UCS (-PolyFun)", "UCS",
-    "Consensus (-PolyFun)", "Consensus"),
+  snp_groups = c("Random", "GWAS lead", "UCS (-PolyFun)", "UCS", "Consensus (-PolyFun)",
+    "Consensus"),
   background_filter = NULL,
   grouping_vars = c("Study", "Assay", "Cell_type"),
   iterations = 1000,

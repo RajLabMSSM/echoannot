@@ -8,14 +8,12 @@
 #' @param filename Path to save file to as PNG.
 #' @param formula_str Formula passed to \link[stats]{xtabs}.
 #' @inheritParams super_summary_plot
+#' @family summarise
 #' 
-#' @importFrom dplyr %>%
+#' @export 
 #' @importFrom stats as.formula median 
 #' @importFrom DescTools Divisors 
 #' @importFrom grDevices png dev.off
-#' 
-#' @family summarise
-#' @export 
 #' @examples
 #' \dontrun{
 #'     merged_DT <- echodata::get_Nalls2019_merged()
@@ -31,7 +29,7 @@ plot_dataset_overlap <- function(merged_DT,
     
     snp_xtab <- subset(merged_DT, eval(parse(text = snp_filter)),
         .drop = FALSE
-    ) %>%
+    ) |>
         BiocGenerics::xtabs(
             formula = stats::as.formula(formula_str),
             sparse = FALSE,

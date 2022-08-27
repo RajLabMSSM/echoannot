@@ -22,7 +22,7 @@ NOTT2019_get_interactions <- function(dat,
         dat <- NOTT2019_interactome[[s]]
         dat$Name <- s
         return(dat)
-    }) %>% data.table::rbindlist()
+    }) |> data.table::rbindlist()
     
     #### Anchor 1 ####
     interactomes.anchor1 <- granges_overlap(
@@ -72,7 +72,7 @@ NOTT2019_get_interactions <- function(dat,
 
     if (as_granges) {
         interactomes.anchor <- echodata::dt_to_granges(
-            dat = interactomes.anchor %>% dplyr::select(-seqnames),
+            dat = interactomes.anchor |> dplyr::select(-seqnames),
             chrom_col = "CHR",
             start_col = "start",
             end_col = "end",

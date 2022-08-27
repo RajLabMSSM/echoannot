@@ -64,6 +64,6 @@ biomart_snp_info <- function(snp_list,
         biomart_query$consequence_type_tv == "",
     ]$consequence_type_tv <- NA
     # Only take the first annotation per variant
-    # annotated_results %>% dplyr::group_by(Dataset, Gene, SNP) %>% slice(1)
+    # annotated_results |> dplyr::group_by(Dataset, Gene, SNP) |> slice(1)
     return(biomart_query)
 }

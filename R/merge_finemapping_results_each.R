@@ -34,7 +34,7 @@ merge_finemapping_results_each <- function(study_dirs,
                 merged_top <- subset(merged_all, eval(parse(text = return_filter)))
                 return(merged_top)
             }
-        ) %>% data.table::rbindlist(fill = TRUE)
+        ) |> data.table::rbindlist(fill = TRUE)
         # Save merged multi-study file
         if (merged_path != FALSE) {
             messager("+ SUMMARISE:: Saving merged subset after filtering criterion:", return_filter, v = verbose)

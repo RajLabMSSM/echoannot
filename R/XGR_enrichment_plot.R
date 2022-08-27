@@ -41,7 +41,7 @@
 #' )
 #'
 #' # Merged volcano plot
-#' enrich_res <- subset(enrich_res, SNP_Group != "Consensus (-PolyFun)") %>%
+#' enrich_res <- subset(enrich_res, SNP_Group != "Consensus (-PolyFun)") |>
 #'     dplyr::rename(SNP_group = SNP_Group)
 #' gp <- XGR_enrichment_plot(
 #'     enrich_res = subset(enrich_res, !Assay %in% c("HiChIP_FitHiChIP", "PLAC")),

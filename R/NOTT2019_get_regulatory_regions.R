@@ -29,7 +29,7 @@ NOTT2019_get_regulatory_regions <- function(as_granges = FALSE,
         dat <- NOTT2019_interactome[[s]]
         dat$Name <- tolower(s)
         return(dat)
-    }, mc.cores = nThread) %>% data.table::rbindlist(fill = TRUE)
+    }, mc.cores = nThread) |> data.table::rbindlist(fill = TRUE)
 
     cell_dict <- c(
         "astrocyte" = "astrocytes",
@@ -38,11 +38,11 @@ NOTT2019_get_regulatory_regions <- function(as_granges = FALSE,
         "oligodendrocytes" = "oligo",
         "microglia" = "microglia"
     )
-    regions_sub <- regions %>%
+    regions_sub <- regions |>
         tidyr::separate(Name,
             into = c("Cell_type", "Element"),
             remove = FALSE
-        ) %>%
+        ) |>
         dplyr::mutate(
             middle = as.integer(end - abs(end - start) / 2),
             Cell_type = cell_dict[Cell_type]

@@ -12,7 +12,7 @@ CORCES2020_scATAC_to_granges <- function(standardize_cellTypes = FALSE) {
             "OPCs"
         ),
         variable.name = "Cell_type"
-    ) %>% subset(value == 1)
+    ) |> subset(value == 1)
     scATAC$Assay <- "scATAC"
     scATAC$Study <- "Corces2020.peaks"
     gr.Corces2020.peaks <- echotabix::liftover(

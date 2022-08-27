@@ -25,7 +25,7 @@
 #'     background_filter = "leadSNP==TRUE"
 #' )
 #' }
-#' @importFrom dplyr %>% mutate select sample_n
+#' @importFrom dplyr mutate select sample_n
 XGR_prepare_foreground_background <- function(dat,
                                               foreground_filter = "Support>0",
                                               background_filter = NULL,
@@ -39,13 +39,13 @@ XGR_prepare_foreground_background <- function(dat,
         v = verbose
     )
     #### Foreground ####
-    fg <- subset(dat, eval(parse(text = foreground_filter))) %>%
+    fg <- subset(dat, eval(parse(text = foreground_filter))) |>
         dplyr::mutate(
             chrom = paste0(gsub("chr", "", CHR)),
             chromStart = POS,
             chromEnd = POS,
             name = SNP
-        ) %>%
+        ) |>
         dplyr::select(chrom, chromStart, chromEnd, name)
 
     #### Background ####
@@ -58,13 +58,13 @@ XGR_prepare_foreground_background <- function(dat,
         } else {
             bg_DT <- dat
         }
-        bg <- bg_DT %>%
+        bg <- bg_DT |>
             dplyr::mutate(
                 chrom = paste0(gsub("chr", "", CHR)),
                 chromStart = POS,
                 chromEnd = POS,
                 name = SNP
-            ) %>%
+            ) |>
             dplyr::select(chrom, chromStart, chromEnd, name)
     }
 
@@ -72,11 +72,11 @@ XGR_prepare_foreground_background <- function(dat,
     #### Sample fg/bg (for bootstrapping) ####
     if (!is.null(fg_sample_size)) {
         messager("XGR:: Sampling", fg_sample_size, "foreground SNPs", v = verbose)
-        fg <- fg %>% dplyr::sample_n(size = fg_sample_size)
+        fg <- fg |> dplyr::sample_n(size = fg_sample_size)
     }
     if (!is.null(bg_sample_size)) {
         messager("XGR:: Sampling", bg_sample_size, "background SNPs", v = verbose)
-        bg <- bg %>% dplyr::sample_n(size = bg_sample_size)
+        bg <- bg |> dplyr::sample_n(size = bg_sample_size)
     }
 
     messager("XGR::", nrow(fg), "SNPs in foreground.")

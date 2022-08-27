@@ -10,7 +10,7 @@
 #' @param verbose Print messages.
 #' @export
 #' @importFrom tidyr separate
-#' @importFrom dplyr %>% mutate select
+#' @importFrom dplyr mutate select
 #' @importFrom data.table rbindlist data.table 
 #' @importFrom echotabix liftover
 #' @importFrom tools R_user_dir
@@ -49,27 +49,27 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE,
     NOTT2019_interactome <- get_NOTT2019_interactome()
     interactome <- NOTT2019_interactome[
         grep("interactome", names(NOTT2019_interactome))
-    ] %>%
-        data.table::rbindlist(idcol = "id") %>%
+    ] |>
+        data.table::rbindlist(idcol = "id") |>
         tidyr::separate(id,
             sep = " ",
             remove = FALSE,
             into = c("Cell_type", "Data_type")
-        ) %>%
+        ) |>
         dplyr::mutate(
             Cell_type = standardize_celltypes(Cell_type),
             Assay = "PLAC", Study = "Nott2019.celltype_interactome"
         )
     gr.Nott2019.interactome <- c(
         echodata::dt_to_granges(
-            dat = interactome %>% dplyr::mutate(Anchor = 1),
+            dat = interactome |> dplyr::mutate(Anchor = 1),
             chrom_col = "chr1", 
             start_col = "start1",
             end_col = "end1", 
             style = "NCBI"
         ),
         echodata::dt_to_granges(
-            dat = interactome %>% dplyr::mutate(Anchor = 2),
+            dat = interactome |> dplyr::mutate(Anchor = 2),
             chrom_col = "chr2", 
             start_col = "start2",
             end_col = "end2", 
@@ -85,19 +85,19 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE,
 
     ## Cicero Interactome
     #### Assign cell types to interactome
-    cicero <- get_CORCES2020_cicero_coaccessibility() %>%
+    cicero <- get_CORCES2020_cicero_coaccessibility() |>
         dplyr::mutate(
             Study = "Corces2020.celltype_interactome",
             Assay = "cicero"
         )
     #### Convert anchor 1 ####
-    cicero.anchor1 <- cicero %>%
+    cicero.anchor1 <- cicero |>
         data.table::merge.data.table(
-            y = data.table::data.table(data.frame(gr.Corces2020.peaks)) %>%
+            y = data.table::data.table(data.frame(gr.Corces2020.peaks)) |>
                 dplyr::select(Peak_ID, Cell_type),
         by.x = "Peak_ID_Peak1",
         by.y = "Peak_ID"
-        ) %>%
+        ) |>
         echotabix::liftover(
             query_genome = "hg38",
             target_genome = "hg19",
@@ -108,14 +108,14 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE,
             style = "NCBI"
         )
     #### Convert anchor 2 ####
-    cicero.anchor2 <- cicero %>%
+    cicero.anchor2 <- cicero |>
         data.table::merge.data.table(data.table::data.table(
             data.frame(gr.Corces2020.peaks)
-        ) %>%
+        ) |>
             dplyr::select(Peak_ID, Cell_type),
         by.x = "Peak_ID_Peak2",
         by.y = "Peak_ID"
-        ) %>%
+        ) |>
         echotabix::liftover(
             query_genome = "hg38",
             target_genome = "hg19",
@@ -130,12 +130,12 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE,
 
     ### Bulk ATACseq peaks
     gr.Corces2020.bulk_peaks <-
-        get_CORCES2020_bulkATACseq_peaks() %>%
+        get_CORCES2020_bulkATACseq_peaks() |>
         dplyr::mutate(
             Study = "Corces2020.bulk_peaks",
             Assay = "ATAC",
             Cell_type = "brain"
-        ) %>%
+        ) |>
         echotabix::liftover(
             query_genome = "hg38",
             target_genome = "hg19",
@@ -147,13 +147,13 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE,
         )
 
     ### FitChip interactome
-    fitchip <- get_CORCES2020_hichip_fithichip_loop_calls() %>%
+    fitchip <- get_CORCES2020_hichip_fithichip_loop_calls() |>
         dplyr::mutate(
             Study = "Corces2020.bulk_interactome",
             Cell_type = "brain", Assay = "HiChIP_FitHiChIP"
         )
-    fitchip.anchor1 <- fitchip %>%
-        dplyr::mutate(Anchor = 1) %>%
+    fitchip.anchor1 <- fitchip |>
+        dplyr::mutate(Anchor = 1) |>
         echotabix::liftover(
             query_genome = "hg38",
             target_genome = "hg19",
@@ -163,8 +163,8 @@ merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE,
             as_granges = TRUE,
             style = "NCBI"
         )
-    fitchip.anchor2 <- fitchip %>%
-        dplyr::mutate(Anchor = 2) %>%
+    fitchip.anchor2 <- fitchip |>
+        dplyr::mutate(Anchor = 2) |>
         echotabix::liftover(
             query_genome = "hg38",
             target_genome = "hg19",

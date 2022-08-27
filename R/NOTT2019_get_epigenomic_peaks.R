@@ -19,7 +19,6 @@
 #'
 #' 
 #' @export
-#' @importFrom dplyr %>%
 #' @importFrom data.table fread
 #' @importFrom parallel mclapply
 #' @importFrom echodata dt_to_granges
@@ -89,7 +88,7 @@ NOTT2019_get_epigenomic_peaks <- function(assays = c(
             bed_dat$Cell_type <-
                 cell_dict_invert[[strsplit(basename(f), "_")[[1]][1]]]
             return(bed_dat)
-        }, mc.cores = nThread) %>% data.table::rbindlist()
+        }, mc.cores = nThread) |> data.table::rbindlist()
         
         if (convert_to_granges) { 
             PEAKS <- echodata::dt_to_granges(dat = PEAKS,

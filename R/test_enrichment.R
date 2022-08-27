@@ -18,7 +18,6 @@
 #' @inheritParams regioneR::permTest 
 #' 
 #' @export
-#' @importFrom dplyr %>%
 #' @importFrom data.table data.table rbindlist 
 test_enrichment <- function(grlist1,
                             grlist2, 
@@ -64,9 +63,9 @@ test_enrichment <- function(grlist1,
             t2 <- Sys.time()
             res1$time <- as.numeric(t2-t1) 
             return(res1)
-        }) %>% data.table::rbindlist()
+        }) |> data.table::rbindlist()
         return(res2)
-    }) %>% data.table::rbindlist()
+    }) |> data.table::rbindlist()
     #### Return ####
     return(enrich)
 }

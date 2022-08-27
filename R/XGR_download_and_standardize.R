@@ -23,7 +23,6 @@
 #' @export
 #' @importFrom parallel mclapply
 #' @importFrom XGR xRDataLoader
-#' @importFrom dplyr %>%
 #' @importFrom GenomicRanges GRangesList
 #' @importFrom methods is
 XGR_download_and_standardize <- function(lib.selections = c(
@@ -52,12 +51,12 @@ XGR_download_and_standardize <- function(lib.selections = c(
                     gr$source <- n1
                     gr$assay <- n2
                     return(gr)
-                }) %>% unlist()
+                }) |> unlist()
             } else {
                 grl$name <- names(grl)
                 return(grl)
             }
-        }, mc.cores = nThread) %>% unlist() # return all_GRL
+        }, mc.cores = nThread) |> unlist() # return all_GRL
         # Rename GRanges after they've been unnested
         names(all_GRL) <- names(unlist(GR.annotations))
 
