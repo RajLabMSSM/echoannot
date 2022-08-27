@@ -4,10 +4,12 @@
 \alias{select_genome}
 \title{Select genome build}
 \usage{
-select_genome(genome_build)
+select_genome(genome_build, verbose = TRUE)
 }
 \arguments{
 \item{genome_build}{Genome build to use.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 Named list

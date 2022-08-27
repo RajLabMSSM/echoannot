@@ -3,8 +3,10 @@
 #' Select and load a valid genome build and its relevant  Bioc data packages.
 #' @keywords internal
 #' @param genome_build Genome build to use.
+#' @param verbose Print messages. 
 #' @returns Named list
-select_genome <- function(genome_build){
+select_genome <- function(genome_build,
+                          verbose = TRUE){
     if(is.null(genome_build)){
         messager("genome_build set to hg19 by default.")
         genome_build <- "hg19"
@@ -12,7 +14,7 @@ select_genome <- function(genome_build){
     genome_build <- tolower(genome_build)[1]
     if(genome_build=="hg19"){
         requireNamespace("SNPlocs.Hsapiens.dbSNP144.GRCh37")
-        requireNamespace("BSgenome.Hsapiens.UCSC.hg19")
+        requireNamespace("BSgenome.Hsapiens.UCSC.hg19") 
         dbSNP <- SNPlocs.Hsapiens.dbSNP144.GRCh37::SNPlocs.Hsapiens.dbSNP144.GRCh37
         search.genome <- BSgenome.Hsapiens.UCSC.hg19::BSgenome.Hsapiens.UCSC.hg19
     } else if(genome_build=="hg38"){
@@ -25,6 +27,7 @@ select_genome <- function(genome_build){
                      paste0("- ",c("hg19","hg38"),sep="\n ",collapse = ""))
         stop(stp)
     }
+    messager("Using genome_build",genome_build,v=verbose)
     return(list(genome_build=genome_build,
                 dbSNP=dbSNP,
                 search.genome=search.genome))

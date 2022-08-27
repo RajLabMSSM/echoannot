@@ -70,7 +70,7 @@ larger values compromise full accuracy for speed of calculation. A value of
 
 \item{nThread}{Number of threads to parallelize analyses across.}
 
-\item{verbose}{Logical; if running serially, show verbose messages}
+\item{verbose}{Print messages.}
 }
 \value{
 Motif disruption predictions in 
@@ -99,11 +99,12 @@ merged_DT <- echodata::get_Nalls2019_merged()
 mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
                       # limit the number of datasets tested 
                       # for demonstration purposes only
-                      pwmList_max = 5,
+                      pwmList_max = 4,
                       calculate_pvals = FALSE)
 }
 \seealso{
 Other motifbreakR: 
-\code{\link{MOTIFBREAKR_filter_by_metadata}()}
+\code{\link{MOTIFBREAKR_filter_by_metadata}()},
+\code{\link{MOTIFBREAKR_summarize}()}
 }
 \concept{motifbreakR}

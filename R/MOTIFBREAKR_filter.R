@@ -51,7 +51,7 @@
 #' mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
 #'                       # limit the number of datasets tests 
 #'                       # for demonstration purposes only
-#'                       pwmList_max = 5,
+#'                       pwmList_max = 4,
 #'                       calculate_pvals = FALSE)
 #' mb_res_filt <- MOTIFBREAKR_filter(mb_res = mb_res,
 #'                                   merged_DT = merged_DT)

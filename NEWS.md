@@ -3,6 +3,8 @@
 ## New features
 
 * Added `MOTIFBREAKR` suite of functions.
+    - `MOTIFBREAKR`,`MOTIFBREAKR_calc_pvals`,`MOTIFBREAKR_filter`,
+        `MOTIFBREAKR_plot`,`MOTIFBREAKR_summarize`
     - Fully documented.
     - First attempts to get parallelization working.  
     - Passes up other args from `motifbreakR` core functions. 

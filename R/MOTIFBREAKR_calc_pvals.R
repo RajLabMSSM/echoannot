@@ -23,8 +23,8 @@ MOTIFBREAKR_calc_pvals <- function(mb_res,
                                                   T = 0.25),
                                    granularity = NULL,
                                    nThread = 1,
-                                   results_dir=file.path(tempdir(),"results"),
-                                   verbose=TRUE){
+                                   results_dir = file.path(tempdir(),"results"),
+                                   verbose = TRUE){
     requireNamespace("motifbreakR");
     requireNamespace("MotifDb");
     requireNamespace("BSgenome");

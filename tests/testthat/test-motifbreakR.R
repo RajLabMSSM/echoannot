@@ -8,7 +8,7 @@ test_that("MOTIFBREAKR works", {
     mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
                           # limit the number of datasets tested
                           # for demonstration purposes only
-                          pwmList_max = 5, 
+                          pwmList_max = 4, 
                           calculate_pvals = TRUE)
     testthat::expect_true(methods::is(mb_res,"GRanges"))
     testthat::expect_length(mb_res,1)
@@ -18,22 +18,24 @@ test_that("MOTIFBREAKR works", {
     )
       
     #### Filter and merge results #### 
-    mb_res_filt <- MOTIFBREAKR_filter(mb_res = mb_res_p,
-                                      merged_DT = merged_DT, 
-                                      top_geneSymbol_hits = 1)
-    testthat::expect_true(methods::is(mb_res_filt,"data.table"))
+    mb_merge <- MOTIFBREAKR_filter(mb_res = mb_res,
+                                   merged_DT = merged_DT, 
+                                   pvalue_threshold = NULL,
+                                   qvalue_threshold = NULL,
+                                   top_geneSymbol_hits = 1)
+    testthat::expect_true(methods::is(mb_merge,"data.table"))
     testthat::expect_true(
-        echoannot:::MOTIFBREAKR_has_pvals(mb_res = mb_res_p)
+        echoannot:::MOTIFBREAKR_has_pvals(mb_res = mb_merge)
     )
     
-    
     #### Plot ####  
-    #### Select genome build #### 
-    library(BSgenome.Hsapiens.UCSC.hg19) ## IMPORTANT! 
-    #### With p-values ####
-    plot_paths <- MOTIFBREAKR_plot(mb_res = mb_res_p)
-    testthat::expect_true(file.exists(plot_paths$rs11175620))
-    #### Without p-values ####
+    library(BSgenome.Hsapiens.UCSC.hg19) ## IMPORTANT!  
     plot_paths <- MOTIFBREAKR_plot(mb_res = mb_res)
     testthat::expect_true(file.exists(plot_paths$rs11175620)) 
+    
+    #### Summarise ####
+    summary_ls <- MOTIFBREAKR_summarize(mb_merge = mb_merge)
+    testthat::expect_equal(names(summary_ls), c("db_tally","locus_tally"))
+    testthat::expect_true(methods::is(summary_ls$locus_tally,"data.table"))
+    testthat::expect_equal(nrow(summary_ls$locus_tally), nrow(mb_merge))
 })

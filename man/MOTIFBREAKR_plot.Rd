@@ -41,7 +41,7 @@ If \code{NULL}, results will not be saved to disk.}
 
 \item{width}{the width of the device.}
 
-\item{verbose}{Logical; if running serially, show verbose messages}
+\item{verbose}{Print messages.}
 }
 \value{
 Named list of motif plot paths.

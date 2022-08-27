@@ -30,7 +30,7 @@ as a file named:
  \emph{<results_dir>/_genome_wide/motifbreakR/motifbreakR_results.rds}.
 If \code{NULL}, results will not be saved to disk.}
 
-\item{verbose}{Logical; if running serially, show verbose messages}
+\item{verbose}{Print messages.}
 }
 \value{
 Motif disruption predictions in 

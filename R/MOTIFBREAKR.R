@@ -51,33 +51,33 @@
 #' mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
 #'                       # limit the number of datasets tested 
 #'                       # for demonstration purposes only
-#'                       pwmList_max = 5,
+#'                       pwmList_max = 4,
 #'                       calculate_pvals = FALSE)
 MOTIFBREAKR <- function(rsid_list, 
-                        results_dir=file.path(tempdir(),"results"),
-                        pwmList=NULL,
-                        pwmList_max=NULL,
-                        genome_build=NULL,
-                        organism="Hsapiens",
-                        threshold=.85, # 1e-4 #  4e-8
-                        show.neutral=FALSE,
-                        method="default",
-                        calculate_pvals=TRUE,
-                        force_new=FALSE,
+                        results_dir = file.path(tempdir(),"results"),
+                        pwmList = NULL,
+                        pwmList_max = NULL,
+                        genome_build = NULL,
+                        organism = "Hsapiens",
+                        threshold = .85, # 1e-4 #  4e-8
+                        show.neutral = FALSE,
+                        method = "default",
+                        calculate_pvals = TRUE,
+                        force_new = FALSE,
                         background = c(A = 0.25, 
                                        C = 0.25, 
                                        G = 0.25, 
                                        T = 0.25),
                         granularity = NULL,
-                        nThread=1,
-                        verbose=TRUE){
+                        nThread = 1,
+                        verbose = TRUE){
   requireNamespace("BSgenome")
   requireNamespace("motifbreakR")
   # echoverseTemplate:::args2vars(MOTIFBREAKR)
     
   #### Select genome build ####
-  gb_list <- select_genome(genome_build = genome_build)
-  messager("Using genome_build",genome_build,v=verbose)
+  gb_list <- select_genome(genome_build = genome_build,
+                           verbose = verbose)
   #### Set up results save path ####
   rds_path <- file.path(results_dir,'_genome_wide',
                         'motifbreakR',
@@ -119,6 +119,8 @@ MOTIFBREAKR <- function(rsid_list,
                                        bkg = background, 
                                        # BPPARAM = BPPARAM,
                                        verbose = verbose);
+    #### Exit early if empty ####
+    if(length(mb_res)==0) return(mb_res)
     #### Calculate p-values ####
     if(isTRUE(calculate_pvals)){
         mb_res <- MOTIFBREAKR_calc_pvals(mb_res = mb_res, 
@@ -130,7 +132,7 @@ MOTIFBREAKR <- function(rsid_list,
     } 
     #### Save results #### 
     if(!is.null(results_dir)){
-      dir.create(results_dir,showWarnings = FALSE, recursive = TRUE);
+      dir.create(dirname(rds_path),showWarnings = FALSE, recursive = TRUE);
       messager("+ MOTIFBREAKR:: Saving results ==>", rds_path);
       saveRDS(object = mb_res, 
               file = rds_path);
