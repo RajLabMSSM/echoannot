@@ -7,7 +7,7 @@
 #' @param label_yaxis Whether or not to label the y-axis.
 #' @param legend_nrow Number of rows for the legend to span over.
 #' @inheritParams CS_bin_plot
-#' @inheritParams merge_finemapping_results
+#' @inheritParams echodata::merge_finemapping_results
 #' 
 #' @family summarise
 #' @export

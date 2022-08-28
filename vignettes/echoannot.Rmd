@@ -5,49 +5,52 @@ date: "<h4>Updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   BiocStyle::html_document
 vignette: >
-    %\VignetteIndexEntry{echoplot} 
+    %\VignetteIndexEntry{Getting started} 
     %\usepackage[utf8]{inputenc}
     %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r setup, echo=FALSE, include=FALSE}
-pkg <- read.dcf("../DESCRIPTION", fields = "Package")[1]
-library(pkg, character.only = TRUE)
+```{r setup, include=TRUE} 
+library(echoannot)
 ```
+ 
 
-```R
-library(`r pkg`)
-```
+# Import data
 
-# Merge and annotate 
-
-## Import results 
+## Single-locus
 
 Import pre-calculated fine-mapping results.
 
 ```{r}
-dataset <- echodata::get_Nalls2019_loci(return_dir = TRUE) 
+dat <- echodata::BST1[Consensus_SNP==TRUE,]
 ```
 
+## Genome-wide
 
-Merge (and annotate) SNP-wise fine-mapping results.
+To get the full dataset of all fine-mapped Parkinson's Disease loci, 
+you can use the following function: 
 
-```{r} 
-merged_DT <- echoannot::merge_finemapping_results(dataset = dataset, 
-                                                  minimum_support = 1,
-                                                  haploreg_annotation = TRUE)
-knitr::kable(head(merged_DT))
-```
-
-### Genome-wide example
-
-To get the full dataset of al fine-mapped PD loci, you can use the following
-function: 
-
-```R
+```{r}
 merged_DT <- echodata::get_Nalls2019_merged()
-
 ```
+
+# Annotate 
+
+Annotate SNP-wise fine-mapping results.
+
+Here, we're only annotating a small number of SNPs high-confidence causal SNPs
+for demo purposes.
+The more SNPs you supply to `annotate_snps`, the longer it will take to 
+query the selected databases for each SNP.
+
+```{r}  
+dat_annot <- echoannot::annotate_snps(dat = dat,
+                                      haploreg_annotation = TRUE, 
+                                      regulomeDB_annotation = TRUE,
+                                      biomart_annotation = TRUE) 
+echodata::createDT(dat_annot)
+```
+
 
 # Summary plots
 

@@ -8,7 +8,13 @@
 HaploR}
 }
 \usage{
-haplor_regulomedb(snp_list, verbose = TRUE, chunk_size = NA)
+haplor_regulomedb(snp_list, timeout = 500, chunk_size = NA, verbose = TRUE)
+}
+\arguments{
+\item{timeout}{A \code{timeout} parameter for \code{httr::GET}.
+Default: 100}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Download SNP-wise annotations from RegulomeDB

@@ -59,7 +59,6 @@ Other summarise:
 \code{\link{CS_bin_plot}()},
 \code{\link{CS_counts_plot}()},
 \code{\link{peak_overlap_plot}()},
-\code{\link{plot_dataset_overlap}()},
-\code{\link{results_report}()}
+\code{\link{plot_dataset_overlap}()}
 }
 \concept{summarise}

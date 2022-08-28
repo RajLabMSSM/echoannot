@@ -10,12 +10,18 @@
     - Passes up other args from `motifbreakR` core functions. 
     - Saves motif plots as PDFs. 
 * Added `get_bpparam` function.
+* Move to `echodata` package:
+    - `get_SNPgroup_counts`
+    - `results_report` 
+    - `merge_finemapping_results`: and split annotation portions 
+        into new `annotate_snps`.
 
 ## Bug fixes
 
 * `get_SNPgroup_counts`: 
     - Get rid of `.dots` and `.groups` warnings.
-    - Move to `echodata` package . 
+* Update main vignette to reflect all changes. 
+* `annotate_snps`: Fix subfunctions (there's been some updates to tool outputs).
 
 # echoannot 0.99.8
 

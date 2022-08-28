@@ -1,5 +1,7 @@
 #' Download SNP-wise annotations from RegulomeDB
 #'
+#' @param verbose Print messages. 
+#' @inheritParams haploR::queryRegulome
 #' @keywords internal
 #' @family annotate
 #' @source
@@ -9,9 +11,12 @@
 #' @keywords internal 
 #' @importFrom data.table as.data.table rbindlist
 haplor_regulomedb <- function(snp_list,
-                              verbose = TRUE,
-                              chunk_size = NA) {
+                              timeout = 500,
+                              chunk_size = NA,
+                              verbose = TRUE) {
     requireNamespace("haploR")
+    regulome.start <- NULL;
+    
     messager("+ Gathering annotation data from HaploReg...", v = verbose)
     # Break into smaller chunks
     snp_list <- unique(snp_list)
@@ -25,11 +30,16 @@ haplor_regulomedb <- function(snp_list,
         chunk <- chunked_list[[i]]
         rdb_query <- haploR::queryRegulome(
             query = chunk,
-            timeout = 500,
-            verbose = FALSE
+            timeout = timeout
         )
-        return(data.table::as.data.table(rdb_query))
-    }) |> data.table::rbindlist()
-
+        data.table::data.table(rdb_query$summary)[,-("chrom")]
+    }) |> data.table::rbindlist() 
+    data.table::setnames(rDB_query, 
+                         c("rsids","start","end"), 
+                         c("rsID","regulome.start","regulome.end"), 
+                         skip_absent = TRUE)
+    rDB_query <- dplyr::relocate(rDB_query, 
+                                 regulome.start, 
+                                 .before = "regulome.end")
     return(rDB_query)
 }

@@ -30,7 +30,7 @@ biomart_snp_info <- function(snp_list,
     messager("+ Gathering annotation data from Biomart...", v = verbose)
     mart <- biomaRt::useMart(
         biomart = "ENSEMBL_MART_SNP",
-        host = paste0(reference_genome, ".ensembl.org"),
+        host = paste0("https://",reference_genome, ".ensembl.org"),
         path = "/biomart/martservice",
         dataset = "hsapiens_snp"
     )
