@@ -21,7 +21,6 @@ results_report(echodata::get_Nalls2019_merged())
 Other summarise: 
 \code{\link{CS_bin_plot}()},
 \code{\link{CS_counts_plot}()},
-\code{\link{get_SNPgroup_counts}()},
 \code{\link{peak_overlap_plot}()},
 \code{\link{plot_dataset_overlap}()},
 \code{\link{super_summary_plot}()}

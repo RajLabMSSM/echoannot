@@ -13,7 +13,9 @@
 
 ## Bug fixes
 
-* `get_SNPgroup_counts`: Get rid of `.dots` and `.groups` warnings. 
+* `get_SNPgroup_counts`: 
+    - Get rid of `.dots` and `.groups` warnings.
+    - Move to `echodata` package . 
 
 # echoannot 0.99.8
 
