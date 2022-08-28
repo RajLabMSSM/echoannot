@@ -2,22 +2,28 @@
 #' 
 #' Tally locus-specific SNP group sizes.
 #' @param grouping_vars Column names in \code{merged_DT} to group counts by.
+#' @param verbose Print messages.
+#' @returns Named list of report tables.
 #' @inheritParams super_summary_plot
 #' 
 #' @family summarise
 #' @export
+#' @importFrom dplyr group_by_at summarise n_distinct
 #' @importFrom methods show
+#' @importFrom data.table data.table
 #' @examples
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' snp_groups <- get_SNPgroup_counts(merged_DT = merged_DT)
 get_SNPgroup_counts <- function(merged_DT,
-                                grouping_vars = "Locus") {
+                                grouping_vars = "Locus",
+                                verbose = TRUE) {
     SNP <- P <- Support <- Consensus_SNP <- mean.PP <- leadSNP <-
         Consensus <- NULL
 
-    snp_groups <- suppressMessages(
+    #### All loci ####
+    snp_groups <-  
         merged_DT |>
-            dplyr::group_by(.dots = grouping_vars) |>
+            dplyr::group_by_at(.vars = grouping_vars) |>
             dplyr::summarise(
                 Total.SNPs = dplyr::n_distinct(SNP,
                     na.rm = TRUE
@@ -41,18 +47,28 @@ get_SNPgroup_counts <- function(merged_DT,
                 topConsensus.leadGWAS = dplyr::n_distinct(
                     SNP[Consensus_SNP & leadSNP],
                     na.rm = TRUE
-                )
-            )
-    )
-    message("Report:: all loci:")
-    methods::show(
-        snp_groups[, !colnames(snp_groups) %in% grouping_vars] |>
-        colSums() / dplyr::n_distinct(snp_groups$Locus))
-    message("Report:: loci with at least one Consensus SNP:")
+                ),
+                .groups = "keep" 
+    ) |> data.table::data.table()
+    messager("All loci",
+             paste0("(",formatC(nrow(snp_groups),big.mark = ","),") : "),
+             v=verbose)
+    locus_summary <- 
+        colSums(snp_groups[,-(grouping_vars), with=FALSE]) / 
+        dplyr::n_distinct(snp_groups$Locus)
+    methods::show(round(locus_summary,2))
+    
+    #### Only loci with consensus SNPs ####
     consensus_present <- subset(snp_groups, Consensus > 0)
-    methods::show(
-        consensus_present[, !colnames(consensus_present) %in%
-        grouping_vars] |>
-        colSums() / dplyr::n_distinct(consensus_present$Locus))
-    return(data.frame(snp_groups))
+    messager("Loci with at least one Consensus SNP",
+             paste0("(",formatC(nrow(consensus_present),big.mark = ","),") : "),
+             v=verbose)
+    consensus_summary <- 
+        colSums(consensus_present[,-(grouping_vars), with=FALSE]) /
+        dplyr::n_distinct(consensus_present$Locus)
+    methods::show(round(consensus_summary,2))
+    #### Return ####
+    return(list(snp_groups=snp_groups,
+                locus_summary=locus_summary,
+                consensus_summary=consensus_summary))
 }

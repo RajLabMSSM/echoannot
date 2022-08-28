@@ -26,7 +26,7 @@ mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
 mb_merge <- MOTIFBREAKR_filter(mb_res = mb_res,
                                merged_DT = merged_DT,
                                pvalue_threshold = NULL)
-locus_tally <- MOTIFBREAKR_summarize(mb_merge = mb_merge)                         
+summary_ls <- MOTIFBREAKR_summarize(mb_merge = mb_merge)                         
 }
 \seealso{
 Other motifbreakR: 

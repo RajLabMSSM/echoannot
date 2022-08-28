@@ -4,13 +4,18 @@
 \alias{get_SNPgroup_counts}
 \title{Get SNP group counts}
 \usage{
-get_SNPgroup_counts(merged_DT, grouping_vars = "Locus")
+get_SNPgroup_counts(merged_DT, grouping_vars = "Locus", verbose = TRUE)
 }
 \arguments{
 \item{merged_DT}{Merged fine-mapping results data from
 \link[echolocatoR]{finemap_loci}.}
 
 \item{grouping_vars}{Column names in \code{merged_DT} to group counts by.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+Named list of report tables.
 }
 \description{
 Tally locus-specific SNP group sizes.
