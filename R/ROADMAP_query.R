@@ -1,15 +1,15 @@
 #' Query Roadmap by genomic coordinates
-#'
-#' @param gr.snp \code{\link[GenomicRanges]{GRanges}} object of
-#' SNPs to query Roadmap with.
+#' 
 #' @param limit_files Limit the number of annotation files queried
 #' (for faster testing).
-#' @param conda_env Conda environment to search for tabix in.
-#' @param remove_tmps Remove temporary files (e.g. "*.tbi").
+#' @param return_paths Return list of paths instead of a
+#'  \link[GenomicRanges]{GRangesList}.
+#' @param conda_env Conda environment to search for tabix in. 
 #' @param nThread Number of threads to parallelise queries over.
 #' @param verbose Print messages.
 #' @inheritParams ROADMAP_tabix
 #' @inheritParams ROADMAP_construct_reference
+#' @inheritParams echotabix::construct_query
 #'
 #' @family ROADMAP
 #' @export
@@ -17,76 +17,62 @@
 #' @importFrom parallel mclapply
 #' @importFrom echodata dt_to_granges
 #' @examples
-#' grl.roadmap <- echoannot::ROADMAP_query(
-#'     gr.snp = echodata::BST1,
-#'     keyword_query = "placenta"
-#' )
-ROADMAP_query <- function(results_path = file.path(tempdir(), "Roadmap"),
-                          gr.snp,
+#' query_dat <- echodata::BST1
+#' grl.roadmap <- ROADMAP_query(
+#'     query_dat = query_dat,
+#'     keyword_query = "placenta")
+ROADMAP_query <- function(query_dat,
+                          results_path = file.path(tempdir(), "Roadmap"),
                           keyword_query = NULL,
                           limit_files = NULL,
                           remove_tmps = TRUE,
+                          return_paths = FALSE,
                           conda_env = "echoR_mini",
                           nThread = 1,
                           verbose = TRUE) {
     rm_start <- Sys.time()
-    gr.snp <- echodata::dt_to_granges(
-        dat = gr.snp,
-        verbose = verbose
-    )
     roadmap_ref <- ROADMAP_construct_reference(keyword_query = keyword_query)
     if (!is.null(limit_files)) {
         roadmap_ref <- roadmap_ref[seq(1, limit_files), ]
     }
-    # Download via tabix (fast)
-    counter <- 1
-    gr.roadmap <- parallel::mclapply(unique(roadmap_ref$EID),
-        function(eid,
-                 gr.snp. = gr.snp,
-                 results_path. = results_path) {
+    #### Download via tabix (fast) ####
+    eid_list <- unique(roadmap_ref$EID)
+    gr.roadmap <- parallel::mclapply(seq_len(length(eid_list)),
+                                     function(i) {
+            eid <- eid_list[i]                             
             message_parallel(
-                "+ ROADMAP:: Querying subset from Roadmap API: ",
-                eid, " - ", counter, "/", length(unique(roadmap_ref$EID))
-            )
-            counter <<- counter + 1
-            dat <- GenomicRanges::GRanges()
-            try({
-                dat <- ROADMAP_tabix(
-                    results_path = results_path.,
-                    chrom = as.character(GenomicRanges::seqnames(gr.snp.)[1]),
-                    min_pos = min(GenomicRanges::start(gr.snp.), na.rm = TRUE),
-                    max_pos = max(GenomicRanges::end(gr.snp.), na.rm = TRUE),
+                "Querying subset from Roadmap API: ",
+                eid, " - ", i, "/", length(unique(roadmap_ref$EID))
+            ) 
+            dat <- tryCatch({
+                ROADMAP_tabix( 
+                    query_dat = query_dat,
                     eid = eid,
                     conda_env = conda_env,
-                    convert_to_granges = TRUE
+                    verbose = verbose
                 )
-            })
+            }, error = function(e){message(e);NULL}) 
             if (length(GenomicRanges::seqnames(dat)) > 0) {
                 return(dat)
             } else {
                 return(NULL)
-            }
-        },
-        mc.cores = nThread
-    ) #### END MCLAPPLY
-    remove(counter)
+            } 
+        }, mc.cores = nThread ) |> `names<-`(eid_list) #### END MCLAPPLY
+    #### Filter results ####
     grl.roadmap <- name_filter_convert(
         GR.final = gr.roadmap,
         GR.names =
             roadmap_ref$`Epigenome name (from EDACC Release 9 directory)`,
         min_hits = 1
     )
-    #### Remove temp files ####
-    if (remove_tmps) {
-        tbi <- list.files(
-            path = results_path,
-            pattern = ".tbi$", 
-            full.names = TRUE
-        )
-        dummy <- suppressWarnings(file.remove(tbi))
-    }
+    
     rm_end <- Sys.time()
     messager("ROADMAP:: All downloads complete", v = verbose)
     messager(round(rm_end - rm_start, 1), v = verbose)
-    return(grl.roadmap)
+    if(isTRUE(return_paths)){
+        bed_gz <- lapply(grl.roadmap, function(x)x@metadata$bed_gz)
+        return(bed_gz)
+    } else {
+        return(grl.roadmap)
+    } 
 }

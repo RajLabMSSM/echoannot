@@ -3,31 +3,35 @@
 \name{ROADMAP_tabix}
 \alias{ROADMAP_tabix}
 \title{Query Roadmap API}
+\source{
+\code{
+query_dat <- echodata::BST1
+dat <- ROADMAP_tabix(
+    query_dat = query_dat,
+    eid = "E099")
+}
+}
 \usage{
 ROADMAP_tabix(
-  results_path = tempfile(fileext = "ROADMAP_query.csv.gz"),
-  chrom,
-  min_pos,
-  max_pos,
   eid,
-  convert_to_granges = TRUE,
+  query_dat,
+  save_dir = tempdir(),
   conda_env = "echoR_mini",
+  nThread = 1,
   verbose = TRUE
 )
 }
 \arguments{
-\item{results_path}{Where to store query results.}
-
-\item{chrom}{Chromosome to query}
-
-\item{min_pos}{Minimum genomic position}
-
-\item{max_pos}{Maximum genomic position}
-
 \item{eid}{Roadmap annotation ID}
 
-\item{convert_to_granges}{Whether to return query
-as a \code{data.frame} or \code{\link[GenomicRanges]{GRanges}}.}
+\item{query_dat}{Variant-level summary statistics.}
+
+\item{verbose}{Print messages.}
+
+\item{results_path}{Where to store query results.}
+
+\item{as_granges}{Whether to return query
+as a \code{data.frame} or \link[GenomicRanges]{GRanges}.}
 }
 \description{
 Query Roadmap epigenomic annotations (chromatin marks)
@@ -36,18 +40,6 @@ using a range of genomic coordinates.
 \details{
 \href{https://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/}{
 ROADMAP file locations.}
-}
-\examples{
-\dontrun{
-BST1 <- echodata::BST1
-dat <- ROADMAP_tabix(
-    chrom = BST1$CHR[1],
-    min_pos = min(BST1$POS),
-    max_pos = max(BST1$POS),
-    eid = "E099"
-)
-}
-
 }
 \seealso{
 Other ROADMAP: 

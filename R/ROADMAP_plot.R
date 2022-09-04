@@ -56,7 +56,7 @@ ROADMAP_plot <- function(dat,
         grl.roadmap <- ROADMAP_query(
             results_path = dirname(annot_file),
             # Will convert data.table automatically
-            gr.snp = gr.snp,
+            query_dat = dat,
             keyword_query = roadmap_query,
             limit_files = NULL,
             conda_env = conda_env,

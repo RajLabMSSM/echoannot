@@ -30,6 +30,7 @@ biocViews:
 Imports: 
     echodata,
     echotabix,
+    downloadR,
     dplyr,
     data.table,
     utils,
@@ -75,6 +76,7 @@ Suggests:
 Remotes:
     github::RajLabMSSM/echodata,
     github::RajLabMSSM/echotabix,
+    github::RajLabMSSM/downloadR,
     github::hfang-bristol/XGR
 RoxygenNote: 7.2.1.9000
 VignetteBuilder: knitr

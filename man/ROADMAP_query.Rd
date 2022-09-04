@@ -5,21 +5,21 @@
 \title{Query Roadmap by genomic coordinates}
 \usage{
 ROADMAP_query(
+  query_dat,
   results_path = file.path(tempdir(), "Roadmap"),
-  gr.snp,
   keyword_query = NULL,
   limit_files = NULL,
   remove_tmps = TRUE,
+  return_paths = FALSE,
   conda_env = "echoR_mini",
   nThread = 1,
   verbose = TRUE
 )
 }
 \arguments{
-\item{results_path}{Where to store query results.}
+\item{query_dat}{Variant-level summary statistics.}
 
-\item{gr.snp}{\code{\link[GenomicRanges]{GRanges}} object of
-SNPs to query Roadmap with.}
+\item{results_path}{Where to store query results.}
 
 \item{keyword_query}{Search all columns in the Roadmap annotations metadata
 and only query annotations that contain your keywords.
@@ -29,7 +29,8 @@ Can provide multiple keywords in list form:
 \item{limit_files}{Limit the number of annotation files queried
 (for faster testing).}
 
-\item{remove_tmps}{Remove temporary files (e.g. "*.tbi").}
+\item{return_paths}{Return list of paths instead of a
+\link[GenomicRanges]{GRangesList}.}
 
 \item{conda_env}{Conda environment to search for tabix in.}
 
@@ -41,10 +42,10 @@ Can provide multiple keywords in list form:
 Query Roadmap by genomic coordinates
 }
 \examples{
-grl.roadmap <- echoannot::ROADMAP_query(
-    gr.snp = echodata::BST1,
-    keyword_query = "placenta"
-)
+query_dat <- echodata::BST1
+grl.roadmap <- ROADMAP_query(
+    query_dat = query_dat,
+    keyword_query = "placenta")
 }
 \seealso{
 Other ROADMAP: 

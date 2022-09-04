@@ -11,7 +11,7 @@
 #' \code{
 #' gr.snp <- echodata::dt_to_granges(echodata::BST1)
 #' grl.roadmap <- ROADMAP_query(
-#'     gr.snp = gr.snp,
+#'     query_dat = gr.snp,
 #'     keyword_query = "monocyte"
 #' )
 #' grl.roadmap.filt <- ROADMAP_merge_and_process_grl(

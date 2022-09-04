@@ -22,6 +22,7 @@
     - Get rid of `.dots` and `.groups` warnings.
 * Update main vignette to reflect all changes. 
 * `annotate_snps`: Fix subfunctions (there's been some updates to tool outputs).
+* Fix `ROADMAP_query`.
 
 # echoannot 0.99.8
 

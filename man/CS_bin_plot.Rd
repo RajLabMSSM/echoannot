@@ -23,6 +23,7 @@ bin_plot <- echoannot::CS_bin_plot(merged_DT = dat)
 \seealso{
 Other summarise: 
 \code{\link{CS_counts_plot}()},
+\code{\link{get_SNPgroup_counts}()},
 \code{\link{peak_overlap_plot}()},
 \code{\link{plot_dataset_overlap}()},
 \code{\link{super_summary_plot}()}

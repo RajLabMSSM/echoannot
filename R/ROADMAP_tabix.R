@@ -7,42 +7,34 @@
 #' ROADMAP file locations.}
 #'
 #' @param results_path Where to store query results.
-#' @param chrom Chromosome to query
-#' @param min_pos Minimum genomic position
-#' @param max_pos Maximum genomic position
 #' @param eid Roadmap annotation ID
-#' @param convert_to_granges Whether to return query
-#' as a \code{data.frame} or \code{\link[GenomicRanges]{GRanges}}.
-#'
-#' @examples
-#' \dontrun{
-#' BST1 <- echodata::BST1
+#' @param as_granges Whether to return query
+#' as a \code{data.frame} or \link[GenomicRanges]{GRanges}.
+#' @inheritParams echotabix::construct_query
+#' @source
+#' \code{
+#' query_dat <- echodata::BST1
 #' dat <- ROADMAP_tabix(
-#'     chrom = BST1$CHR[1],
-#'     min_pos = min(BST1$POS),
-#'     max_pos = max(BST1$POS),
-#'     eid = "E099"
-#' )
+#'     query_dat = query_dat,
+#'     eid = "E099")
 #' }
-#'
 #' @family ROADMAP
 #' @keywords internal
-#' @importFrom data.table fread
-#' @importFrom echotabix query
-#' @importFrom echodata dt_to_granges
-ROADMAP_tabix <- function(results_path =
-                              tempfile(fileext = "ROADMAP_query.csv.gz"),
-                          chrom,
-                          min_pos,
-                          max_pos,
-                          eid,
-                          convert_to_granges = TRUE,
+#' @importFrom downloadR downloader
+#' @importFrom data.table fread data.table
+#' @importFrom echotabix query construct_query 
+#' @importFrom rtracklayer import
+ROADMAP_tabix <- function(eid,
+                          query_dat,
+                          save_dir = tempdir(),
                           conda_env = "echoR_mini",
+                          nThread = 1,
                           verbose = TRUE) {
-    dir.create(results_path, showWarnings = FALSE, recursive = TRUE)
-    chrom <- paste0("chr", gsub("chr", "", tolower(chrom)))
-    tbx_start <- Sys.time()
-    messager("Downloading Roadmap Chromatin Marks:", eid, v = verbose)
+    
+    #### Prepare query_granges ####  
+    query_dat <- echotabix::construct_query(query_dat = query_dat, 
+                                            style = "UCSC")
+    #### Set up save path ####
     fname <- paste0(eid, "_15_coreMarks_dense.bed.bgz")
     URL <- paste(
         "https://egg2.wustl.edu/roadmap/data/byFileType",
@@ -50,29 +42,36 @@ ROADMAP_tabix <- function(results_path =
         fname,
         sep="/"
     ) # _15_coreMarks_stateno.bed.gz
-    #### Qiuery remote tabix file ####
-    query_granges <- echotabix::construct_query(query_chrom = chrom, 
-                                                query_start_pos = min_pos, 
-                                                query_end_pos = max_pos)
-    dat <- echotabix::query(
-        target_path = URL,
-        query_granges = query_granges,
-        conda_env = conda_env,
-        verbose = verbose
-    )
-    dat <- dat[, paste0("V", seq(1, 4))]
-    colnames(dat) <- c("Chrom", "Start", "End", "State")
-    dat$EID <- eid
-    dat$File <- fname
-    if (convert_to_granges) {
-        dat <- echodata::dt_to_granges(
-            dat = dat,
-            chrom_col = "Chrom",
-            start_col = "Start",
-            end_col = "End",
-            style = "NCBI"
-        )
-    }
+    #### Start timer ####
+    tbx_start <- Sys.time()
+    messager("Downloading Roadmap Chromatin Marks:", eid, v = verbose) 
+    #### Not ideal, but rtracklayer and tabix are unable to query these files #### 
+    tmp <- downloadR::downloader(input_url = URL,
+                                 output_path = save_dir,
+                                 conda_env = conda_env,
+                                 nThread = nThread,
+                                 verbose = verbose) 
+    dat <- rtracklayer::import(tmp, which = query_dat)
+    #### Query remote tabix file ####  
+    # dat <- echotabix::query(
+    #     target_path = tmp,
+    #     query_granges = query_dat,
+    #     conda_env = conda_env,
+    #     verbose = verbose
+    # )
+    # dat <- dat[, paste0("V", seq(1, 4))]
+    # colnames(dat) <- c("Chrom", "Start", "End", "State")
+    GenomicRanges::mcols(dat)$EID <- eid
+    GenomicRanges::mcols(dat)$file <- fname 
+    bed_path <- file.path(tempfile(),
+                              paste("query",basename(URL),sep=".")) 
+    grlist <- list(dat)|> `names<-`(gsub("\\.bed|\\.bgz","",basename(URL)))
+    bed_gz <- echodata::granges_to_bed(grlist = grlist, 
+                                       save_dir = dirname(bed_path), 
+                                       gzip = TRUE,
+                                       nThread = nThread,
+                                       verbose = verbose)
+    dat@metadata <- list(bed_gz=bed_gz)
     tbx_end <- Sys.time()
     messager("BED subset downloaded in", 
              round(tbx_end - tbx_start, 3), "seconds",

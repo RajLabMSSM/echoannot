@@ -58,6 +58,7 @@ super_plot <- echoannot::super_summary_plot(merged_DT = merged_DT,
 Other summarise: 
 \code{\link{CS_bin_plot}()},
 \code{\link{CS_counts_plot}()},
+\code{\link{get_SNPgroup_counts}()},
 \code{\link{peak_overlap_plot}()},
 \code{\link{plot_dataset_overlap}()}
 }
