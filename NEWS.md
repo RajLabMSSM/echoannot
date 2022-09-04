@@ -10,6 +10,7 @@
     - Passes up other args from `motifbreakR` core functions. 
     - Saves motif plots as PDFs. 
 * Added `get_bpparam` function.
+* Added `filter_chromatin_states` function (internal).
 * Move to `echodata` package:
     - `get_SNPgroup_counts`
     - `results_report` 

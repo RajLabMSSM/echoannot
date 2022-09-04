@@ -7,7 +7,8 @@
 ROADMAP_construct_reference(
   ref_path = system.file("extdata/ROADMAP", "ROADMAP_Epigenomic.js", package =
     "echoannot"),
-  keyword_query = NULL
+  keyword_query = NULL,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -16,7 +17,9 @@ ROADMAP_construct_reference(
 \item{keyword_query}{Search all columns in the Roadmap annotations metadata
 and only query annotations that contain your keywords.
 Can provide multiple keywords in list form:
-\code{c("placenta","liver","monocytes")}}
+\code{c("placenta","liver","monocytes")}.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Gather Roadmap annotation metadata

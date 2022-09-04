@@ -4,7 +4,7 @@
 \alias{name_filter_convert}
 \title{name_filter_convert}
 \usage{
-name_filter_convert(GR.final, GR.names, min_hits = 1)
+name_filter_convert(grl, min_hits = 1)
 }
 \description{
 name_filter_convert

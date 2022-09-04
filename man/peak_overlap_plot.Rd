@@ -76,7 +76,6 @@ gg_peaks <- echoannot::peak_overlap_plot(
 Other summarise: 
 \code{\link{CS_bin_plot}()},
 \code{\link{CS_counts_plot}()},
-\code{\link{get_SNPgroup_counts}()},
 \code{\link{plot_dataset_overlap}()},
 \code{\link{super_summary_plot}()}
 }

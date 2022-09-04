@@ -2,6 +2,7 @@
 #' 
 #' @param limit_files Limit the number of annotation files queried
 #' (for faster testing).
+#' @param chrom_states Filter results by chromatin states.
 #' @param return_paths Return list of paths instead of a
 #'  \link[GenomicRanges]{GRangesList}.
 #' @param conda_env Conda environment to search for tabix in. 
@@ -18,18 +19,21 @@
 #' @importFrom echodata dt_to_granges
 #' @examples
 #' query_dat <- echodata::BST1
-#' grl.roadmap <- ROADMAP_query(
+#' grl <- ROADMAP_query(
 #'     query_dat = query_dat,
+#'     limit_files = 1,
 #'     keyword_query = "placenta")
 ROADMAP_query <- function(query_dat,
                           results_path = file.path(tempdir(), "Roadmap"),
                           keyword_query = NULL,
                           limit_files = NULL,
+                          chrom_states = NULL,
                           remove_tmps = TRUE,
                           return_paths = FALSE,
                           conda_env = "echoR_mini",
                           nThread = 1,
                           verbose = TRUE) {
+    
     rm_start <- Sys.time()
     roadmap_ref <- ROADMAP_construct_reference(keyword_query = keyword_query)
     if (!is.null(limit_files)) {
@@ -37,7 +41,7 @@ ROADMAP_query <- function(query_dat,
     }
     #### Download via tabix (fast) ####
     eid_list <- unique(roadmap_ref$EID)
-    gr.roadmap <- parallel::mclapply(seq_len(length(eid_list)),
+    grl.roadmap <- parallel::mclapply(seq_len(length(eid_list)),
                                      function(i) {
             eid <- eid_list[i]                             
             message_parallel(
@@ -59,16 +63,15 @@ ROADMAP_query <- function(query_dat,
             } 
         }, mc.cores = nThread ) |> `names<-`(eid_list) #### END MCLAPPLY
     #### Filter results ####
-    grl.roadmap <- name_filter_convert(
-        GR.final = gr.roadmap,
-        GR.names =
-            roadmap_ref$`Epigenome name (from EDACC Release 9 directory)`,
-        min_hits = 1
-    )
-    
+    #### Annotate/filter chromatin states ####
+    grl.roadmap <- filter_chromatin_states(grl = grl.roadmap, 
+                                           chrom_states = chrom_states,
+                                           verbose = verbose) 
+    grl.roadmap <- name_filter_convert(grl = grl.roadmap) 
     rm_end <- Sys.time()
     messager("ROADMAP:: All downloads complete", v = verbose)
     messager(round(rm_end - rm_start, 1), v = verbose)
+    #### Return ####
     if(isTRUE(return_paths)){
         bed_gz <- lapply(grl.roadmap, function(x)x@metadata$bed_gz)
         return(bed_gz)

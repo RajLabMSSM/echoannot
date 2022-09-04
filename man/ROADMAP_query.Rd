@@ -9,6 +9,7 @@ ROADMAP_query(
   results_path = file.path(tempdir(), "Roadmap"),
   keyword_query = NULL,
   limit_files = NULL,
+  chrom_states = NULL,
   remove_tmps = TRUE,
   return_paths = FALSE,
   conda_env = "echoR_mini",
@@ -24,10 +25,12 @@ ROADMAP_query(
 \item{keyword_query}{Search all columns in the Roadmap annotations metadata
 and only query annotations that contain your keywords.
 Can provide multiple keywords in list form:
-\code{c("placenta","liver","monocytes")}}
+\code{c("placenta","liver","monocytes")}.}
 
 \item{limit_files}{Limit the number of annotation files queried
 (for faster testing).}
+
+\item{chrom_states}{Filter results by chromatin states.}
 
 \item{return_paths}{Return list of paths instead of a
 \link[GenomicRanges]{GRangesList}.}
