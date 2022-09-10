@@ -14,4 +14,8 @@ add_mb(dat, pos_col = "POS")
 \description{
 Add column containing genomic coordinate in units of megabasepairs ("Mb").
 }
-\keyword{internal}
+\examples{
+dat <- echodata::BST1
+dat2 <- add_mb(dat = dat)
+}
+\keyword{export}
