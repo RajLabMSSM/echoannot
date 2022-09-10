@@ -13,6 +13,7 @@ XGR_plot(
   facet_var = "Source",
   geom = "density",
   n_top = 5,
+  adjust = 0.2,
   force_new = FALSE,
   show_plot = FALSE,
   nThread = 1,
@@ -47,6 +48,8 @@ For full list of libraries see
 \item{n_top}{Number of top annotations to be plotted
 (passed to \link[echoannot]{XGR_filter_sources} and then
 \link[echoannot]{XGR_filter_assays}).}
+
+\item{adjust}{The granularity of the peaks.}
 
 \item{force_new}{Download and prepare a new query
 even if the file already exists locally (Default: \code{FALSE}).}

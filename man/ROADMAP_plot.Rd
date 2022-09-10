@@ -10,6 +10,7 @@ ROADMAP_plot(
   lib_name = "Roadmap.ChromatinMarks_CellTypes",
   locus_dir = tempdir(),
   n_top = 5,
+  adjust = 0.2,
   force_new = FALSE,
   show_plot = FALSE,
   conda_env = "echoR_mini",
@@ -36,6 +37,8 @@ Can provide multiple keywords in list form:
 
 \item{n_top}{Number of top annotations to be plotted
 (passed to \link[echoannot]{ROADMAP_merge_and_process_grl}).}
+
+\item{adjust}{The granularity of the peaks.}
 
 \item{force_new}{Download and prepare a new query
 even if the file already exists locally (Default: \code{FALSE}).}

@@ -37,6 +37,7 @@ ROADMAP_plot <- function(dat,
                          lib_name = "Roadmap.ChromatinMarks_CellTypes",
                          locus_dir = tempdir(),
                          n_top = 5,
+                         adjust = 0.2,
                          force_new = FALSE,
                          show_plot = FALSE, 
                          conda_env = "echoR_mini",
@@ -76,6 +77,7 @@ ROADMAP_plot <- function(dat,
     track.roadmap <- ROADMAP_track_plot(
         grl.roadmap.filt = grl.roadmap.filt,
         gr.snp = gr.snp,
+        adjust = adjust,
         show_plot = show_plot,
         verbose = verbose
     )

@@ -30,7 +30,7 @@
 ROADMAP_track_plot <- function(grl.roadmap.filt,
                                gr.snp = NULL,
                                geom = "density",
-                               adjust = .2,
+                               adjust = 0.2,
                                show_plot = TRUE,
                                as_ggplot = TRUE,
                                verbose = TRUE) {
