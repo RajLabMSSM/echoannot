@@ -18,4 +18,3 @@ Add column containing genomic coordinate in units of megabasepairs ("Mb").
 dat <- echodata::BST1
 dat2 <- add_mb(dat = dat)
 }
-\keyword{export}

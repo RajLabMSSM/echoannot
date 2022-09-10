@@ -3,11 +3,12 @@
 #' Add column containing genomic coordinate in units of megabasepairs ("Mb").
 #' @param dat Data.
 #' @param pos_col Genomic position column name.
-#' @keywords export
+#' 
 #' @importFrom echodata is_granges
 #' @importFrom GenomicRanges mcols
 #' @importFrom methods is
 #' @importFrom data.table :=
+#' @export
 #' @examples 
 #' dat <- echodata::BST1
 #' dat2 <- add_mb(dat = dat)
