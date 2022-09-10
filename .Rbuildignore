@@ -8,10 +8,9 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-
 Dockerfile
 ^LICENSE\.md$
-
 .*\.tbi$
 vignettes/*\.tbi$
 .empty
+^\.httr-oauth$

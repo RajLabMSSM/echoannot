@@ -72,7 +72,8 @@ Suggests:
     SNPlocs.Hsapiens.dbSNP144.GRCh38,
     BSgenome.Hsapiens.UCSC.hg19,
     BSgenome.Hsapiens.UCSC.hg38,
-    BiocParallel
+    BiocParallel,
+    zen4R
 Remotes:
     github::RajLabMSSM/echodata,
     github::RajLabMSSM/echotabix,
@@ -82,3 +83,4 @@ RoxygenNote: 7.2.1.9000
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3
+LazyData: true

@@ -46,8 +46,9 @@ Query Roadmap by genomic coordinates
 }
 \examples{
 query_dat <- echodata::BST1
-grl.roadmap <- ROADMAP_query(
+grl <- ROADMAP_query(
     query_dat = query_dat,
+    limit_files = 1,
     keyword_query = "placenta")
 }
 \seealso{
