@@ -34,6 +34,9 @@ ROADMAP_query <- function(query_dat,
                           nThread = 1,
                           verbose = TRUE) {
     
+    # echoverseTemplate:::args2vars(ROADMAP_query)
+    # echoverseTemplate:::source_all()
+    
     rm_start <- Sys.time()
     roadmap_ref <- ROADMAP_construct_reference(keyword_query = keyword_query)
     if (!is.null(limit_files)) {
@@ -52,7 +55,8 @@ ROADMAP_query <- function(query_dat,
                 ROADMAP_tabix( 
                     query_dat = query_dat,
                     eid = eid,
-                    conda_env = conda_env,
+                    save_dir = results_path,
+                    conda_env = conda_env, 
                     verbose = verbose
                 )
             }, error = function(e){message(e);NULL}) 

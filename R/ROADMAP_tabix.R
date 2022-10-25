@@ -20,7 +20,7 @@
 #' }
 #' @family ROADMAP
 #' @keywords internal
-#' @importFrom downloadR downloader
+#' @importFrom echodata get_header
 #' @importFrom data.table fread data.table
 #' @importFrom echotabix query construct_query 
 #' @importFrom rtracklayer import
@@ -45,22 +45,28 @@ ROADMAP_tabix <- function(eid,
     #### Start timer ####
     tbx_start <- Sys.time()
     messager("Downloading Roadmap Chromatin Marks:", eid, v = verbose) 
-    #### Not ideal, but rtracklayer and tabix are unable to query these files #### 
-    tmp <- downloadR::downloader(input_url = URL,
-                                 output_path = save_dir,
-                                 conda_env = conda_env,
-                                 nThread = nThread,
-                                 verbose = verbose) 
-    dat <- rtracklayer::import(tmp, which = query_dat)
+    #### Not ideal, but rtracklayer and tabix are unable to query these files ####  
+    ## returns 493652 rows  
+    dat <- echodata::get_header(path = URL,
+                                nrows = -2L,
+                                colnames_only = FALSE,
+                                nThread = nThread)
     #### Query remote tabix file ####  
-    # dat <- echotabix::query(
-    #     target_path = tmp,
-    #     query_granges = query_dat,
+    ## "works" but only returns 298 rows.
+    # dat <- echotabix::query_table(
+    #     target_path = URL,
+    #     query_granges = query_dat,  
     #     conda_env = conda_env,
+    #     nThread = nThread,
     #     verbose = verbose
-    # )
-    # dat <- dat[, paste0("V", seq(1, 4))]
-    # colnames(dat) <- c("Chrom", "Start", "End", "State")
+    # )  
+    names(dat)[seq_len(4)] <- c("Chrom", "Start", "End", "name")
+    dat <- echodata::dt_to_granges(dat = dat,
+                                   chrom_col = "Chrom",
+                                   start_col = "Start",
+                                   end_col = "End",
+                                   style = "UCSC",
+                                   verbose = verbose)
     GenomicRanges::mcols(dat)$EID <- eid
     GenomicRanges::mcols(dat)$file <- fname 
     bed_path <- file.path(tempfile(),

@@ -1,3 +1,11 @@
+# echoannot 0.99.10
+
+## Big fixes
+
+* `ROADMAP_query`: `rtracklayer::import` has some bugs that prevent it
+    from importing certain bed.gz files. So implemented a workaround using 
+    custom functions instead.
+
 # echoannot 0.99.9
 
 ## New features

@@ -24,7 +24,8 @@ filter_chromatin_states <- function(grl,
     }
     ckey <- ROADMAP_chromatin_states(as_dict = TRUE)
     
-    grl <- lapply(grl, function(gr){
+    grl <- lapply(grl, 
+                  function(gr){
         GenomicRanges::mcols(gr)$chrom_type <- 
             stringr::str_split(GenomicRanges::mcols(gr)[[chrom_states_col]],
                                "_",n = 2, simplify = TRUE)[,2]

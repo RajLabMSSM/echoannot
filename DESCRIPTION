@@ -1,7 +1,7 @@
 Package: echoannot
 Type: Package
 Title: echoverse module: Annotate fine-mapping results
-Version: 0.99.7
+Version: 0.99.10
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
