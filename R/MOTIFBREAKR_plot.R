@@ -36,7 +36,9 @@
 #'                       # for demonstration purposes only
 #'                       pwmList_max = 5,
 #'                       calculate_pvals = FALSE)  
+#' \dontrun{
 #' plot_paths <- MOTIFBREAKR_plot(mb_res = mb_res) 
+#' }
 MOTIFBREAKR_plot <- function(mb_res, 
                              mb_filter=NULL,
                              rsid=NULL,

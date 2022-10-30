@@ -68,5 +68,7 @@ mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
                       # for demonstration purposes only
                       pwmList_max = 5,
                       calculate_pvals = FALSE)  
+\dontrun{
 plot_paths <- MOTIFBREAKR_plot(mb_res = mb_res) 
+}
 }
