@@ -4,7 +4,7 @@ test_that("NOTT2019_plac_seq_plot works", {
     locus_dir <- file.path(tempdir(), echodata::locus_dir)
     
     #### Full window ####
-    trks_plus_lines <- echoannot::NOTT2019_plac_seq_plot(
+    trks_plus_lines <- echoannot:: NOTT2019_plac_seq_plot(
         dat = dat
     )
     testthat::expect_true(methods::is(trks_plus_lines,"Tracks"))

@@ -28,8 +28,8 @@ add_regulatory_rects <- function(NOTT.interact_trk,
                 rect.height = rect_height,
                 ggplot2::aes_string(y = "y", fill = "Element"),
                 alpha = .7, inherit.aes = FALSE,
-                color = "transparent",
-                hjust = 0
+                color = "transparent"
+                # hjust = 0
             ) +
             ggplot2::scale_fill_manual(values = color_dict) +
             # geom_point(data = data.frame(regions),

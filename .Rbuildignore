@@ -15,3 +15,5 @@ vignettes/*\.tbi$
 .empty
 ^\.httr-oauth$
 .*\.tbi$
+IMPACT707_EUR_chr4.annot.bgz.tbi
+IMPACT707_EUR_chr4.l2.ldscore.bgz.tbi
