@@ -38,6 +38,7 @@
     custom functions instead.
 * Reduce vignette sizes to <5Mb.
 * Fix `super_summary_plot` unit tests.
+* Switch website to gh-pages branch.
 * Fix GHA: @master --> @v2  
 * `NOTT2019_plac_seq_plot`:
     - Get rid of hjust warning. 
