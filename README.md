@@ -1,5 +1,5 @@
 <img src='https://github.com/RajLabMSSM/echoannot/raw/main/inst/hex/hex.png' height='300'><br><br>
-[![](https://img.shields.io/badge/devel%20version-0.99.7-black.svg)](https://github.com/RajLabMSSM/echoannot)
+[![](https://img.shields.io/badge/devel%20version-0.99.10-black.svg)](https://github.com/RajLabMSSM/echoannot)
 [![R build
 status](https://github.com/RajLabMSSM/echoannot/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RajLabMSSM/echoannot/actions)
 [![](https://img.shields.io/github/last-commit/RajLabMSSM/echoannot.svg)](https://github.com/RajLabMSSM/echoannot/commits/main)
@@ -10,7 +10,7 @@ GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-pro
 Author: <i>Brian M. Schilder</i>
 </h5>
 <h5>
-README updated: <i>Aug-27-2022</i>
+README updated: <i>Oct-30-2022</i>
 </h5>
 
 ## `echoannot`: Functions for annotating genomic data
