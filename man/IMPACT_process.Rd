@@ -26,7 +26,15 @@ sudo apt-get install librdf0-dev
 }
 }
 \usage{
-IMPACT_process(IMPACT_dir, sandbox = TRUE, token)
+IMPACT_process(
+  IMPACT_dir,
+  sandbox = TRUE,
+  title = "IMPACT",
+  zipfile = file.path(tempdir(), "IMPACT707"),
+  token = Sys.getenv("zenodo_token"),
+  validate = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{IMPACT_dir}{Directory where IMPACT repo has been cloned to.}
@@ -36,6 +44,8 @@ IMPACT_process(IMPACT_dir, sandbox = TRUE, token)
 \item{token}{Zenodo
 \href{https://zenodo.org/account/settings/applications/tokens/new/}{
 Personal access token}.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Process IMPACT files so that they're all tabix-indexed

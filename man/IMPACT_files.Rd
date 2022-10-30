@@ -9,7 +9,7 @@ An object of class \code{data.table} (inherits from \code{data.frame}) with 88 r
 }
 \source{
 \code{
-IMPACT_files <- zenodo_list(token = token)[!endsWith(filename,
+IMPACT_files <- downloadR::zenodo_list(token = token)[!endsWith(filename,
                                                      c(".zip",".tbi")),]
 usethis::use_data(IMPACT_files, overwrite = TRUE)
 }

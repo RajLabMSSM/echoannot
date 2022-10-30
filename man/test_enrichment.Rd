@@ -3,13 +3,21 @@
 \name{test_enrichment}
 \alias{test_enrichment}
 \title{Test enrichment}
+\source{
+\href{https://www.bioconductor.org/packages/devel/bioc/vignettes/regioneR/inst/doc/regioneR.html}{
+See section "3.7A note on reproducibility" for info on setting the seed.}
+}
 \usage{
 test_enrichment(
   grlist1,
   grlist2,
-  ntimes = 50,
+  ntimes = 100,
   genome = "hg19",
   alternative = "auto",
+  min.parallel = 1000,
+  force.parallel = NULL,
+  seed = 2022,
+  mc.set.seed = FALSE,
   verbose = TRUE,
   ...
 )
@@ -29,13 +37,37 @@ Internally it uses getGenomeAndMask.}
 
 \item{alternative}{the alternative hypothesis must be one of \code{"greater"}, \code{"less"} or \code{"auto"}. If \code{"auto"}, the alternative will be decided depending on the data.}
 
+\item{min.parallel}{if force.parallel is not specified, this will be used to determine the threshold for parallel computation. If \code{length(A) * ntimes > min.parallel}, it will activate the parallel computation. Single threaded otherwise.}
+
+\item{force.parallel}{logical indicating if the computation must be paralelized.}
+
+\item{seed}{Set the seed for reproducibility.}
+
+\item{mc.set.seed}{"In order to create reproducible code with functions that use random 
+numbers such as the permutation testing in \pkg{regioneR} , 
+it is necessary to use set.seed. 
+However, since \pkg{regioneR} uses parallel to perform the test it is
+ also necessary to set the \code{mc.set.seed} parameter to FALSE 
+ to ensure reproducibility."}
+
 \item{verbose}{Print messages.}
 
 \item{...}{Additional arguments passed to \link[regioneR]{overlapPermTest}.}
+}
+\value{
+data.frame
 }
 \description{
 Conduct permutation enrichment tests between all combinations of 
 two named lists,
 each containing one or more \link[GenomicRanges]{GRanges} objects.
 Permutation tests are run using \link[regioneR]{overlapPermTest}.
+}
+\examples{
+dat <- echodata::get_Nalls2019_merged() 
+grlist1 <- dat[P<5e-8,]
+grlist2 <- dat[Support>0,] 
+enrich <- test_enrichment(grlist1 = grlist1,
+                          grlist2 = grlist2,  
+                          ntimes = 25) 
 }

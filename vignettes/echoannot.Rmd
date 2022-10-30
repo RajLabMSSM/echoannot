@@ -15,17 +15,7 @@ library(echoannot)
 ```
  
 
-# Import data
-
-## Single-locus
-
-Import pre-calculated fine-mapping results.
-
-```{r}
-dat <- echodata::BST1[Consensus_SNP==TRUE,]
-```
-
-## Genome-wide
+# Import data  
 
 To get the full dataset of all fine-mapped Parkinson's Disease loci, 
 you can use the following function: 
@@ -44,11 +34,14 @@ The more SNPs you supply to `annotate_snps`, the longer it will take to
 query the selected databases for each SNP.
 
 ```{r}  
+#### Only query high-confidence fine-mapping SNPs from one locus ####
+dat <- merged_DT[Locus=="LRRK2" & Consensus_SNP==TRUE,]
+#### Query annotations ####
 dat_annot <- echoannot::annotate_snps(dat = dat,
                                       haploreg_annotation = TRUE, 
                                       regulomeDB_annotation = TRUE,
                                       biomart_annotation = TRUE) 
-echodata::createDT(dat_annot)
+knitr::kable(dat_annot)
 ```
 
 
@@ -57,13 +50,15 @@ echodata::createDT(dat_annot)
 ## Credible Set bin plot
 
 ```{r} 
-gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = merged_DT)
+gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = merged_DT,
+                                    show_plot = FALSE)
 ```
 
 ## Credible Set counts plot
 
 ```{r}
-gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = merged_DT)
+gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = merged_DT, 
+                                          show_plot = FALSE)
 ```
 
 ## Epigenomic data

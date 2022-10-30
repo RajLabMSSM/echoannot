@@ -54,7 +54,6 @@ enrich.lead <- XGR_enrichment(
 }
 \seealso{
 Other XGR: 
-\code{\link{XGR_download_and_standardize}()},
 \code{\link{XGR_enrichment_bootstrap}()},
 \code{\link{XGR_enrichment_plot}()},
 \code{\link{XGR_filter_assays}()},
@@ -65,9 +64,9 @@ Other XGR:
 \code{\link{XGR_merge_and_process}()},
 \code{\link{XGR_parse_metadata}()},
 \code{\link{XGR_plot_enrichment}()},
-\code{\link{XGR_plot_peaks}()},
 \code{\link{XGR_prepare_foreground_background}()},
+\code{\link{XGR_query}()},
 \code{\link{XGR_sep_handler}()},
-\code{\link{xgr_query}}
+\code{\link{xgr_example}}
 }
 \concept{XGR}

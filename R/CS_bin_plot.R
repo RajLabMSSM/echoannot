@@ -6,8 +6,7 @@
 #' @param show_plot Show plot. 
 #'
 #' @family summarise
-#' @export
-#' @importFrom RColorBrewer brewer.pal
+#' @export 
 #' @importFrom stats setNames
 #' @importFrom methods show
 #' @importFrom echodata get_CS_bins
@@ -22,12 +21,10 @@ CS_bin_plot <- function(merged_DT,
     Method <- bin <- ..count.. <- NULL;
     
     bin_counts <- echodata::get_CS_bins(merged_DT = merged_DT)
-    # Assign bin colors
+    # Assign bin colors 
     used_bins <- levels(bin_counts$bin)[levels(bin_counts$bin) %in%
         unique(bin_counts$bin)]
-    custom_colors <- RColorBrewer::brewer.pal(
-        n = length(levels(bin_counts$bin)), "GnBu"
-    )
+    custom_colors <- palette_gnbu(n = length(levels(bin_counts$bin)))
     custom_colors_dict <- stats::setNames(
         custom_colors[seq(1, length(used_bins))],
         rev(used_bins)

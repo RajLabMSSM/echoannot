@@ -60,7 +60,7 @@ CS_counts_plot <- function(merged_DT,
         ggplot2::aes(y = Locus, x = `Credible Set size`, fill = Method)
     ) +
         ggplot2::geom_bar(stat = "identity", color = "white", size = .05) +
-        ggplot2::geom_text(aes(label = `Credible Set size`),
+        ggplot2::geom_text(ggplot2::aes(label = `Credible Set size`),
             color = "grey20",
             size = 3, show.legend = FALSE,
             position = ggplot2::position_stack(vjust = .5)

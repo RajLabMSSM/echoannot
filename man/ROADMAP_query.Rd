@@ -2,16 +2,23 @@
 % Please edit documentation in R/ROADMAP_query.R
 \name{ROADMAP_query}
 \alias{ROADMAP_query}
-\title{Query Roadmap by genomic coordinates}
+\title{Query Roadmap 
+ 
+Query Roadmap annotations using a set of genomic coordinates.}
 \usage{
 ROADMAP_query(
   query_dat,
-  results_path = file.path(tempdir(), "Roadmap"),
   keyword_query = NULL,
   limit_files = NULL,
   chrom_states = NULL,
-  remove_tmps = TRUE,
+  n_top = NULL,
+  min_hits = 1,
+  save_dir = file.path(tempdir(), paste(paste0("roadmap_query--", paste(keyword_query,
+    collapse = "-")), paste0("n_top--", n_top), paste0("limit_files--", limit_files),
+    paste(chrom_states, collapse = "-"), sep = ".")),
+  force_new = FALSE,
   return_paths = FALSE,
+  merge_and_process = FALSE,
   conda_env = "echoR_mini",
   nThread = 1,
   verbose = TRUE
@@ -19,8 +26,6 @@ ROADMAP_query(
 }
 \arguments{
 \item{query_dat}{Variant-level summary statistics.}
-
-\item{results_path}{Where to store query results.}
 
 \item{keyword_query}{Search all columns in the Roadmap annotations metadata
 and only query annotations that contain your keywords.
@@ -32,8 +37,23 @@ Can provide multiple keywords in list form:
 
 \item{chrom_states}{Filter results by chromatin states.}
 
+\item{n_top}{The number of top annotation sources (e.g. tissues)
+ to include, sorted by greatest number of rows
+(i.e. the number of genomic ranges within the window).}
+
+\item{min_hits}{Minimum number of hits 
+(regions overlapping with \code{query_dat})
+ required to include a given annotation.}
+
+\item{save_dir}{Directory to store query results in.}
+
+\item{force_new}{Overwrite any existing files of the same name.}
+
 \item{return_paths}{Return list of paths instead of a
 \link[GenomicRanges]{GRangesList}.}
+
+\item{merge_and_process}{Perform filtering and merging of
+\link[GenomicRanges]{GRangesList} items.}
 
 \item{conda_env}{Conda environment to search for tabix in.}
 
@@ -42,19 +62,20 @@ Can provide multiple keywords in list form:
 \item{verbose}{Print messages.}
 }
 \description{
-Query Roadmap by genomic coordinates
+Query Roadmap 
+ 
+Query Roadmap annotations using a set of genomic coordinates.
 }
 \examples{
 query_dat <- echodata::BST1
 grl <- ROADMAP_query(
     query_dat = query_dat,
-    limit_files = 1,
-    keyword_query = "placenta")
+    keyword_query = "monocyte")
 }
 \seealso{
 Other ROADMAP: 
 \code{\link{ROADMAP_construct_reference}()},
-\code{\link{ROADMAP_merge_and_process_grl}()},
+\code{\link{ROADMAP_merge_and_process}()},
 \code{\link{ROADMAP_tabix}()}
 }
 \concept{ROADMAP}

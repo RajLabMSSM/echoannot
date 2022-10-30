@@ -1,40 +1,44 @@
 #' Download, standardize, and merge XGR annotations
 #'
-#' Merges a list of XGR annotations into a single GRanges object
-#'
+#' Merges a list of XGR annotations into a single
+#'  \link[GenomicRanges]{GRangesList} 
+#'  (or merged \link[GenomicRanges]{GRanges}) object.
 #' @param lib.selections Which XGR annotations to check overlap with.
 #' For full list of libraries see
 #' \href{http://XGR_r-forge.r-project.org/#annotations-at-the-genomic-region-level}{
 #'  here.}
 #'  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.
-#' @param as_grangesList Return as a \code{GRangesList},
-#'  instead of a single merged \code{GRanges} object.
+#' @param n_top Filter to only the top N annotations 
+#' that have the greatest amount of overlap with the genomic coordinates of
+#' \code{dat}. 
+#' @param as_grangesList Return as a \link[GenomicRanges]{GRangesList},
+#'  instead of a single merged \link[GenomicRanges]{GRanges} object.
 #' @param dat data.table of genomic coordinates to query with.
 #' Set as \code{NULL} to return genome-wide data.
 #' @param nThread Number of cores to parallelise across.
-#'
-#' @return GRangesList
+#' @returns \link[GenomicRanges]{GRangesList}
 #' @family XGR
-#' @examples
-#' gr.lib <- echoannot::XGR_download_and_standardize(
-#'     lib.selections = c("ENCODE_DNaseI_ClusteredV3_CellTypes"),
-#'     dat = echodata::BST1
-#' )
+#' 
 #' @export
 #' @importFrom parallel mclapply
 #' @importFrom XGR xRDataLoader
-#' @importFrom GenomicRanges GRangesList
-#' @importFrom methods is
-XGR_download_and_standardize <- function(lib.selections = c(
-                                             "ENCODE_TFBS_ClusteredV3_CellTypes",
-                                             "TFBS_Conserved",
-                                             "Uniform_TFBS"
-                                         ),
+#' @importFrom GenomicRanges GRangesList 
+#' @examples
+#' gr.lib <- echoannot::XGR_query(
+#'     lib.selections = c("ENCODE_DNaseI_ClusteredV3_CellTypes"),
+#'     dat = echodata::BST1, 
+#'     n_top = 1)
+XGR_query <- function(lib.selections = c("ENCODE_TFBS_ClusteredV3_CellTypes",
+                                         "TFBS_Conserved",
+                                         "Uniform_TFBS"
+                                         ), 
                                          as_grangesList = FALSE,
                                          dat=NULL,
-                                         nThread = 1) {
+                                         n_top=NULL,
+                                         nThread=1) {
     # Iterate over XGR libraries
-    gr.lib <- lapply(lib.selections, function(lib.name) {
+    gr.lib <- lapply(lib.selections, 
+                     function(lib.name) {
         GR.annotations <- XGR::xRDataLoader(RData.customised = lib.name)
         if (is.null(GR.annotations)) {
             stop("XGR library name not recognized: ", lib.name)
@@ -84,10 +88,18 @@ XGR_download_and_standardize <- function(lib.selections = c(
             return(NULL)
         }
     }) # return OVERLAP
-    # Merge
+    #### Merge ####
     gr.lib <- GenomicRanges::GRangesList(unlist(gr.lib))
-    if (as_grangesList == FALSE) {
+    if (isFALSE(as_grangesList)) {
         gr.lib <- unlist(gr.lib)
     }
+    #### Filter annot ####
+    gr.lib <- XGR_filter_sources(
+        gr.lib = gr.lib,
+        n_top_sources = n_top)
+    gr.lib <- XGR_filter_assays(
+        gr.lib = gr.lib,
+        n_top_assays = n_top)
+    #### Return ####
     return(gr.lib)
 }

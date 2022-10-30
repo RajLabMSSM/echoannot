@@ -26,6 +26,8 @@ that contain's each SNPs RSID.}
 (using \code{HaploR}).}
 
 \item{biomart_annotation}{Annotate SNPs with \code{biomart}.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Annotate fine-mapping results from \pkg{echolocatoR} across all loci.

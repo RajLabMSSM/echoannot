@@ -9,6 +9,7 @@
 #' @param regulomeDB_annotation Annotate SNPs with regulomeDB
 #' (using \code{HaploR}).
 #' @param biomart_annotation Annotate SNPs with \code{biomart}.
+#' @param verbose Print messages.
 #' 
 #' @export
 #' @importFrom dplyr rename 

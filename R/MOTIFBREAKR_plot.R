@@ -27,6 +27,7 @@
 #' @importFrom BiocGenerics %in%
 #' @examples
 #' library(BSgenome) ## <-- IMPORTANT!
+#' library(BSgenome.Hsapiens.UCSC.hg19) ## <-- IMPORTANT!
 #' #### Example fine-mapping results ####
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' #### Run motif analyses ####
@@ -44,12 +45,13 @@ MOTIFBREAKR_plot <- function(mb_res,
                              height=3,
                              width=7,
                              verbose=TRUE){
+    
     requireNamespace("motifbreakR")
     requireNamespace("MotifDb")
     requireNamespace("BSgenome.Hsapiens.UCSC.hg19")
     requireNamespace("grDevices")
     id <- NULL;
-    
+     
     mb_res <- echodata::dt_to_granges(dat = mb_res, 
                                       style = "UCSC", ## IMPORTANT!
                                       verbose = verbose)
@@ -59,9 +61,10 @@ MOTIFBREAKR_plot <- function(mb_res,
     if(is.null(rsid)) rsid <- mb_res$SNP_id
     rsid <- unique(rsid)
     if(length(rsid)>0){
-        messager("Plotting",length(rsid),"unique RSID(s).")
+        messager("Plotting",length(rsid),"unique RSID(s).",v=verbose)
     } else {
-        stop("No valid RSIDs provided.")
+        stp <- "No valid RSIDs provided."
+        stop(stp)
     }
     #### Filter SNPs based on another GRanges object ####
     if(!is.null(mb_filter)){

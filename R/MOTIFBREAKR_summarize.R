@@ -23,7 +23,7 @@
 MOTIFBREAKR_summarize <- function(mb_merge){ 
     effect <- dataSource <- Locus <-alleleDiff <- top_disrupting_SNP <-
         seqMatch <- SNP <- Consensus_SNP <- geneSymbol <- 
-        leadSNP <- Support <- NULL;
+        leadSNP <- Support <- n <- NULL;
     # Tally hits hits per
     db_tally <- mb_merge |>
         dplyr::group_by(effect, dataSource) |>

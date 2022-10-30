@@ -28,7 +28,7 @@ library(`r pkg`)
 
 ### Import data 
 
-```{r}
+```R
 superenhancers <- echoannot::get_NOTT2019_superenhancer_interactome()
 enhancers_promoters <- echoannot::NOTT2019_get_promoter_interactome_data()
 peaks <- echoannot::NOTT2019_get_epigenomic_peaks() 
@@ -60,7 +60,7 @@ knitr::kable(head(histo_out$data$peaks))
 
 ### Import data 
 
-```{r}
+```R
 bulkATACseq_peaks <- echoannot::get_CORCES2020_bulkATACseq_peaks()
 cicero_coaccessibility <- echoannot::get_CORCES2020_cicero_coaccessibility()
 hichip_fithichip_loop_calls <- echoannot::get_CORCES2020_hichip_fithichip_loop_calls()
@@ -70,7 +70,7 @@ scATACseq_peaks <- echoannot::get_CORCES2020_scATACseq_peaks()
 
 ### Plot
 
-```{r} 
+```R
 peak_dat <- echoannot::granges_overlap(
     dat1 = dat,  
     chrom_col.1 = "CHR",
@@ -80,8 +80,7 @@ peak_dat <- echoannot::granges_overlap(
     start_col.2 = "hg38_Start",
     end_col.2 = "hg38_Stop")
 ggbio::autoplot(peak_dat, 
-                ggplot2::aes(y=ExcitatoryNeurons, color=Effect))
-
+                ggplot2::aes(y=ExcitatoryNeurons, color=Effect)) 
 ```
 
 

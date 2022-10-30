@@ -24,17 +24,20 @@
 #' sudo apt-get install librdf0-dev
 #' }
 #' @param IMPACT_dir Directory where IMPACT repo has been cloned to.
-#' @inheritParams zenodo_list
+#' @inheritParams downloadR::zenodo_list
 #' @keywords internal
+#' @importFrom downloadR zenodo_upload
 #' @importFrom echotabix convert
 #' @importFrom stringr str_split
-#' @importFrom stats setNames
-#' @importFrom utils zip
+#' @importFrom stats setNames 
 IMPACT_process <- function(IMPACT_dir,
                            sandbox=TRUE,
-                           token){  
+                           title="IMPACT",
+                           zipfile=file.path(tempdir(),"IMPACT707"),
+                           token=Sys.getenv("zenodo_token"),
+                           validate=TRUE,
+                           verbose=TRUE){  
     
-    requireNamespace("zen4R")
     file_types <- c("\\.annot\\.gz$", "\\.ldscore.gz")
     names(file_types) <- stringr::str_split(file_types,"\\.",
                                             simplify = TRUE)[,2]
@@ -55,58 +58,32 @@ IMPACT_process <- function(IMPACT_dir,
                                force_new = FALSE)
         })
     })  
-    #### Compress ####
-    out <- utils::zip(zipfile = "IMPACT707",
-                      files = IMPACT_dir,
-                      extras = list("-x *.gz"))
-    
-    #### Upload to zenodo ####
-    zenodo <- zen4R::ZenodoManager$new(
-        #### zenodo sandbox ####
-        url = if(isTRUE(sandbox)) {
-            "https://sandbox.zenodo.org/api"
-        } else {
-            "https://zenodo.org/api"
-        },
-        token = token, 
-        ##  use "DEBUG" to see detailed API operation logs, 
-        ## use NULL if you don't want logs at all
-        logger = "INFO" 
-    )   
-    #### Create new record ####
-    newrec <- zen4R::ZenodoRecord$new() 
-    newrec$setTitle(title = "IMPACT")
-    newrec$setDescription(description = 
-  paste("Annotations produced by IMPACT",
-        "(Inference and Modeling of Phenotype-related ACtive Transcription)",
-        "to predict functional impact of genome sequence variation.",
-        "Source: https://github.com/immunogenomics/IMPACT",
-        "These annotations are used by echolocatoR to perform",
-        "in silico validation analyses.",
-        "Data has been reprocessed to enable API access and querying of",
-        "files using tabix.\n",
-        "https://github.com/RajLabMSSM/echolocatoR"))
-    newrec$setUploadType(uploadType = "dataset")
-    newrec$addCreator(firstname = "Brian", lastname = "Schilder", 
-                      affiliation = "Imperial College London") 
-    newrec <- zenodo$depositRecord(newrec) 
-    #### Upload files ####
-    uploads <- lapply(unlist(all_files), function(x){
-        message("Uploading: ",x)
-        zenodo$uploadFile(x, record = newrec) 
-    })
-    zipped_file <- "IMPACT707.zip"
-    file_res <- zenodo$uploadFile(zipped_file, record = newrec) 
-    #### Publish record ####
-    rec_res <- zenodo$publishRecord(recordId = newrec$id) 
-    #### Validate everything was published #### 
-    myrec <- zenodo$getDepositionByConceptDOI("10.5281/zenodo.7062237")
-    zen_files <- zenodo$getFiles(myrec$id)
-    # message(length(zen_files)," Zenodo files found.")  
-    zfiles <- sapply(zen_files, function(x){x$filename})
-    all_there <- all(
-        c(basename(unlist(all_files)),zipped_file) %in% zfiles
-    )
-    return(list(all_files=all_files,
-                zipped_file=zipped_file))
+    meta <- list(
+        description=
+            paste("Annotations produced by IMPACT",
+                  "(Inference and Modeling of",
+                  "Phenotype-related ACtive Transcription)",
+                  "to predict functional impact of genome sequence variation.",
+                  "Source: https://github.com/immunogenomics/IMPACT",
+                  "These annotations are used by echolocatoR to perform",
+                  "in silico validation analyses.",
+                  "Data has been reprocessed to enable API access",
+                  "and querying of files using tabix.\n",
+                  "https://github.com/RajLabMSSM/echolocatoR"),
+        uploadType="dataset",
+        Creator=list(
+            firstname = "Brian", 
+            lastname = "Schilder", 
+            affiliation = "Imperial College London"
+        )
+        )
+    zout <- downloadR::zenodo_upload(files=all_files,
+                                     token=token,
+                                     title=title,
+                                     zipfile=zipfile,
+                                     meta=meta,
+                                     sandbox=sandbox,
+                                     validate=validate,
+                                     verbose=verbose) 
+    return(zout)
 }

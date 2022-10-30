@@ -1,31 +1,17 @@
 #' Get data
 #' 
 #' Download remote resources stored on GitHub Releases via \pkg{piggyback}.
-#' 
-#' @param fname File name.
-#' @param repo GitHub repository name.
-#' @param save_dir Local directory to cache data in.
-#' @inheritParams piggyback::pb_download
-#' 
+#' @inheritParams echodata::get_data 
 #' @keywords internal
-#' @importFrom piggyback pb_download
+#' @importFrom echodata get_data
 #' @importFrom tools R_user_dir
 get_data <- function(fname,
                      repo = "RajLabMSSM/echoannot",
                      save_dir = tools::R_user_dir("echoannot",
                                                   which="cache"),
-                     overwrite = FALSE) {
-    
-    dir.create(save_dir, showWarnings = FALSE, recursive = TRUE)
-    tmp <- file.path(save_dir, fname)
-    if (!file.exists(tmp)) {
-        Sys.setenv("piggyback_cache_duration" = 10)
-        piggyback::pb_download(
-            file = fname,
-            dest = save_dir,
-            repo = repo,
-            overwrite = overwrite
-        )
-    }
-    return(tmp)
+                     overwrite = FALSE) { 
+    echodata::get_data(fname = fname, 
+                       repo = repo, 
+                       save_dir = save_dir, 
+                       overwrite = overwrite)
 }

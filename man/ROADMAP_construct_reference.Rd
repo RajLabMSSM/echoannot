@@ -7,12 +7,16 @@
 ROADMAP_construct_reference(
   ref_path = system.file("extdata/ROADMAP", "ROADMAP_Epigenomic.js", package =
     "echoannot"),
+  limit_files = NULL,
   keyword_query = NULL,
   verbose = TRUE
 )
 }
 \arguments{
 \item{ref_path}{Where the ROADMAP metadata is stored.}
+
+\item{limit_files}{Limit the number of annotation files queried
+(for faster testing).}
 
 \item{keyword_query}{Search all columns in the Roadmap annotations metadata
 and only query annotations that contain your keywords.
@@ -28,12 +32,11 @@ Gather Roadmap annotation metadata
 ref <- ROADMAP_construct_reference(keyword_query = c(
     "placenta",
     "liver",
-    "monocytes"
-))
+    "monocytes"))
 }
 \seealso{
 Other ROADMAP: 
-\code{\link{ROADMAP_merge_and_process_grl}()},
+\code{\link{ROADMAP_merge_and_process}()},
 \code{\link{ROADMAP_query}()},
 \code{\link{ROADMAP_tabix}()}
 }

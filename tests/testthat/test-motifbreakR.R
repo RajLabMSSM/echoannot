@@ -1,6 +1,6 @@
 test_that("MOTIFBREAKR works", {
   
-    library(BSgenome) ## <-- IMPORTANT!
+    library(BSgenome) ## <-- IMPORTANT! 
     set.seed(2022)
     #### Example fine-mapping results ####
     merged_DT <- echodata::get_Nalls2019_merged()
@@ -9,7 +9,8 @@ test_that("MOTIFBREAKR works", {
                           # limit the number of datasets tested
                           # for demonstration purposes only
                           pwmList_max = 4, 
-                          calculate_pvals = TRUE)
+                          calculate_pvals = TRUE,
+                          force_new = TRUE)
     testthat::expect_true(methods::is(mb_res,"GRanges"))
     testthat::expect_length(mb_res,1)
     testthat::expect_true("alleleDiff" %in% names(GenomicRanges::mcols(mb_res)))

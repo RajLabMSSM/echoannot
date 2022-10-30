@@ -16,6 +16,7 @@ ROADMAP_tabix(
   eid,
   query_dat,
   save_dir = tempdir(),
+  force_new = FALSE,
   conda_env = "echoR_mini",
   nThread = 1,
   verbose = TRUE
@@ -26,9 +27,11 @@ ROADMAP_tabix(
 
 \item{query_dat}{Variant-level summary statistics.}
 
-\item{verbose}{Print messages.}
+\item{save_dir}{Directory to store query results in.}
 
-\item{results_path}{Where to store query results.}
+\item{force_new}{Overwrite any existing files of the same name.}
+
+\item{verbose}{Print messages.}
 
 \item{as_granges}{Whether to return query
 as a \code{data.frame} or \link[GenomicRanges]{GRanges}.}
@@ -44,7 +47,7 @@ ROADMAP file locations.}
 \seealso{
 Other ROADMAP: 
 \code{\link{ROADMAP_construct_reference}()},
-\code{\link{ROADMAP_merge_and_process_grl}()},
+\code{\link{ROADMAP_merge_and_process}()},
 \code{\link{ROADMAP_query}()}
 }
 \concept{ROADMAP}

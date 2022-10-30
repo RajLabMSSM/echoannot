@@ -9,7 +9,7 @@
 #' @param nThread Number of threads to parallelise across libraries.
 #' @param save_path Save the results as a \code{data.frame}.
 #' @inheritParams XGR_prepare_foreground_background
-#' @inheritParams XGR_download_and_standardize
+#' @inheritParams XGR_query
 #' @family XGR
 #' @keywords internal
 #' @examples
@@ -32,7 +32,7 @@ XGR_iterate_overlap <- function(lib.selections =
                                 nThread = 1) {
     
     Consensus_SNP <- NULL;
-    gr.lib <- XGR_download_and_standardize(
+    gr.lib <- XGR_query(
         lib.selections = lib.selections,
         dat = dat,
         nThread = nThread

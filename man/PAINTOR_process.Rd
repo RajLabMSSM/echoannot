@@ -23,9 +23,12 @@ sudo apt-get install librdf0-dev
 \usage{
 PAINTOR_process(
   annot_dir = "./",
-  zipped_file = "Functional_Annotations.zip",
+  zipfile = "Functional_Annotations",
   sandbox = TRUE,
-  token
+  title = "PAINTOR",
+  token = Sys.getenv("zenodo_token"),
+  validate = TRUE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -37,6 +40,8 @@ data has been decompressed to.}
 \item{token}{Zenodo
 \href{https://zenodo.org/account/settings/applications/tokens/new/}{
 Personal access token}.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Process PAINTOR annotation/LD-score files and upload them to Zenodo.

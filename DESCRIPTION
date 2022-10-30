@@ -32,9 +32,9 @@ Imports:
     echotabix,
     downloadR,
     dplyr,
+    stringr,
     data.table,
-    utils,
-    R.utils,
+    utils, 
     tools,
     methods,
     stats, 
@@ -42,9 +42,7 @@ Imports:
     parallel, 
     ggplot2,
     patchwork,
-    ggbio,
-    RColorBrewer,
-    scales,
+    ggbio, 
     GenomicRanges,
     DescTools, 
     grDevices,
@@ -52,8 +50,7 @@ Imports:
     S4Vectors,
     BiocGenerics,
     IRanges,
-    XGR,
-    piggyback
+    XGR
 Suggests:
     markdown,
     rmarkdown,
@@ -68,12 +65,13 @@ Suggests:
     biomaRt,
     regioneR,
     motifbreakR,
+    MotifDb,
+    BSgenome,
     SNPlocs.Hsapiens.dbSNP144.GRCh37,
     SNPlocs.Hsapiens.dbSNP144.GRCh38,
     BSgenome.Hsapiens.UCSC.hg19,
     BSgenome.Hsapiens.UCSC.hg38,
-    BiocParallel,
-    zen4R
+    BiocParallel
 Remotes:
     github::RajLabMSSM/echodata,
     github::RajLabMSSM/echotabix,

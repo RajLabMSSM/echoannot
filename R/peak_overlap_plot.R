@@ -17,8 +17,7 @@
 #' \href{https://doi.org/10.1038/s41588-020-00721-x}{
 #' Corces et al., 2020 (Nature Genetics)} 
 #' @export
-#' @importFrom patchwork plot_layout
-#' @importFrom scales alpha
+#' @importFrom patchwork plot_layout 
 #' @importFrom stats formula
 #' @importFrom methods show
 #' @examples
@@ -196,8 +195,8 @@ peak_overlap_plot <- function(merged_DT,
         # scale_fill_discrete(na.value = "transparent") +
         ggplot2::scale_fill_gradient(
             na.value = "transparent",
-            low = scales::alpha("blue", .7),
-            high = scales::alpha("red", .7)
+            low = ggplot2::alpha("blue", .7),
+            high = ggplot2::alpha("red", .7)
         ) +
         # geom_point(aes(size=ifelse(Count>0, "dot", "no_dot")),
         # show.legend = F, alpha=.8, color="white") +
@@ -266,14 +265,18 @@ peak_overlap_plot <- function(merged_DT,
                 show_plot = FALSE
             )
             gg_pks <- gg_pks + gg_cells$plot +
-                patchwork::plot_layout(nrow = 1, widths = subplot_widths)
+                patchwork::plot_layout(nrow = 1, 
+                                       widths = subplot_widths)
         })
     }
 
     if (show_plot) methods::show(gg_pks)
     if (save_path != FALSE) {
         messager("+ Saving plot ==>", save_path, v = verbose)
-        ggplot2::ggsave(save_path, gg_pks, height = height, width = width)
+        ggplot2::ggsave(filename = save_path, 
+                        plot = gg_pks, 
+                        height = height, 
+                        width = width)
     }
     return(list(
         data = dat_melt,

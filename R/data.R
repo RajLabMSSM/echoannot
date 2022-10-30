@@ -25,18 +25,18 @@
 #' Example XGR query
 #'
 #' Example XGR query results from \pkg{XGR} via
-#' \link[echoannot]{XGR_download_and_standardize} using the
+#' \link[echoannot]{XGR_query} using the
 #' "ENCODE_DNaseI_ClusteredV3_CellTypes" dataset.
 #' @family XGR
 #' @source
 #' \code{
-#' xgr_query <- echoannot::XGR_download_and_standardize(
+#' xgr_example <- echoannot::XGR_query(
 #'     c("ENCODE_DNaseI_ClusteredV3_CellTypes"),
 #'     dat = echodata::BST1)
 #' }
-#' usethis::use_data(xgr_query, overwrite = TRUE)
-#' @usage data("xgr_query")
-"xgr_query"
+#' usethis::use_data(xgr_example, overwrite = TRUE)
+#' @usage data("xgr_example")
+"xgr_example"
 
 
 #' IMPACT files
@@ -47,7 +47,7 @@
 #' @family IMPACT
 #' @source
 #' \code{
-#' IMPACT_files <- zenodo_list(token = token)[!endsWith(filename,
+#' IMPACT_files <- downloadR::zenodo_list(token = token)[!endsWith(filename,
 #'                                                      c(".zip",".tbi")),]
 #' usethis::use_data(IMPACT_files, overwrite = TRUE)
 #' }

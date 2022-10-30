@@ -8,9 +8,14 @@ name_filter_convert <- function(grl,
     
     grl <- grl[!as.logical(lapply(grl, is.null))]
     # Filter to those that had at least N hits
-    grl <- grl[as.logical(lapply(grl, function(g, min_hits. = min_hits) {
-        length(GenomicRanges::seqnames(g)) >= min_hits.
-    }))] 
+    if(!is.null(min_hits)){
+        grl <- grl[
+            as.logical(lapply(grl,
+                              function(g) {
+          length(GenomicRanges::seqnames(g)) >= min_hits
+                                  }
+     ))] 
+    } 
     #### Convert to GRangesList (important) ####
     grl <- GenomicRanges::GRangesList(grl)
     return(grl)

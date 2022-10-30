@@ -22,6 +22,8 @@
 #' results as a named list, where the name is 
 #' the file the annotation came from.}
 #' }   
+#' @param add_metadata Add metadata about each sample 
+#' (\emph{Warning}: can substantially increase the dataset size).
 #' @inheritParams echotabix::query
 #' @inheritParams echotabix::construct_query
 #' @returns A named list or data.table of annotations 
@@ -32,6 +34,7 @@
 #' @importFrom stats setNames
 #' @importFrom data.table data.table melt.data.table rbindlist fread :=
 #' @importFrom dplyr group_by slice_head
+#' @importFrom utils data
 #' @examples 
 #' query_dat <- echodata::BST1[1:50,]
 #' annot_dt <- IMPACT_query(query_dat=query_dat, populations="EUR")
@@ -46,9 +49,12 @@ IMPACT_query <- function(query_dat,
                          conda_env = "echoR_mini",
                          nThread = 1,
                          verbose = TRUE){ 
-    # echoverseTemplate:::args2vars(echoannot:::IMPACT_query)
-    IMPACT_id <- IMPACT <- variable <- NULL;
     
+    # echoverseTemplate:::args2vars(echoannot:::IMPACT_query)
+    # echoverseTemplate:::source_all()
+    IMPACT_id <- IMPACT <- variable <- chrom <- type <- population <- NULL;
+    
+    IMPACT_files <- get("IMPACT_files")
     #### Handle output_format ####
     output_format <- tolower(output_format)[1]
     if(output_format!="long" && add_metadata){
@@ -57,7 +63,7 @@ IMPACT_query <- function(query_dat,
             "Setting add_metadata=FALSE."
         )
         warning(msg)
-    } 
+    }  
     #### Get file paths ####
     files <- IMPACT_files[chrom %in% unique(query_dat$CHR) &
                              type %in% types &

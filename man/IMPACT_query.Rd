@@ -42,6 +42,9 @@ results as a named list, where the name is
 the file the annotation came from.}
 }}
 
+\item{add_metadata}{Add metadata about each sample 
+(\emph{Warning}: can substantially increase the dataset size).}
+
 \item{conda_env}{Conda environments to search in. 
 If \code{NULL} (default), will search all conda environments.}
 

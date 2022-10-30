@@ -1,10 +1,45 @@
 # echoannot 0.99.10
 
-## Big fixes
+## New features  
+
+* `annotation_file_name`:   
+    - New export function.  
+* `ROADMAP_merge_and_process_grl` --> `ROADMAP_merge_and_process`
+* `ROADMAP_query`:
+    - Embed `ROADMAP_merge_and_process` as an option.  
+    - Make `save_path` more unique by adding params to name.
+* `ROADMAP_tabix`:
+    - Can now find a read in existing files of the same. 
+* `XGR_query` --> `XGR_query`: 
+    - Embed n_top as an option, 
+        passed to `XGR_filter_assays` and `XGR_filter_sources`.  
+* `xgr_query` --> `xgr_example` (to avoid conflict with func name) 
+* Move functions to `echoplot`:
+    - `ROADMAP_plot` and plotting subfunctions.  
+    - `XGR_plot` and plotting subfunctions.  
+* Move functions to `downloadR`:
+    - `zenodo_upload` 
+    - `zenodo_list`  
+* Remove Imports:
+    - `scales`
+    - `piggyback`
+    - `RColorBrewer`
+    - `zen4R` 
+* `test_enrichment`:
+    - Can convert data.tables to GRL too.
+    - Pass up args from `PermTest`: `min.parallel`,`force.parallel`
+    - Allow users to set seed.
+* Move `zenodo_list` to `downloadR`
+
+## Bug fixes
 
 * `ROADMAP_query`: `rtracklayer::import` has some bugs that prevent it
-    from importing certain bed.gz files. So implemented a workaround using 
+    from importing certain bed.gz files. So implemented a workaround using
     custom functions instead.
+* Reduce vignette sizes to <5Mb.
+* Fix `super_summary_plot` unit tests.
+* Fix GHA: @master --> @v2  
+
 
 # echoannot 0.99.9
 
@@ -74,7 +109,7 @@ instead of error/NA/NULL during errors, so you can still merge at the end.
 
 ## New features 
 
-* `XGR_download_and_standardize`: Set `dat=NULL` to return genome-wide data.
+* `XGR_query`: Set `dat=NULL` to return genome-wide data.
 * New vignette: *cell_type_specific_epigenomics*, 
     with Nott2019 and Corces2020 data.
 
@@ -171,7 +206,7 @@ NAMESPACE.
     - "ROADMAP." --> "ROADMAP_"
     - "NOTT_2019." --> "NOTT2019_"
     - etc.
-* Added `xgr_query` example data. 
+* Added `xgr_example` example data. 
 * Added unit tests for `super_summary_plot` and its subfunctions.
 * Offloaded all liftover functions to `echotabix`
 * Made new wrapper functions to simplify importing/plotting pipelines:

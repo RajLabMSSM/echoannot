@@ -1,7 +1,7 @@
 test_that("granges_overlap works", {
  
     dat1 <- echodata::BST1
-    dat2 <- echoannot::xgr_query
+    dat2 <- echoannot::xgr_example
     GenomicRanges::mcols(dat2) <- NULL
 
     gr.hits <- echoannot::granges_overlap(dat1 = dat1,
