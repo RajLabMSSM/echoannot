@@ -33,7 +33,9 @@ test_that("MOTIFBREAKR works", {
     library(BSgenome.Hsapiens.UCSC.hg19) ## IMPORTANT!  
     ## Sometimes causes errors during tests/examples 
     ## (but not in R console, and not on some GHA platforms) 
-    plot_paths <- MOTIFBREAKR_plot(mb_res = mb_res) 
+    tryCatch({
+        plot_paths <- MOTIFBREAKR_plot(mb_res = mb_res) 
+    })
     # testthat::expect_true(file.exists(plot_paths$rs11175620)) 
     
     #### Summarise ####
