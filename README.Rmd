@@ -2,7 +2,7 @@
 title: ""  
 author: "<img src='https://github.com/RajLabMSSM/`r read.dcf('DESCRIPTION', fields = 'Package')[1]`/raw/main/inst/hex/hex.png' height='300'><br><br>
         `r badger::badge_github_version(color = 'black')` 
-        `r badger::badge_github_actions(action = 'R-CMD-check-bioc')`
+        `r badger::badge_github_actions(action = 'rworkflows')`
         `r badger::badge_last_commit(branch = 'main')`
         `r badger::badge_codecov(branch = 'main')` 
         `r badger::badge_license()` 
