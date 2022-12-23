@@ -78,7 +78,7 @@ Remotes:
     github::RajLabMSSM/echotabix,
     github::RajLabMSSM/downloadR,
     github::hfang-bristol/XGR
-RoxygenNote: 7.2.1.9000
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3

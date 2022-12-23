@@ -1,3 +1,9 @@
+# echoannot 0.99.11
+
+## New features
+
+* Implement `rworkflows`
+
 # echoannot 0.99.10
 
 ## New features  

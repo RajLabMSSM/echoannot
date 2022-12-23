@@ -17,3 +17,7 @@ vignettes/*\.tbi$
 .*\.tbi$
 IMPACT707_EUR_chr4.annot.bgz.tbi
 IMPACT707_EUR_chr4.l2.ldscore.bgz.tbi
+
+node_modules$
+package-lock\.json$
+package\.json$
