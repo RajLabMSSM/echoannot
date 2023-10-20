@@ -18,6 +18,7 @@ test_enrichment(
   force.parallel = NULL,
   seed = 2022,
   mc.set.seed = FALSE,
+  save_path = tempfile(fileext = "_test_enrichment.rds"),
   verbose = TRUE,
   ...
 )
@@ -50,9 +51,17 @@ However, since \pkg{regioneR} uses parallel to perform the test it is
  also necessary to set the \code{mc.set.seed} parameter to FALSE 
  to ensure reproducibility."}
 
+\item{save_path}{Path to save results to as an \emph{RDS} file.
+Set to \code{NULL} to skip this step.}
+
 \item{verbose}{Print messages.}
 
-\item{...}{Additional arguments passed to \link[regioneR]{overlapPermTest}.}
+\item{...}{
+  Arguments passed on to \code{\link[regioneR:overlapPermTest]{regioneR::overlapPermTest}}
+  \describe{
+    \item{\code{A}}{a region set in any of the accepted formats by \code{\link[regioneR]{toGRanges}} (\code{\link{GenomicRanges}}, \code{\link{data.frame}}, etc...)}
+    \item{\code{B}}{a region set in any of the accepted formats by \code{\link[regioneR]{toGRanges}} (\code{\link{GenomicRanges}}, \code{\link{data.frame}}, etc...)}
+  }}
 }
 \value{
 data.frame

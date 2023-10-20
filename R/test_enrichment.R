@@ -21,7 +21,9 @@
 #'  also necessary to set the \code{mc.set.seed} parameter to FALSE 
 #'  to ensure reproducibility."
 #' @param verbose Print messages.
-#' @param ... Additional arguments passed to \link[regioneR]{overlapPermTest}.
+#' @param save_path Path to save results to as an \emph{RDS} file.
+#' Set to \code{NULL} to skip this step.
+#' @inheritDotParams regioneR::overlapPermTest
 #' @inheritParams regioneR::overlapPermTest
 #' @inheritParams regioneR::permTest 
 #' @source \href{https://www.bioconductor.org/packages/devel/bioc/vignettes/regioneR/inst/doc/regioneR.html}{
@@ -36,7 +38,8 @@
 #' grlist2 <- dat[Support>0,] 
 #' enrich <- test_enrichment(grlist1 = grlist1,
 #'                           grlist2 = grlist2,  
-#'                           ntimes = 25) 
+#'                           ntimes = 25,
+#'                           force.parallel = FALSE) 
 test_enrichment <- function(grlist1,
                             grlist2, 
                             ntimes = 100,
@@ -46,6 +49,7 @@ test_enrichment <- function(grlist1,
                             force.parallel=NULL,
                             seed = 2022,
                             mc.set.seed = FALSE,
+                            save_path=tempfile(fileext="_test_enrichment.rds"),
                             verbose = TRUE,
                             ...){
     
@@ -61,7 +65,7 @@ test_enrichment <- function(grlist1,
     enrich <- lapply(names(grlist1), function(nm1){
         if(verbose) cat("\ngrlist1:",nm1,"\n")
         res2 <- lapply(names(grlist2)[!is.na(grlist2)], function(nm2){
-            messager("+ grlist2: ",nm2, v=verbose)    
+            messager("\n+ grlist2: ",nm2, v=verbose)    
             t1 <- Sys.time()
             A <- grlist1[[nm1]]
             B <- grlist2[[nm2]]
@@ -89,7 +93,7 @@ test_enrichment <- function(grlist1,
                 alternative=pt$numOverlaps$alternative, 
                 # permuted=list(pt$numOverlaps$permuted),
                 zscore=pt$numOverlaps$zscore,
-                full_res=pt
+                full_res=list(pt)
             )
             t2 <- Sys.time()
             res1$time <- as.numeric(t2-t1) 
@@ -97,6 +101,12 @@ test_enrichment <- function(grlist1,
         }) |> data.table::rbindlist()
         return(res2)
     }) |> data.table::rbindlist()
+    #### Save ####
+    if(!is.null(save_path)){
+        dir.create(dirname(save_path), showWarnings = FALSE, recursive = TRUE)
+        messager("Saving enrichment results -->",save_path,v=verbose)
+        saveRDS(enrich, file = save_path)
+    }
     #### Return ####
     return(enrich)
 }
