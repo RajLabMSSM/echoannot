@@ -1,13 +1,20 @@
-<img src='https://github.com/RajLabMSSM/echoannot/raw/main/inst/hex/hex.png' height='300'><br><br>
-[![](https://img.shields.io/badge/devel%20version-0.99.10-black.svg)](https://github.com/RajLabMSSM/echoannot)
-[![R build
-status](https://github.com/RajLabMSSM/echoannot/workflows/rworkflows/badge.svg)](https://github.com/RajLabMSSM/echoannot/actions)
-[![](https://img.shields.io/github/last-commit/RajLabMSSM/echoannot.svg)](https://github.com/RajLabMSSM/echoannot/commits/main)
-[![](https://app.codecov.io/gh/RajLabMSSM/echoannot/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RajLabMSSM/echoannot)
+<img src='https://github.com/RajLabMSSM/echoannot/raw/main/inst/hex/hex.png' title='Hex sticker for echoannot' height='300'><br>
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-¶ <h5> ¶ Author: <i>Brian M. Schilder</i> ¶ </h5>
-<h5> ¶ README updated: <i>Dec-22-2022</i> ¶ </h5>
+[![](https://img.shields.io/badge/devel%20version-0.99.11-black.svg)](https://github.com/RajLabMSSM/echoannot)
+[![](https://img.shields.io/github/languages/code-size/RajLabMSSM/echoannot.svg)](https://github.com/RajLabMSSM/echoannot)
+[![](https://img.shields.io/github/last-commit/RajLabMSSM/echoannot.svg)](https://github.com/RajLabMSSM/echoannot/commits/main)
+<br> [![R build
+status](https://github.com/RajLabMSSM/echoannot/workflows/rworkflows/badge.svg)](https://github.com/RajLabMSSM/echoannot/actions)
+[![](https://codecov.io/gh/RajLabMSSM/echoannot/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RajLabMSSM/echoannot)
+<br>
+<a href='https://app.codecov.io/gh/RajLabMSSM/echoannot/tree/main' target='_blank'><img src='https://codecov.io/gh/RajLabMSSM/echoannot/branch/main/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
+<h4>  
+Authors: <i>Brian Schilder, Jack Humphrey, Towfique Raj</i>  
+</h4>
+<h5>  
+README updated: <i>Oct-20-2023</i>  
+</h5>
 
 ## `echoannot`: Functions for annotating genomic data
 

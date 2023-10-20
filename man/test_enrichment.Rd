@@ -78,5 +78,6 @@ grlist1 <- dat[P<5e-8,]
 grlist2 <- dat[Support>0,] 
 enrich <- test_enrichment(grlist1 = grlist1,
                           grlist2 = grlist2,  
-                          ntimes = 25) 
+                          ntimes = 25,
+                          force.parallel = FALSE) 
 }
