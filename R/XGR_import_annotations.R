@@ -2,7 +2,6 @@
 #'
 #' @family XGR
 #' @keywords internal
-#' @importFrom  XGR xRDataLoader
 XGR_import_annotations <- function(gr.snp,
                                    anno_data_path =
                                        file.path(
@@ -15,6 +14,11 @@ XGR_import_annotations <- function(gr.snp,
                                    lib.name,
                                    save_xgr = TRUE,
                                    annot_overlap_threshold = 5) {
+    if (!requireNamespace("XGR", quietly = TRUE)) {
+        stop("Package 'XGR' is required but not installed.\n",
+             "Install it with: remotes::install_github('hfang-bristol/XGR')",
+             call. = FALSE)
+    }
     if (file.exists(anno_data_path)) {
         messager("")
         messager("+ Saved annotation file detected. Loading...")

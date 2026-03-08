@@ -21,21 +21,25 @@
 #' 
 #' @export
 #' @importFrom parallel mclapply
-#' @importFrom XGR xRDataLoader
-#' @importFrom GenomicRanges GRangesList 
+#' @importFrom GenomicRanges GRangesList
 #' @examples
 #' gr.lib <- echoannot::XGR_query(
 #'     lib.selections = c("ENCODE_DNaseI_ClusteredV3_CellTypes"),
-#'     dat = echodata::BST1, 
+#'     dat = echodata::BST1,
 #'     n_top = 1)
 XGR_query <- function(lib.selections = c("ENCODE_TFBS_ClusteredV3_CellTypes",
                                          "TFBS_Conserved",
                                          "Uniform_TFBS"
-                                         ), 
+                                         ),
                                          as_grangesList = FALSE,
                                          dat=NULL,
                                          n_top=NULL,
                                          nThread=1) {
+    if (!requireNamespace("XGR", quietly = TRUE)) {
+        stop("Package 'XGR' is required but not installed.\n",
+             "Install it with: remotes::install_github('hfang-bristol/XGR')",
+             call. = FALSE)
+    }
     # Iterate over XGR libraries
     gr.lib <- lapply(lib.selections, 
                      function(lib.name) {

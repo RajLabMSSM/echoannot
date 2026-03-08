@@ -19,7 +19,6 @@
 #' @keywords internal
 #' @importFrom data.table rbindlist data.table fwrite
 #' @importFrom parallel mclapply
-#' @importFrom XGR xGRviaGenomicAnno xRDataLoader
 #' @importFrom stats p.adjust
 #' @importFrom dplyr mutate arrange
 XGR_iterate_enrichment <- function(dat,
@@ -46,6 +45,11 @@ XGR_iterate_enrichment <- function(dat,
                                    save_path = FALSE,
                                    nThread = 1) {
     
+    if (!requireNamespace("XGR", quietly = TRUE)) {
+        stop("Package 'XGR' is required but not installed.\n",
+             "Install it with: remotes::install_github('hfang-bristol/XGR')",
+             call. = FALSE)
+    }
     FDR <- nOverlap <- fc <- adjp <- pvalue <- NULL;
     fg_bg <- XGR_prepare_foreground_background(
         dat,

@@ -24,7 +24,7 @@ Description: echoverse module: Functions for annotating genomic data
 URL: https://github.com/RajLabMSSM/echoannot
 BugReports: https://github.com/RajLabMSSM/echoannot/issues
 Encoding: UTF-8
-Depends: R (>= 4.0.0)
+Depends: R (>= 4.1)
 biocViews:
     Genetics, FunctionalGenomics, SystemsBiology
 Imports: 
@@ -49,9 +49,9 @@ Imports:
     rtracklayer,
     S4Vectors,
     BiocGenerics,
-    IRanges,
-    XGR
+    IRanges
 Suggests:
+    XGR,
     markdown,
     rmarkdown,
     remotes,

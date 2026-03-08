@@ -28,7 +28,6 @@
 #' }
 #' @export
 #' @importFrom data.table rbindlist
-#' @importFrom XGR xGRviaGenomicAnno
 XGR_enrichment <- function(gr,
                            merged_dat,
                            foreground_filter = "Consensus_SNP==TRUE",
@@ -42,6 +41,11 @@ XGR_enrichment <- function(gr,
                            bg_sample_size = NULL,
                            background.annotatable.only = FALSE,
                            verbose = TRUE) {
+    if (!requireNamespace("XGR", quietly = TRUE)) {
+        stop("Package 'XGR' is required but not installed.\n",
+             "Install it with: remotes::install_github('hfang-bristol/XGR')",
+             call. = FALSE)
+    }
     fg_bg <- XGR_prepare_foreground_background(
         dat = merged_dat,
         foreground_filter = foreground_filter,

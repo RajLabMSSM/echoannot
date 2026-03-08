@@ -1,5 +1,5 @@
-*.tbi$
-vignettes/*.tbi$
+*.tbi
+Rplots.pdf
 
 # R project files
 *.Rproj
