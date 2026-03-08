@@ -1,3 +1,14 @@
+# echoannot 0.99.12
+
+## New features
+
+* Standardize `rworkflows.yml` with canonical template:
+  enable Docker on `ghcr.io`, set `write-all` permissions.
+* Move `XGR` from Imports to Suggests with `requireNamespace()` guards.
+* Update R requirement from `>= 4.0.0` to `>= 4.1`.
+* Fix `.gitignore` patterns for `.tbi` and `Rplots.pdf` files.
+* Remove tracked `.DS_Store` files.
+
 # echoannot 0.99.11
 
 ## New features
