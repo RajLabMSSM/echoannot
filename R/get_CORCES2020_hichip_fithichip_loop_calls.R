@@ -53,8 +53,3 @@ get_CORCES2020_hichip_fithichip_loop_calls <- function() {
     dat <- data.table::fread(tmp, nThread = 1)
     return(dat)
 }
-
-get_CORCES2020_HiChIP_FitHiChIP_loop_calls <- function(...){
-    .Deprecated("get_CORCES2020_hichip_fithichip_loop_calls")
-    get_CORCES2020_hichip_fithichip_loop_calls(...)
-}

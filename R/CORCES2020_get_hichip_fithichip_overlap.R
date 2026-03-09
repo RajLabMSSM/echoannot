@@ -68,8 +68,3 @@ CORCES2020_get_hichip_fithichip_overlap <- function(query_dat,
     )
     return(gr.anchor)
 }
-
-CORCES2020_get_HiChIP_FitHiChIP_overlap <- function(...){
-    .Deprecated("CORCES2020_get_hichip_fithichip_overlap")
-    CORCES2020_get_hichip_fithichip_overlap(...)
-}
