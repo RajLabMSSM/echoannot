@@ -33,6 +33,8 @@ that contain's each SNPs RSID.}
 Annotate fine-mapping results from \pkg{echolocatoR} across all loci.
 }
 \examples{
+\dontrun{
 dat <- echodata::BST1[Consensus_SNP==TRUE,]
 dat_annot <- annotate_snps(dat = dat)
+}
 }

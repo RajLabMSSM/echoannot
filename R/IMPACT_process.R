@@ -9,7 +9,6 @@
 #' Mac:
 #' git lfs fetch --all
 #' git lfs pull
-#' 
 #' Linux:
 #' sudo apt-get install git-lfs
 #' git-lfs fetch --all

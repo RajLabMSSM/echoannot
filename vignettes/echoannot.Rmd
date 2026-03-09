@@ -20,7 +20,7 @@ library(echoannot)
 To get the full dataset of all fine-mapped Parkinson's Disease loci, 
 you can use the following function: 
 
-```{r}
+```{r, eval=FALSE}
 merged_DT <- echodata::get_Nalls2019_merged()
 ```
 
@@ -33,7 +33,7 @@ for demo purposes.
 The more SNPs you supply to `annotate_snps`, the longer it will take to 
 query the selected databases for each SNP.
 
-```{r}  
+```{r, eval=FALSE}
 #### Only query high-confidence fine-mapping SNPs from one locus ####
 dat <- merged_DT[Locus=="LRRK2" & Consensus_SNP==TRUE,]
 #### Query annotations ####
@@ -49,21 +49,21 @@ knitr::kable(dat_annot)
 
 ## Credible Set bin plot
 
-```{r} 
+```{r, eval=FALSE}
 gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = merged_DT,
                                     show_plot = FALSE)
 ```
 
 ## Credible Set counts plot
 
-```{r}
+```{r, eval=FALSE}
 gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = merged_DT, 
                                           show_plot = FALSE)
 ```
 
 ## Epigenomic data
 
-```{r}
+```{r, eval=FALSE}
 gg_epi <- echoannot::peak_overlap_plot(
     merged_DT = merged_DT, 
     include.NOTT2019_enhancers_promoters = TRUE,
@@ -87,8 +87,8 @@ super_plot <- echoannot::super_summary_plot(merged_DT = merged_DT,
 
 ```
 
-```{r Cleanup, include=FALSE}
-remove(super_plot, gg_epi, gg_cs_counts, merged_DT) 
+```{r Cleanup, include=FALSE, eval=FALSE}
+remove(super_plot, gg_epi, gg_cs_counts, merged_DT)
 ```
 
 

@@ -11,9 +11,11 @@
 #' @importFrom methods show
 #' @importFrom echodata get_CS_bins
 #' @examples
+#' \dontrun{
 #' dat <- echodata::BST1 
 #' dat$Locus <- "BST1"
 #' bin_plot <- echoannot::CS_bin_plot(merged_DT = dat)
+#' }
 CS_bin_plot <- function(merged_DT,
                         show_plot = TRUE) {
     

@@ -22,6 +22,7 @@
 #' @importFrom S4Vectors queryHits subjectHits
 #' @importFrom echodata dt_to_granges
 #' @examples
+#' \dontrun{
 #' dat1 <- echodata::BST1
 #' dat2 <- echoannot::xgr_example
 #' GenomicRanges::mcols(dat2) <- NULL
@@ -30,6 +31,7 @@
 #'                                       dat2 = dat2, 
 #'                                       chrom_col.1 = "CHR",
 #'                                       start_col.1 = "POS")
+#' }
 granges_overlap <- function(dat1,
                             dat2,
                             chrom_col.1 = "chrom",

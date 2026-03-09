@@ -22,11 +22,11 @@ get_window_limits(
 (without editing the fine-mapping results file).
 You can provide either:
 \itemize{
-\item{The size of your plot window in terms of basepairs
-(e.g. \code{zoom=50000} for a 50kb window)}.
-\item{How much you want to zoom in (e.g. \code{zoom="1x"}
+\item The size of your plot window in terms of basepairs
+(e.g. \code{zoom=50000} for a 50kb window).
+\item How much you want to zoom in (e.g. \code{zoom="1x"}
 for the full locus, \code{zoom="2x"}
-for 2x zoom into the center of the locus, etc.)}.
+for 2x zoom into the center of the locus, etc.).
 }
 You can pass a list of window sizes (e.g. \code{c(50000,100000,500000)})
 to automatically generate
@@ -42,10 +42,12 @@ This can even be a mix of different style inputs: e.g.
 Get genomic window size limits for a locus plot.
 }
 \examples{
+\dontrun{
 dat <- echodata::BST1
 xlims <- get_window_limits(dat = dat, zoom = 50000)
 xlims <- get_window_limits(dat = dat, zoom = "all")
 xlims <- get_window_limits(dat = dat, zoom = "5x")
+}
 }
 \seealso{
 Other plot: 

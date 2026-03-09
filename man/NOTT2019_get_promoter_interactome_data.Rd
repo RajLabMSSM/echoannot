@@ -4,7 +4,7 @@
 \alias{NOTT2019_get_promoter_interactome_data}
 \title{Get cell type-specific promoter/emhancer/interactome data}
 \source{
-\href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+Nott et al. (2019) (\doi{10.1126/science.aay0793})
 }
 \usage{
 NOTT2019_get_promoter_interactome_data(dat = NULL)
@@ -17,8 +17,10 @@ Set as \code{NULL} to return genome-wide data.}
 Brain cell-specific epigenomic data from Nott et al. (2019).
 }
 \examples{
+\dontrun{
 dat <- echodata::BST1
 annot_sub <- NOTT2019_get_promoter_interactome_data(dat=dat)
+}
 }
 \seealso{
 Other NOTT2019: 

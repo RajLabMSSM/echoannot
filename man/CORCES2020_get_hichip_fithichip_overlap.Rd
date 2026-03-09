@@ -5,7 +5,7 @@
 \title{Get overlap between data table of SNPs and HiChIP_FitHiChIP
 coaccessibility anchors}
 \source{
-\url{https://doi.org/10.1038/s41588-020-00721-x}
+\doi{10.1038/s41588-020-00721-x}
 }
 \usage{
 CORCES2020_get_hichip_fithichip_overlap(query_dat, verbose = TRUE)

@@ -13,10 +13,12 @@
 #' @export
 #' @importFrom data.table transpose fread
 #' @examples
+#' \dontrun{
 #' ref <- ROADMAP_construct_reference(keyword_query = c(
 #'     "placenta",
 #'     "liver",
 #'     "monocytes"))
+#' }
 ROADMAP_construct_reference <- function(ref_path =
                                             system.file(
                                                 "extdata/ROADMAP",

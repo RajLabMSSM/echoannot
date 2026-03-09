@@ -17,17 +17,17 @@ convert_plots(
 \item{plot_list}{A plot, or a list of plots belonging
  to one of the following classes:
 \itemize{
-\item{\link[ggplot2]{ggplot}}
-\item{\link[ggbio]{ggbio}}
-\item{\link[ggbio]{tracks}}
+\item \link[ggplot2]{ggplot}
+\item \link[ggbio]{ggbio}
+\item \link[ggbio]{tracks}
 }}
 
 \item{return_as}{Plot class to convert \code{plot_list} to:
-\itemize{
-\item{"ggplot"}{\link[ggplot2]{ggplot}}
-\item{"ggbio"}{\link[ggbio]{ggbio}}
-\item{"patchwork"}{\pkg{patchwork}}
-\item{"Tracks"}{\link[ggbio]{tracks}}
+\describe{
+\item{ggplot}{\link[ggplot2]{ggplot}}
+\item{ggbio}{\link[ggbio]{ggbio}}
+\item{patchwork}{\pkg{patchwork}}
+\item{Tracks}{\link[ggbio]{tracks}}
 \item{NULL}{Return original object.}
 }}
 
@@ -50,6 +50,7 @@ will be expanded to the expected sequence.}
 Takes a plot or just of plots and converts to various formats.
 }
 \examples{
+\dontrun{
 #### Create example plot_list ####
 gg <- ggplot2::ggplot(mtcars, ggplot2::aes(mpg, cyl)) + ggplot2::geom_point()
 plot_list <- lapply(1:3, function(x) gg)
@@ -64,4 +65,5 @@ return_out3 <- convert_plots(plot_list = plot_list, return_as = "patchwork")
 return_out4 <- convert_plots(plot_list = plot_list, return_as = "Tracks")
 ##### From Tracks #####
 return_out5 <- echoannot::convert_plots(plot_list = return_out4)
+}
 }

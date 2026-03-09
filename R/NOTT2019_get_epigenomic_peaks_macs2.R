@@ -4,7 +4,7 @@
 # # @keywords internal
 # # @family NOTT2019
 # # @source
-# # \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+# # Nott et al. (2019) (\doi{10.1126/science.aay0793})
 # # \url{https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr2:127770344-127983251&hgsid=778249165_ySowqECRKNxURRn6bafH0yewAiuf}
 # # @examples
 # # \dontrun{

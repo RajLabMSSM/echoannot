@@ -4,7 +4,7 @@
 \alias{NOTT2019_get_regulatory_regions}
 \title{Get regulatory regions: Nott2019}
 \source{
-\href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+Nott et al. (2019) (\doi{10.1126/science.aay0793})
 }
 \usage{
 NOTT2019_get_regulatory_regions(
@@ -25,7 +25,9 @@ instead of a \link[data.table]{data.table}.}
 Get epigenomic peak ranges from Nott2019.
 }
 \examples{
+\dontrun{
 regions <- NOTT2019_get_regulatory_regions()
+}
 }
 \seealso{
 Other NOTT2019: 

@@ -12,15 +12,14 @@
 #' @keywords internal
 #' @family summarise
 #' @source
-#' \href{https://doi.org/10.1126/science.aay0793}{
-#' Nott et al., 2019 (The Lancet Neurology)}
-#' \href{https://doi.org/10.1038/s41588-020-00721-x}{
-#' Corces et al., 2020 (Nature Genetics)} 
+#' Nott et al., 2019 (The Lancet Neurology) (\doi{10.1126/science.aay0793})
+#' Corces et al., 2020 (Nature Genetics) (\doi{10.1038/s41588-020-00721-x}) 
 #' @export
 #' @importFrom patchwork plot_layout 
 #' @importFrom stats formula
 #' @importFrom methods show
 #' @examples
+#' \dontrun{
 #' #### Data ####
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' 
@@ -34,6 +33,7 @@
 #'     merged_DT = merged_DT,
 #'     snp_filter = "Support>0",
 #'     fill_title = "UCS SNPs in epigenomic peaks")
+#' }
 #' }
 peak_overlap_plot <- function(merged_DT,
                               snp_filter = "Consensus_SNP==TRUE",

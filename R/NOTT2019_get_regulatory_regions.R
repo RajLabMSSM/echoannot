@@ -8,12 +8,14 @@
 #' 
 #' @export
 #' @family NOTT2019
-#' @source \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+#' @source Nott et al. (2019) (\doi{10.1126/science.aay0793})
 #'
 #' @importFrom parallel mclapply
 #' @importFrom data.table rbindlist 
 #' @examples 
+#' \dontrun{
 #' regions <- NOTT2019_get_regulatory_regions()
+#' }
 NOTT2019_get_regulatory_regions <- function(as_granges = FALSE,
                                             nThread = 1,
                                             verbose = TRUE) {

@@ -16,13 +16,15 @@ Identify the assays with the most annotations in the locus.
 Then only keep these assays.
 }
 \examples{
+\dontrun{
 gr.filt <- echoannot::XGR_filter_assays(gr.lib = echoannot::xgr_example)
+}
 }
 \seealso{
 Other XGR: 
+\code{\link{XGR_enrichment}()},
 \code{\link{XGR_enrichment_bootstrap}()},
 \code{\link{XGR_enrichment_plot}()},
-\code{\link{XGR_enrichment}()},
 \code{\link{XGR_filter_sources}()},
 \code{\link{XGR_import_annotations}()},
 \code{\link{XGR_iterate_enrichment}()},

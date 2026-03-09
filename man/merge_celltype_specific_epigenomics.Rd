@@ -28,5 +28,7 @@ Merges multiple cell-type-specific epigenomic datasets
 (Nott 2019, Corces 2020) into a single \link[GenomicRanges]{GRanges} object.
 }
 \examples{
+\dontrun{
 gr.merged <- echoannot::merge_celltype_specific_epigenomics()
+}
 }

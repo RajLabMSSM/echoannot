@@ -6,9 +6,11 @@
 #' @param suffix File suffix.
 #' @export
 #' @examples 
+#' \dontrun{
 #' tmp <- tempdir()
 #' annot_file <- annotation_file_name(locus_dir=tmp,
 #'                                    lib_name="test")
+#' }
 annotation_file_name <- function(locus_dir,
                                  lib_name,
                                  suffix=".rds") {

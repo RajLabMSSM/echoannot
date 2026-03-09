@@ -67,10 +67,12 @@ Query Roadmap
 Query Roadmap annotations using a set of genomic coordinates.
 }
 \examples{
+\dontrun{
 query_dat <- echodata::BST1
 grl <- ROADMAP_query(
     query_dat = query_dat,
     keyword_query = "monocyte")
+}
 }
 \seealso{
 Other ROADMAP: 

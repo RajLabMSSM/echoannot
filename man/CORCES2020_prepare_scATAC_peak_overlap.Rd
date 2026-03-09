@@ -4,7 +4,7 @@
 \alias{CORCES2020_prepare_scATAC_peak_overlap}
 \title{Prepare CORCES2020 scATAC-seq peak overlap data}
 \source{
-\url{https://doi.org/10.1038/s41588-020-00721-x}
+\doi{10.1038/s41588-020-00721-x}
 
 \code{
 merged_DT <- echodata::get_Nalls2019_merged()

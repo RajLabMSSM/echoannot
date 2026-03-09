@@ -15,8 +15,8 @@ Filter by motif database metadata.
 }
 \seealso{
 Other motifbreakR: 
-\code{\link{MOTIFBREAKR_summarize}()},
-\code{\link{MOTIFBREAKR}()}
+\code{\link{MOTIFBREAKR}()},
+\code{\link{MOTIFBREAKR_summarize}()}
 }
 \concept{motifbreakR}
 \keyword{internal}

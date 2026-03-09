@@ -16,8 +16,8 @@ XGR_query(
 \arguments{
 \item{lib.selections}{Which XGR annotations to check overlap with.
 For full list of libraries see
-\href{http://XGR_r-forge.r-project.org/#annotations-at-the-genomic-region-level}{
- here.}
+\href{https://cran.r-project.org/package=XGR}{
+ here (XGR on CRAN).}
  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.}
 
 \item{as_grangesList}{Return as a \link[GenomicRanges]{GRangesList},
@@ -41,16 +41,18 @@ Merges a list of XGR annotations into a single
  (or merged \link[GenomicRanges]{GRanges}) object.
 }
 \examples{
+\dontrun{
 gr.lib <- echoannot::XGR_query(
     lib.selections = c("ENCODE_DNaseI_ClusteredV3_CellTypes"),
-    dat = echodata::BST1, 
+    dat = echodata::BST1,
     n_top = 1)
+}
 }
 \seealso{
 Other XGR: 
+\code{\link{XGR_enrichment}()},
 \code{\link{XGR_enrichment_bootstrap}()},
 \code{\link{XGR_enrichment_plot}()},
-\code{\link{XGR_enrichment}()},
 \code{\link{XGR_filter_assays}()},
 \code{\link{XGR_filter_sources}()},
 \code{\link{XGR_import_annotations}()},

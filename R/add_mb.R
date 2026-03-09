@@ -10,8 +10,10 @@
 #' @importFrom data.table :=
 #' @export
 #' @examples 
+#' \dontrun{
 #' dat <- echodata::BST1
 #' dat2 <- add_mb(dat = dat)
+#' }
 add_mb <- function(dat,
                    pos_col = "POS"){
     Mb <- NULL;

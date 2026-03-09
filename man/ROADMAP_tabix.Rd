@@ -32,9 +32,6 @@ ROADMAP_tabix(
 \item{force_new}{Overwrite any existing files of the same name.}
 
 \item{verbose}{Print messages.}
-
-\item{as_granges}{Whether to return query
-as a \code{data.frame} or \link[GenomicRanges]{GRanges}.}
 }
 \description{
 Query Roadmap epigenomic annotations (chromatin marks)

@@ -9,7 +9,7 @@
 #' containing genomic coordinates to query the UCSC tracks with.
 #' @param bigwig_metadata Metadata table with at 
 #' least the following two columns:
-#' \itemize{
+#' \describe{
 #' \item{"name"}{Unique name of the file.}
 #' \item{"data_link"}{URL to UCSC genome browser bigwig file.}
 #' }
@@ -34,11 +34,13 @@
 #' @importFrom GenomicRanges GRangesList seqnames start end mcols 
 #' @importFrom DescTools StrCap
 #' @examples 
+#' \dontrun{
 #' bigwig_metadata <- echoannot::NOTT2019_bigwig_metadata[1,]
 #' query_dat = echodata::BST1
 #' 
 #' bw.gr <- echoannot::import_ucsc_bigwigs(query_dat = query_dat, 
 #'                                         bigwig_metadata = bigwig_metadata)
+#' }
 import_ucsc_bigwigs <- function(query_dat,
                                 bigwig_metadata, 
                                 full_data = TRUE,

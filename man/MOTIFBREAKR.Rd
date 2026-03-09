@@ -36,8 +36,9 @@ as a file named:
  \emph{<results_dir>/_genome_wide/motifbreakR/motifbreakR_results.rds}.
 If \code{NULL}, results will not be saved to disk.}
 
-\item{pwmList}{An object of class \code{MotifList} containing the motifs that
-you wish to interrogate}
+\item{pwmList}{An object of class
+\link[TFBSTools]{MotifList} containing position weight matrices.
+If \code{NULL}, defaults to \code{MotifDb::MotifDb}.}
 
 \item{pwmList_max}{Limit the maximum number of PWM datasets tested 
 (e.g. \code{10}). If \code{NULL}, no limit it set.}
@@ -47,12 +48,11 @@ you wish to interrogate}
 \item{organism}{Only include datasets in the \code{pwmList} 
 performed in a particular organism.}
 
-\item{threshold}{Numeric; the maximum p-value for a match to be called or a minimum score threshold}
+\item{threshold}{A numeric value used as a threshold for filtering results.}
 
-\item{show.neutral}{Logical; include neutral changes in the output}
+\item{show.neutral}{Logical. Include neutral effects in results.}
 
-\item{method}{Character; one of \code{default}, \code{log}, \code{ic}, or \code{notrans}; see
-details.}
+\item{method}{Character string specifying the method for scoring effects.}
 
 \item{calculate_pvals}{Calculate p-values for all SNPs tested.
 \emph{WARNING:} May take a long time if many SNPs and/or PWM are selected.}
@@ -62,11 +62,11 @@ overwrite them with new analyses (\code{TRUE}).
 Otherwise, import the existing results and skip the analyses
  (default: \code{FALSE}).}
 
-\item{background}{Numeric Vector; the background probabilities of the nucleotides}
+\item{background}{A named numeric vector of background nucleotide
+frequencies (A, C, G, T) summing to 1.}
 
-\item{granularity}{Numeric Vector; the granularity to which to round the PWM,
-larger values compromise full accuracy for speed of calculation. A value of
-\code{NULL} does no rounding.}
+\item{granularity}{Granularity for p-value calculation. If \code{NULL},
+a default is chosen automatically.}
 
 \item{nThread}{Number of threads to parallelize analyses across.}
 
@@ -80,7 +80,7 @@ Motif disruption predictions in
 \pkg{motifbreakR} is a package to predict how much a SNP will disrupt
 a transcription factor binding motif (if it falls within one).
 \emph{Notes:}\cr
-\itemize{
+\describe{
 \item{\pkg{BSgenome}}{Users must manually run \code{library(BSgenome)} 
 before running any \pkg{motifbreakR} functions 
 to successfully use this tool.
@@ -92,15 +92,17 @@ to successfully use this tool.
 }
 }
 \examples{
+\dontrun{
 library(BSgenome) ## <-- IMPORTANT!
 #### Example fine-mapping results ####
 merged_DT <- echodata::get_Nalls2019_merged()
 #### Run motif analyses ####
 mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
-                      # limit the number of datasets tested 
+                      # limit the number of datasets tested
                       # for demonstration purposes only
                       pwmList_max = 4,
                       calculate_pvals = FALSE)
+}
 }
 \seealso{
 Other motifbreakR: 

@@ -4,7 +4,7 @@
 #' of SNPs and cell-type-specific epigenomic peaks and coaccessibility data.
 #'
 #' @family CORCES2020
-#' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
+#' @source \doi{10.1038/s41588-020-00721-x}
 #' @source
 #' \code{
 #' merged_DT <- echodata::get_Nalls2019_merged()

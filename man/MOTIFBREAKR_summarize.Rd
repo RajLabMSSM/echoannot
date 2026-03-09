@@ -17,6 +17,7 @@ Summarize \pkg{motifbreakR} + \pkg{echolocatoR} results after they have
 been merged together with \link[echoannot]{MOTIFBREAKR_filter}.
 }
 \examples{
+\dontrun{
 merged_DT <- echodata::get_Nalls2019_merged()
 mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
                       # limit the number of datasets tests 
@@ -28,9 +29,10 @@ mb_merge <- MOTIFBREAKR_filter(mb_res = mb_res,
                                pvalue_threshold = NULL)
 summary_ls <- MOTIFBREAKR_summarize(mb_merge = mb_merge)                         
 }
+}
 \seealso{
 Other motifbreakR: 
-\code{\link{MOTIFBREAKR_filter_by_metadata}()},
-\code{\link{MOTIFBREAKR}()}
+\code{\link{MOTIFBREAKR}()},
+\code{\link{MOTIFBREAKR_filter_by_metadata}()}
 }
 \concept{motifbreakR}

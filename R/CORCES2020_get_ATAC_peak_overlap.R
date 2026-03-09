@@ -13,10 +13,12 @@
 #' @export
 #' @importFrom GenomicRanges mcols
 #' @family CORCES2020
-#' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
+#' @source \doi{10.1038/s41588-020-00721-x}
 #' @examples 
+#' \dontrun{
 #' query_dat <- echodata::BST1[1:100,]
 #' gr.hits <- echoannot::CORCES2020_get_ATAC_peak_overlap(query_dat = query_dat)
+#' }
 CORCES2020_get_ATAC_peak_overlap <- function(query_dat,
                                              FDR_filter = NULL,
                                              add_cicero = TRUE,

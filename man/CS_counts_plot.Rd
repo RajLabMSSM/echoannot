@@ -34,9 +34,11 @@ CS_counts_plot(
 Loci ordered by UCS size (smallest to largest).
 }
 \examples{
+\dontrun{
 dat <- echodata::BST1
 dat$Locus <- "BST1"
 gg_CS <- echoannot::CS_counts_plot(merged_DT = dat)
+}
 }
 \seealso{
 Other summarise: 

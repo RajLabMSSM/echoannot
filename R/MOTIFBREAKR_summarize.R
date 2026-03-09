@@ -10,6 +10,7 @@
 #' @importFrom dplyr group_by tally arrange desc summarise mutate n_distinct
 #' @importFrom data.table data.table
 #' @examples 
+#' \dontrun{
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
 #'                       # limit the number of datasets tests 
@@ -20,6 +21,7 @@
 #'                                merged_DT = merged_DT,
 #'                                pvalue_threshold = NULL)
 #' summary_ls <- MOTIFBREAKR_summarize(mb_merge = mb_merge)                         
+#' }
 MOTIFBREAKR_summarize <- function(mb_merge){ 
     effect <- dataSource <- Locus <-alleleDiff <- top_disrupting_SNP <-
         seqMatch <- SNP <- Consensus_SNP <- geneSymbol <- 

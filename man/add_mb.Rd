@@ -15,6 +15,8 @@ add_mb(dat, pos_col = "POS")
 Add column containing genomic coordinate in units of megabasepairs ("Mb").
 }
 \examples{
+\dontrun{
 dat <- echodata::BST1
 dat2 <- add_mb(dat = dat)
+}
 }

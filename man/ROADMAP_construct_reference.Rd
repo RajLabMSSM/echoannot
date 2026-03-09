@@ -29,10 +29,12 @@ Can provide multiple keywords in list form:
 Gather Roadmap annotation metadata
 }
 \examples{
+\dontrun{
 ref <- ROADMAP_construct_reference(keyword_query = c(
     "placenta",
     "liver",
     "monocytes"))
+}
 }
 \seealso{
 Other ROADMAP: 

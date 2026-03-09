@@ -9,14 +9,16 @@
 #' @export
 #' @family NOTT2019
 #' @source
-#' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+#' Nott et al. (2019) (\doi{10.1126/science.aay0793})
 #' @importFrom dplyr mutate group_by summarise
 #' @importFrom data.table data.table rbindlist
 #' @examples 
+#' \dontrun{
 #' dat <- echodata::BST1
 #' annot_sub <- NOTT2019_get_promoter_interactome_data(dat = dat)
 #' interact.DT <- NOTT2019_get_interactome(annot_sub=annot_sub, 
 #'                                         top.consensus.pos = 15712787)
+#' }
 NOTT2019_get_interactome <- function(annot_sub,
                                      top.consensus.pos,
                                      marker_key=NOTT2019_marker_key(),

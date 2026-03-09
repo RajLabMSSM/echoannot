@@ -15,7 +15,7 @@
 #' 
 #' @family NOTT2019
 #' @source
-#' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+#' Nott et al. (2019) (\doi{10.1126/science.aay0793})
 #'
 #' 
 #' @export
@@ -23,7 +23,9 @@
 #' @importFrom parallel mclapply
 #' @importFrom echodata dt_to_granges
 #' @examples
+#' \dontrun{
 #' PEAKS <- echoannot::NOTT2019_get_epigenomic_peaks() 
+#' }
 NOTT2019_get_epigenomic_peaks <- function(assays = c(
                                               "ATAC",
                                               "H3K27ac",

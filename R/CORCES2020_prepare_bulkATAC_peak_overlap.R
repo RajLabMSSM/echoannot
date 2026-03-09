@@ -2,7 +2,7 @@
 #' cell-type-specific epigenomic peaks and coaccessibility data.
 #'
 #' @family CORCES2020
-#' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
+#' @source \doi{10.1038/s41588-020-00721-x}
 #' @examples
 #' \dontrun{
 #' dat_melt <- echoannot:::CORCES2020_prepare_bulkATAC_peak_overlap(

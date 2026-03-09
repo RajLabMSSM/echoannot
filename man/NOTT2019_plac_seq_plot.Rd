@@ -4,7 +4,7 @@
 \alias{NOTT2019_plac_seq_plot}
 \title{Plot brain cell-specific interactome data}
 \source{
-\href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+Nott et al. (2019) (\doi{10.1126/science.aay0793})
 }
 \usage{
 NOTT2019_plac_seq_plot(
@@ -87,11 +87,11 @@ If \code{FALSE}, will instead apply the same opacity level
 \item{dpi}{dpi to use for raster graphics}
 
 \item{return_as}{Plot class to convert \code{plot_list} to:
-\itemize{
-\item{"ggplot"}{\link[ggplot2]{ggplot}}
-\item{"ggbio"}{\link[ggbio]{ggbio}}
-\item{"patchwork"}{\pkg{patchwork}}
-\item{"Tracks"}{\link[ggbio]{tracks}}
+\describe{
+\item{ggplot}{\link[ggplot2]{ggplot}}
+\item{ggbio}{\link[ggbio]{ggbio}}
+\item{patchwork}{\pkg{patchwork}}
+\item{Tracks}{\link[ggbio]{tracks}}
 \item{NULL}{Return original object.}
 }}
 
@@ -101,10 +101,12 @@ If \code{FALSE}, will instead apply the same opacity level
 }
 \description{
 Plot brain cell-specific interactome data from
- \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}.
+ Nott et al. (2019) (\doi{10.1126/science.aay0793}).
 }
 \examples{
+\dontrun{
 trks_plus_lines <- echoannot::NOTT2019_plac_seq_plot(dat = echodata::BST1) 
+}
 }
 \seealso{
 Other NOTT2019: 

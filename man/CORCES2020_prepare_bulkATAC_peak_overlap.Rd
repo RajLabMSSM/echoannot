@@ -5,7 +5,7 @@
 \title{Prepare data to plot overlap between datatable of SNPs and
 cell-type-specific epigenomic peaks and coaccessibility data.}
 \source{
-\url{https://doi.org/10.1038/s41588-020-00721-x}
+\doi{10.1038/s41588-020-00721-x}
 }
 \usage{
 CORCES2020_prepare_bulkATAC_peak_overlap(

@@ -4,7 +4,7 @@
 \alias{NOTT2019_epigenomic_histograms}
 \title{Plot brain cell-specific epigenomic data}
 \source{
-\href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+Nott et al. (2019) (\doi{10.1126/science.aay0793})
 }
 \usage{
 NOTT2019_epigenomic_histograms(
@@ -38,7 +38,7 @@ NOTT2019_epigenomic_histograms(
 
 \item{bigwig_metadata}{Metadata table with at 
 least the following two columns:
-\itemize{
+\describe{
 \item{"name"}{Unique name of the file.}
 \item{"data_link"}{URL to UCSC genome browser bigwig file.}
 }}
@@ -70,11 +70,11 @@ Setting \code{full_data=TRUE} is necessary for creating
 (without editing the fine-mapping results file).
 You can provide either:
 \itemize{
-\item{The size of your plot window in terms of basepairs
-(e.g. \code{zoom=50000} for a 50kb window)}.
-\item{How much you want to zoom in (e.g. \code{zoom="1x"}
+\item The size of your plot window in terms of basepairs
+(e.g. \code{zoom=50000} for a 50kb window).
+\item How much you want to zoom in (e.g. \code{zoom="1x"}
 for the full locus, \code{zoom="2x"}
-for 2x zoom into the center of the locus, etc.)}.
+for 2x zoom into the center of the locus, etc.).
 }
 You can pass a list of window sizes (e.g. \code{c(50000,100000,500000)})
 to automatically generate
@@ -86,10 +86,7 @@ This can even be a mix of different style inputs: e.g.
 
 \item{xtext}{Whether to include x-axis title and text.}
 
-\item{geom}{
-    Geom to use (Single character for now). Please see section Geometry
-    for details.
-  }
+\item{geom}{defaults for geoms (\code{\link[ggplot2:element_geom]{element_geom()}})}
 
 \item{plot_formula}{Formula passed to \code{facets} argument in 
 \link[ggplot2]{facet_grid}.}
@@ -119,9 +116,11 @@ This can even be a mix of different style inputs: e.g.
 Brain cell-specific epigenomic data from Nott et al. (2019).
 }
 \examples{
+\dontrun{
 nott2019_track <- echoannot::NOTT2019_epigenomic_histograms(
     dat = echodata::BST1, 
     bigwig_metadata = echoannot::NOTT2019_bigwig_metadata[1:2,])
+}
 }
 \seealso{
 Other NOTT2019: 

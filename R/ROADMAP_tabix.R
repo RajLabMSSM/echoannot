@@ -8,8 +8,6 @@
 #'
 #' @param save_dir Directory to store query results in.
 #' @param eid Roadmap annotation ID
-#' @param as_granges Whether to return query
-#' as a \code{data.frame} or \link[GenomicRanges]{GRanges}.
 #' @param force_new Overwrite any existing files of the same name.
 #' @inheritParams echotabix::construct_query
 #' @source

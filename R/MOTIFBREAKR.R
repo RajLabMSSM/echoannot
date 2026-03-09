@@ -3,7 +3,7 @@
 #' \pkg{motifbreakR} is a package to predict how much a SNP will disrupt
 #' a transcription factor binding motif (if it falls within one).
 #' \emph{Notes:}\cr
-#' \itemize{
+#' \describe{
 #' \item{\pkg{BSgenome}}{Users must manually run \code{library(BSgenome)} 
 #' before running any \pkg{motifbreakR} functions 
 #' to successfully use this tool.
@@ -30,10 +30,17 @@
 #' overwrite them with new analyses (\code{TRUE}). 
 #' Otherwise, import the existing results and skip the analyses
 #'  (default: \code{FALSE}).
+#' @param pwmList An object of class
+#'  \link[TFBSTools]{MotifList} containing position weight matrices.
+#'  If \code{NULL}, defaults to \code{MotifDb::MotifDb}.
+#' @param threshold A numeric value used as a threshold for filtering results.
+#' @param show.neutral Logical. Include neutral effects in results.
+#' @param method Character string specifying the method for scoring effects.
+#' @param background A named numeric vector of background nucleotide
+#'  frequencies (A, C, G, T) summing to 1.
+#' @param granularity Granularity for p-value calculation. If \code{NULL},
+#'  a default is chosen automatically.
 #' @inheritParams select_genome
-#' @inheritParams motifbreakR::snps.from.rsid
-#' @inheritParams motifbreakR::motifbreakR
-#' @inheritParams motifbreakR::calculatePvalue
 #' @returns Motif disruption predictions in 
 #'  \link[GenomicRanges]{GRanges} format.
 #' @family motifbreakR
@@ -44,15 +51,17 @@
 #' 
 #' @export
 #' @examples
+#' \dontrun{
 #' library(BSgenome) ## <-- IMPORTANT!
 #' #### Example fine-mapping results ####
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' #### Run motif analyses ####
 #' mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
-#'                       # limit the number of datasets tested 
+#'                       # limit the number of datasets tested
 #'                       # for demonstration purposes only
 #'                       pwmList_max = 4,
 #'                       calculate_pvals = FALSE)
+#' }
 MOTIFBREAKR <- function(rsid_list, 
                         results_dir = file.path(tempdir(),"results"),
                         pwmList = NULL,

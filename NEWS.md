@@ -1,3 +1,8 @@
+# echoannot 0.99.13
+
+## Bug fixes
+* Local R CMD check fixes and compatibility updates.
+
 # echoannot 0.99.12
 
 ## New features

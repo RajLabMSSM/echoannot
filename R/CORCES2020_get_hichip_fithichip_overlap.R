@@ -10,7 +10,7 @@
 #'
 #' @family CORCES2020
 #' @importFrom GenomicRanges mcols
-#' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
+#' @source \doi{10.1038/s41588-020-00721-x}
 #' @export 
 CORCES2020_get_hichip_fithichip_overlap <- function(query_dat,
                                                     verbose = TRUE) {

@@ -44,9 +44,9 @@ fg_bg <- echoannot:::XGR_prepare_foreground_background(
 }
 \seealso{
 Other XGR: 
+\code{\link{XGR_enrichment}()},
 \code{\link{XGR_enrichment_bootstrap}()},
 \code{\link{XGR_enrichment_plot}()},
-\code{\link{XGR_enrichment}()},
 \code{\link{XGR_filter_assays}()},
 \code{\link{XGR_filter_sources}()},
 \code{\link{XGR_import_annotations}()},

@@ -15,8 +15,10 @@
 #' @importFrom dplyr rename 
 #' @importFrom data.table merge.data.table data.table rbindlist 
 #' @examples
+#' \dontrun{
 #' dat <- echodata::BST1[Consensus_SNP==TRUE,]
 #' dat_annot <- annotate_snps(dat = dat)
+#' }
 annotate_snps <- function(dat,
                           SNP_col = "SNP",
                           haploreg_annotation = TRUE,

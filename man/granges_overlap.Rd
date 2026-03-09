@@ -58,6 +58,7 @@ Find overlap genomic position overlap between two
 \link[GenomicRanges]{GRanges} objects.
 }
 \examples{
+\dontrun{
 dat1 <- echodata::BST1
 dat2 <- echoannot::xgr_example
 GenomicRanges::mcols(dat2) <- NULL
@@ -66,5 +67,6 @@ gr.hits <- echoannot::granges_overlap(dat1 = dat1,
                                       dat2 = dat2, 
                                       chrom_col.1 = "CHR",
                                       start_col.1 = "POS")
+}
 }
 \concept{GRanges}

@@ -24,8 +24,12 @@ XGR_enrichment_plot(
 )
 }
 \arguments{
+\item{width, height}{Plot size in units expressed by the \code{units} argument.
+If not supplied, uses the size of the current graphics device.}
+
 \item{dpi}{Plot resolution. Also accepts a string input: "retina" (320),
-"print" (300), or "screen" (72). Applies only to raster output types.}
+"print" (300), or "screen" (72). Only applies when converting pixel units,
+as is typical for raster output types.}
 }
 \description{
 Plot enrichment results from XGR annotations.
@@ -91,8 +95,8 @@ gp <- XGR_enrichment_plot(
 }
 \seealso{
 Other XGR: 
-\code{\link{XGR_enrichment_bootstrap}()},
 \code{\link{XGR_enrichment}()},
+\code{\link{XGR_enrichment_bootstrap}()},
 \code{\link{XGR_filter_assays}()},
 \code{\link{XGR_filter_sources}()},
 \code{\link{XGR_import_annotations}()},

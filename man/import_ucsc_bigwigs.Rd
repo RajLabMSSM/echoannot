@@ -22,7 +22,7 @@ containing genomic coordinates to query the UCSC tracks with.}
 
 \item{bigwig_metadata}{Metadata table with at 
 least the following two columns:
-\itemize{
+\describe{
 \item{"name"}{Unique name of the file.}
 \item{"data_link"}{URL to UCSC genome browser bigwig file.}
 }}
@@ -51,9 +51,11 @@ Import, preprocess, merge, and save data from
 \href{https://genome.ucsc.edu/}{UCSC Genome Browser} tracks.
 }
 \examples{
+\dontrun{
 bigwig_metadata <- echoannot::NOTT2019_bigwig_metadata[1,]
 query_dat = echodata::BST1
 
 bw.gr <- echoannot::import_ucsc_bigwigs(query_dat = query_dat, 
                                         bigwig_metadata = bigwig_metadata)
+}
 }

@@ -7,18 +7,18 @@
 XGR_merge_and_process(grl.xgr, lib, n_top_sources = 10)
 }
 \arguments{
-\item{grl.xgr}{\link[GenomicRanges]{GenomicRangesList} of XGR queries.}
+\item{grl.xgr}{\link[GenomicRanges]{GRangesList} of XGR queries.}
 }
 \description{
 Parses the metadata and adds it as columns,
 and then merges the results into a single
-\code{\link[GenomicRanges]{GenomicRangesList}}
+\code{\link[GenomicRanges]{GRangesList}}
 }
 \seealso{
 Other XGR: 
+\code{\link{XGR_enrichment}()},
 \code{\link{XGR_enrichment_bootstrap}()},
 \code{\link{XGR_enrichment_plot}()},
-\code{\link{XGR_enrichment}()},
 \code{\link{XGR_filter_assays}()},
 \code{\link{XGR_filter_sources}()},
 \code{\link{XGR_import_annotations}()},

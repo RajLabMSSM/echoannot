@@ -8,7 +8,7 @@
 #' @keywords internal
 #' @family NOTT2019
 #' @source
-#' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+#' Nott et al. (2019) (\doi{10.1126/science.aay0793})
 #'
 #' @importFrom data.table data.table merge.data.table
 #' @importFrom dplyr mutate

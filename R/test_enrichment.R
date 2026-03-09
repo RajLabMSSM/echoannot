@@ -23,8 +23,13 @@
 #' @param verbose Print messages.
 #' @param save_path Path to save results to as an \emph{RDS} file.
 #' Set to \code{NULL} to skip this step.
+#' @param A A region set in any of the accepted formats by
+#' \code{\link[regioneR]{toGRanges}}
+#' (\link[GenomicRanges]{GRanges}, \code{data.frame}, etc.).
+#' @param B A region set in any of the accepted formats by
+#' \code{\link[regioneR]{toGRanges}}
+#' (\link[GenomicRanges]{GRanges}, \code{data.frame}, etc.).
 #' @inheritDotParams regioneR::overlapPermTest
-#' @inheritParams regioneR::overlapPermTest
 #' @inheritParams regioneR::permTest 
 #' @source \href{https://www.bioconductor.org/packages/devel/bioc/vignettes/regioneR/inst/doc/regioneR.html}{
 #' See section "3.7A note on reproducibility" for info on setting the seed.}
@@ -33,6 +38,7 @@
 #' @export
 #' @importFrom data.table data.table rbindlist 
 #' @examples
+#' \dontrun{
 #' dat <- echodata::get_Nalls2019_merged() 
 #' grlist1 <- dat[P<5e-8,]
 #' grlist2 <- dat[Support>0,] 
@@ -40,6 +46,7 @@
 #'                           grlist2 = grlist2,  
 #'                           ntimes = 25,
 #'                           force.parallel = FALSE) 
+#' }
 test_enrichment <- function(grlist1,
                             grlist2, 
                             ntimes = 100,

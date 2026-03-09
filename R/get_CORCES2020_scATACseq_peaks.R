@@ -3,11 +3,10 @@
 #' Each row represents an individual peak identified in
 #' the single-cell ATAC-seq data.
 #'
-#' Data originally from \href{https://doi.org/10.1038/s41588-020-00721-x}{
-#' Corces et al. (bioRxiv)}, as of May 2020.
+#' Data originally from Corces et al. (bioRxiv) (\doi{10.1038/s41588-020-00721-x}), as of May 2020.
 #' Specifically: \emph{STable5_Features_scATAC-seq_Peaks_all}
 #' @family CORCES2020
-#' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
+#' @source \doi{10.1038/s41588-020-00721-x}
 #' @examples
 #' \dontrun{
 #' dat <- readxl::read_excel(

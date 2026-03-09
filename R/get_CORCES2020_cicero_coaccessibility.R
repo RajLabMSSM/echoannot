@@ -5,8 +5,7 @@
 #' Each row represents an individual peak identified from the feature
 #' binarization analysis (see methods).
 #'
-#' Data originally from \href{https://doi.org/10.1038/s41588-020-00721-x}{
-#' Corces et al. (bioRxiv)}, as of May 2020.
+#' Data originally from Corces et al. (bioRxiv) (\doi{10.1038/s41588-020-00721-x}), as of May 2020.
 #' Specifically: \emph{STable10_Coacessibility_Peak_loop_connection},
 #' \emph{Cicero Coaccessibility} sheet.
 #' Peak_ID_Peak1 - A unique number that identifies the peak across
@@ -32,7 +31,7 @@
 #' the second peak overlaps a SNP from our AD/PD GWAS analyses.}
 #' }
 #' @family CORCES2020
-#' @source \url{https://doi.org/10.1038/s41588-020-00721-x}
+#' @source \doi{10.1038/s41588-020-00721-x}
 #' @examples
 #' \dontrun{
 #' dat <- readxl::read_excel(

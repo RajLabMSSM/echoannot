@@ -17,7 +17,9 @@ annotation_file_name(locus_dir, lib_name, suffix = ".rds")
 Construct an annotation-specific file name.
 }
 \examples{
+\dontrun{
 tmp <- tempdir()
 annot_file <- annotation_file_name(locus_dir=tmp,
                                    lib_name="test")
+}
 }

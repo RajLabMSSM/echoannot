@@ -37,15 +37,15 @@ peaks <- echoannot::NOTT2019_get_epigenomic_peaks()
 
 ### Plot
 
-```{r}
+```{r, eval=FALSE}
 dat <- echodata::BST1
-histo_out <- echoannot::NOTT2019_epigenomic_histograms(dat = dat) 
+histo_out <- echoannot::NOTT2019_epigenomic_histograms(dat = dat)
 ```
 
 In addition to the plot object, 
 tables of both raw read ranges and called peaks are included in the output list.
 
-```{r}
+```{r, eval=FALSE}
 knitr::kable(head(histo_out$data$raw))
 knitr::kable(head(histo_out$data$peaks))
 ```

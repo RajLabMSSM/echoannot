@@ -4,7 +4,7 @@
 \alias{get_CORCES2020_bulkATACseq_peaks}
 \title{bulkATACseq peaks from human brain tissue}
 \source{
-\url{https://doi.org/10.1038/s41588-020-00721-x}
+\doi{10.1038/s41588-020-00721-x}
 }
 \usage{
 get_CORCES2020_bulkATACseq_peaks()
@@ -13,8 +13,7 @@ get_CORCES2020_bulkATACseq_peaks()
 Each row represents an individual peak identified in the bulk ATAC-seq data.
 }
 \details{
-Data originally from \href{https://doi.org/10.1038/s41588-020-00721-x}{
-Corces et al. (bioRxiv)}, as of May 2020.
+Data originally from Corces et al. (bioRxiv) (\doi{10.1038/s41588-020-00721-x}), as of May 2020.
 Specifically: \emph{STable2_Features_bulkATAC-seq_Peaks}
 }
 \examples{

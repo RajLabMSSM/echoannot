@@ -9,13 +9,13 @@
 #' All data are aligned to the \emph{hg19} genome build.
 #' All data has also been 
 #' reformatted to tabix indexed files and uploaded to Zenodo 
-#' \href{https://doi.org/10.5281/zenodo.7062238}{here}
+#' here (\doi{10.5281/zenodo.7062238})
 #'  to allow for rapid querying.
 #' @param types File types to include.
 #' @param populations Population ancestries to include 
 #' ("EAS" = East Asian; "EUR" = European).
 #' @param output_format Output format options:
-#' \itemize{
+#' \describe{
 #' \item{"wide" : }{Spread annotation across columns and keep 1 row/SNP.}
 #' \item{"long" : }{Melt annotation across rows and allow multiple rows/SNP.}
 #' \item{"list" : }{Do not perform merging of queries and instead return
@@ -36,8 +36,10 @@
 #' @importFrom dplyr group_by slice_head
 #' @importFrom utils data
 #' @examples 
+#' \dontrun{
 #' query_dat <- echodata::BST1[1:50,]
 #' annot_dt <- IMPACT_query(query_dat=query_dat, populations="EUR")
+#' }
 IMPACT_query <- function(query_dat, 
                          types = c("annot","ldscore"),
                          populations = c("EAS","EUR"),

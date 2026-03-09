@@ -7,12 +7,14 @@
 #' @export
 #' @family NOTT2019
 #' @source
-#' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+#' Nott et al. (2019) (\doi{10.1126/science.aay0793})
 #'
 #' @importFrom dplyr rename
 #' @examples 
+#' \dontrun{
 #' dat <- echodata::BST1
 #' annot_sub <- NOTT2019_get_promoter_interactome_data(dat=dat)
+#' }
 NOTT2019_get_promoter_interactome_data <- function(dat=NULL) {
     Chr <- Start <- End <- chr <- NULL
     # Subset to window

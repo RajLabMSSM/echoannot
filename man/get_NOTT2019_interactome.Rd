@@ -4,7 +4,7 @@
 \alias{get_NOTT2019_interactome}
 \title{Brain cell type-specific enhancers, promoters, and interactomes}
 \source{
-\url{https://doi.org/10.1126/science.aay0793}
+\doi{10.1126/science.aay0793}
 
 \code{
 file <- file.path(
@@ -30,7 +30,6 @@ NOTT2019_interactome <- append(
     })
 )
 names(NOTT2019_interactome) <- c(other_sheets, enh_prom_sheets)
-
 #### piggyback ####
 tmp <- file.path(tempdir(), "NOTT2019_interactome.rds")
 saveRDS(NOTT2019_interactome, tmp)
@@ -48,8 +47,7 @@ NOTT2019_interactome <- get_NOTT2019_interactome()
 get_NOTT2019_interactome()
 }
 \description{
-Originally from \href{https://doi.org/10.1126/science.aay0793}{
-Nott et al. (2019)}.
+Originally from Nott et al. (2019) (\doi{10.1126/science.aay0793}).
 Specifically: \emph{aay0793-Nott-Table-S5.xlsx}.
 }
 \seealso{

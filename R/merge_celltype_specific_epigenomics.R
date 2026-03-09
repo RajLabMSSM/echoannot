@@ -15,7 +15,9 @@
 #' @importFrom echotabix liftover
 #' @importFrom tools R_user_dir
 #' @examples
+#' \dontrun{
 #' gr.merged <- echoannot::merge_celltype_specific_epigenomics()
+#' }
 merge_celltype_specific_epigenomics <- function(keep_extra_cols = FALSE,
                                                 save_path = file.path(
                                                     tools::R_user_dir(

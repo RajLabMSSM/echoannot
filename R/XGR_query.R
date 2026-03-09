@@ -5,8 +5,8 @@
 #'  (or merged \link[GenomicRanges]{GRanges}) object.
 #' @param lib.selections Which XGR annotations to check overlap with.
 #' For full list of libraries see
-#' \href{http://XGR_r-forge.r-project.org/#annotations-at-the-genomic-region-level}{
-#'  here.}
+#' \href{https://cran.r-project.org/package=XGR}{
+#'  here (XGR on CRAN).}
 #'  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.
 #' @param n_top Filter to only the top N annotations 
 #' that have the greatest amount of overlap with the genomic coordinates of
@@ -23,10 +23,12 @@
 #' @importFrom parallel mclapply
 #' @importFrom GenomicRanges GRangesList
 #' @examples
+#' \dontrun{
 #' gr.lib <- echoannot::XGR_query(
 #'     lib.selections = c("ENCODE_DNaseI_ClusteredV3_CellTypes"),
 #'     dat = echodata::BST1,
 #'     n_top = 1)
+#' }
 XGR_query <- function(lib.selections = c("ENCODE_TFBS_ClusteredV3_CellTypes",
                                          "TFBS_Conserved",
                                          "Uniform_TFBS"

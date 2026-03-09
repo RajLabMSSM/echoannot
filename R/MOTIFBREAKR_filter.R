@@ -8,7 +8,7 @@
 #' \emph{pctRef} and \emph{pctAlt} display the the score for the motif 
 #' in the sequence as a percentage of the best score that motif 
 #' could achieve on an ideal sequence.
-#' In other words, \emph{(scoreVariant−minscorePWM)/(maxscorePWM−minscorePWM)}.
+#' In other words, \emph{(scoreVariant-minscorePWM)/(maxscorePWM-minscorePWM)}.
 #' We can also see the absolute scores for our method in
 #'  \emph{scoreRef} and \emph{scoreAlt} and their respective p-values.
 #'  
@@ -47,6 +47,7 @@
 #' @importFrom data.table as.data.table merge.data.table
 #' @importFrom dplyr mutate group_by arrange slice desc
 #' @examples 
+#' \dontrun{
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
 #'                       # limit the number of datasets tests 
@@ -55,6 +56,7 @@
 #'                       calculate_pvals = FALSE)
 #' mb_res_filt <- MOTIFBREAKR_filter(mb_res = mb_res,
 #'                                   merged_DT = merged_DT)
+#' }
 MOTIFBREAKR_filter <- function(mb_res,
                                merged_DT,
                                filter_by_locus=NULL,  

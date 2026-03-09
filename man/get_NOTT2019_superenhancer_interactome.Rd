@@ -4,14 +4,13 @@
 \alias{get_NOTT2019_superenhancer_interactome}
 \title{Brain cell type-specific interactomes with superenhancers}
 \source{
-\url{https://doi.org/10.1126/science.aay0793}
+\doi{10.1126/science.aay0793}
 }
 \usage{
 get_NOTT2019_superenhancer_interactome()
 }
 \description{
-Originally from \href{https://doi.org/10.1126/science.aay0793}{
-Nott et al. (2019)}.
+Originally from Nott et al. (2019) (\doi{10.1126/science.aay0793}).
 Specifically: \emph{aay0793-Nott-Table-S6.xlsx}.
 }
 \examples{

@@ -4,7 +4,7 @@
 \alias{NOTT2019_get_interactome}
 \title{Import cell type-specific interactomes}
 \source{
-\href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+Nott et al. (2019) (\doi{10.1126/science.aay0793})
 }
 \usage{
 NOTT2019_get_interactome(
@@ -27,10 +27,12 @@ NOTT2019_get_interactome(
 Brain cell-specific epigenomic data from Nott et al. (2019).
 }
 \examples{
+\dontrun{
 dat <- echodata::BST1
 annot_sub <- NOTT2019_get_promoter_interactome_data(dat = dat)
 interact.DT <- NOTT2019_get_interactome(annot_sub=annot_sub, 
                                         top.consensus.pos = 15712787)
+}
 }
 \seealso{
 Other NOTT2019: 

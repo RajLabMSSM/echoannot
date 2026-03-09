@@ -11,9 +11,6 @@ HaploR}
 haplor_regulomedb(snp_list, timeout = 500, chunk_size = NA, verbose = TRUE)
 }
 \arguments{
-\item{timeout}{A \code{timeout} parameter for \code{httr::GET}.
-Default: 100}
-
 \item{verbose}{Print messages.}
 }
 \description{

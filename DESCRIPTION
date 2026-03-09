@@ -1,7 +1,8 @@
 Package: echoannot
 Type: Package
-Title: echoverse module: Annotate fine-mapping results
-Version: 0.99.12
+Title: Echoverse Module: Annotate Fine-Mapping Results
+Version: 0.99.13
+Date: 2026-03-08
 Authors@R: 
     c(person(given = "Brian",
            family = "Schilder",
@@ -19,7 +20,7 @@ Authors@R:
            email = "towfique.raj@mssm.edu",
            comment = c(ORCID = "0000-0002-9355-5704"))
            ) 
-Description: echoverse module: Functions for annotating genomic data 
+Description: Echoverse module: Functions for annotating genomic data 
     with annotations and epigenomic data.
 URL: https://github.com/RajLabMSSM/echoannot
 BugReports: https://github.com/RajLabMSSM/echoannot/issues
@@ -78,7 +79,7 @@ Remotes:
     github::RajLabMSSM/echotabix,
     github::RajLabMSSM/downloadR,
     github::hfang-bristol/XGR
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3

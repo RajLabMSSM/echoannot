@@ -27,7 +27,7 @@
 #' 
 #' @family NOTT2019
 #' @source
-#' \href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+#' Nott et al. (2019) (\doi{10.1126/science.aay0793})
 #'
 #' 
 #' @export
@@ -36,9 +36,11 @@
 #' @importFrom GenomicRanges mcols
 #' @importFrom methods show
 #' @examples
+#' \dontrun{
 #' nott2019_track <- echoannot::NOTT2019_epigenomic_histograms(
 #'     dat = echodata::BST1, 
 #'     bigwig_metadata = echoannot::NOTT2019_bigwig_metadata[1:2,])
+#' }
 NOTT2019_epigenomic_histograms <- function(
         dat,
         bigwig_metadata = echoannot::NOTT2019_bigwig_metadata,

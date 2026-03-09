@@ -2,9 +2,9 @@
 #'
 #' Parses the metadata and adds it as columns,
 #' and then merges the results into a single
-#' \code{\link[GenomicRanges]{GenomicRangesList}}
+#' \code{\link[GenomicRanges]{GRangesList}}
 #'
-#' @param grl.xgr \link[GenomicRanges]{GenomicRangesList} of XGR queries.
+#' @param grl.xgr \link[GenomicRanges]{GRangesList} of XGR queries.
 #' @family XGR
 #' @keywords internal
 #' @importFrom GenomicRanges start end

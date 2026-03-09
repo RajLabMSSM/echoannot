@@ -25,10 +25,12 @@
 #' @importFrom parallel mclapply
 #' @importFrom echodata dt_to_granges is_granges
 #' @examples
+#' \dontrun{
 #' query_dat <- echodata::BST1
 #' grl <- ROADMAP_query(
 #'     query_dat = query_dat,
 #'     keyword_query = "monocyte")
+#' }
 ROADMAP_query <- function(query_dat,
                           keyword_query = NULL,
                           limit_files = NULL,

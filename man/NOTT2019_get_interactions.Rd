@@ -4,7 +4,7 @@
 \alias{NOTT2019_get_interactions}
 \title{Import cell type-specific interactomes}
 \source{
-\href{https://doi.org/10.1126/science.aay0793}{Nott et al. (2019)}
+Nott et al. (2019) (\doi{10.1126/science.aay0793})
 }
 \usage{
 NOTT2019_get_interactions(dat, as_granges = FALSE, verbose = TRUE)

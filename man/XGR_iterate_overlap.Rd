@@ -15,8 +15,8 @@ XGR_iterate_overlap(
 \arguments{
 \item{lib.selections}{Which XGR annotations to check overlap with.
 For full list of libraries see
-\href{http://XGR_r-forge.r-project.org/#annotations-at-the-genomic-region-level}{
- here.}
+\href{https://cran.r-project.org/package=XGR}{
+ here (XGR on CRAN).}
  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.}
 
 \item{dat}{Data.frame with at least the following columns:
@@ -47,9 +47,9 @@ gr.hits <- XGR_iterate_overlap(
 }
 \seealso{
 Other XGR: 
+\code{\link{XGR_enrichment}()},
 \code{\link{XGR_enrichment_bootstrap}()},
 \code{\link{XGR_enrichment_plot}()},
-\code{\link{XGR_enrichment}()},
 \code{\link{XGR_filter_assays}()},
 \code{\link{XGR_filter_sources}()},
 \code{\link{XGR_import_annotations}()},

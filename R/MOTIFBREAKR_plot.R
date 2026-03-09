@@ -4,9 +4,8 @@
 #' 
 #' \emph{Notes:}\cr
 #' \itemize{
-#' \item{Saving as a PDF seems to work much better than PNG format 
+#' \item Saving as a PDF seems to work much better than PNG format
 #' (at least when using \pkg{grDevices}).
-#' }
 #' }
 #' @source
 #' \href{https://pubmed.ncbi.nlm.nih.gov/26272984/}{Publication}
@@ -16,8 +15,11 @@
 #' used to filter \code{mb_res} before plotting. 
 #' @inheritParams MOTIFBREAKR
 #' @inheritParams MOTIFBREAKR_filter
+#' @param rsid Character vector of RSIDs to plot.
+#'  If \code{NULL}, all RSIDs in \code{mb_res} are used.
+#' @param effect Character vector of effect strengths to include
+#'  (e.g. \code{"strong"}, \code{"weak"}).
 #' @inheritParams grDevices::png
-#' @inheritParams motifbreakR::plotMB
 #' @returns Named list of motif plot paths.
 #' 
 #' @export
@@ -26,18 +28,18 @@
 #' @importFrom echodata dt_to_granges
 #' @importFrom BiocGenerics %in%
 #' @examples
+#' \dontrun{
 #' library(BSgenome) ## <-- IMPORTANT!
 #' library(BSgenome.Hsapiens.UCSC.hg19) ## <-- IMPORTANT!
 #' #### Example fine-mapping results ####
 #' merged_DT <- echodata::get_Nalls2019_merged()
 #' #### Run motif analyses ####
 #' mb_res <- MOTIFBREAKR(rsid_list = c("rs11175620"),
-#'                       # limit the number of datasets tested 
+#'                       # limit the number of datasets tested
 #'                       # for demonstration purposes only
 #'                       pwmList_max = 5,
-#'                       calculate_pvals = FALSE)  
-#' \dontrun{
-#' plot_paths <- MOTIFBREAKR_plot(mb_res = mb_res) 
+#'                       calculate_pvals = FALSE)
+#' plot_paths <- MOTIFBREAKR_plot(mb_res = mb_res)
 #' }
 MOTIFBREAKR_plot <- function(mb_res, 
                              mb_filter=NULL,

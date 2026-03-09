@@ -8,7 +8,9 @@
 #' @family XGR
 #' @importFrom dplyr n_distinct group_by tally
 #' @examples
+#' \dontrun{
 #' gr.filt <- echoannot::XGR_filter_assays(gr.lib = echoannot::xgr_example)
+#' }
 XGR_filter_assays <- function(gr.lib,
                               n_top_assays = 1) {
     Assay <- NULL;

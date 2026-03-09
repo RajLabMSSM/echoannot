@@ -4,7 +4,7 @@
 \alias{CORCES2020_get_ATAC_peak_overlap}
 \title{Get overlap between datatable of SNPs and scATAC peaks}
 \source{
-\url{https://doi.org/10.1038/s41588-020-00721-x}
+\doi{10.1038/s41588-020-00721-x}
 }
 \usage{
 CORCES2020_get_ATAC_peak_overlap(
@@ -33,8 +33,10 @@ Can optionally add \code{Cicero} coaccessibility scores,
 which are also derived from scATAC-seq data.
 }
 \examples{
+\dontrun{
 query_dat <- echodata::BST1[1:100,]
 gr.hits <- echoannot::CORCES2020_get_ATAC_peak_overlap(query_dat = query_dat)
+}
 }
 \seealso{
 Other CORCES2020: 
