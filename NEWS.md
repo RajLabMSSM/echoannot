@@ -1,3 +1,19 @@
+# echoannot 1.0.0
+
+## New features
+
+* Remove deprecated `NOTT2019_plot_bp_query` and
+  `NOTT2019_epigenomic_histograms` wrappers.
+
+## Bug fixes
+
+* Move `XGR` from Imports to Suggests with `requireNamespace()` guards,
+  since XGR is no longer maintained on CRAN/Bioconductor.
+* Update R requirement from `>= 4.0.0` to `>= 4.1`.
+* Rd: convert `\itemize` to `\describe` for named lists,
+  add `\dontrun{}` guards to examples requiring XGR.
+* Remove tracked `.DS_Store` files.
+
 # echoannot 0.99.13
 
 ## Bug fixes
