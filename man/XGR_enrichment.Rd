@@ -39,7 +39,7 @@ only use SNPs that overlap with some annotation in \code{gr}.
 \item{verbose}{Print messages.}
 }
 \description{
-Run SNP-level enrichment test with \link[XGR]{xGRviaGenomicAnno}.
+Run SNP-level enrichment test with \code{XGR::xGRviaGenomicAnno}.
 }
 \examples{
 \dontrun{

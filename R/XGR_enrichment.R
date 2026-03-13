@@ -1,6 +1,6 @@
 #' XGR enrichment
 #'
-#' Run SNP-level enrichment test with \link[XGR]{xGRviaGenomicAnno}.
+#' Run SNP-level enrichment test with \code{XGR::xGRviaGenomicAnno}.
 #'
 #' @param gr Annotations to test for enrichment with.
 #' @param merged_dat SNP-level fine-mapping results to test for enrichment with.

@@ -7,7 +7,7 @@
 #' For full list of libraries see
 #' \href{https://cran.r-project.org/package=XGR}{
 #'  here (XGR on CRAN).}
-#'  Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.
+#'  Passed to the \code{RData.customised} argument in \code{XGR::xRDataLoader}.
 #' @param n_top Filter to only the top N annotations 
 #' that have the greatest amount of overlap with the genomic coordinates of
 #' \code{dat}. 

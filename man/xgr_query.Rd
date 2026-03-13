@@ -18,7 +18,7 @@ XGR_query(
 For full list of libraries see
 \href{https://cran.r-project.org/package=XGR}{
  here (XGR on CRAN).}
- Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.}
+ Passed to the \code{RData.customised} argument in \code{XGR::xRDataLoader}.}
 
 \item{as_grangesList}{Return as a \link[GenomicRanges]{GRangesList},
 instead of a single merged \link[GenomicRanges]{GRanges} object.}

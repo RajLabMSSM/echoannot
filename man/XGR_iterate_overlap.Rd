@@ -17,7 +17,7 @@ XGR_iterate_overlap(
 For full list of libraries see
 \href{https://cran.r-project.org/package=XGR}{
  here (XGR on CRAN).}
- Passed to the \code{RData.customised} argument in \link[XGR]{xRDataLoader}.}
+ Passed to the \code{RData.customised} argument in \code{XGR::xRDataLoader}.}
 
 \item{dat}{Data.frame with at least the following columns:
 \describe{
