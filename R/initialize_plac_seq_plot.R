@@ -42,7 +42,7 @@ initialize_plac_seq_plot <- function(interact.DT,
     #### Post-processing ####
     NOTT.interact_trk <- suppressMessages(
         NOTT.interact_trk +
-            ggplot2::facet_grid(facets = Cell_type ~ .) +
+            ggplot2::facet_grid(rows = ggplot2::vars(Cell_type)) +
             ggplot2::scale_y_reverse() +
             ggplot2::theme_classic() +
             ggplot2::theme(

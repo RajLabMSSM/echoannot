@@ -108,7 +108,7 @@ XGR_enrichment_plot <- function(enrich_res,
                                  show.legend = FALSE) +
             ggplot2::scale_fill_manual(values = colorDict) +
             ggplot2::facet_grid(
-                facets = if (is.null(facet_formula)) {
+                rows = if (is.null(facet_formula)) {
                     facet_formula
                 } else {
                     stats::as.formula(facet_formula)
@@ -153,7 +153,7 @@ XGR_enrichment_plot <- function(enrich_res,
             ggplot2::geom_hline(yintercept = -log10(0.05), 
                                 linetype = 2, alpha = .5) +
             ggplot2::facet_grid(
-                facets = if (is.null(facet_formula)) {
+                rows = if (is.null(facet_formula)) {
                     facet_formula
                 } else {
                     stats::as.formula(facet_formula)

@@ -171,7 +171,7 @@ NOTT2019_epigenomic_histograms <- function(
             # hjust = 1,
             color = "transparent"
         ) +
-        ggplot2::facet_grid(facets = stats::formula(plot_formula)) +
+        ggplot2::facet_grid(rows = stats::formula(plot_formula)) +
         ggplot2::theme_classic() +
         ggplot2::theme(
             legend.position = "right",

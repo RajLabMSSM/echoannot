@@ -210,7 +210,7 @@ peak_overlap_plot <- function(merged_DT,
             color = "cyan", size = .7
         ) +
         ggplot2::facet_grid(
-            facets = stats::formula(facets_formula),
+            rows = stats::formula(facets_formula),
             scales = if (drop_empty_cols) "free_x" else "fixed",
             space = "free_x"
         ) +

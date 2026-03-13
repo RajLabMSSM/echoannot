@@ -99,7 +99,7 @@ cell_type_specificity <- function(plot_dat,
     ) +
         ggplot2::geom_tile(color = "white") +
         ggplot2::facet_grid(
-            facets = . ~ Cell_group,
+            cols = ggplot2::vars(Cell_group),
             scales = "free_x"
         ) +
         ggplot2::scale_fill_viridis_c(

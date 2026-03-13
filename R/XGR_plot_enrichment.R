@@ -51,7 +51,8 @@ XGR_plot_enrichment <- function(enrich_res,
             y = "Fold-change"
         ) +
         ggplot2::facet_grid(
-            facets = Cell_type ~ Assay,
+            rows = ggplot2::vars(Cell_type),
+            cols = ggplot2::vars(Assay),
             scales = "free",
             space = "free"
         ) +
