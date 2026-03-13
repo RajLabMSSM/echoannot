@@ -29,9 +29,9 @@ If you use `echoannot`, please cite:
 ## Installation
 
 ``` r
-if(!require("remotes")) install.packages("remotes")
+if(!require("BiocManager")) install.packages("BiocManager")
 
-remotes::install_github("RajLabMSSM/echoannot")
+BiocManager::install("RajLabMSSM/echoannot")
 library(echoannot)
 ```
 
