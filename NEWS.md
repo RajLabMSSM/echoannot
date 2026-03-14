@@ -1,3 +1,12 @@
+# echoannot 1.0.1
+
+## Bug fixes
+
+* Remove XGR from Remotes to fix GHA dependency installation failure
+  (`dnet`/`supraHex` unavailable on Bioconductor devel). XGR remains
+  in Suggests with `requireNamespace()` guards.
+* Add `"aut"` role to maintainer in DESCRIPTION (required by `--as-cran`).
+
 # echoannot 1.0.0
 
 ## New features

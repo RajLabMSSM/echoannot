@@ -72,13 +72,13 @@ NOTT2019_get_interactions <- function(dat,
 
     if (as_granges) {
         interactomes.anchor <- echodata::dt_to_granges(
-            dat = interactomes.anchor |> dplyr::select(-seqnames),
-            chrom_col = "CHR",
+            dat = interactomes.anchor,
+            chrom_col = "seqnames",
             start_col = "start",
             end_col = "end",
             style = "NCBI",
             verbose = verbose
-        ) 
+        )
     }
     return(interactomes.anchor)
 }
