@@ -89,11 +89,20 @@ MOTIFBREAKR_plot <- function(mb_res,
                            width = width,
                            height = height)
         }
-        motifbreakR::plotMB(results = mb_res,
-                            rsid = rs,
-                            effect = effect) 
+        tryCatch({
+            motifbreakR::plotMB(results = mb_res,
+                                rsid = rs,
+                                effect = effect)
+        }, error = function(e){
+            messager("WARNING: motifbreakR::plotMB failed for ",rs,
+                     ": ",conditionMessage(e),
+                     "\nThis is a known upstream issue ",
+                     "(Simon-Coetzee/motifBreakR#31).",
+                     v=verbose)
+            save_path <- NULL
+        })
         if(!is.null(results_dir)){
-            grDevices::dev.off();    
+            grDevices::dev.off();
         }
         return(save_path)
     }) 
