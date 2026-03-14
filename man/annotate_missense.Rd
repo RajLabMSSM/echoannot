@@ -8,7 +8,7 @@ annotate_missense(merged_DT, snp_filter = "Support>0")
 }
 \arguments{
 \item{merged_DT}{Merged fine-mapping results data from
-\link[echolocatoR]{finemap_loci}.}
+\code{echolocatoR::finemap_loci}.}
 
 \item{snp_filter}{Row-wise filter to apply to \code{merged_DT} filter 
 (provided as a string).}

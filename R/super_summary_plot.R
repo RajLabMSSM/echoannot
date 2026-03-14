@@ -2,7 +2,7 @@
 #'
 #' @family summarise
 #' @param merged_DT Merged fine-mapping results data from
-#'  \link[echolocatoR]{finemap_loci}.
+#'  \code{echolocatoR::finemap_loci}.
 #' @param snp_filter Filter to use apply to SNPs before plotting.
 #' @param coloc_results Colocalization results from 
 #' \href{https://github.com/RajLabMSSM/catalogueR}{catalogueR}.

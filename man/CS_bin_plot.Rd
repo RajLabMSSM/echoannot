@@ -8,7 +8,7 @@ CS_bin_plot(merged_DT, show_plot = TRUE)
 }
 \arguments{
 \item{merged_DT}{Merged fine-mapping results data from
-\link[echolocatoR]{finemap_loci}.}
+\code{echolocatoR::finemap_loci}.}
 
 \item{show_plot}{Show plot.}
 }

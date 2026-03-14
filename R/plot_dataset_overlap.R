@@ -3,7 +3,7 @@
 #' Cross-tabulate SNP overlap (after applying filter)
 #' between each pair of studies.
 #' @param merged_DT Merged fine-mapping results data from
-#'  \link[echolocatoR]{finemap_loci}.
+#'  \code{echolocatoR::finemap_loci}.
 #' @param triangle Plot correlation matrix as a square or a triangle.
 #' @param filename Path to save file to as PNG.
 #' @param formula_str Formula passed to \link[stats]{xtabs}.

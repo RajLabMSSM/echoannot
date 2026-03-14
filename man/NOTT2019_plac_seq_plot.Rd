@@ -35,7 +35,7 @@ NOTT2019_plac_seq_plot(
 )
 }
 \arguments{
-\item{dat}{Fine-mapping results data from \link[echolocatoR]{finemap_loci}.}
+\item{dat}{Fine-mapping results data from \code{echolocatoR::finemap_loci}.}
 
 \item{locus_dir}{Locus-specific directory.}
 

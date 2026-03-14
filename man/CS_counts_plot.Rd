@@ -16,7 +16,7 @@ CS_counts_plot(
 }
 \arguments{
 \item{merged_DT}{Merged fine-mapping results data from
-\link[echolocatoR]{finemap_loci}.}
+\code{echolocatoR::finemap_loci}.}
 
 \item{show_numbers}{Print numbers on top of bars.}
 

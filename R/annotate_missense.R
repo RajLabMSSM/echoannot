@@ -2,7 +2,7 @@
 #'
 #' Annotate any missense variants with \link[biomaRt]{getBM}.
 #' @param merged_DT Merged fine-mapping results data from
-#'  \link[echolocatoR]{finemap_loci}.
+#'  \code{echolocatoR::finemap_loci}.
 #' @param snp_filter Row-wise filter to apply to \code{merged_DT} filter 
 #' (provided as a string). 
 #' 

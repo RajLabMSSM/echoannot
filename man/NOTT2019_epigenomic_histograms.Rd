@@ -34,7 +34,7 @@ NOTT2019_epigenomic_histograms(
 )
 }
 \arguments{
-\item{dat}{Fine-mapping results data from \link[echolocatoR]{finemap_loci}.}
+\item{dat}{Fine-mapping results data from \code{echolocatoR::finemap_loci}.}
 
 \item{bigwig_metadata}{Metadata table with at 
 least the following two columns:

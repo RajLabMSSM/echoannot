@@ -2,7 +2,7 @@
 #'
 #' Brain cell-specific epigenomic data from Nott et al. (2019).
 #' 
-#' @param dat Fine-mapping results data from \link[echolocatoR]{finemap_loci}.
+#' @param dat Fine-mapping results data from \code{echolocatoR::finemap_loci}.
 #' @param locus_dir Locus-specific directory.
 #' @param show_plot Show plot.
 #' @param save_plot Whether to save the plot. 

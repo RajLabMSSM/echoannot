@@ -37,7 +37,7 @@ as a file named:
 If \code{NULL}, results will not be saved to disk.}
 
 \item{pwmList}{An object of class
-\link[TFBSTools]{MotifList} containing position weight matrices.
+\code{TFBSTools::MotifList} containing position weight matrices.
 If \code{NULL}, defaults to \code{MotifDb::MotifDb}.}
 
 \item{pwmList_max}{Limit the maximum number of PWM datasets tested 

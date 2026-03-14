@@ -2,7 +2,7 @@
 #' 
 #' Plot Credible Set bins counts for multiple fine-mapping method results.
 #' @param merged_DT Merged fine-mapping results data from
-#'  \link[echolocatoR]{finemap_loci}.
+#'  \code{echolocatoR::finemap_loci}.
 #' @param show_plot Show plot. 
 #'
 #' @family summarise

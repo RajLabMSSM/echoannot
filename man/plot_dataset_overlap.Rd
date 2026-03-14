@@ -14,7 +14,7 @@ plot_dataset_overlap(
 }
 \arguments{
 \item{merged_DT}{Merged fine-mapping results data from
-\link[echolocatoR]{finemap_loci}.}
+\code{echolocatoR::finemap_loci}.}
 
 \item{snp_filter}{Filter to use apply to SNPs before plotting.}
 

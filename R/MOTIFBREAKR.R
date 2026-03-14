@@ -31,7 +31,7 @@
 #' Otherwise, import the existing results and skip the analyses
 #'  (default: \code{FALSE}).
 #' @param pwmList An object of class
-#'  \link[TFBSTools]{MotifList} containing position weight matrices.
+#'  \code{TFBSTools::MotifList} containing position weight matrices.
 #'  If \code{NULL}, defaults to \code{MotifDb::MotifDb}.
 #' @param threshold A numeric value used as a threshold for filtering results.
 #' @param show.neutral Logical. Include neutral effects in results.
