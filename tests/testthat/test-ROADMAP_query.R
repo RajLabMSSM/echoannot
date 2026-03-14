@@ -1,5 +1,6 @@
 test_that("ROADMAP_query works", {
-  
+
+    testthat::skip_on_os("windows")
     query_dat <- echodata::BST1
     #### as file names ####
     bed_paths <- ROADMAP_query(

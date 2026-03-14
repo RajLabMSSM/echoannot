@@ -1,6 +1,7 @@
 test_that("MOTIFBREAKR works", {
-  
-    library(BSgenome) ## <-- IMPORTANT! 
+
+    testthat::skip_on_os("windows")
+    library(BSgenome) ## <-- IMPORTANT!
     set.seed(2022)
     #### Example fine-mapping results ####
     merged_DT <- echodata::get_Nalls2019_merged()

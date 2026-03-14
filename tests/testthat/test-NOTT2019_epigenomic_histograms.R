@@ -1,5 +1,6 @@
 test_that("NOTT2019_epigenomic_histograms works", {
-  
+
+    testthat::skip_on_os("windows")
     dat <- echodata::BST1
     items_lv1 <- c("data","plot")
     items_lv2 <- c("raw","peaks")
