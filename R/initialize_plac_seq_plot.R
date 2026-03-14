@@ -6,7 +6,8 @@ initialize_plac_seq_plot <- function(interact.DT,
                                      strip.text.y.angle,
                                      verbose = TRUE){
     requireNamespace("ggplot2")
-    messager("Initializing PLAC-seq plot.",v=verbose) 
+    Cell_type <- NULL;
+    messager("Initializing PLAC-seq plot.",v=verbose)
     if (highlight_plac) {
         ##### Method 1 #####
         ### Apply alpha based on consensus SNP overlap

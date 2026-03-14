@@ -20,7 +20,7 @@ XGR_plot_enrichment <- function(enrich_res,
                                 show_plot = TRUE) {
     
     requireNamespace("ggplot2")
-    fc <- adjp <- assay <- NULL;
+    fc <- adjp <- assay <- Cell_type <- Assay <- NULL;
     enrich_res <- dplyr::arrange(enrich_res, dplyr::desc(fc))
     enrich_res$source <- factor(enrich_res$source,
         unique(enrich_res$source),

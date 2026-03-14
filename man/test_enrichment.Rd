@@ -59,16 +59,9 @@ Set to \code{NULL} to skip this step.}
 \item{...}{
   Arguments passed on to \code{\link[regioneR:overlapPermTest]{regioneR::overlapPermTest}}
   \describe{
-    \item{\code{}}{}
+    \item{\code{A}}{a region set in any of the accepted formats by \code{\link[regioneR]{toGRanges}} (\code{\link{GenomicRanges}}, \code{\link{data.frame}}, etc...)}
+    \item{\code{B}}{a region set in any of the accepted formats by \code{\link[regioneR]{toGRanges}} (\code{\link{GenomicRanges}}, \code{\link{data.frame}}, etc...)}
   }}
-
-\item{A}{A region set in any of the accepted formats by
-\code{\link[regioneR]{toGRanges}}
-(\link[GenomicRanges]{GRanges}, \code{data.frame}, etc.).}
-
-\item{B}{A region set in any of the accepted formats by
-\code{\link[regioneR]{toGRanges}}
-(\link[GenomicRanges]{GRanges}, \code{data.frame}, etc.).}
 }
 \value{
 data.frame

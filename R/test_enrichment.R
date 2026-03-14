@@ -23,12 +23,6 @@
 #' @param verbose Print messages.
 #' @param save_path Path to save results to as an \emph{RDS} file.
 #' Set to \code{NULL} to skip this step.
-#' @param A A region set in any of the accepted formats by
-#' \code{\link[regioneR]{toGRanges}}
-#' (\link[GenomicRanges]{GRanges}, \code{data.frame}, etc.).
-#' @param B A region set in any of the accepted formats by
-#' \code{\link[regioneR]{toGRanges}}
-#' (\link[GenomicRanges]{GRanges}, \code{data.frame}, etc.).
 #' @inheritDotParams regioneR::overlapPermTest
 #' @inheritParams regioneR::permTest 
 #' @source \href{https://www.bioconductor.org/packages/devel/bioc/vignettes/regioneR/inst/doc/regioneR.html}{
