@@ -26,9 +26,13 @@ MOTIFBREAKR_calc_pvals <- function(mb_res,
                                    nThread = 1,
                                    results_dir = file.path(tempdir(),"results"),
                                    verbose = TRUE){
-    requireNamespace("motifbreakR");
-    requireNamespace("MotifDb");
-    requireNamespace("BSgenome");
+    for (pkg in c("motifbreakR", "MotifDb", "BSgenome")) {
+        if (!requireNamespace(pkg, quietly = TRUE)) {
+            stop("Package '", pkg, "' is required but not installed.\n",
+                 "Install it with: BiocManager::install('", pkg, "')",
+                 call. = FALSE)
+        }
+    }
     #### Calculate p-values #### 
     messager("+ MOTIFBREAKR:: Calculating p-values for",
              length(mb_res),"RSID(s)...", v=verbose)

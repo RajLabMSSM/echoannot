@@ -54,7 +54,11 @@ test_enrichment <- function(grlist1,
                             verbose = TRUE,
                             ...){
     
-    requireNamespace("regioneR")
+    if (!requireNamespace("regioneR", quietly = TRUE)) {
+        stop("Package 'regioneR' is required but not installed.\n",
+             "Install it with: BiocManager::install('regioneR')",
+             call. = FALSE)
+    }
     #### Check inputs #### 
     grlist1 <- check_grlist(grlist=grlist1, 
                             prefix = "grlist1",

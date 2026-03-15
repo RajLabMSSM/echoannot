@@ -80,8 +80,16 @@ MOTIFBREAKR <- function(rsid_list,
                         granularity = NULL,
                         nThread = 1,
                         verbose = TRUE){
-  requireNamespace("BSgenome")
-  requireNamespace("motifbreakR")
+  if (!requireNamespace("BSgenome", quietly = TRUE)) {
+      stop("Package 'BSgenome' is required for motifbreakR.\n",
+           "Install it with: BiocManager::install('BSgenome')",
+           call. = FALSE)
+  }
+  if (!requireNamespace("motifbreakR", quietly = TRUE)) {
+      stop("Package 'motifbreakR' is required but not installed.\n",
+           "Install it with: BiocManager::install('motifbreakR')",
+           call. = FALSE)
+  }
   # echoverseTemplate:::args2vars(MOTIFBREAKR)
     
   #### Select genome build ####
@@ -102,7 +110,14 @@ MOTIFBREAKR <- function(rsid_list,
         dbSNP = gb_list$dbSNP,
         search.genome = gb_list$search.genome);
     #### Subset motif databases ####
-    if(is.null(pwmList)){pwmList <- MotifDb::MotifDb}
+    if(is.null(pwmList)){
+        if (!requireNamespace("MotifDb", quietly = TRUE)) {
+            stop("Package 'MotifDb' is required for motifbreakR.\n",
+                 "Install it with: BiocManager::install('MotifDb')",
+                 call. = FALSE)
+        }
+        pwmList <- MotifDb::MotifDb
+    }
     if(!is.null(organism)){
       messager("Filtering pwmList to only include organism:",organism)
       pwmList <- pwmList[grep(paste0("^",organism),names(pwmList),

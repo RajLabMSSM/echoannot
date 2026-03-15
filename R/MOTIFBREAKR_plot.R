@@ -50,10 +50,13 @@ MOTIFBREAKR_plot <- function(mb_res,
                              width=7,
                              verbose=TRUE){
     
-    requireNamespace("motifbreakR")
-    requireNamespace("MotifDb")
-    requireNamespace("BSgenome.Hsapiens.UCSC.hg19")
-    requireNamespace("grDevices")
+    for (pkg in c("motifbreakR", "MotifDb", "BSgenome.Hsapiens.UCSC.hg19")) {
+        if (!requireNamespace(pkg, quietly = TRUE)) {
+            stop("Package '", pkg, "' is required but not installed.\n",
+                 "Install it with: BiocManager::install('", pkg, "')",
+                 call. = FALSE)
+        }
+    }
     id <- NULL;
      
     mb_res <- echodata::dt_to_granges(dat = mb_res, 
