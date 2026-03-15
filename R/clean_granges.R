@@ -9,6 +9,6 @@ clean_granges <- function(gr) {
     )
     metadat <- GenomicRanges::elementMetadata(gr)
     GenomicRanges::elementMetadata(gr) <-
-        metadat[, !colnames(metadat) %in% no_no_cols]
+        metadat[, !colnames(metadat) %in% no_no_cols, drop = FALSE]
     return(gr)
 }

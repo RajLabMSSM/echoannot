@@ -50,7 +50,8 @@ Imports:
     rtracklayer,
     S4Vectors,
     BiocGenerics,
-    IRanges
+    IRanges,
+    rlang
 Suggests:
     XGR,
     markdown,
@@ -73,11 +74,18 @@ Suggests:
     SNPlocs.Hsapiens.dbSNP144.GRCh38,
     BSgenome.Hsapiens.UCSC.hg19,
     BSgenome.Hsapiens.UCSC.hg38,
-    BiocParallel
+    BiocParallel,
+    echoconda,
+    echoLD,
+    heatmaply,
+    reshape2,
+    R.utils
 Remotes:
     github::RajLabMSSM/echodata,
     github::RajLabMSSM/echotabix,
-    github::RajLabMSSM/downloadR
+    github::RajLabMSSM/downloadR,
+    github::RajLabMSSM/echoconda,
+    github::RajLabMSSM/echoLD
 RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 License: GPL-3

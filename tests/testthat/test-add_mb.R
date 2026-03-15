@@ -27,6 +27,12 @@ test_that("add_mb works with GRanges", {
         start_col = "POS",
         style = "NCBI"
     )
+    ## POS becomes the start coordinate and is not in mcols;
+    ## add_mb should fall back to start(gr).
     result <- echoannot::add_mb(dat = gr, pos_col = "POS")
     expect_true("Mb" %in% colnames(GenomicRanges::mcols(result)))
+    expect_equal(
+        GenomicRanges::mcols(result)[["Mb"]],
+        GenomicRanges::start(gr) / 1e6
+    )
 })

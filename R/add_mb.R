@@ -20,7 +20,12 @@ add_mb <- function(dat,
     
     if (!"Mb" %in% colnames(dat)) {
         if(echodata::is_granges(dat)){
-            GenomicRanges::mcols(dat)["Mb"] <- dat[pos_col] / 1000000
+            pos_vals <- if (pos_col %in% colnames(GenomicRanges::mcols(dat))) {
+                GenomicRanges::mcols(dat)[[pos_col]]
+            } else {
+                GenomicRanges::start(dat)
+            }
+            GenomicRanges::mcols(dat)["Mb"] <- pos_vals / 1000000
         } else if(methods::is(dat,"data.table")){
             dat[,Mb:=(get(pos_col)/  1000000)]
         } else {
