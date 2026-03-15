@@ -1,6 +1,9 @@
 test_that("MOTIFBREAKR works", {
 
     testthat::skip_on_os("windows")
+    testthat::skip_on_os("mac")
+    testthat::skip_if_not_installed("motifbreakR")
+    testthat::skip_if_not_installed("BSgenome.Hsapiens.UCSC.hg19")
     library(BSgenome) ## <-- IMPORTANT!
     set.seed(2022)
     #### Example fine-mapping results ####
