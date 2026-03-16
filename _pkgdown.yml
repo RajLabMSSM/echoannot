@@ -1,0 +1,160 @@
+url: https://rajlabmssm.github.io/echoannot/
+
+template:
+  bootstrap: 5
+  bslib:
+    bg: "#1a2744"
+    fg: "#e8f4f4"
+    primary: "#4ecdc4"
+    secondary: "#3a8d8c"
+    success: "#2ee8d6"
+    info: "#5bc0be"
+    code-bg: "#d6e4ee"
+    code-color: "#1a2744"
+    border-color: "#2a4060"
+    link-color: "#4ecdc4"
+    link-hover-color: "#2ee8d6"
+    font-size-base: "1rem"
+  includes:
+    in_header: |
+      <style>
+      .navbar {
+        background-color: #162038 !important;
+        border-bottom: 2px solid #4ecdc4;
+      }
+      .navbar-brand, .nav-link { color: #e8f4f4 !important; }
+      .nav-link:hover { color: #2ee8d6 !important; }
+      .nav-link.active { color: #2ee8d6 !important; border-bottom: 2px solid #2ee8d6; }
+      pre {
+        background-color: #d6e4ee !important;
+        color: #1a2744 !important;
+        border: none !important;
+        border-radius: 12px;
+        margin: 0;
+        padding: 0.8em 1em;
+      }
+      code { color: #1a6b68 !important; border: none !important; }
+      pre code { color: #1a2744 !important; border: none !important; background: transparent !important; }
+      pre code span { border: none !important; background: transparent !important; }
+      .table { color: #e8f4f4 !important; }
+      .table-striped > tbody > tr:nth-of-type(odd) > * {
+        background-color: rgba(78, 205, 196, 0.05) !important;
+        color: #e8f4f4 !important;
+      }
+      .table-striped > tbody > tr:nth-of-type(even) > * {
+        background-color: transparent !important;
+        color: #e8f4f4 !important;
+      }
+      .table > thead { border-bottom: 2px solid #4ecdc4; }
+      h1, h2, h3, h4, h5, h6 { color: #4ecdc4 !important; }
+      a { color: #5bc0be; }
+      a:hover { color: #2ee8d6; }
+      .card { background-color: #1e3050; border-color: #2a4060; }
+      .footer { background-color: #162038 !important; border-top: 1px solid #2a4060; }
+      .page-header { border-bottom: 2px solid #3a8d8c; }
+      .sourceCode {
+        background-color: #d6e4ee !important;
+        border: 1px solid #3a8d8c;
+        border-radius: 12px !important;
+        overflow: hidden;
+      }
+      .sourceCode code span,
+      .sourceCode code a {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+      }
+      </style>
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    github:
+      icon: fa-github
+      href: https://github.com/RajLabMSSM/echoannot
+
+articles:
+  - title: Getting started
+    contents:
+      - echoannot
+  - title: Epigenomics
+    contents:
+      - cell_type_specific_epigenomics
+
+reference:
+  - title: Annotation functions
+    desc: Annotate SNPs with functional information
+    contents:
+      - annotate_snps
+      - annotate_missense
+      - annotation_file_name
+  - title: NOTT2019 data
+    desc: Brain cell-type-specific epigenomic data from Nott et al. 2019
+    contents:
+      - NOTT2019_epigenomic_histograms
+      - NOTT2019_get_epigenomic_peaks
+      - NOTT2019_get_interactome
+      - NOTT2019_get_promoter_interactome_data
+      - NOTT2019_get_regulatory_regions
+      - NOTT2019_plac_seq_plot
+      - get_NOTT2019_superenhancer_interactome
+  - title: CORCES2020 data
+    desc: Single-cell epigenomic data from Corces et al. 2020
+    contents:
+      - CORCES2020_get_ATAC_peak_overlap
+      - CORCES2020_get_hichip_fithichip_overlap
+      - get_CORCES2020_bulkATACseq_peaks
+      - get_CORCES2020_cicero_coaccessibility
+      - get_CORCES2020_hichip_fithichip_loop_calls
+      - get_CORCES2020_scATACseq_celltype_peaks
+      - get_CORCES2020_scATACseq_peaks
+  - title: GOSHIFTER
+    desc: GoShifter enrichment analysis
+    contents:
+      - GOSHIFTER
+      - GOSHIFTER_run
+      - GOSHIFTER_heatmap
+      - GOSHIFTER_histograms_SNPgroups
+      - GOSHIFTER_histograms_pvals
+  - title: MOTIFBREAKR
+    desc: Motif disruption analysis
+    contents:
+      - MOTIFBREAKR
+      - MOTIFBREAKR_calc_pvals
+      - MOTIFBREAKR_filter
+      - MOTIFBREAKR_plot
+      - MOTIFBREAKR_summarize
+  - title: XGR
+    desc: Genomic region annotation via XGR
+    contents:
+      - XGR_enrichment
+      - XGR_filter_assays
+      - XGR_filter_sources
+      - XGR_query
+  - title: ROADMAP
+    desc: Roadmap Epigenomics chromatin state annotations
+    contents:
+      - ROADMAP_construct_reference
+      - ROADMAP_query
+  - title: Plotting
+    desc: Summary and visualization functions
+    contents:
+      - CS_bin_plot
+      - CS_counts_plot
+      - super_summary_plot
+      - peak_overlap_plot
+      - plot_dataset_overlap
+      - plot_missense
+      - convert_plots
+      - merge_celltype_specific_epigenomics
+  - title: Utilities
+    desc: Helper functions
+    contents:
+      - add_mb
+      - granges_overlap
+      - get_window_limits
+      - import_ucsc_bigwigs
+      - test_enrichment

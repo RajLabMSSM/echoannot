@@ -1,46 +1,54 @@
 ---
-title: "Getting Started" 
-author: "<h4>Author: <i>Brian M. Schilder</i></h4>" 
+title: "Getting Started"
+author: "<h4>Author: <i>Brian M. Schilder</i></h4>"
 date: "<h4>Updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   BiocStyle::html_document
 vignette: >
-    %\VignetteIndexEntry{Getting started} 
+    %\VignetteIndexEntry{Getting started}
     %\usepackage[utf8]{inputenc}
     %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r setup, include=TRUE} 
+```{r setup, include=TRUE}
 library(echoannot)
+has_internet <- tryCatch(
+    !is.null(curl::nslookup("github.com", error = FALSE)),
+    error = function(e) FALSE
+)
 ```
- 
 
-# Import data  
 
-To get the full dataset of all fine-mapped Parkinson's Disease loci, 
-you can use the following function: 
+# Import data
 
-```{r, eval=FALSE}
+To get the full dataset of all fine-mapped Parkinson's Disease loci,
+you can use the following function:
+
+```{r import_data, eval=has_internet}
 merged_DT <- echodata::get_Nalls2019_merged()
 ```
 
-# Annotate 
+# Annotate
 
 Annotate SNP-wise fine-mapping results.
 
 Here, we're only annotating a small number of SNPs high-confidence causal SNPs
 for demo purposes.
-The more SNPs you supply to `annotate_snps`, the longer it will take to 
+The more SNPs you supply to `annotate_snps`, the longer it will take to
 query the selected databases for each SNP.
 
-```{r, eval=FALSE}
+*Note:* This chunk is kept as `eval=FALSE` because `annotate_snps` queries
+external databases (HaploReg, RegulomeDB, BioMart), which can be slow and
+may have rate limits.
+
+```{r annotate, eval=FALSE}
 #### Only query high-confidence fine-mapping SNPs from one locus ####
 dat <- merged_DT[Locus=="LRRK2" & Consensus_SNP==TRUE,]
 #### Query annotations ####
 dat_annot <- echoannot::annotate_snps(dat = dat,
-                                      haploreg_annotation = TRUE, 
+                                      haploreg_annotation = TRUE,
                                       regulomeDB_annotation = TRUE,
-                                      biomart_annotation = TRUE) 
+                                      biomart_annotation = TRUE)
 knitr::kable(dat_annot)
 ```
 
@@ -49,30 +57,30 @@ knitr::kable(dat_annot)
 
 ## Credible Set bin plot
 
-```{r, eval=FALSE}
+```{r cs_bin, eval=has_internet}
 gg_cs_bin <- echoannot::CS_bin_plot(merged_DT = merged_DT,
                                     show_plot = FALSE)
 ```
 
 ## Credible Set counts plot
 
-```{r, eval=FALSE}
-gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = merged_DT, 
+```{r cs_counts, eval=has_internet}
+gg_cs_counts <- echoannot::CS_counts_plot(merged_DT = merged_DT,
                                           show_plot = FALSE)
 ```
 
 ## Epigenomic data
 
-```{r, eval=FALSE}
+```{r epigenomics, eval=has_internet}
 gg_epi <- echoannot::peak_overlap_plot(
-    merged_DT = merged_DT, 
+    merged_DT = merged_DT,
     include.NOTT2019_enhancers_promoters = TRUE,
     include.NOTT2019_PLACseq = TRUE,
     #### Omit many annotations to save time ####
     include.NOTT2019_peaks = FALSE,
-    include.CORCES2020_scATACpeaks = FALSE, 
-    include.CORCES2020_Cicero_coaccess = FALSE, 
-    include.CORCES2020_bulkATACpeaks = FALSE, 
+    include.CORCES2020_scATACpeaks = FALSE,
+    include.CORCES2020_Cicero_coaccess = FALSE,
+    include.CORCES2020_bulkATACpeaks = FALSE,
     include.CORCES2020_HiChIP_FitHiChIP_coaccess = FALSE,
     include.CORCES2020_gene_annotations = FALSE)
 ```
@@ -81,24 +89,23 @@ gg_epi <- echoannot::peak_overlap_plot(
 
 Creates one big merged plot using the subfunctions above.
 
-```{r, eval=FALSE} 
-super_plot <- echoannot::super_summary_plot(merged_DT = merged_DT, 
+```{r super_summary, eval=has_internet}
+super_plot <- echoannot::super_summary_plot(merged_DT = merged_DT,
                                             plot_missense = FALSE)
 
 ```
 
-```{r Cleanup, include=FALSE, eval=FALSE}
+```{r Cleanup, include=FALSE, eval=has_internet}
 remove(super_plot, gg_epi, gg_cs_counts, merged_DT)
 ```
 
 
-# Session Info 
+# Session Info
 
-<details> 
+<details>
 
 ```{r Session Info}
 utils::sessionInfo()
 ```
 
-</details>  
-
+</details>
