@@ -17,6 +17,8 @@ has_internet <- tryCatch(
     !is.null(curl::nslookup("github.com", error = FALSE)),
     error = function(e) FALSE
 )
+## Epigenomic data functions require remote bigwig access (not available on Windows)
+can_run <- has_internet && .Platform$OS.type != "windows"
 ```
 
 ```R
@@ -32,7 +34,7 @@ library(`r pkg`)
 
 ### Import data
 
-```{r nott2019_import, eval=has_internet}
+```{r nott2019_import, eval=can_run}
 superenhancers <- echoannot::get_NOTT2019_superenhancer_interactome()
 enhancers_promoters <- echoannot::NOTT2019_get_promoter_interactome_data()
 peaks <- echoannot::NOTT2019_get_epigenomic_peaks()
@@ -41,7 +43,7 @@ peaks <- echoannot::NOTT2019_get_epigenomic_peaks()
 
 ### Plot
 
-```{r nott2019_plot, eval=has_internet}
+```{r nott2019_plot, eval=can_run}
 dat <- echodata::BST1
 histo_out <- echoannot::NOTT2019_epigenomic_histograms(dat = dat)
 ```
@@ -49,7 +51,7 @@ histo_out <- echoannot::NOTT2019_epigenomic_histograms(dat = dat)
 In addition to the plot object,
 tables of both raw read ranges and called peaks are included in the output list.
 
-```{r nott2019_tables, eval=has_internet}
+```{r nott2019_tables, eval=can_run}
 knitr::kable(head(histo_out$data$raw))
 knitr::kable(head(histo_out$data$peaks))
 ```
@@ -64,7 +66,7 @@ knitr::kable(head(histo_out$data$peaks))
 
 ### Import data
 
-```{r corces2020_import, eval=has_internet}
+```{r corces2020_import, eval=can_run}
 bulkATACseq_peaks <- echoannot::get_CORCES2020_bulkATACseq_peaks()
 cicero_coaccessibility <- echoannot::get_CORCES2020_cicero_coaccessibility()
 hichip_fithichip_loop_calls <- echoannot::get_CORCES2020_hichip_fithichip_loop_calls()
