@@ -158,3 +158,9 @@ reference:
       - get_window_limits
       - import_ucsc_bigwigs
       - test_enrichment
+      - annotation_file_name
+  - title: Bundled data
+    contents:
+      - NOTT2019_bigwig_metadata
+      - xgr_example
+      - XGR_enrichment_bootstrap
