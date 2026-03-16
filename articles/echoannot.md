@@ -335,7 +335,7 @@ utils::sessionInfo()
     ## [105] bookdown_0.46               RBGL_1.87.0                
     ## [107] ProtGenerics_1.43.0         scales_1.4.0               
     ## [109] Biobase_2.71.0              lmom_3.2                   
-    ## [111] png_0.1-8                   knitr_1.51                 
+    ## [111] png_0.1-9                   knitr_1.51                 
     ## [113] rstudioapi_0.18.0           tzdb_0.5.0                 
     ## [115] reshape2_1.4.5              rjson_0.2.23               
     ## [117] checkmate_2.3.4             curl_7.0.0                 
@@ -347,7 +347,7 @@ utils::sessionInfo()
     ## [129] grid_4.6.0                  vctrs_0.7.1                
     ## [131] cluster_2.1.8.2             htmlTable_2.4.3            
     ## [133] evaluate_1.0.5              readr_2.2.0                
-    ## [135] GenomicFeatures_1.63.1      mvtnorm_1.3-5              
+    ## [135] GenomicFeatures_1.63.1      mvtnorm_1.3-6              
     ## [137] cli_3.6.5                   compiler_4.6.0             
     ## [139] Rsamtools_2.27.1            rlang_1.1.7                
     ## [141] crayon_1.5.3                labeling_0.4.3             
