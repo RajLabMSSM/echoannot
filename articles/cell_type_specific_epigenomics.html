@@ -133,268 +133,30 @@ Epub 2019 Nov 14. PMID: 31727856; PMCID: PMC7028213.</p>
 <div class="section level4">
 <h4 id="import-data">Import data<a class="anchor" aria-label="anchor" href="#import-data"></a>
 </h4>
+<p><em>Note:</em> These functions download remote bigwig files from
+UCSC, which requires network access and may take several minutes.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">superenhancers</span> <span class="op">&lt;-</span> <span class="fu">echoannot</span><span class="fu">::</span><span class="fu"><a href="../reference/get_NOTT2019_superenhancer_interactome.html">get_NOTT2019_superenhancer_interactome</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">enhancers_promoters</span> <span class="op">&lt;-</span> <span class="fu">echoannot</span><span class="fu">::</span><span class="fu"><a href="../reference/NOTT2019_get_promoter_interactome_data.html">NOTT2019_get_promoter_interactome_data</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">peaks</span> <span class="op">&lt;-</span> <span class="fu">echoannot</span><span class="fu">::</span><span class="fu"><a href="../reference/NOTT2019_get_epigenomic_peaks.html">NOTT2019_get_epigenomic_peaks</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Importing previously downloaded files: /github/home/.cache/R/echoannot/NOTT2019_epigenomic_peaks.rds</span></span></code></pre>
-<pre><code><span><span class="co">## ++ NOTT2019:: 634,540 ranges retrieved.</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
 </h4>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">echodata</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/echodata/man/BST1.html" class="external-link">BST1</a></span></span>
 <span><span class="va">histo_out</span> <span class="op">&lt;-</span> <span class="fu">echoannot</span><span class="fu">::</span><span class="fu"><a href="../reference/NOTT2019_epigenomic_histograms.html">NOTT2019_epigenomic_histograms</a></span><span class="op">(</span>dat <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## NOTT2019:: Creating epigenomic histograms plot</span></span></code></pre>
-<pre><code><span><span class="co">## + Inferring genomic limits for window: 1x</span></span></code></pre>
-<pre><code><span><span class="co">## Constructing GRanges query using min/max ranges across one or more chromosomes.</span></span></code></pre>
-<pre><code><span><span class="co">## Downloading data from UCSC.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [1] exvivo_H3K27ac_tbp</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [2] microglia_H3K27ac</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [3] neurons_H3K27ac</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [4] oligodendrocytes_H3K27ac</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [5] astrocytes_H3K27ac</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [6] exvivo_atac_tbp</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [7] microglia_atac</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [8] neurons_atac</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [9] oligodendrocytes_atac</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [10] astrocytes_atac</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [11] microglia_H3K4me3</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [12] neurons_H3K4me3</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [13] oligodendrocytes_H3K4me3</span></span></code></pre>
-<pre><code><span><span class="co">## Importing... [14] astrocytes_H3K4me3</span></span></code></pre>
-<pre><code><span><span class="co">## Importing previously downloaded files: /github/home/.cache/R/echoannot/NOTT2019_epigenomic_peaks.rds</span></span></code></pre>
-<pre><code><span><span class="co">## ++ NOTT2019:: 634,540 ranges retrieved.</span></span></code></pre>
-<pre><code><span><span class="co">## dat is already a GRanges object.</span></span></code></pre>
-<pre><code><span><span class="co">## 543 query SNP(s) detected with reference overlap.</span></span></code></pre>
-<pre><code><span><span class="co">## + Calculating max histogram height</span></span></code></pre>
-<pre><code><span><span class="co">## + Converting label units to Mb.</span></span></code></pre>
-<pre><code><span><span class="co">## using coord:genome to parse x scale</span></span>
-<span><span class="co">## using coord:genome to parse x scale</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in !vapply(ggl, fixed, logical(1L)) &amp; !vapply(PlotList, is, "Ideogram",</span></span>
-<span><span class="co">## : longer object length is not a multiple of shorter object length</span></span></code></pre>
-<p><img src="cell_type_specific_epigenomics_files/figure-html/nott2019_plot-1.png" class="r-plt" alt="" width="700"></p>
 <p>In addition to the plot object, tables of both raw read ranges and
 called peaks are included in the output list.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">histo_out</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">raw</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="7%">
-<col width="8%">
-<col width="7%">
-<col width="12%">
-<col width="9%">
-<col width="22%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">seqnames</th>
-<th align="right">start</th>
-<th align="right">end</th>
-<th align="right">width</th>
-<th align="left">strand</th>
-<th align="right">score</th>
-<th align="left">Cell_type</th>
-<th align="left">Assay</th>
-<th align="left">Experiment</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">chr4</td>
-<td align="right">14737349</td>
-<td align="right">14737411</td>
-<td align="right">63</td>
-<td align="left">*</td>
-<td align="right">0.6</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-</tr>
-<tr class="even">
-<td align="left">chr4</td>
-<td align="right">14737488</td>
-<td align="right">14737562</td>
-<td align="right">75</td>
-<td align="left">*</td>
-<td align="right">0.2</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-</tr>
-<tr class="odd">
-<td align="left">chr4</td>
-<td align="right">14737692</td>
-<td align="right">14737766</td>
-<td align="right">75</td>
-<td align="left">*</td>
-<td align="right">0.6</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-</tr>
-<tr class="even">
-<td align="left">chr4</td>
-<td align="right">14737782</td>
-<td align="right">14737856</td>
-<td align="right">75</td>
-<td align="left">*</td>
-<td align="right">0.4</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-</tr>
-<tr class="odd">
-<td align="left">chr4</td>
-<td align="right">14738054</td>
-<td align="right">14738126</td>
-<td align="right">73</td>
-<td align="left">*</td>
-<td align="right">0.6</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-</tr>
-<tr class="even">
-<td align="left">chr4</td>
-<td align="right">14738127</td>
-<td align="right">14738128</td>
-<td align="right">2</td>
-<td align="left">*</td>
-<td align="right">1.2</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">histo_out</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">peaks</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="8%">
-<col width="8%">
-<col width="8%">
-<col width="5%">
-<col width="6%">
-<col width="5%">
-<col width="6%">
-<col width="9%">
-<col width="10%">
-<col width="7%">
-<col width="16%">
-<col width="8%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">seqnames</th>
-<th align="right">start</th>
-<th align="right">end</th>
-<th align="right">width</th>
-<th align="left">strand</th>
-<th align="left">Assay</th>
-<th align="left">Marker</th>
-<th align="left">Cell_type</th>
-<th align="left">Cell_type.1</th>
-<th align="left">Assay.1</th>
-<th align="left">Experiment</th>
-<th align="right">y</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">4</td>
-<td align="right">14745668</td>
-<td align="right">14746002</td>
-<td align="right">335</td>
-<td align="left">*</td>
-<td align="left">peaks</td>
-<td align="left">Olig2</td>
-<td align="left">oligo</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-<td align="right">-1.1e-06</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="right">14751439</td>
-<td align="right">14751837</td>
-<td align="right">399</td>
-<td align="left">*</td>
-<td align="left">peaks</td>
-<td align="left">Olig2</td>
-<td align="left">oligo</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-<td align="right">-1.1e-06</td>
-</tr>
-<tr class="odd">
-<td align="left">4</td>
-<td align="right">14768551</td>
-<td align="right">14768735</td>
-<td align="right">185</td>
-<td align="left">*</td>
-<td align="left">peaks</td>
-<td align="left">PU1</td>
-<td align="left">microglia</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-<td align="right">-1.1e-06</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="right">14768704</td>
-<td align="right">14769257</td>
-<td align="right">554</td>
-<td align="left">*</td>
-<td align="left">peaks</td>
-<td align="left">PU1</td>
-<td align="left">microglia</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-<td align="right">-1.1e-06</td>
-</tr>
-<tr class="odd">
-<td align="left">4</td>
-<td align="right">14771450</td>
-<td align="right">14773099</td>
-<td align="right">1650</td>
-<td align="left">*</td>
-<td align="left">peaks</td>
-<td align="left">LHX2</td>
-<td align="left">astrocytes</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-<td align="right">-1.1e-06</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="right">14829018</td>
-<td align="right">14829146</td>
-<td align="right">129</td>
-<td align="left">*</td>
-<td align="left">peaks</td>
-<td align="left">NeuN</td>
-<td align="left">neurons</td>
-<td align="left">microglia</td>
-<td align="left">H3K27ac</td>
-<td align="left">exvivo H3K27ac tbp</td>
-<td align="right">-1.1e-06</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">histo_out</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">raw</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">histo_out</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">peaks</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="corces2020">Corces2020<a class="anchor" aria-label="anchor" href="#corces2020"></a>
 </h3>
-<p><code>echoannot</code> also includes data generated by <a href="https://doi.org/10.1038/s41588-020-00721-x" class="external-link">“Corces2019”</a>:</p>
+<p><code>echoannot</code> also includes data generated by <a href="https://doi.org/10.1038/s41588-020-00721-x" class="external-link">“Corces2020”</a>:</p>
 <blockquote>
 <p>Corces, M.R., Shcherbina, A., Kundu, S. et al. Single-cell epigenomic
 analyses implicate candidate causal variants at inherited risk loci for
@@ -403,7 +165,7 @@ Alzheimer’s and Parkinson’s diseases. Nat Genet 52, 1158-1168 (2020). <a hre
 <div class="section level4">
 <h4 id="import-data-1">Import data<a class="anchor" aria-label="anchor" href="#import-data-1"></a>
 </h4>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bulkATACseq_peaks</span> <span class="op">&lt;-</span> <span class="fu">echoannot</span><span class="fu">::</span><span class="fu"><a href="../reference/get_CORCES2020_bulkATACseq_peaks.html">get_CORCES2020_bulkATACseq_peaks</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">cicero_coaccessibility</span> <span class="op">&lt;-</span> <span class="fu">echoannot</span><span class="fu">::</span><span class="fu"><a href="../reference/get_CORCES2020_cicero_coaccessibility.html">get_CORCES2020_cicero_coaccessibility</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">hichip_fithichip_loop_calls</span> <span class="op">&lt;-</span> <span class="fu">echoannot</span><span class="fu">::</span><span class="fu"><a href="../reference/get_CORCES2020_hichip_fithichip_loop_calls.html">get_CORCES2020_hichip_fithichip_loop_calls</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -413,10 +175,7 @@ Alzheimer’s and Parkinson’s diseases. Nat Genet 52, 1158-1168 (2020). <a hre
 <div class="section level4">
 <h4 id="plot-1">Plot<a class="anchor" aria-label="anchor" href="#plot-1"></a>
 </h4>
-<p><em>Note:</em> This chunk is kept as <code>eval=FALSE</code> because
-it depends on the <code>dat</code> variable from a prior analysis and
-<code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">ggbio::autoplot</a></code>.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">peak_dat</span> <span class="op">&lt;-</span> <span class="fu">echoannot</span><span class="fu">::</span><span class="fu"><a href="../reference/granges_overlap.html">granges_overlap</a></span><span class="op">(</span></span>
 <span>    dat1 <span class="op">=</span> <span class="va">dat</span>,</span>
 <span>    chrom_col.1 <span class="op">=</span> <span class="st">"CHR"</span>,</span>
@@ -432,9 +191,9 @@ it depends on the <code>dat</code> variable from a prior analysis and
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<details><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<details><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R Under development (unstable) (2026-03-12 r89607)</span></span>
+<pre><code><span><span class="co">## R Under development (unstable) (2026-03-15 r89629)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
 <span><span class="co">## Running under: Ubuntu 24.04.4 LTS</span></span>
 <span><span class="co">## </span></span>
@@ -515,7 +274,7 @@ it depends on the <code>dat</code> variable from a prior analysis and
 <span><span class="co">## [105] bookdown_0.46               RBGL_1.87.0                </span></span>
 <span><span class="co">## [107] ProtGenerics_1.43.0         scales_1.4.0               </span></span>
 <span><span class="co">## [109] Biobase_2.71.0              lmom_3.2                   </span></span>
-<span><span class="co">## [111] png_0.1-9                   knitr_1.51                 </span></span>
+<span><span class="co">## [111] png_0.1-8                   knitr_1.51                 </span></span>
 <span><span class="co">## [113] rstudioapi_0.18.0           tzdb_0.5.0                 </span></span>
 <span><span class="co">## [115] reshape2_1.4.5              rjson_0.2.23               </span></span>
 <span><span class="co">## [117] checkmate_2.3.4             curl_7.0.0                 </span></span>
@@ -527,22 +286,21 @@ it depends on the <code>dat</code> variable from a prior analysis and
 <span><span class="co">## [129] grid_4.6.0                  vctrs_0.7.1                </span></span>
 <span><span class="co">## [131] cluster_2.1.8.2             htmlTable_2.4.3            </span></span>
 <span><span class="co">## [133] evaluate_1.0.5              readr_2.2.0                </span></span>
-<span><span class="co">## [135] GenomicFeatures_1.63.1      mvtnorm_1.3-6              </span></span>
+<span><span class="co">## [135] GenomicFeatures_1.63.1      mvtnorm_1.3-5              </span></span>
 <span><span class="co">## [137] cli_3.6.5                   compiler_4.6.0             </span></span>
 <span><span class="co">## [139] Rsamtools_2.27.1            rlang_1.1.7                </span></span>
-<span><span class="co">## [141] crayon_1.5.3                labeling_0.4.3             </span></span>
-<span><span class="co">## [143] aws.signature_0.6.0         plyr_1.8.9                 </span></span>
-<span><span class="co">## [145] forcats_1.0.1               fs_1.6.7                   </span></span>
-<span><span class="co">## [147] stringi_1.8.7               viridisLite_0.4.3          </span></span>
-<span><span class="co">## [149] BiocParallel_1.45.0         Biostrings_2.79.5          </span></span>
-<span><span class="co">## [151] lazyeval_0.2.2              Matrix_1.7-4               </span></span>
-<span><span class="co">## [153] downloadR_1.0.0             dir.expiry_1.19.0          </span></span>
-<span><span class="co">## [155] BSgenome_1.79.1             patchwork_1.3.2            </span></span>
-<span><span class="co">## [157] hms_1.1.4                   bit64_4.6.0-1              </span></span>
-<span><span class="co">## [159] ggplot2_4.0.2               KEGGREST_1.51.1            </span></span>
-<span><span class="co">## [161] SummarizedExperiment_1.41.1 haven_2.5.5                </span></span>
-<span><span class="co">## [163] memoise_2.0.1               bslib_0.10.0               </span></span>
-<span><span class="co">## [165] bit_4.6.0                   readxl_1.4.5</span></span></code></pre>
+<span><span class="co">## [141] crayon_1.5.3                aws.signature_0.6.0        </span></span>
+<span><span class="co">## [143] plyr_1.8.9                  forcats_1.0.1              </span></span>
+<span><span class="co">## [145] fs_1.6.7                    stringi_1.8.7              </span></span>
+<span><span class="co">## [147] BiocParallel_1.45.0         Biostrings_2.79.5          </span></span>
+<span><span class="co">## [149] lazyeval_0.2.2              Matrix_1.7-4               </span></span>
+<span><span class="co">## [151] downloadR_1.0.0             dir.expiry_1.19.0          </span></span>
+<span><span class="co">## [153] BSgenome_1.79.1             patchwork_1.3.2            </span></span>
+<span><span class="co">## [155] hms_1.1.4                   bit64_4.6.0-1              </span></span>
+<span><span class="co">## [157] ggplot2_4.0.2               KEGGREST_1.51.1            </span></span>
+<span><span class="co">## [159] SummarizedExperiment_1.41.1 haven_2.5.5                </span></span>
+<span><span class="co">## [161] memoise_2.0.1               bslib_0.10.0               </span></span>
+<span><span class="co">## [163] bit_4.6.0                   readxl_1.4.5</span></span></code></pre>
 </details>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
