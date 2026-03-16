@@ -1,0 +1,331 @@
+![](https://github.com/RajLabMSSM/echoannot/raw/main/inst/hex/hex.png "Hex sticker for echoannot")\
+[![License:
+GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
+[![](https://img.shields.io/badge/devel%20version-1.0.1-black.svg)](https://github.com/RajLabMSSM/echoannot)
+[![](https://img.shields.io/github/languages/code-size/RajLabMSSM/echoannot.svg)](https://github.com/RajLabMSSM/echoannot)
+[![](https://img.shields.io/github/last-commit/RajLabMSSM/echoannot.svg)](https://github.com/RajLabMSSM/echoannot/commits/main)\
+[![R build
+status](https://github.com/RajLabMSSM/echoannot/workflows/rworkflows/badge.svg)](https://github.com/RajLabMSSM/echoannot/actions)
+[![](https://codecov.io/gh/RajLabMSSM/echoannot/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RajLabMSSM/echoannot)\
+[![](https://codecov.io/gh/RajLabMSSM/echoannot/branch/main/graphs/icicle.svg "Codecov icicle graph")](https://app.codecov.io/gh/RajLabMSSM/echoannot/tree/main)\
+
+#### \
+Authors: *Brian Schilder, Jack Humphrey, Towfique Raj*\
+
+##### \
+README updated: *Mar-16-2026*\
+
+## `echoannot`: Echoverse module: Functions for annotating genomic data
+
+with annotations and epigenomic data.
+
+This R package is part of the *echoverse* suite that supports
+[`echolocatoR`](https://github.com/RajLabMSSM/echolocatoR): an automated
+genomic fine-mapping pipeline.
+
+If you use `echoannot`, please cite:
+
+> Brian M Schilder, Jack Humphrey, Towfique Raj (2021). echolocatoR: an
+> automated end-to-end statistical and functional genomic fine-mapping
+> pipeline. Bioinformatics, btab658.
+> <https://doi.org/10.1093/bioinformatics/btab658>
+
+## Installation
+
+``` r
+
+if(!require("BiocManager")) install.packages("BiocManager")
+
+BiocManager::install("RajLabMSSM/echoannot")
+library(echoannot)
+```
+
+## Documentation
+
+### [Website](https://rajlabmssm.github.io/echoannot)
+
+### [Getting started](https://rajlabmssm.github.io/echoannot/articles/echoannot)
+
+## Datasets
+
+For more detailed information about each dataset, use `?`:\
+`R library(echolocatoR) ?NOTT_2019.interactome # example dataset`
+
+### Epigenomic & genome-wide annotations
+
+#### [Nott et al. (2019)](https://science.sciencemag.org/content/366/6469/1134.abstract)
+
+- Data from this publication contains results from cell type-specific
+  (neurons, oligodendrocytes, astrocytes, microglia, & peripheral
+  myeloid cells) epigenomic assays (H3K27ac, ATAC, H3K4me3) from human
+  brain tissue.
+
+- For detailed metadata, see:
+
+  ``` r
+
+  data("NOTT_2019.bigwig_metadata")
+  ```
+
+- Built-in datasets:
+
+  - Enhancer/promoter coordinates (as *GenomicRanges*)
+
+  ``` r
+
+  data("NOTT_2019.interactome")
+  # Examples of the data nested in "NOTT_2019.interactome" object:
+  NOTT_2019.interactome$`Neuronal promoters`
+  NOTT_2019.interactome$`Neuronal enhancers`
+  NOTT_2019.interactome$`Microglia promoters`
+  NOTT_2019.interactome$`Microglia enhancers`
+  ...
+  ...
+  ```
+
+  - PLAC-seq enhancer-promoter interactome coordinates
+
+  ``` r
+
+  NOTT_2019.interactome$H3K4me3_around_TSS_annotated_pe
+  NOTT_2019.interactome$`Microglia interactome`
+  NOTT_2019.interactome$`Neuronal interactome`
+  NOTT_2019.interactome$`Oligo interactome`
+  ...
+  ...
+  ```
+
+- API access to full bigWig files on UCSC Genome Browser, which includes
+
+  - Epigenomic reads (as *GenomicRanges*)\
+  - Aggregate epigenomic *score* for each cell type - assay combination
+
+#### [Corces et al. (2020)](https://www.biorxiv.org/content/10.1101/2020.01.06.896159v1)
+
+- Data from this preprint contains results from bulk and single-cell
+  chromatin accessibility epigenomic assays in 39 human brains.
+
+  ``` r
+
+  data("CORCES_2020.bulkATACseq_peaks")
+  data("CORCES_2020.cicero_coaccessibility")
+  data("CORCES_2020.HiChIP_FitHiChIP_loop_calls")
+  data("CORCES_2020.scATACseq_celltype_peaks")
+  data("CORCES_2020.scATACseq_peaks")
+  ```
+
+#### [XGR](http://xgr.r-forge.r-project.org)
+
+- API access to a diverse library of cell type/line-specific epigenomic
+  (e.g. ENCODE) and other genome-wide annotations.
+
+#### [Roadmap](http://www.roadmapepigenomics.org)
+
+- API access to cell type-specific epigenomic data.
+
+#### [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html)
+
+- API access to various genome-wide SNP annotations (e.g. missense,
+  nonsynonmous, intronic, enhancer).
+
+#### [HaploR](https://cran.r-project.org/web/packages/haploR/vignettes/haplor-vignette.html)
+
+- API access to known per-SNP QTL and epigenomic data hits.
+
+------------------------------------------------------------------------
+
+## Contact
+
+[Brian M. Schilder, Bioinformatician
+II](https://bschilder.github.io/BMSchilder/)\
+[Raj Lab](https://rajlab.org)\
+[Department of Neuroscience, Icahn School of Medicine at Mount
+Sinai](https://icahn.mssm.edu/about/departments-offices/neuroscience)
+
+# Package index
+
+## Annotation functions
+
+Annotate SNPs with functional information
+
+- [`annotate_snps()`](https://rajlabmssm.github.io/echoannot/reference/annotate_snps.md)
+  : Annotate merged fine-mapping results from all loci
+- [`annotate_missense()`](https://rajlabmssm.github.io/echoannot/reference/annotate_missense.md)
+  : Annotate any missense variants
+- [`annotation_file_name()`](https://rajlabmssm.github.io/echoannot/reference/annotation_file_name.md)
+  : Annotation file name
+
+## NOTT2019 data
+
+Brain cell-type-specific epigenomic data from Nott et al. 2019
+
+- [`NOTT2019_epigenomic_histograms()`](https://rajlabmssm.github.io/echoannot/reference/NOTT2019_epigenomic_histograms.md)
+  : Plot brain cell-specific epigenomic data
+- [`NOTT2019_get_epigenomic_peaks()`](https://rajlabmssm.github.io/echoannot/reference/NOTT2019_get_epigenomic_peaks.md)
+  : Download cell type-specific epigenomic peaks
+- [`NOTT2019_get_interactome()`](https://rajlabmssm.github.io/echoannot/reference/NOTT2019_get_interactome.md)
+  : Import cell type-specific interactomes
+- [`NOTT2019_get_promoter_interactome_data()`](https://rajlabmssm.github.io/echoannot/reference/NOTT2019_get_promoter_interactome_data.md)
+  : Get cell type-specific promoter/emhancer/interactome data
+- [`NOTT2019_get_regulatory_regions()`](https://rajlabmssm.github.io/echoannot/reference/NOTT2019_get_regulatory_regions.md)
+  : Get regulatory regions: Nott2019
+- [`NOTT2019_plac_seq_plot()`](https://rajlabmssm.github.io/echoannot/reference/NOTT2019_plac_seq_plot.md)
+  : Plot brain cell-specific interactome data
+- [`get_NOTT2019_superenhancer_interactome()`](https://rajlabmssm.github.io/echoannot/reference/get_NOTT2019_superenhancer_interactome.md)
+  : Brain cell type-specific interactomes with superenhancers
+
+## CORCES2020 data
+
+Single-cell epigenomic data from Corces et al. 2020
+
+- [`CORCES2020_get_ATAC_peak_overlap()`](https://rajlabmssm.github.io/echoannot/reference/CORCES2020_get_ATAC_peak_overlap.md)
+  : Get overlap between datatable of SNPs and scATAC peaks
+- [`CORCES2020_get_hichip_fithichip_overlap()`](https://rajlabmssm.github.io/echoannot/reference/CORCES2020_get_hichip_fithichip_overlap.md)
+  : Get overlap between data table of SNPs and HiChIP_FitHiChIP
+  coaccessibility anchors
+- [`get_CORCES2020_bulkATACseq_peaks()`](https://rajlabmssm.github.io/echoannot/reference/get_CORCES2020_bulkATACseq_peaks.md)
+  : bulkATACseq peaks from human brain tissue
+- [`get_CORCES2020_cicero_coaccessibility()`](https://rajlabmssm.github.io/echoannot/reference/get_CORCES2020_cicero_coaccessibility.md)
+  : Cicero_coaccessibility from human brain tissue
+- [`get_CORCES2020_hichip_fithichip_loop_calls()`](https://rajlabmssm.github.io/echoannot/reference/get_CORCES2020_hichip_fithichip_loop_calls.md)
+  : FitHiChIP loop calls from human brain tissue
+- [`get_CORCES2020_scATACseq_celltype_peaks()`](https://rajlabmssm.github.io/echoannot/reference/get_CORCES2020_scATACseq_celltype_peaks.md)
+  : scATACseq cell type-specific peaks from human brain tissue
+- [`get_CORCES2020_scATACseq_peaks()`](https://rajlabmssm.github.io/echoannot/reference/get_CORCES2020_scATACseq_peaks.md)
+  : scATACseq peaks from human brain tissue
+
+## GOSHIFTER
+
+GoShifter enrichment analysis
+
+- [`GOSHIFTER()`](https://rajlabmssm.github.io/echoannot/reference/GOSHIFTER.md)
+  : Run GoShifter enrichment pipeline
+- [`GOSHIFTER_run()`](https://rajlabmssm.github.io/echoannot/reference/GOSHIFTER_run.md)
+  : Run GoShifter enrichment test
+- [`GOSHIFTER_heatmap()`](https://rajlabmssm.github.io/echoannot/reference/GOSHIFTER_heatmap.md)
+  : GoShifter enrichment heatmap
+- [`GOSHIFTER_histograms_SNPgroups()`](https://rajlabmssm.github.io/echoannot/reference/GOSHIFTER_histograms_SNPgroups.md)
+  : GoShifter SNP-group histograms
+- [`GOSHIFTER_histograms_pvals()`](https://rajlabmssm.github.io/echoannot/reference/GOSHIFTER_histograms_pvals.md)
+  : GoShifter p-value histograms
+
+## MOTIFBREAKR
+
+Motif disruption analysis
+
+- [`MOTIFBREAKR()`](https://rajlabmssm.github.io/echoannot/reference/MOTIFBREAKR.md)
+  :
+
+  Run motifbreakR
+
+- [`MOTIFBREAKR_calc_pvals()`](https://rajlabmssm.github.io/echoannot/reference/MOTIFBREAKR_calc_pvals.md)
+  :
+
+  Calculate motifbreakR p-values
+
+- [`MOTIFBREAKR_filter()`](https://rajlabmssm.github.io/echoannot/reference/MOTIFBREAKR_filter.md)
+  :
+
+  Merge and filter motifbreakR + echolocatoR results
+
+- [`MOTIFBREAKR_plot()`](https://rajlabmssm.github.io/echoannot/reference/MOTIFBREAKR_plot.md)
+  :
+
+  Plot motifbreakR results
+
+- [`MOTIFBREAKR_summarize()`](https://rajlabmssm.github.io/echoannot/reference/MOTIFBREAKR_summarize.md)
+  :
+
+  Summarize motifbreakR + echolocatoR results
+
+## XGR
+
+Genomic region annotation via XGR
+
+- [`XGR_enrichment()`](https://rajlabmssm.github.io/echoannot/reference/XGR_enrichment.md)
+  : XGR enrichment
+- [`XGR_filter_assays()`](https://rajlabmssm.github.io/echoannot/reference/XGR_filter_assays.md)
+  : Filter assays
+- [`XGR_filter_sources()`](https://rajlabmssm.github.io/echoannot/reference/XGR_filter_sources.md)
+  : Filter sources
+- [`XGR_query()`](https://rajlabmssm.github.io/echoannot/reference/xgr_query.md)
+  : Download, standardize, and merge XGR annotations
+
+## ROADMAP
+
+Roadmap Epigenomics chromatin state annotations
+
+- [`ROADMAP_construct_reference()`](https://rajlabmssm.github.io/echoannot/reference/ROADMAP_construct_reference.md)
+  : Gather Roadmap annotation metadata
+- [`ROADMAP_query()`](https://rajlabmssm.github.io/echoannot/reference/ROADMAP_query.md)
+  : Query Roadmap Query Roadmap annotations using a set of genomic
+  coordinates.
+
+## Plotting
+
+Summary and visualization functions
+
+- [`CS_bin_plot()`](https://rajlabmssm.github.io/echoannot/reference/CS_bin_plot.md)
+  : Plot CS bin counts
+- [`CS_counts_plot()`](https://rajlabmssm.github.io/echoannot/reference/CS_counts_plot.md)
+  : Bar plot of tool-specific CS sizes
+- [`super_summary_plot()`](https://rajlabmssm.github.io/echoannot/reference/super_summary_plot.md)
+  : Merge all summary plots into one super plot
+- [`peak_overlap_plot()`](https://rajlabmssm.github.io/echoannot/reference/peak_overlap_plot.md)
+  : Plot overlap between some SNP group and various epigenomic data
+- [`plot_dataset_overlap()`](https://rajlabmssm.github.io/echoannot/reference/plot_dataset_overlap.md)
+  : Plot inter-study SNP overlap
+- [`plot_missense()`](https://rajlabmssm.github.io/echoannot/reference/plot_missense.md)
+  : Plot any missense variants
+- [`convert_plots()`](https://rajlabmssm.github.io/echoannot/reference/convert_plots.md)
+  : Convert plots to various formats
+- [`merge_celltype_specific_epigenomics()`](https://rajlabmssm.github.io/echoannot/reference/merge_celltype_specific_epigenomics.md)
+  : Merge all cell-type-specific epigenomics
+
+## Utilities
+
+Helper functions
+
+- [`add_mb()`](https://rajlabmssm.github.io/echoannot/reference/add_mb.md)
+  : Add Mb
+
+- [`granges_overlap()`](https://rajlabmssm.github.io/echoannot/reference/granges_overlap.md)
+  :
+
+  Find GenomicRanges overlap Find overlap genomic position overlap
+  between two
+  [GRanges](https://rdrr.io/pkg/GenomicRanges/man/GRanges-class.html)
+  objects.
+
+- [`get_window_limits()`](https://rajlabmssm.github.io/echoannot/reference/get_window_limits.md)
+  : Get widow limits
+
+- [`import_ucsc_bigwigs()`](https://rajlabmssm.github.io/echoannot/reference/import_ucsc_bigwigs.md)
+  : Import bigwig files from the UCSC Genome Browser
+
+- [`test_enrichment()`](https://rajlabmssm.github.io/echoannot/reference/test_enrichment.md)
+  : Test enrichment
+
+- [`annotation_file_name()`](https://rajlabmssm.github.io/echoannot/reference/annotation_file_name.md)
+  : Annotation file name
+
+## Bundled data
+
+- [`NOTT2019_bigwig_metadata`](https://rajlabmssm.github.io/echoannot/reference/NOTT2019_bigwig_metadata.md)
+  : Metadata and links to data
+- [`xgr_example`](https://rajlabmssm.github.io/echoannot/reference/xgr_example.md)
+  : Example XGR query
+- [`XGR_enrichment_bootstrap()`](https://rajlabmssm.github.io/echoannot/reference/XGR_enrichment_bootstrap.md)
+  : XGR enrichment (bootstrapped)
+
+# Articles
+
+### Getting started
+
+- [Getting
+  Started](https://rajlabmssm.github.io/echoannot/articles/echoannot.md):
+
+### Epigenomics
+
+- [Cell-type-specific
+  epigenomics](https://rajlabmssm.github.io/echoannot/articles/cell_type_specific_epigenomics.md):
